@@ -32,7 +32,7 @@ const RingsGrid = ({ addToCart }) => {
           ))}
         </div>
       </div>
-      <div className="p-20 text-justify">
+      <div className="p-20 text-justify poppins-regular">
         <h1 className="font-bold">
           Rings – Timeless & Trendy Rings for Men & Women
         </h1>

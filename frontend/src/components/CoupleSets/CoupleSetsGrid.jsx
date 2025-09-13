@@ -35,7 +35,7 @@ const CoupleSetsGrid = ({ addToCart }) => {
         </div>
       </div>
 
-      <div className="p-10 px-5 md:px-20 text-justify">
+      <div className="p-10 px-5 md:px-20 text-justify poppins-regular">
         <b> Couple Sets – Matching Jewelry Sets for Couples in Love </b>
         <br />
         Celebrate love with Couple Sets - Matching Jewelry for couples. Shop

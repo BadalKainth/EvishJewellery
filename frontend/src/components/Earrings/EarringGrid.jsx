@@ -35,7 +35,7 @@ const EarringsGrid = ({ addToCart }) => {
           ))}
         </div>
       </div>
-      <div className="p-10 px-5 md:px-20 text-justify">
+      <div className="p-10 px-5 md:px-20 text-justify poppins-regular">
         <h1 className="font-bold">
           {" "}
           Earrings – Beautiful Earrings Collection to Elevate Your Style

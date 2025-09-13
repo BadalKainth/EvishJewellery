@@ -18,7 +18,7 @@ const Navbar = ({ cartItems }) => {
 
   return (
     <nav className="bg-[#faf9eb] shadow-md sticky top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase overflow-x-hidden">
-      <div className="container mx-auto px-4 overflow-x-hidden">
+      <div className="container mx-auto px-1 overflow-x-hidden">
         <div className="flex justify-between items-center py-4 px-1">
           {/* Logo - Left side */}
           <Link
@@ -33,7 +33,7 @@ const Navbar = ({ cartItems }) => {
               JEWELS
             </span>
           </Link>
-
+         
           {/* Right side (Links + Cart + Mobile Button) */}
           <div className="flex items-center space-x-4">
             {/* Desktop Menu */}

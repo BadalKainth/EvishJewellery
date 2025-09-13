@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import Navbar from "./Navbar";
@@ -18,24 +17,29 @@ import CoupleDetails from "./components/CoupleSets/CoupleDetails";
 import AnkletDetails from "./components/Anklet/AnkletDetails";
 import Cart from "./components/Cart/Cart";
 import Footer from "./Footer";
+import AuthForm from "./AuthForm"; // ✅ Add this
+import About from "./components/about/about";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
-
   useEffect(() => {
-    window.scrollTo(0, 0);   // हर बार route change पर top पर चला जाएगा
+    window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 }
 
-
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const addToCart = (product) => {
+    setCartItems((prev) => [...prev, product]);
+  };
 
-   const addToCart = (product) => {
-     setCartItems((prev) => [...prev, product]);
-   };
+  const token = localStorage.getItem("token"); // ✅ check login
+
+  if (!token) {
+    return <AuthForm />; // ✅ agar login nahi hai toh signup/signin form dikhao
+  }
+
   return (
     <>
       <ScrollToTopOnRouteChange />
@@ -101,14 +105,18 @@ function App() {
           element={<AnkletDetails addToCart={addToCart} slider={false} />}
         />
         <Route
+          path="/about"
+          element={ <About/>}
+        />
+        <Route
           path="/cart"
           element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
         />
+
+        <Route path="/authForm" element={<AuthForm />} />
       </Routes>
 
-      
-
-      <Footer/>
+      <Footer />
     </>
   );
 }
