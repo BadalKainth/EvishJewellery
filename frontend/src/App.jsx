@@ -57,7 +57,7 @@ function App() {
           }
         />
         <Route
-          path="/braceletsgrid"
+          path="/bracelets"
           element={<BraceletsGrid addToCart={addToCart} />}
         />
         <Route
@@ -65,7 +65,7 @@ function App() {
           element={<BraceletsDetails addToCart={addToCart} />}
         />
         <Route
-          path="/ringsgrid"
+          path="/rings"
           element={<RingsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
@@ -73,7 +73,7 @@ function App() {
           element={<ProductDetails addToCart={addToCart} />}
         />
         <Route
-          path="/earringsgrid"
+          path="/earrings"
           element={<EarringsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
@@ -81,7 +81,7 @@ function App() {
           element={<EarringDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/necklacesgrid"
+          path="/necklaces"
           element={<NecklacesGrid addToCart={addToCart} slider={false} />}
         />
         <Route
@@ -89,7 +89,7 @@ function App() {
           element={<NecklaceDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/couplesetsgrid"
+          path="/couplesets"
           element={<CoupleSetsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
@@ -97,7 +97,7 @@ function App() {
           element={<CoupleDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/ankletgrid"
+          path="/anklet"
           element={<AnkletGrid addToCart={addToCart} slider={false} />}
         />
         <Route

@@ -7,12 +7,12 @@ const Navbar = ({ cartItems }) => {
   // सारे menu links एक array में रखे
   const menuLinks = [
     { name: "Home", path: "/" },
-    { name: "Bracelets", path: "/braceletsgrid" },
-    { name: "Rings", path: "/ringsgrid" },
-    { name: "Earrings", path: "/earringsgrid" },
-    { name: "Necklaces", path: "/necklacesgrid" },
-    { name: "Couple Sets", path: "/couplesetsgrid" },
-    { name: "Anklet", path: "/ankletgrid" },
+    { name: "Bracelets", path: "/bracelets" },
+    { name: "Rings", path: "/rings" },
+    { name: "Earrings", path: "/earrings" },
+    { name: "Necklaces", path: "/necklaces" },
+    { name: "Couple Sets", path: "/couplesets" },
+    { name: "Anklet", path: "/anklet" },
     { name: "About", path: "/about" },
   ];
 
