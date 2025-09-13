@@ -1,0 +1,150 @@
+import React from "react";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Phone,
+  Mail,
+  MapPin,
+  ChevronRight,
+  MessageCircle,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+const Footer = () => {
+  // Collections with routes
+  const collections = [
+    { name: "Bracelets", path: "/braceletsgrid" },
+    { name: "Rings", path: "/ringsgrid" },
+    { name: "Earrings", path: "/earringsgrid" },
+    { name: "Necklaces", path: "/necklacesgrid" },
+    { name: "Couple Sets", path: "/couplesetsgrid" },
+    { name: "Anklet", path: "/ankletgrid" },
+  ];
+
+  // Quick Links with routes
+  const quickLinks = [
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Privacy Policy", path: "/privacy-policy" },
+    { name: "Terms & Conditions", path: "/terms" },
+  ];
+
+  return (
+    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black text-white w-full shadow-2xl relative">
+      <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Brand Info */}
+        <div>
+          <h2 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+            ✨{" "}
+            <span className="text-4xl font-sans font-bold text-[#ed9d58]">
+              LUXURY
+            </span>
+            <span className="text-2xl font-sans font-bold pl-1 pt-4">
+              JEWELS
+            </span>
+          </h2>
+          <p className="text-gray-100">
+            Premium jewellery crafted with love and elegance, designed to shine
+            with timeless beauty. Perfect for your special moments,
+            anniversaries, weddings, and everyday elegance that reflects your
+            true style.
+          </p>
+          <div className="flex gap-4 mt-4">
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Facebook />
+            </a>
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Instagram />
+            </a>
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Twitter />
+            </a>
+          </div>
+        </div>
+
+        {/* Collections */}
+        <div>
+          <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+            Collections
+          </h3>
+          <ul className="space-y-2 text-gray-100">
+            {collections.map((item, index) => (
+              <li key={index}>
+                <Link
+                  to={item.path}
+                  className="flex items-center gap-2 hover:text-amber-500 transition-all hover:translate-x-1"
+                >
+                  <ChevronRight size={16} /> {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+            Quick Links
+          </h3>
+          <ul className="space-y-2 text-gray-100">
+            {quickLinks.map((link, index) => (
+              <li key={index}>
+                <Link
+                  to={link.path}
+                  className="flex items-center gap-2 hover:text-amber-500 transition-all hover:translate-x-1"
+                >
+                  <ChevronRight size={16} /> {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div>
+          <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+            Contact Us
+          </h3>
+          <ul className="space-y-3 text-gray-100">
+            <li className="flex items-center gap-2">
+              <MapPin size={18} /> 123, Delhi, India
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone size={18} /> +91 9876543210
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail size={18} /> support@jewellery.com
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800 py-4 text-center text-gray-100">
+        © {new Date().getFullYear()} Jewellery Store. All Rights Reserved.
+      </div>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/919876543210"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all animate-bounce z-10"
+      >
+        <MessageCircle size={28} />
+      </a>
+    </footer>
+  );
+};
+
+export default Footer;

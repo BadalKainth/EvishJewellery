@@ -1,0 +1,98 @@
+const Earringsdata = [
+  {
+    id: 1,
+    name: "Gold Earrings",
+    description: "Elegant gold earrings with modern design",
+    price: 12000,
+    discountPrice: 10000,
+    category: "earrings",
+    material: "gold",
+    deliveryCharge: 0,
+    stock: 5, // 👈 कितने available हैं
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/mov_bbb.mp4"],
+    badge: "NEW",
+  },
+  {
+    id: 2,
+    name: "Diamond Earrings",
+    description: "Luxury diamond earrings with premium cut",
+    price: 28000,
+    discountPrice: 25000,
+    category: "earrings",
+    material: "diamond",
+    deliveryCharge: 0,
+    stock: 3,
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/movie.mp4"],
+  },
+  {
+    id: 3,
+    name: "Platinum Earrings",
+    description: "Classic platinum earrings for special occasions",
+    price: 35000,
+    discountPrice: 30000,
+    category: "earrings",
+    material: "platinum",
+    deliveryCharge: 0,
+    stock: 2,
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/mov_bbb.mp4"],
+  },
+  {
+    id: 4,
+    name: "Silver Earrings",
+    description: "Stylish silver earrings with engraved pattern",
+    price: 9000,
+    discountPrice: 7500,
+    category: "earrings",
+    material: "silver",
+    deliveryCharge: 0,
+    stock: 4,
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/mov_bbb.mp4"],
+  },
+  {
+    id: 5,
+    name: "Emerald Earrings",
+    description: "Green emerald stone earrings with gold base",
+    price: 20000,
+    discountPrice: 18000,
+    category: "earrings",
+    material: "emerald",
+    deliveryCharge: 0,
+    stock: 1,
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/mov_bbb.mp4"],
+    badge: "SALE",
+  },
+  {
+    id: 6,
+    name: "Ruby Earrings",
+    description: "Bright red ruby earrings with elegant design",
+    price: 22000,
+    discountPrice: 19000,
+    category: "earrings",
+    material: "ruby",
+    deliveryCharge: 0,
+    stock: 0, // 👈 पहले से out of stock
+    images: [
+      "https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg",
+    ],
+    videos: ["https://www.w3schools.com/html/mov_bbb.mp4"],
+  },
+];
+
+export default Earringsdata;
