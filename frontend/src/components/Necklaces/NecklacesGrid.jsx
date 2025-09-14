@@ -36,7 +36,7 @@ const NecklacesGrid = ({ addToCart }) => {
         </div>
       </div>
 
-      <div className="p-10 px-6 md:px-20 text-justify">
+      <div className="p-10 px-6 md:px-20 text-justify poppins-regular">
         <b>Necklaces – Modern & Traditional Necklace Designs Online</b>
         <br />
         Find traditional and modern necklace designs online. Shop designer,

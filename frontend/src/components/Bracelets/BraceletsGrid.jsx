@@ -32,7 +32,7 @@ const BraceletsGrid = ({ addToCart }) => {
           ))}
         </div>
       </div>
-      <div className="p-10 text-justify">
+      <div className="p-10 text-justify poppins-regular">
         <h1 className="font-bold">
           Bracelets – Elegant & Stylish Bracelet Designs for Every Occasion
         </h1>

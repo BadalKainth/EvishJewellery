@@ -7,18 +7,18 @@ const Navbar = ({ cartItems }) => {
   // सारे menu links एक array में रखे
   const menuLinks = [
     { name: "Home", path: "/" },
-    { name: "Bracelets", path: "/braceletsgrid" },
-    { name: "Rings", path: "/ringsgrid" },
-    { name: "Earrings", path: "/earringsgrid" },
-    { name: "Necklaces", path: "/necklacesgrid" },
-    { name: "Couple Sets", path: "/couplesetsgrid" },
-    { name: "Anklet", path: "/ankletgrid" },
+    { name: "Bracelets", path: "/bracelets" },
+    { name: "Rings", path: "/rings" },
+    { name: "Earrings", path: "/earrings" },
+    { name: "Necklaces", path: "/necklaces" },
+    { name: "Couple Sets", path: "/couplesets" },
+    { name: "Anklet", path: "/anklet" },
     { name: "About", path: "/about" },
   ];
 
   return (
     <nav className="bg-[#faf9eb] shadow-md sticky top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase overflow-x-hidden">
-      <div className="container mx-auto px-4 overflow-x-hidden">
+      <div className="container mx-auto px-1 overflow-x-hidden">
         <div className="flex justify-between items-center py-4 px-1">
           {/* Logo - Left side */}
           <Link
@@ -33,7 +33,7 @@ const Navbar = ({ cartItems }) => {
               JEWELS
             </span>
           </Link>
-
+         
           {/* Right side (Links + Cart + Mobile Button) */}
           <div className="flex items-center space-x-4">
             {/* Desktop Menu */}
