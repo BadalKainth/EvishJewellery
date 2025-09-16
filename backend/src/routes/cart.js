@@ -162,7 +162,7 @@ router.put(
 
       res.json({
         success: true,
-        message: "Cart updated successfully",
+        message: "Cart updated successfully!",
         data: {
           cart: {
             items: cart.items,
@@ -175,7 +175,7 @@ router.put(
       console.error("Update cart error:", error);
       res.status(500).json({
         success: false,
-        message: "Failed to update cart",
+        message: "Failed to update.",
       });
     }
   }

@@ -36,9 +36,9 @@ function App() {
 
   const token = localStorage.getItem("token"); // ✅ check login
 
-  if (!token) {
-    return <AuthForm />; // ✅ agar login nahi hai toh signup/signin form dikhao
-  }
+  // if (!token) {
+  //   return <AuthForm />; // ✅ agar login nahi hai toh signup/signin form dikhao
+  // }
 
   return (
     <>
@@ -104,10 +104,7 @@ function App() {
           path="/anklets/:id"
           element={<AnkletDetails addToCart={addToCart} slider={false} />}
         />
-        <Route
-          path="/about"
-          element={ <About/>}
-        />
+        <Route path="/about" element={<About />} />
         <Route
           path="/cart"
           element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
