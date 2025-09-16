@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
 
 const Navbar = ({ cartItems }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   // सारे menu links एक array में रखे
   const menuLinks = [
     { name: "Home", path: "/" },
-    { name: "Bracelets", path: "/bracelets" },
-    { name: "Rings", path: "/rings" },
-    { name: "Earrings", path: "/earrings" },
-    { name: "Necklaces", path: "/necklaces" },
-    { name: "Couple Sets", path: "/couplesets" },
-    { name: "Anklet", path: "/anklet" },
+    { name: "Featured", path: "/featured" },
+    { name: "Coupons", path: "/coupons" },
+    { name: "Rings", path: "/category/rings" },
+    { name: "Bracelets", path: "/category/bracelets" },
+    { name: "Earrings", path: "/category/earrings" },
+    { name: "Necklaces", path: "/category/necklaces" },
+    { name: "Anklets", path: "/category/anklets" },
+    { name: "Couple Sets", path: "/category/couple-sets" },
     { name: "About", path: "/about" },
   ];
 
@@ -47,6 +51,14 @@ const Navbar = ({ cartItems }) => {
                   {link.name}
                 </Link>
               ))}
+              <Link to="/search" className="text-dark hover:text-amber-600 transition">Search</Link>
+              {user && <Link to="/account" className="text-dark hover:text-amber-600 transition">Account</Link>}
+              {user?.role === 'admin' && <Link to="/admin" className="text-dark hover:text-amber-600 transition">Admin</Link>}
+              {user ? (
+                <button onClick={logout} className="text-dark hover:text-amber-600 transition">Logout</button>
+              ) : (
+                <Link to="/authForm" className="text-dark hover:text-amber-600 transition">Login</Link>
+              )}
             </div>
 
             {/* Cart Icon (Desktop) */}
@@ -119,6 +131,14 @@ const Navbar = ({ cartItems }) => {
                 {link.name}
               </Link>
             ))}
+            <Link to="/search" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Search</Link>
+            {user && <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Account</Link>}
+            {user?.role === 'admin' && <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Admin</Link>}
+            {user ? (
+              <button onClick={()=> { logout(); setIsMobileMenuOpen(false);} } className="block py-2 text-left w-full text-dark hover:text-amber-600 transition">Logout</button>
+            ) : (
+              <Link to="/authForm" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Login</Link>
+            )}
 
             {/* Cart Icon (Mobile) */}
             <div className="pt-2">

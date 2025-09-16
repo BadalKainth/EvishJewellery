@@ -1,28 +1,49 @@
 // src/AuthForm.jsx
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 const AuthForm = () => {
+  const { login, register } = useContext(AuthContext);
   const [isSignup, setIsSignup] = useState(true);
   const [signupData, setSignupData] = useState({
-    username: "",
+    name: "",
     email: "",
     phone: "",
     password: "",
   });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    alert("Signup successful! Please sign in.");
-    setSignupData({ username: "", email: "",phone: "", password: "" });
-    setIsSignup(false);
+    setSubmitting(true);
+    setError("");
+    try {
+      await register({
+        name: signupData.name,
+        email: signupData.email,
+        phone: signupData.phone,
+        password: signupData.password,
+      });
+    } catch (err) {
+      setError(err.message || "Registration failed");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleSignin = (e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();
-    localStorage.setItem("token", "demo-token"); //////////// token set /////////////
-    alert("Signed in successfully!");
-    window.location.reload();
+    setSubmitting(true);
+    setError("");
+    try {
+      await login({ email: signinData.email, password: signinData.password });
+    } catch (err) {
+      setError(err.message || "Login failed");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -31,13 +52,14 @@ const AuthForm = () => {
         {isSignup ? (
           <form onSubmit={handleSignup} className="space-y-6">
             <h2 className="text-2xl font-bold text-center">Sign Up</h2>
+            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Full name"
               required
-              value={signupData.username}
+              value={signupData.name}
               onChange={(e) =>
-                setSignupData({ ...signupData, username: e.target.value })
+                setSignupData({ ...signupData, name: e.target.value })
               }
               className="w-full p-3 border rounded"
             />
@@ -73,9 +95,10 @@ const AuthForm = () => {
             />
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
+              disabled={submitting}
+              className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition disabled:opacity-60"
             >
-              Sign Up
+              {submitting ? "Signing up..." : "Sign Up"}
             </button>
             <p className="text-center text-sm text-gray-600">
               Already have an account?{" "}
@@ -91,6 +114,7 @@ const AuthForm = () => {
         ) : (
           <form onSubmit={handleSignin} className="space-y-6">
             <h2 className="text-2xl font-bold text-center">Sign In</h2>
+            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
             <input
               type="email"
               placeholder="Email"
@@ -113,9 +137,10 @@ const AuthForm = () => {
             />
             <button
               type="submit"
-              className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700 transition"
+              disabled={submitting}
+              className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700 transition disabled:opacity-60"
             >
-              Sign In
+              {submitting ? "Signing in..." : "Sign In"}
             </button>
             <p className="text-center text-sm text-gray-600">
               Don’t have an account?{" "}

@@ -18,6 +18,23 @@ import AnkletDetails from "./components/Anklet/AnkletDetails";
 import Cart from "./components/Cart/Cart";
 import Footer from "./Footer";
 import AuthForm from "./AuthForm"; // ✅ Add this
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminLayout from "./components/Admin";
+import ProductsList from "./components/ProductsList";
+import ProductDetail from "./components/ProductDetail";
+import Checkout from "./components/Checkout/Checkout";
+import Account from "./components/Account/Account";
+import CreateReturn from "./components/Returns/CreateReturn";
+import SearchPage from "./components/Search/SearchPage";
+import FeaturedProducts from "./components/Featured/FeaturedProducts";
+import PublicCoupons from "./components/Coupons/PublicCoupons";
+import OrderDetail from "./components/Orders/OrderDetail";
+import UploadReturnMedia from "./components/Returns/UploadReturnMedia";
+import Addresses from "./components/Account/Addresses";
+import VerifyEmail from "./components/Auth/VerifyEmail";
+import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
+import ChangePassword from "./components/Auth/ChangePassword";
 import About from "./components/about/about";
 
 function ScrollToTopOnRouteChange() {
@@ -34,11 +51,7 @@ function App() {
     setCartItems((prev) => [...prev, product]);
   };
 
-  const token = localStorage.getItem("token"); // ✅ check login
-
-  if (!token) {
-    return <AuthForm />; // ✅ agar login nahi hai toh signup/signin form dikhao
-  }
+  // Auth is now handled via routes and ProtectedRoute
 
   return (
     <>
@@ -56,10 +69,24 @@ function App() {
             />
           }
         />
-        <Route
-          path="/bracelets"
-          element={<BraceletsGrid addToCart={addToCart} />}
-        />
+        <Route path="/products" element={<ProductsList />} />
+        <Route path="/category/:category" element={<CategoryWrapper />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/featured" element={<FeaturedProducts />} />
+        <Route path="/coupons" element={<PublicCoupons />} />
+        <Route path="/orders/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
+        <Route path="/returns/:id/media" element={<ProtectedRoute><UploadReturnMedia /></ProtectedRoute>} />
+        <Route path="/account/addresses" element={<ProtectedRoute><Addresses /></ProtectedRoute>} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+        <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+        <Route path="/returns/new" element={<ProtectedRoute><CreateReturn /></ProtectedRoute>} />
+
+        <Route path="/bracelets" element={<BraceletsGrid addToCart={addToCart} />} />
         <Route
           path="/bracelets/:id"
           element={<BraceletsDetails addToCart={addToCart} />}
@@ -112,6 +139,12 @@ function App() {
           path="/cart"
           element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
         />
+
+        <Route path="/admin/*" element={
+          <ProtectedRoute requireAdmin>
+            <AdminLayout />
+          </ProtectedRoute>
+        } />
 
         <Route path="/authForm" element={<AuthForm />} />
       </Routes>
