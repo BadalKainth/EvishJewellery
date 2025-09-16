@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import braceletsdata from "./BraceletsData";
 
 import "slick-carousel/slick/slick.css";
@@ -35,9 +35,12 @@ const Bracelets = ({ addToCart }) => {
       <div className="w-full">
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Bracelets
-            </h2>
+            <Link
+              to="/bracelets"
+              className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
+            >
+              Bracelet
+            </Link>
             <p className="text-lg poppins-medium text-amber-800">
               Elegance that shines on your wrist
             </p>

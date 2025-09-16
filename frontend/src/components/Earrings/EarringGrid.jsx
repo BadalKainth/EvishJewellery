@@ -90,33 +90,33 @@ const EarringsGrid = ({ addToCart }) => {
         Free delivery and a 30-day return Great customer care Visit discover
         your perfect pair of silver earrings for every occasion. <br />
         <br />
-        <b>FAQs</b>
+        <b className="text-4xl text-yellow-900 ">FAQs</b> <br />
         <b>
           1. How should I care for silver earrings to keep them looking shiny?
-        </b>
+        </b> <br />
         Response: With proper storage in an airtight box, avoidance of direct
         contact with perfume and water, and a gentle clean with a soft jewelry
         cloth, your silver earrings can stay shining. Our anti-tarnish rhodium
         plating means they will stay looking shiny for much longer.
-        <br />
-        <b>2. Can pearl earrings be worn everyday?</b>
+        <br /> <br />
+        <b>2. Can pearl earrings be worn everyday?</b>  <br />
         Response: Pearl earrings are certainly a wonderful option for everyday
         wear, but be careful if they get in contact with strong chemicals or if
         they are handled too roughly. You cannot wrong with a simple pearl
         earring which can be dressed up or down and suits every occasion.
-        <br />
-        <b>3. Will Sui Dhaga gold earrings irritate my skin?</b>
+        <br /> <br />
+        <b>3. Will Sui Dhaga gold earrings irritate my skin?</b> <br />
         Response: Our Sui Dhaga gold earrings will not irritate your skin, as
         they are not only made with skin-friendly materials, but are also
         extremely lightweight making them great for even very sensitive ears.
         The design means you do not need to compromise comfort for style.
-        <br />
-        <b>4. Can I buy these earrings with packaging?</b>
+        <br /> <br />
+        <b>4. Can I buy these earrings with packaging?</b> <br />
         Response: Of course, we package all our earrings in premium packaging
         with a jewelry care kit, and you can also choose gift wrapping during
         checkout. They will make the perfect gift for your loved ones.
-        <br />
-        <b>5. Do the earrings come with a warranty or certificate?</b>
+        <br /> <br />
+        <b>5. Do the earrings come with a warranty or certificate?</b> <br />
         Answer: Yes. All our earrings come with an authentication certificate of
         purity and quality. All gold and silver product are hallmarked and all
         pieces are quality checked before they are dispatched.
