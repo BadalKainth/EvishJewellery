@@ -216,7 +216,6 @@ const orderSchema = new mongoose.Schema(
 );
 
 // Indexes for better query performance
-orderSchema.index({ orderNumber: 1 });
 orderSchema.index({ user: 1 });
 orderSchema.index({ status: 1 });
 orderSchema.index({ "paymentDetails.paymentStatus": 1 });
