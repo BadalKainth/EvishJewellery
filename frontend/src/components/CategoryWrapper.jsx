@@ -6,5 +6,3 @@ export default function CategoryWrapper() {
   const { category } = useParams();
   return <ProductsList category={category} />;
 }
-
-

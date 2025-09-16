@@ -36,6 +36,7 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import ChangePassword from "./components/Auth/ChangePassword";
 import About from "./components/about/about";
+import CategoryWrapper from "./components/CategoryWrapper";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -75,18 +76,70 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/featured" element={<FeaturedProducts />} />
         <Route path="/coupons" element={<PublicCoupons />} />
-        <Route path="/orders/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
-        <Route path="/returns/:id/media" element={<ProtectedRoute><UploadReturnMedia /></ProtectedRoute>} />
-        <Route path="/account/addresses" element={<ProtectedRoute><Addresses /></ProtectedRoute>} />
+        <Route
+          path="/orders/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/returns/:id/media"
+          element={
+            <ProtectedRoute>
+              <UploadReturnMedia />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account/addresses"
+          element={
+            <ProtectedRoute>
+              <Addresses />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
-        <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-        <Route path="/returns/new" element={<ProtectedRoute><CreateReturn /></ProtectedRoute>} />
+        <Route
+          path="/change-password"
+          element={
+            <ProtectedRoute>
+              <ChangePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/returns/new"
+          element={
+            <ProtectedRoute>
+              <CreateReturn />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path="/bracelets" element={<BraceletsGrid addToCart={addToCart} />} />
+        <Route
+          path="/bracelets"
+          element={<BraceletsGrid addToCart={addToCart} />}
+        />
         <Route
           path="/bracelets/:id"
           element={<BraceletsDetails addToCart={addToCart} />}
@@ -137,11 +190,14 @@ function App() {
           element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
         />
 
-        <Route path="/admin/*" element={
-          <ProtectedRoute requireAdmin>
-            <AdminLayout />
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute requireAdmin>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/authForm" element={<AuthForm />} />
       </Routes>
