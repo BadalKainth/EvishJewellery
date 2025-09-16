@@ -71,7 +71,7 @@ const CoupleSets = ({ slider = true, addToCart }) => {
                 key={product.id}
                 product={product}
                 addToCart={addToCart}
-                onClick={() => navigate(`/couplesets/${product.id}`)}
+                onClick={() => navigate(`/category/couplesets/${product.id}`)}
               />
             ))}
           </Slider>

@@ -27,7 +27,7 @@ const RingsGrid = ({ addToCart }) => {
               key={product.id}
               product={product}
               addToCart={addToCart}
-              onClick={() => navigate(`/rings/${product.id}`)}
+              onClick={() => navigate(`/category/rings/${product.id}`)}
             />
           ))}
         </div>
@@ -92,128 +92,146 @@ const RingsGrid = ({ addToCart }) => {
         special moments.
         <br />
         <br />
-        <b className="bg-gray-100 m-2 cursor-pointer">Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Silver Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Diamond Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Women Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Men Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 10K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 50K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 2L</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Jewellery above 2L</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Women</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Men</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">22 Karat Gold Chain</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">18 Karat Gold Chain</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Kids</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain under 50K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Gold Earrings for Women
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Earrings for Kids</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Stud Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Jhumka Earrings Gold</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Daily Wear Gold Earrings
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Chandbali Earrings Gold
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Plain Gold Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pearl Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">22 Karat Gold Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Ruby Earrings Gold</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Earrings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Gold Earrings under 10K
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Gold Earrings under 50K
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Earrings under 2L</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Bangles</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Baby Bangles Gold</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Bangles for Women</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">22KT Gold Bangles</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Kada Gold Bangles</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Bangles under 50K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Necklaces</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Necklaces</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Silver Necklaces</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Diamond Necklaces</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Necklaces for Women</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Party Wear Necklaces</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Necklaces above 50K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Rings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Diamond Rings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Silver Rings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Men</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Women</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Kids</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          22 Karat Gold Rings for Men & Women
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Plain Gold Rings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Rings</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Daily Wear Gold Ring Designs
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 10K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 50K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 2L</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Less Than 4 Gram Gold Rings
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Less Than 8 Gram Gold Rings
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant for Women</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant for Men</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Pendant</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant for Kids</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant above 10K</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Collections</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Antique Jewellery</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Modern Mangalsutra Design
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          18 Karat Gold Jewellery
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Diamond Jewellery Collection
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">
-          Silver Jewellery Collection
-        </b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Gold God Pendant</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Wedding Collection</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Coins</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Silver Coins</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">22 Karat Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">1 Gram Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">2 Gram Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">4 Gram Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">8 Gram Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">25 Gram Silver Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Lakshmi Gold Coin</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Bars</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">Silver Bars</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">24 Karat Gold Bars</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">1 Gram Gold Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">5 Gram Gold Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">10 Gram Gold Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">25 Gram Silver Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">50 Gram Gold Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">50 Gram Silver Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">75 Gram Silver Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">100 Gram Gold Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">100 Gram Silver Bar</b>
-        <b className="bg-gray-100 m-2 cursor-pointer">1000 Gram Gold Bar</b>
+        <div className="text-sm">
+          <b className="bg-gray-100 m-2 cursor-pointer">Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Silver Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Diamond Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Women Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Men Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 10K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 50K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Jewellery under 2L</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Jewellery above 2L</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Women</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Men</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">22 Karat Gold Chain</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">18 Karat Gold Chain</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain for Kids</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Chain under 50K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Earrings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Earrings for Women
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Earrings for Kids
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Stud Earrings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Jhumka Earrings Gold</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Daily Wear Gold Earrings
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Chandbali Earrings Gold
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Plain Gold Earrings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Pearl Earrings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            22 Karat Gold Earrings
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Ruby Earrings Gold</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Earrings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Earrings under 10K
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Earrings under 50K
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Earrings under 2L
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Bangles</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Baby Bangles Gold</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Bangles for Women
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">22KT Gold Bangles</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Kada Gold Bangles</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Bangles under 50K
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Necklaces</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Necklaces</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Silver Necklaces</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Diamond Necklaces</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Necklaces for Women</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Party Wear Necklaces</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Necklaces above 50K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Rings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Diamond Rings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Silver Rings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Men</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Women</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings for Kids</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            22 Karat Gold Rings for Men & Women
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Plain Gold Rings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Rings</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Daily Wear Gold Ring Designs
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 10K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 50K</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Rings under 2L</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Less Than 4 Gram Gold Rings
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Less Than 8 Gram Gold Rings
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Pendant for Women
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold Pendant for Men</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Rose Gold Pendant</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Pendant for Kids
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Gold Pendant above 10K
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Collections</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Antique Jewellery</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Modern Mangalsutra Design
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            18 Karat Gold Jewellery
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Diamond Jewellery Collection
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">
+            Silver Jewellery Collection
+          </b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Gold God Pendant</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Wedding Collection</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Coins</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Silver Coins</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">22 Karat Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">1 Gram Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">2 Gram Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">4 Gram Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">8 Gram Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">25 Gram Silver Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Lakshmi Gold Coin</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Bars</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">Silver Bars</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">24 Karat Gold Bars</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">1 Gram Gold Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">5 Gram Gold Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">10 Gram Gold Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">25 Gram Silver Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">50 Gram Gold Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">50 Gram Silver Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">75 Gram Silver Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">100 Gram Gold Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">100 Gram Silver Bar</b>
+          <b className="bg-gray-100 m-2 cursor-pointer">1000 Gram Gold Bar</b>
+        </div>
       </div>
     </div>
   );

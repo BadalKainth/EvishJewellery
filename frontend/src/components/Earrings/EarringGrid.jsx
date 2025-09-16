@@ -30,7 +30,7 @@ const EarringsGrid = ({ addToCart }) => {
               key={product.id}
               product={product}
               addToCart={addToCart}
-              onClick={() => navigate(`/earrings/${product.id}`)}
+              onClick={() => navigate(`/category/earrings/${product.id}`)}
             />
           ))}
         </div>
@@ -93,13 +93,14 @@ const EarringsGrid = ({ addToCart }) => {
         <b className="text-4xl text-yellow-900 ">FAQs</b> <br />
         <b>
           1. How should I care for silver earrings to keep them looking shiny?
-        </b> <br />
+        </b>{" "}
+        <br />
         Response: With proper storage in an airtight box, avoidance of direct
         contact with perfume and water, and a gentle clean with a soft jewelry
         cloth, your silver earrings can stay shining. Our anti-tarnish rhodium
         plating means they will stay looking shiny for much longer.
         <br /> <br />
-        <b>2. Can pearl earrings be worn everyday?</b>  <br />
+        <b>2. Can pearl earrings be worn everyday?</b> <br />
         Response: Pearl earrings are certainly a wonderful option for everyday
         wear, but be careful if they get in contact with strong chemicals or if
         they are handled too roughly. You cannot wrong with a simple pearl

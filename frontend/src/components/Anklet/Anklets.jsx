@@ -71,7 +71,7 @@ const Anklets = ({ slider = true, addToCart }) => {
                 key={product.id}
                 product={product}
                 addToCart={addToCart}
-                onClick={() => navigate(`/anklets/${product.id}`)}
+                onClick={() => navigate(`/category/anklets/${product.id}`)}
               />
             ))}
           </Slider>
@@ -82,7 +82,7 @@ const Anklets = ({ slider = true, addToCart }) => {
                 key={product.id}
                 product={product}
                 addToCart={addToCart}
-                onClick={() => navigate(`/anklets/${product.id}`)}
+                onClick={() => navigate(`/category/anklets/${product.id}`)}
               />
             ))}
           </div>

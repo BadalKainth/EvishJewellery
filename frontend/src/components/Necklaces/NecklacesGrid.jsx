@@ -30,7 +30,7 @@ const NecklacesGrid = ({ addToCart }) => {
               key={product.id}
               product={product}
               addToCart={addToCart}
-              onClick={() => navigate(`/necklaces/${product.id}`)}
+              onClick={() => navigate(`/category/necklaces/${product.id}`)}
             />
           ))}
         </div>

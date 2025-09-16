@@ -11,12 +11,12 @@ const Navbar = ({ cartItems }) => {
     { name: "Home", path: "/" },
     // { name: "Featured", path: "/featured" },
     // { name: "Coupons", path: "/coupons" },
-    { name: "Rings", path: "/category/rings" },
     { name: "Bracelets", path: "/category/bracelets" },
+    { name: "Rings", path: "/category/rings" },
     { name: "Earrings", path: "/category/earrings" },
     { name: "Necklaces", path: "/category/necklaces" },
+    { name: "Couple Sets", path: "/category/couplesets" },
     { name: "Anklets", path: "/category/anklets" },
-    { name: "Couple Sets", path: "/category/couple-sets" },
     { name: "About", path: "/about" },
   ];
 

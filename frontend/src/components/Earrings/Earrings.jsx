@@ -62,7 +62,7 @@ const Earrings = ({ slider = true, addToCart }) => {
                 key={product.id}
                 product={product}
                 addToCart={addToCart}
-                onClick={() => navigate(`/earrings/${product.id}`)}
+                onClick={() => navigate(`/category/earrings/${product.id}`)}
               />
             ))}
           </div>

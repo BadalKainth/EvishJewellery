@@ -7,19 +7,18 @@ import {
   Mail,
   MapPin,
   ChevronRight,
-  MessageCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   // Collections with routes
   const collections = [
-    { name: "Bracelets", path: "/braceletsgrid" },
-    { name: "Rings", path: "/ringsgrid" },
-    { name: "Earrings", path: "/earringsgrid" },
-    { name: "Necklaces", path: "/necklacesgrid" },
-    { name: "Couple Sets", path: "/couplesetsgrid" },
-    { name: "Anklet", path: "/ankletgrid" },
+    { name: "Bracelets", path: "/category/bracelets" },
+    { name: "Rings", path: "/category/rings" },
+    { name: "Earrings", path: "/category/earrings" },
+    { name: "Necklaces", path: "/category/necklaces" },
+    { name: "Couple Sets", path: "/category/couplesets" },
+    { name: "Anklet", path: "/category/anklets" },
   ];
 
   // Quick Links with routes
@@ -50,26 +49,6 @@ const Footer = () => {
             anniversaries, weddings, and everyday elegance that reflects your
             true style.
           </p>
-          <div className="flex gap-4 mt-4">
-            <a
-              href="#"
-              className="hover:text-gold-400 transition-transform transform hover:scale-110"
-            >
-              <Facebook />
-            </a>
-            <a
-              href="#"
-              className="hover:text-gold-400 transition-transform transform hover:scale-110"
-            >
-              <Instagram />
-            </a>
-            <a
-              href="#"
-              className="hover:text-gold-400 transition-transform transform hover:scale-110"
-            >
-              <Twitter />
-            </a>
-          </div>
         </div>
 
         {/* Collections */}
@@ -126,6 +105,26 @@ const Footer = () => {
               <Mail size={18} /> support@jewellery.com
             </li>
           </ul>
+          <div className="flex gap-8 px-6 py-4">
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Facebook />
+            </a>
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Instagram />
+            </a>
+            <a
+              href="#"
+              className="hover:text-gold-400 transition-transform transform hover:scale-110"
+            >
+              <Twitter />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -139,9 +138,13 @@ const Footer = () => {
         href="https://wa.me/919876543210"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all animate-bounce z-10"
+        className="fixed bottom-6 right-6 text-white p-6 transition-all animate-bounce z-10"
       >
-        <MessageCircle size={28} />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+          alt="WhatsApp"
+          className="w-16 h-16"
+        />
       </a>
     </footer>
   );

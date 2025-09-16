@@ -9,10 +9,11 @@ const AboutUsPage = () => {
       {/* Hero Section */}
       <section className=" p-8 md:px-8 bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-amber-500 mb-6">
+          <h1 className="text-3xl md:text-5xl font-bold text-amber-800 p-2">
+            
             About Avish Jewellery
           </h1>
-          <p className="text-lg md:text-xl text-justify md:text-center text-gray-700 max-w-7xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-justify md:text-center text-gray-950 max-w-7xl mx-auto leading-relaxed">
             Avish Jewellery presents to you an eternally elegant combination of
             tradition and modern style in genuine hallmarked gold and 925
             sterling silver jewellery. Each piece is made with love, purity, and
@@ -27,11 +28,11 @@ const AboutUsPage = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl font-bold text-amber-700 mb-6 md:text-justify">
+              <h2 className="text-xl font-bold text-amber-700 mb-6 md:text-justify">
                 Avish Jewellery – Authentic Gold & Silver Jewellery That Blends
                 Tradition with Modern Elegance
               </h2>
-              <p className="md:text-base text-sm text-gray-700 mb-6 md:text-justify">
+              <p className="md:text-base text-sm text-gray-900 mb-6 text-justify">
                 At Avish Jewellery, authenticity is paramount. Every item is
                 accompanied by a certificate of purity, crafted with
                 skin-friendly, hypoallergenic metals, and nicely packaged for
@@ -132,7 +133,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-12 px-4 md:px-8">
+      <section className="py-4 md:py-12 px-4 md:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">
             Get In Touch
@@ -207,8 +208,8 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      <div className="p-8 px-5 text-sm md:text-base  md:px-20 space-y-2 md:text-justify text-gray-950 ">
-        <h1 className="font-bold text-lg md:text-xl text-amber-600  md:text-center py-4">
+      <div className="py-8 px-5 text-sm md:text-base  md:px-20 space-y-2 text-justify text-gray-950 ">
+        <h1 className="font-bold text-lg md:text-xl text-amber-600 text-start  md:text-center py-2 md:py4">
           About Avish Jewellery – Fusing Tradition with Contemporary Elegance
         </h1>
         <p>

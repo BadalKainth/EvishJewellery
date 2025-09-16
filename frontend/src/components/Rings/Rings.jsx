@@ -53,7 +53,7 @@ const Rings = ({ addToCart }) => {
               <ProductCard
                 product={product}
                 addToCart={addToCart}
-                onClick={() => navigate(`/rings/${product.id}`)}
+                onClick={() => navigate(`/category/rings/${product.id}`)}
               />
             </div>
           ))}

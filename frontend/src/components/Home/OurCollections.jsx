@@ -29,7 +29,7 @@ const OurCollections = () => {
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
               <div className="relative overflow-hidden">
                 {/* Link सिर्फ image को घेरता है */}
-                <Link to="/bracelets" className="block">
+                <Link to="/category/bracelets" className="block">
                   <img
                     src={bracelet9}
                     alt="Sparkling diamond necklace on a woman's neck with elegant evening dress"
@@ -58,7 +58,7 @@ const OurCollections = () => {
             {/* <!-- Collection 2 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/rings" className="block">
+                <Link to="/category/rings" className="block">
                   <img
                     src="https://cdn.pixabay.com/photo/2018/04/04/18/28/golden-3290604_1280.jpg"
                     alt="Golden engagement ring with diamond setting on a romantic wedding photo background"
@@ -83,7 +83,7 @@ const OurCollections = () => {
             {/* <!-- Collection 3 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/earrings" className="block">
+                <Link to="/category/earrings" className="block">
                   <img
                     src="https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
@@ -108,7 +108,7 @@ const OurCollections = () => {
             {/* <!-- Collection 4 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/necklaces" className="block">
+                <Link to="/category/necklaces" className="block">
                   <img
                     src={necklaces1}
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
@@ -135,7 +135,7 @@ const OurCollections = () => {
             {/* <!-- Collection 5 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/couplesets" className="block">
+                <Link to="/category/couplesets" className="block">
                   <img
                     src="https://salty.co.in/cdn/shop/files/BC24358-G_MODEL.jpg?v=1754893646&width=1800"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
@@ -162,7 +162,7 @@ const OurCollections = () => {
             {/* <!-- Collection 6 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/anklet" className="block">
+                <Link to="/category/anklets" className="block">
                   <img
                     src="https://images.pexels.com/photos/7068000/pexels-photo-7068000.jpeg"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"

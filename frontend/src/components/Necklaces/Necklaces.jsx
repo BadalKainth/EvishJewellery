@@ -71,7 +71,7 @@ const Necklaces = ({ slider = true, addToCart }) => {
                 <ProductCard
                   product={product}
                   addToCart={addToCart}
-                  onClick={() => navigate(`/necklaces/${product.id}`)}
+                  onClick={() => navigate(`/category/necklaces/${product.id}`)}
                 />
               </div>
             ))}
