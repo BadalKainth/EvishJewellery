@@ -137,51 +137,51 @@ function App() {
         />
 
         <Route
-          path="/bracelets"
+          path="category/bracelets"
           element={<BraceletsGrid addToCart={addToCart} />}
         />
         <Route
-          path="/bracelets/:id"
+          path="category/bracelets/:id"
           element={<BraceletsDetails addToCart={addToCart} />}
         />
         <Route
-          path="/rings"
+          path="category/rings"
           element={<RingsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/rings/:id"
+          path="category/rings/:id"
           element={<ProductDetails addToCart={addToCart} />}
         />
         <Route
-          path="/earrings"
+          path="category/earrings"
           element={<EarringsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/earrings/:id"
+          path="category/earrings/:id"
           element={<EarringDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/necklaces"
+          path="category/necklaces"
           element={<NecklacesGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/necklaces/:id"
+          path="category/necklaces/:id"
           element={<NecklaceDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/couplesets"
+          path="category/couplesets"
           element={<CoupleSetsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/couplesets/:id"
+          path="category/couplesets/:id"
           element={<CoupleDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/anklet"
+          path="category/anklets"
           element={<AnkletGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="/anklets/:id"
+          path="category/anklets/:id"
           element={<AnkletDetails addToCart={addToCart} slider={false} />}
         />
         <Route path="/about" element={<About />} />

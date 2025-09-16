@@ -9,8 +9,8 @@ const Navbar = ({ cartItems }) => {
   // सारे menu links एक array में रखे
   const menuLinks = [
     { name: "Home", path: "/" },
-    { name: "Featured", path: "/featured" },
-    { name: "Coupons", path: "/coupons" },
+    // { name: "Featured", path: "/featured" },
+    // { name: "Coupons", path: "/coupons" },
     { name: "Rings", path: "/category/rings" },
     { name: "Bracelets", path: "/category/bracelets" },
     { name: "Earrings", path: "/category/earrings" },
@@ -37,7 +37,7 @@ const Navbar = ({ cartItems }) => {
               JEWELS
             </span>
           </Link>
-         
+
           {/* Right side (Links + Cart + Mobile Button) */}
           <div className="flex items-center space-x-4">
             {/* Desktop Menu */}
@@ -51,13 +51,42 @@ const Navbar = ({ cartItems }) => {
                   {link.name}
                 </Link>
               ))}
-              <Link to="/search" className="text-dark hover:text-amber-600 transition">Search</Link>
-              {user && <Link to="/account" className="text-dark hover:text-amber-600 transition">Account</Link>}
-              {user?.role === 'admin' && <Link to="/admin" className="text-dark hover:text-amber-600 transition">Admin</Link>}
+              <Link
+                to="/search"
+                className="text-dark hover:text-amber-600 transition"
+              >
+                Search
+              </Link>
+              {user && (
+                <Link
+                  to="/account"
+                  className="text-dark hover:text-amber-600 transition"
+                >
+                  Account
+                </Link>
+              )}
+              {user?.role === "admin" && (
+                <Link
+                  to="/admin"
+                  className="text-dark hover:text-amber-600 transition"
+                >
+                  Admin
+                </Link>
+              )}
               {user ? (
-                <button onClick={logout} className="text-dark hover:text-amber-600 transition">Logout</button>
+                <button
+                  onClick={logout}
+                  className="text-dark hover:text-amber-600 transition"
+                >
+                  Logout
+                </button>
               ) : (
-                <Link to="/authForm" className="text-dark hover:text-amber-600 transition">Login</Link>
+                <Link
+                  to="/authForm"
+                  className="text-dark hover:text-amber-600 transition"
+                >
+                  Login
+                </Link>
               )}
             </div>
 
@@ -131,13 +160,49 @@ const Navbar = ({ cartItems }) => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/search" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Search</Link>
-            {user && <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Account</Link>}
-            {user?.role === 'admin' && <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Admin</Link>}
+            <Link
+              to="/search"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block py-2 text-dark hover:text-amber-600 transition"
+            >
+              Search
+            </Link>
+            {user && (
+              <Link
+                to="/account"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-dark hover:text-amber-600 transition"
+              >
+                Account
+              </Link>
+            )}
+            {user?.role === "admin" && (
+              <Link
+                to="/admin"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-dark hover:text-amber-600 transition"
+              >
+                Admin
+              </Link>
+            )}
             {user ? (
-              <button onClick={()=> { logout(); setIsMobileMenuOpen(false);} } className="block py-2 text-left w-full text-dark hover:text-amber-600 transition">Logout</button>
+              <button
+                onClick={() => {
+                  logout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block py-2 text-left w-full text-dark hover:text-amber-600 transition"
+              >
+                Logout
+              </button>
             ) : (
-              <Link to="/authForm" onClick={() => setIsMobileMenuOpen(false)} className="block py-2 text-dark hover:text-amber-600 transition">Login</Link>
+              <Link
+                to="/authForm"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-dark hover:text-amber-600 transition"
+              >
+                Login
+              </Link>
             )}
 
             {/* Cart Icon (Mobile) */}
