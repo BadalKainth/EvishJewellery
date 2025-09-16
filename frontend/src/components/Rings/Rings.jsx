@@ -36,7 +36,7 @@ const Rings = ({ addToCart }) => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/ringsgrid"
+              to="/rings"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
               Rings

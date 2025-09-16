@@ -52,7 +52,7 @@ const Anklets = ({ slider = true, addToCart }) => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/ankletgrid"
+              to="/anklet"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
               Anklets
