@@ -206,7 +206,6 @@ const returnSchema = new mongoose.Schema(
 );
 
 // Indexes for better query performance
-returnSchema.index({ returnNumber: 1 });
 returnSchema.index({ order: 1 });
 returnSchema.index({ user: 1 });
 returnSchema.index({ status: 1 });
