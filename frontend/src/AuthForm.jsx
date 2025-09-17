@@ -10,22 +10,48 @@ const AuthForm = () => {
     email: "",
     phone: "",
     password: "",
+    confirmPassword: "", // ✅ new field
   });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  const resetSignupForm = () => {
+    setSignupData({
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+    });
+  };
+
+  const resetSigninForm = () => {
+    setSigninData({ email: "", password: "" });
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setError("");
+
+    // ✅ check confirm password
+    if (signupData.password !== signupData.confirmPassword) {
+      setError("Passwords do not match");
+      setSubmitting(false);
+      return;
+    }
+
     try {
       await register({
         name: signupData.name,
         email: signupData.email,
         phone: signupData.phone,
         password: signupData.password,
+        confirmPassword: signupData.confirmPassword,
       });
+      // ✅ clear form after success
+      resetSignupForm();
     } catch (err) {
       setError(err.message || "Registration failed");
     } finally {
@@ -39,6 +65,8 @@ const AuthForm = () => {
     setError("");
     try {
       await login({ email: signinData.email, password: signinData.password });
+      // ✅ clear form after success
+      resetSigninForm();
     } catch (err) {
       setError(err.message || "Login failed");
     } finally {
@@ -52,7 +80,10 @@ const AuthForm = () => {
         {isSignup ? (
           <form onSubmit={handleSignup} className="space-y-6">
             <h2 className="text-2xl font-bold text-center">Sign Up</h2>
-            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+            {error && (
+              <p className="text-red-600 text-sm text-center">{error}</p>
+            )}
+
             <input
               type="text"
               placeholder="Full name"
@@ -74,13 +105,16 @@ const AuthForm = () => {
               className="w-full p-3 border rounded"
             />
             <input
-              type="phone"
+              type="tel"
               placeholder="Phone Number"
               required
               value={signupData.phone}
-              onChange={(e) =>
-                setSignupData({ ...signupData, phone: e.target.value })
-              }
+              onChange={(e) => {
+                // ✅ allow only numbers
+                const onlyNums = e.target.value.replace(/\D/g, "");
+                setSignupData({ ...signupData, phone: onlyNums });
+              }}
+              maxLength={10} // ✅ limit typing to 10 chars
               className="w-full p-3 border rounded"
             />
             <input
@@ -93,6 +127,21 @@ const AuthForm = () => {
               }
               className="w-full p-3 border rounded"
             />
+            {/* ✅ Confirm password input */}
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              required
+              value={signupData.confirmPassword}
+              onChange={(e) =>
+                setSignupData({
+                  ...signupData,
+                  confirmPassword: e.target.value,
+                })
+              }
+              className="w-full p-3 border rounded"
+            />
+
             <button
               type="submit"
               disabled={submitting}
@@ -114,7 +163,9 @@ const AuthForm = () => {
         ) : (
           <form onSubmit={handleSignin} className="space-y-6">
             <h2 className="text-2xl font-bold text-center">Sign In</h2>
-            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+            {error && (
+              <p className="text-red-600 text-sm text-center">{error}</p>
+            )}
             <input
               type="email"
               placeholder="Email"

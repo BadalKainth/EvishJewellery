@@ -94,7 +94,7 @@ const router = express.Router();
  */
 router.post("/register", validateUserRegistration, async (req, res) => {
   try {
-    const { name, email, phone, password } = req.body;
+    const { name, email, phone, password, confirmPassword } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({
@@ -117,6 +117,7 @@ router.post("/register", validateUserRegistration, async (req, res) => {
       email,
       phone,
       password,
+      confirmPassword,
     });
 
     // Generate email verification token

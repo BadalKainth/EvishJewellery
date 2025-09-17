@@ -44,10 +44,13 @@ export default function AdminLayout() {
 
 function Tab({ to, children }) {
   return (
-    <NavLink to={to} className={({ isActive }) => `px-3 py-2 rounded border ${isActive ? 'bg-black text-white' : ''}`}>
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `px-3 py-2 rounded border ${isActive ? "bg-black text-white" : ""}`
+      }
+    >
       {children}
     </NavLink>
   );
 }
-
-
