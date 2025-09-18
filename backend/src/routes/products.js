@@ -1,6 +1,9 @@
 import express from "express";
 import { body } from "express-validator";
 import Product from "../models/Product.js";
+import multer from "multer";
+import path from "path";
+
 import {
   authenticate,
   authorizeAdmin,
@@ -15,6 +18,28 @@ import {
 } from "../middleware/validation.js";
 
 const router = express.Router();
+
+// ---------------------
+// Multer configuration
+// ---------------------
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // folder where images will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // unique filename
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image/")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Only image files are allowed"), false);
+  }
+};
+
+const upload = multer({ storage, fileFilter });
 
 // Get all products (public with optional auth for personalized results)
 router.get(
@@ -154,11 +179,18 @@ router.post(
   "/",
   authenticate,
   authorizeAdmin,
-  validateProduct,
+  upload.array("images", 5), // accept up to 5 images
   async (req, res) => {
     try {
+      // Build image objects from uploaded files
+      const imageUrls = req.files.map((file, idx) => ({
+        url: `/uploads/${file.filename}`,
+        isPrimary: idx === 0,
+      }));
+
       const productData = {
         ...req.body,
+        images: imageUrls, // ✅ attach images
         createdBy: req.user._id,
       };
 

@@ -1,13 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
-import Ringsdata from "./Ringsdata";
+// import Ringsdata from "./Ringsdata";
+import { apiGet } from "../../api/client"; //
+import { CartContext } from "../../context/CartContext";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const Rings = ({ addToCart }) => {
+const Rings = () => {
   const navigate = useNavigate();
+
+  const [rings, setRings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchRings = async () => {
+      try {
+        const response = await apiGet("/products", { category: "rings" });
+        setRings(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load rings");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRings();
+  }, []);
 
   const settings = {
     dots: false,
@@ -26,6 +50,9 @@ const Rings = ({ addToCart }) => {
       { breakpoint: 640, settings: { slidesToShow: 1 } },
     ],
   };
+
+  if (loading) return <p className="text-center py-6">Loading rings...</p>;
+  if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
     <div
@@ -48,12 +75,12 @@ const Rings = ({ addToCart }) => {
         </div>
 
         <Slider {...settings}>
-          {Ringsdata.map((product) => (
+          {rings.map((product) => (
             <div key={product.id}>
               <ProductCard
                 product={product}
-                addToCart={addToCart}
-                onClick={() => navigate(`/category/rings/${product.id}`)}
+                addToCart={() => addItem(product._id)} // ✅ send productId to backend
+                onClick={() => navigate(`/category/rings/${product._id}`)}
               />
             </div>
           ))}
@@ -70,8 +97,9 @@ const ProductCard = ({ product, addToCart, onClick }) => {
   const discount = product.price - product.discountPrice;
   const discountPercent = Math.round((discount / product.price) * 100);
 
-  const handleAddToCart = () => {
-    addToCart(product);
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    await addToCart(); // ✅ calls CartContext.addItem(product.id)
     setShowPopup(true);
     setTimeout(() => setShowPopup(false), 1500);
   };
@@ -117,7 +145,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
             {product.description}
           </p>
           <p className="text-gray-500 text-sm mt-1">
-            Delivery: ₹ {product.deliveryCharge}
+            Delivery: ₹ {product.deliveryCharge || 99}
           </p>
 
           <div className="flex justify-between items-center mt-4">
@@ -126,7 +154,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
                 Price: <span className="line-through">₹{product.price}</span>
               </span>
               <span className="font-bold text-green-600 text-lg">
-                ₹{product.discountPrice}
+                ₹{product.originalPrice}
               </span>
               <span className="text-sm text-gray-600 line-clamp-1 animate-pulse">
                 🎉 You saved ₹{discount} ({discountPercent}% OFF)

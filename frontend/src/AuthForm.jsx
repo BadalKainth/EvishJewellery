@@ -1,6 +1,8 @@
 // src/AuthForm.jsx
 import React, { useContext, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { Eye, EyeOff } from "lucide-react"; // 👁️ icons
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const { login, register } = useContext(AuthContext);
@@ -10,50 +12,72 @@ const AuthForm = () => {
     email: "",
     phone: "",
     password: "",
-    confirmPassword: "", // ✅ new field
+    confirmPassword: "",
   });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const resetSignupForm = () => {
-    setSignupData({
-      name: "",
-      email: "",
-      phone: "",
-      password: "",
-      confirmPassword: "",
-    });
+  // 👁️ control states for show/hide
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showSigninPassword, setShowSigninPassword] = useState(false);
+
+  // ✅ Validation rules (same as before)
+  const validateSignup = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
+
+    if (!signupData.name.trim()) newErrors.name = "Name is required";
+    if (!signupData.email) newErrors.email = "Email is required";
+    else if (!emailRegex.test(signupData.email))
+      newErrors.email = "Invalid email format";
+
+    if (!signupData.phone) newErrors.phone = "Phone number is required";
+    else if (!/^\d{10}$/.test(signupData.phone))
+      newErrors.phone = "Phone number must be exactly 10 digits";
+
+    if (!signupData.password) newErrors.password = "Password is required";
+    else if (!passwordRegex.test(signupData.password))
+      newErrors.password =
+        "Must be 8+ chars, include uppercase, lowercase, number, and special char";
+
+    if (signupData.password !== signupData.confirmPassword)
+      newErrors.confirmPassword = "Passwords do not match";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const resetSigninForm = () => {
-    setSigninData({ email: "", password: "" });
+  const validateSignin = () => {
+    const newErrors = {};
+    if (!signinData.email) newErrors.email = "Email is required";
+    if (!signinData.password) newErrors.password = "Password is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (!validateSignup()) return;
     setSubmitting(true);
-    setError("");
-
-    // ✅ check confirm password
-    if (signupData.password !== signupData.confirmPassword) {
-      setError("Passwords do not match");
-      setSubmitting(false);
-      return;
-    }
-
     try {
-      await register({
-        name: signupData.name,
-        email: signupData.email,
-        phone: signupData.phone,
-        password: signupData.password,
-        confirmPassword: signupData.confirmPassword,
+      await register(signupData);
+      setSignupData({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
       });
-      // ✅ clear form after success
-      resetSignupForm();
+      setErrors({});
+      // ✅ redirect on success
+      navigate("/");
     } catch (err) {
-      setError(err.message || "Registration failed");
+      setErrors({ general: err.message || "Registration failed" });
     } finally {
       setSubmitting(false);
     }
@@ -61,14 +85,16 @@ const AuthForm = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
+    if (!validateSignin()) return;
     setSubmitting(true);
-    setError("");
     try {
-      await login({ email: signinData.email, password: signinData.password });
-      // ✅ clear form after success
-      resetSigninForm();
+      await login(signinData);
+      setSigninData({ email: "", password: "" });
+      setErrors({});
+      // ✅ redirect on success
+      navigate("/");
     } catch (err) {
-      setError(err.message || "Login failed");
+      setErrors({ general: err.message || "Login failed" });
     } finally {
       setSubmitting(false);
     }
@@ -78,70 +104,116 @@ const AuthForm = () => {
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         {isSignup ? (
-          <form onSubmit={handleSignup} className="space-y-6">
+          <form onSubmit={handleSignup} className="space-y-4">
             <h2 className="text-2xl font-bold text-center">Sign Up</h2>
-            {error && (
-              <p className="text-red-600 text-sm text-center">{error}</p>
+            {errors.general && (
+              <p className="text-red-600 text-sm text-center">
+                {errors.general}
+              </p>
             )}
 
-            <input
-              type="text"
-              placeholder="Full name"
-              required
-              value={signupData.name}
-              onChange={(e) =>
-                setSignupData({ ...signupData, name: e.target.value })
-              }
-              className="w-full p-3 border rounded"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              required
-              value={signupData.email}
-              onChange={(e) =>
-                setSignupData({ ...signupData, email: e.target.value })
-              }
-              className="w-full p-3 border rounded"
-            />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              required
-              value={signupData.phone}
-              onChange={(e) => {
-                // ✅ allow only numbers
-                const onlyNums = e.target.value.replace(/\D/g, "");
-                setSignupData({ ...signupData, phone: onlyNums });
-              }}
-              maxLength={10} // ✅ limit typing to 10 chars
-              className="w-full p-3 border rounded"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              required
-              value={signupData.password}
-              onChange={(e) =>
-                setSignupData({ ...signupData, password: e.target.value })
-              }
-              className="w-full p-3 border rounded"
-            />
-            {/* ✅ Confirm password input */}
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              required
-              value={signupData.confirmPassword}
-              onChange={(e) =>
-                setSignupData({
-                  ...signupData,
-                  confirmPassword: e.target.value,
-                })
-              }
-              className="w-full p-3 border rounded"
-            />
+            {/* Name */}
+            <div>
+              <input
+                type="text"
+                placeholder="Full name"
+                value={signupData.name}
+                onChange={(e) =>
+                  setSignupData({ ...signupData, name: e.target.value })
+                }
+                className="w-full p-3 border rounded"
+              />
+              {errors.name && (
+                <p className="text-red-600 text-sm">{errors.name}</p>
+              )}
+            </div>
 
+            {/* Email */}
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={signupData.email}
+                onChange={(e) =>
+                  setSignupData({ ...signupData, email: e.target.value })
+                }
+                className="w-full p-3 border rounded"
+              />
+              {errors.email && (
+                <p className="text-red-600 text-sm">{errors.email}</p>
+              )}
+            </div>
+
+            {/* Phone */}
+            <div>
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={signupData.phone}
+                onChange={(e) =>
+                  setSignupData({
+                    ...signupData,
+                    phone: e.target.value.replace(/\D/g, ""),
+                  })
+                }
+                maxLength={10}
+                className="w-full p-3 border rounded"
+              />
+              {errors.phone && (
+                <p className="text-red-600 text-sm">{errors.phone}</p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={signupData.password}
+                onChange={(e) =>
+                  setSignupData({ ...signupData, password: e.target.value })
+                }
+                className="w-full p-3 border rounded pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+              {errors.password && (
+                <p className="text-red-600 text-sm">{errors.password}</p>
+              )}
+            </div>
+
+            {/* Confirm Password */}
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={signupData.confirmPassword}
+                onChange={(e) =>
+                  setSignupData({
+                    ...signupData,
+                    confirmPassword: e.target.value,
+                  })
+                }
+                className="w-full p-3 border rounded pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+              >
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+              {errors.confirmPassword && (
+                <p className="text-red-600 text-sm">{errors.confirmPassword}</p>
+              )}
+            </div>
+
+            {/* Submit */}
             <button
               type="submit"
               disabled={submitting}
@@ -161,31 +233,54 @@ const AuthForm = () => {
             </p>
           </form>
         ) : (
-          <form onSubmit={handleSignin} className="space-y-6">
+          <form onSubmit={handleSignin} className="space-y-4">
             <h2 className="text-2xl font-bold text-center">Sign In</h2>
-            {error && (
-              <p className="text-red-600 text-sm text-center">{error}</p>
+            {errors.general && (
+              <p className="text-red-600 text-sm text-center">
+                {errors.general}
+              </p>
             )}
-            <input
-              type="email"
-              placeholder="Email"
-              required
-              value={signinData.email}
-              onChange={(e) =>
-                setSigninData({ ...signinData, email: e.target.value })
-              }
-              className="w-full p-3 border rounded"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              required
-              value={signinData.password}
-              onChange={(e) =>
-                setSigninData({ ...signinData, password: e.target.value })
-              }
-              className="w-full p-3 border rounded"
-            />
+
+            {/* Email */}
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={signinData.email}
+                onChange={(e) =>
+                  setSigninData({ ...signinData, email: e.target.value })
+                }
+                className="w-full p-3 border rounded"
+              />
+              {errors.email && (
+                <p className="text-red-600 text-sm">{errors.email}</p>
+              )}
+            </div>
+
+            {/* Password with eye */}
+            <div className="relative">
+              <input
+                type={showSigninPassword ? "text" : "password"}
+                placeholder="Password"
+                value={signinData.password}
+                onChange={(e) =>
+                  setSigninData({ ...signinData, password: e.target.value })
+                }
+                className="w-full p-3 border rounded pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowSigninPassword(!showSigninPassword)}
+                className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+              >
+                {showSigninPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+              {errors.password && (
+                <p className="text-red-600 text-sm">{errors.password}</p>
+              )}
+            </div>
+
+            {/* Submit */}
             <button
               type="submit"
               disabled={submitting}

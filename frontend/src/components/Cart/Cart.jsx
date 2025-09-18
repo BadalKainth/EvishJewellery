@@ -8,18 +8,22 @@ import "swiper/css/pagination";
 
 const Cart = () => {
   const [preview, setPreview] = useState(null); // full preview state
-  const { cart, updateItem, removeItem, clear, applyCoupon, removeCoupon } = useContext(CartContext);
-  const cartItems = cart?.items?.map(i => ({
-    name: i.product?.name,
-    price: i.product?.price || 0,
-    discountPrice: i.product?.price || 0,
-    images: i.product?.images?.map(img => img.url) || (i.product?.primaryImage ? [i.product.primaryImage] : []),
-    videos: [],
-    size: undefined,
-    deliveryCharges: 0,
-    productId: i.product?._id,
-    quantity: i.quantity,
-  })) || [];
+  const { cart, updateItem, removeItem, clear, applyCoupon, removeCoupon } =
+    useContext(CartContext);
+  const cartItems =
+    cart?.items?.map((i) => ({
+      name: i.product?.name,
+      price: i.product?.price || 0,
+      discountPrice: i.product?.price || 0,
+      images:
+        i.product?.images?.map((img) => img.url) ||
+        (i.product?.primaryImage ? [i.product.primaryImage] : []),
+      videos: [],
+      size: undefined,
+      deliveryCharges: 0,
+      productId: i.product?._id,
+      quantity: i.quantity,
+    })) || [];
 
   // Remove product from cart
   const removeProduct = (index) => {
@@ -196,11 +200,23 @@ const Cart = () => {
                           Saved: ₹{itemDiscount} ({itemDiscountPercent}% Off)
                         </span>
                         <span className="text-sm text-gray-500">
-                          Delivery: ₹{product.deliveryCharges || 0}
+                          Delivery: ₹{product.deliveryCharges || 99}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <input type="number" min={1} max={10} value={product.quantity} onChange={(e)=> updateItem(product.productId, Number(e.target.value))} className="w-20 border rounded px-2 py-1" />
+                        <input
+                          type="number"
+                          min={1}
+                          max={10}
+                          value={product.quantity}
+                          onChange={(e) =>
+                            updateItem(
+                              product.productId,
+                              Number(e.target.value)
+                            )
+                          }
+                          className="w-20 border rounded px-2 py-1"
+                        />
                         <button
                           onClick={() => removeProduct(index)}
                           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm transition"
@@ -285,10 +301,15 @@ const Cart = () => {
 
         {cartItems.length > 0 && (
           <div className="space-y-2">
-            <button className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold transition" onClick={()=> window.location.assign('/checkout')}>
+            <button
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold transition"
+              onClick={() => window.location.assign("/checkout")}
+            >
               Proceed to Checkout
             </button>
-            <button className="w-full border py-3 rounded-lg" onClick={clear}>Clear Cart</button>
+            <button className="w-full border py-3 rounded-lg" onClick={clear}>
+              Clear Cart
+            </button>
           </div>
         )}
       </div>

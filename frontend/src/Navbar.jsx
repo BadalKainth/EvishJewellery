@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
+import { CartContext } from "./context/CartContext"; // ✅ import cart context
 
-const Navbar = ({ cartItems }) => {
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext); // ✅ access cart from context
 
   // सारे menu links एक array में रखे
   const menuLinks = [
     { name: "Home", path: "/" },
-    // { name: "Featured", path: "/featured" },
-    // { name: "Coupons", path: "/coupons" },
     { name: "Bracelets", path: "/category/bracelets" },
     { name: "Rings", path: "/category/rings" },
     { name: "Earrings", path: "/category/earrings" },
@@ -108,7 +108,7 @@ const Navbar = ({ cartItems }) => {
                     />
                   </svg>
                   <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItems.length}
+                    {cart?.totals?.totalItems || 0} {/* ✅ show item count */}
                   </span>
                 </button>
               </Link>
@@ -223,7 +223,7 @@ const Navbar = ({ cartItems }) => {
                     />
                   </svg>
                   <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItems.length}
+                    {cart?.totals?.totalItems || 0}
                   </span>
                 </button>
               </Link>

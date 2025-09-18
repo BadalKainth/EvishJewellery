@@ -168,14 +168,13 @@ productSchema.index({ sales: -1 });
 productSchema.index({ views: -1 });
 productSchema.index({ createdAt: -1 });
 
-// Virtual for primary image
 productSchema.virtual("primaryImage").get(function () {
+  if (!Array.isArray(this.images) || this.images.length === 0) {
+    return null;
+  }
+
   const primaryImg = this.images.find((img) => img.isPrimary);
-  return primaryImg
-    ? primaryImg.url
-    : this.images[0]
-    ? this.images[0].url
-    : null;
+  return primaryImg ? primaryImg.url : this.images[0].url;
 });
 
 // Virtual for discount percentage
