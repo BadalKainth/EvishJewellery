@@ -16,6 +16,7 @@ import { sendEmail } from "../utils/email.js";
 const router = express.Router();
 
 // Create new order
+// Create new order
 router.post(
   "/",
   authenticate,
@@ -24,7 +25,9 @@ router.post(
   async (req, res) => {
     try {
       const {
-        items,
+        items: payloadItems,
+        name,
+        phone,
         shippingAddress,
         billingAddress,
         paymentMethod,
@@ -35,48 +38,47 @@ router.post(
       // Get user's cart
       const cart = await Cart.findOne({ user: req.user._id });
       if (!cart || cart.isEmpty()) {
-        return res.status(400).json({
-          success: false,
-          message: "Cart is empty",
-        });
+        return res
+          .status(400)
+          .json({ success: false, message: "Cart is empty" });
       }
 
-      // Validate cart items and calculate totals
+      // Calculate totals from cart
       await cart.getCartWithProducts();
       const cartTotals = await cart.calculateTotals();
 
-      // Validate each item in the order
+      // Validate items & prepare orderItems
       const orderItems = [];
       let subtotal = 0;
 
-      for (const orderItem of items) {
-        const product = await Product.findById(orderItem.product);
+      for (const item of payloadItems) {
+        const product = await Product.findById(item.product);
 
         if (!product || !product.isActive) {
           return res.status(400).json({
             success: false,
             message: `Product ${
-              product?.name || orderItem.product
+              product?.name || item.product
             } is not available`,
           });
         }
 
-        if (product.stock < orderItem.quantity) {
+        if (product.stock < item.quantity) {
           return res.status(400).json({
             success: false,
             message: `Insufficient stock for ${product.name}. Available: ${product.stock}`,
           });
         }
 
-        const itemTotal = product.price * orderItem.quantity;
+        const itemTotal = product.price * item.quantity;
         subtotal += itemTotal;
 
         orderItems.push({
           product: product._id,
           name: product.name,
-          image: product.primaryImage,
+          image: product.primaryImage || "/images/fallback.png", // fallback
           price: product.price,
-          quantity: orderItem.quantity,
+          quantity: item.quantity,
           total: itemTotal,
         });
       }
@@ -87,24 +89,23 @@ router.post(
       const tax = Math.round(subtotal * 0.18); // 18% GST
       const total = subtotal - discount + shipping + tax;
 
+      // Set order name and phone
+      const orderName = name || shippingAddress?.name || req.user.name;
+      const orderPhone = phone || shippingAddress?.phone || req.user.phone;
+
       // Create order
+      const orderNumber = `ORD-${Date.now()}`;
       const order = new Order({
         user: req.user._id,
+        name: orderName,
+        orderNumber,
+        phone: orderPhone,
         items: orderItems,
         shippingAddress,
         billingAddress: billingAddress || shippingAddress,
         paymentMethod,
-        paymentDetails: {
-          ...paymentDetails,
-          paymentStatus: "pending",
-        },
-        pricing: {
-          subtotal,
-          discount,
-          shipping,
-          tax,
-          total,
-        },
+        paymentDetails: { ...paymentDetails, paymentStatus: "pending" },
+        pricing: { subtotal, discount, shipping, tax, total },
         coupon: cart.coupon
           ? {
               code: cart.coupon.code,
@@ -112,19 +113,18 @@ router.post(
               type: cart.coupon.type,
             }
           : undefined,
-        notes: {
-          customer: notes || "",
-        },
+        notes: { customer: notes || "" },
       });
 
+      // Save order first (triggers orderNumber)
+      await order.save();
+
       // Add initial timeline entry
-      order.addTimelineEntry(
+      await order.addTimelineEntry(
         "pending",
         "Order placed successfully",
         req.user._id
       );
-
-      await order.save();
 
       // Update product stock and sales
       for (const item of orderItems) {
@@ -151,7 +151,7 @@ router.post(
           subject: `Order Confirmation - ${order.orderNumber}`,
           template: "orderConfirmation",
           data: {
-            customerName: req.user.name,
+            customerName: orderName,
             orderNumber: order.orderNumber,
             orderDate: order.createdAt,
             status: order.status,
@@ -162,7 +162,6 @@ router.post(
         });
       } catch (emailError) {
         console.error("Order confirmation email failed:", emailError);
-        // Don't fail order creation if email fails
       }
 
       res.status(201).json({
@@ -172,10 +171,9 @@ router.post(
       });
     } catch (error) {
       console.error("Create order error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to create order",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to create order" });
     }
   }
 );

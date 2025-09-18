@@ -132,28 +132,54 @@ export const validateProduct = [
 
 // Address validation rules
 export const validateAddress = [
-  body("name")
+  // Shipping Address
+  body("shippingAddress.name")
     .trim()
     .isLength({ min: 2, max: 50 })
-    .withMessage("Name must be between 2 and 50 characters"),
-  body("phone")
+    .withMessage("Shipping name must be between 2 and 50 characters"),
+  body("shippingAddress.phone")
     .matches(/^[6-9]\d{9}$/)
-    .withMessage("Please provide a valid 10-digit phone number"),
-  body("address")
+    .withMessage("Please provide a valid 10-digit shipping phone number"),
+  body("shippingAddress.address")
     .trim()
     .isLength({ min: 10, max: 200 })
-    .withMessage("Address must be between 10 and 200 characters"),
-  body("city")
+    .withMessage("Shipping address must be between 10 and 200 characters"),
+  body("shippingAddress.city")
     .trim()
     .isLength({ min: 2, max: 50 })
-    .withMessage("City must be between 2 and 50 characters"),
-  body("state")
+    .withMessage("Shipping city must be between 2 and 50 characters"),
+  body("shippingAddress.state")
     .trim()
     .isLength({ min: 2, max: 50 })
-    .withMessage("State must be between 2 and 50 characters"),
-  body("pincode")
+    .withMessage("Shipping state must be between 2 and 50 characters"),
+  body("shippingAddress.pincode")
     .matches(/^[1-9][0-9]{5}$/)
-    .withMessage("Please provide a valid 6-digit pincode"),
+    .withMessage("Please provide a valid 6-digit shipping pincode"),
+
+  // Billing Address
+  body("billingAddress.name")
+    .trim()
+    .isLength({ min: 2, max: 50 })
+    .withMessage("Billing name must be between 2 and 50 characters"),
+  body("billingAddress.phone")
+    .matches(/^[6-9]\d{9}$/)
+    .withMessage("Please provide a valid 10-digit billing phone number"),
+  body("billingAddress.address")
+    .trim()
+    .isLength({ min: 10, max: 200 })
+    .withMessage("Billing address must be between 10 and 200 characters"),
+  body("billingAddress.city")
+    .trim()
+    .isLength({ min: 2, max: 50 })
+    .withMessage("Billing city must be between 2 and 50 characters"),
+  body("billingAddress.state")
+    .trim()
+    .isLength({ min: 2, max: 50 })
+    .withMessage("Billing state must be between 2 and 50 characters"),
+  body("billingAddress.pincode")
+    .matches(/^[1-9][0-9]{5}$/)
+    .withMessage("Please provide a valid 6-digit billing pincode"),
+
   handleValidationErrors,
 ];
 
