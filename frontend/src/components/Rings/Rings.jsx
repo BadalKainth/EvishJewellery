@@ -121,13 +121,13 @@ const ProductCard = ({ product, addToCart, onClick }) => {
             loading="lazy"
             className="w-full h-64 object-cover cursor-pointer"
           />
-          {product.badge && (
+          {product.tags && (
             <span
-              className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                product.badge === "SALE" ? "bg-red-500" : "bg-amber-500"
+              className={`absolute top-3 right-3 text-white text-xs uppercase font-semibold px-2 py-1 rounded-lg shadow ${
+                product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
               }`}
             >
-              {product.badge}
+              {product.tags}
             </span>
           )}
         </div>

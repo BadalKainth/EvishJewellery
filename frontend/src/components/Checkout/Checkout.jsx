@@ -23,13 +23,15 @@ export default function Checkout() {
   });
   const [paymentMethod, setPaymentMethod] = useState("upi");
   const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({}); // ✅ inline field errors
+  const [globalError, setGlobalError] = useState(""); // ✅ single error under Place Order
 
   const placeOrder = async () => {
     setProcessing(true);
-    setError("");
     setSuccess("");
+    setFieldErrors({});
+    setGlobalError("");
     try {
       const items = (cart?.items || []).map((i) => ({
         product: i.product._id,
@@ -38,8 +40,8 @@ export default function Checkout() {
 
       const res = await client.post("/orders", {
         items,
-        shippingAddress: shipping, // must include name, phone, address, city, state, pincode
-        billingAddress: billingSame ? shipping : billing, // same structure
+        shippingAddress: shipping,
+        billingAddress: billingSame ? shipping : billing,
         paymentMethod,
         paymentDetails: {},
       });
@@ -50,52 +52,49 @@ export default function Checkout() {
         cart.clear();
       }
     } catch (e) {
-      setError(
-        e.response?.data?.message || e.message || "Failed to place order"
-      );
+      const apiError = e.response?.data;
+      if (apiError?.details?.length) {
+        const mapped = {};
+        apiError.details.forEach((d) => {
+          mapped[d.field] = d.error;
+        });
+        setFieldErrors(mapped);
+      } else {
+        setGlobalError(
+          apiError?.message || e.message || "Failed to place order"
+        );
+      }
     } finally {
       setProcessing(false);
     }
   };
 
-  const addrFields = (obj, setObj, label) => (
+  const addrFields = (obj, setObj, label, prefix) => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-      <input
-        className="border rounded px-3 py-2"
-        placeholder={`${label} Name`}
-        value={obj.name}
-        onChange={(e) => setObj({ ...obj, name: e.target.value })}
-      />
-      <input
-        className="border rounded px-3 py-2"
-        placeholder={`${label} Phone`}
-        value={obj.phone}
-        onChange={(e) => setObj({ ...obj, phone: e.target.value })}
-      />
-      <input
-        className="border rounded px-3 py-2 md:col-span-2"
-        placeholder={`${label} Address`}
-        value={obj.address}
-        onChange={(e) => setObj({ ...obj, address: e.target.value })}
-      />
-      <input
-        className="border rounded px-3 py-2"
-        placeholder="City"
-        value={obj.city}
-        onChange={(e) => setObj({ ...obj, city: e.target.value })}
-      />
-      <input
-        className="border rounded px-3 py-2"
-        placeholder="State"
-        value={obj.state}
-        onChange={(e) => setObj({ ...obj, state: e.target.value })}
-      />
-      <input
-        className="border rounded px-3 py-2"
-        placeholder="Pincode"
-        value={obj.pincode}
-        onChange={(e) => setObj({ ...obj, pincode: e.target.value })}
-      />
+      {[
+        { key: "name", label: `${label} Name` },
+        { key: "phone", label: `${label} Phone` },
+        { key: "address", label: `${label} Address`, col: "md:col-span-2" },
+        { key: "city", label: "City" },
+        { key: "state", label: "State" },
+        { key: "pincode", label: "Pincode" },
+      ].map((f) => (
+        <div key={f.key} className={f.col || ""}>
+          <input
+            className={`border rounded px-3 py-2 w-full ${
+              fieldErrors[`${prefix}.${f.key}`] ? "border-red-500" : ""
+            }`}
+            placeholder={f.label}
+            value={obj[f.key]}
+            onChange={(e) => setObj({ ...obj, [f.key]: e.target.value })}
+          />
+          {fieldErrors[`${prefix}.${f.key}`] && (
+            <p className="text-red-500 text-xs mt-1">
+              {fieldErrors[`${prefix}.${f.key}`]}
+            </p>
+          )}
+        </div>
+      ))}
     </div>
   );
 
@@ -106,7 +105,7 @@ export default function Checkout() {
       <div className="md:col-span-2 space-y-6">
         <div className="bg-white rounded shadow p-4">
           <h2 className="font-semibold mb-3">Shipping Address</h2>
-          {addrFields(shipping, setShipping, "Shipping")}
+          {addrFields(shipping, setShipping, "Shipping", "shippingAddress")}
         </div>
         <div className="bg-white rounded shadow p-4">
           <div className="flex items-center justify-between mb-3">
@@ -121,12 +120,15 @@ export default function Checkout() {
               Same as shipping
             </label>
           </div>
-          {!billingSame && addrFields(billing, setBilling, "Billing")}
+          {!billingSame &&
+            addrFields(billing, setBilling, "Billing", "billingAddress")}
         </div>
         <div className="bg-white rounded shadow p-4">
           <h2 className="font-semibold mb-3">Payment Method</h2>
           <select
-            className="border rounded px-3 py-2"
+            className={`border rounded px-3 py-2 w-full ${
+              fieldErrors["paymentMethod"] ? "border-red-500" : ""
+            }`}
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
@@ -135,6 +137,11 @@ export default function Checkout() {
             <option value="card">Card</option>
             <option value="wallet">Wallet</option>
           </select>
+          {fieldErrors["paymentMethod"] && (
+            <p className="text-red-500 text-xs mt-1">
+              {fieldErrors["paymentMethod"]}
+            </p>
+          )}
         </div>
       </div>
       <div className="bg-white rounded shadow p-4 h-fit">
@@ -153,9 +160,11 @@ export default function Checkout() {
             <span>₹{totals.total}</span>
           </div>
         </div>
-        {error && <div className="text-red-600 text-sm mt-3">{error}</div>}
         {success && (
           <div className="text-green-600 text-sm mt-3">{success}</div>
+        )}
+        {globalError && (
+          <div className="text-red-600 text-sm mt-3">{globalError}</div>
         )}
         <button
           disabled={processing}
