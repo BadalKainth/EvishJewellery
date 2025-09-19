@@ -1,9 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import braceletsdata from "./BraceletsData";
+import { apiGet } from "../../api/client";
+import { CartContext } from "../../context/CartContext";
 
-const BraceletsGrid = ({ addToCart }) => {
+const BraceletsGrid = () => {
   const navigate = useNavigate();
+  
+   const [bracelets, setbracelets] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState("");
+    
+      const { addItem } = useContext(CartContext);
+    
+      useEffect(() => {
+        const fetchbracelets = async () => {
+          try {
+            const response = await apiGet("/products", { category: "bracelets" });
+            setbracelets(response.data?.products || []);
+            const data = response.data?.products;
+            console.log(data);
+          } catch (err) {
+            setError(err.message || "Failed to load Bracelets");
+          } finally {
+            setLoading(false);
+          }
+        };
+        fetchbracelets();
+      }, []);
+    
+      if (loading) return <p className="text-center py-6">Loading bracelet...</p>;
+      if (error)
+        return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
     <div className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 md:px-10">
@@ -22,12 +49,12 @@ const BraceletsGrid = ({ addToCart }) => {
 
         {/* ✅ Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
-          {braceletsdata.map((product) => (
+          {bracelets.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
-              addToCart={addToCart}
-              onClick={() => navigate(`/category/bracelets/${product.id}`)}
+              addToCart={() => addItem(product._id)} // ✅ send productId to backend
+              onClick={() => navigate(`/category/bracelets/${product._id}`)}
             />
           ))}
         </div>
@@ -142,12 +169,9 @@ const BraceletsGrid = ({ addToCart }) => {
 const ProductCard = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
 
-  const discount = product.discountPrice
-    ? product.price - product.discountPrice
-    : 0;
-  const discountPercent = product.discountPrice
-    ? Math.round((discount / product.price) * 100)
-    : 0;
+ 
+  const discount = product.originalPrice - product.price;
+  const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
@@ -180,13 +204,13 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           />
 
           {/* ✅ Badge */}
-          {product.badge && (
+          {product.tags && (
             <span
               className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                product.badge === "SALE" ? "bg-red-500" : "bg-amber-500"
+                product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
               }`}
             >
-              {product.badge}
+              {product.tags}
             </span>
           )}
 
@@ -206,20 +230,22 @@ const ProductCard = ({ product, addToCart, onClick }) => {
             </p>
 
             <p className="text-gray-500 text-sm mt-1">
-              Delivery: ₹{product.deliveryCharge}
+              Delivery: ₹ {product.deliveryCharge || 99}
             </p>
 
             {/* ✅ Price + Discount */}
             <div className="flex justify-between items-center mt-4">
-              <div className="flex flex-col text-amber-600 text-lg">
-                {product.discountPrice ? (
+              <div className="flex flex-col text-amber-600 text-xl font-bold">
+                {product.price ? (
                   <>
                     <span>
                       Price:{" "}
-                      <span className="line-through">₹{product.price}</span>
+                      <span className="line-through decoration-2 decoration-amber-700 text-2xl">
+                        ₹{product.originalPrice}
+                      </span>
                     </span>
                     <span className="font-bold text-green-600 text-lg">
-                      ₹{product.discountPrice}
+                      Discounted price : ₹{product.price}
                     </span>
                     <span className="text-sm text-gray-600">
                       🎉 You saved ₹{discount} ({discountPercent}% OFF)

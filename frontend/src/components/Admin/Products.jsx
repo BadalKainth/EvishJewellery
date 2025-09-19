@@ -10,14 +10,15 @@ export default function AdminProducts() {
   const [createForm, setCreateForm] = useState({
     name: "",
     description: "",
-    price: 0,
-    originalPrice: 0,
+    originalPrice: "",
+    price: "",
     category: "rings",
     type: "gold",
     material: "",
-    weight: 1,
-    stock: 0,
+    weight: "",
+    stock: "",
     tags: "",
+    size: "",
     imagesCsv: "",
     isFeatured: false,
   });
@@ -122,6 +123,7 @@ export default function AdminProducts() {
       formData.append("material", createForm.material);
       formData.append("weight", Number(createForm.weight));
       formData.append("stock", Number(createForm.stock));
+      formData.append("size", Number(createForm.size));
       formData.append("isFeatured", createForm.isFeatured);
       if (createForm.tags) {
         createForm.tags
@@ -142,13 +144,14 @@ export default function AdminProducts() {
       setCreateForm({
         name: "",
         description: "",
-        price: 0,
-        originalPrice: 0,
+        price: "",
+        originalPrice: "",
         category: "rings",
         type: "gold",
         material: "",
-        weight: 1,
-        stock: 0,
+        weight: "",
+        stock: "",
+        size: "",
         images: [],
         imagesCsv: "",
         isFeatured: false,
@@ -173,6 +176,7 @@ export default function AdminProducts() {
       material: p.material,
       weight: p.weight,
       stock: p.stock,
+      size: p.size,
       tags: (p.tags || []).join(","),
       imagesCsv: (p.images || []).map((i) => i.url).join(","),
       isFeatured: !!p.isFeatured,
@@ -188,6 +192,7 @@ export default function AdminProducts() {
         originalPrice: Number(editForm.originalPrice),
         weight: Number(editForm.weight),
         stock: Number(editForm.stock),
+        size: Number(editForm.size),
         tags: editForm.tags
           ? editForm.tags.split(",").map((t) => t.trim())
           : [],
@@ -242,16 +247,7 @@ export default function AdminProducts() {
           />
           <input
             className="border rounded px-2 py-1"
-            placeholder="Price"
-            type="number"
-            value={createForm.price}
-            onChange={(e) =>
-              setCreateForm({ ...createForm, price: e.target.value })
-            }
-          />
-          <input
-            className="border rounded px-2 py-1"
-            placeholder="Discounted Price"
+            placeholder="Original Price"
             type="number"
             value={createForm.originalPrice}
             onChange={
@@ -259,6 +255,16 @@ export default function AdminProducts() {
                 setCreateForm({ ...createForm, originalPrice: e.target.value }) // ✅ correct
             }
           />
+          <input
+            className="border rounded px-2 py-1"
+            placeholder="Selling Price"
+            type="number"
+            value={createForm.price}
+            onChange={(e) =>
+              setCreateForm({ ...createForm, price: e.target.value })
+            }
+          />
+
           <select
             className="border rounded px-2 py-1"
             value={createForm.category}
@@ -324,6 +330,16 @@ export default function AdminProducts() {
             value={createForm.stock}
             onChange={(e) =>
               setCreateForm({ ...createForm, stock: e.target.value })
+            }
+          />
+
+          <input
+            className="border rounded px-2 py-1"
+            placeholder="Size No"
+            type="number"
+            value={createForm.size}
+            onChange={(e) =>
+              setCreateForm({ ...createForm, size: e.target.value })
             }
           />
           <input
@@ -450,8 +466,8 @@ export default function AdminProducts() {
               className="w-full h-36 object-cover rounded"
             />
             <div className="mt-2 font-semibold">{p.name}</div>
-            <div className="text-sm text-gray-600">₹{p.price}</div>
             <div className="text-sm text-gray-600">₹{p.originalPrice}</div>
+            <div className="text-sm text-gray-600">₹{p.price}</div>
             <div className="text-xs capitalize">
               {p.category} / {p.type}
             </div>
@@ -512,28 +528,30 @@ export default function AdminProducts() {
                     setEditForm({ ...editForm, name: e.target.value })
                   }
                 />
+
                 <input
                   className="border rounded px-2 py-1 w-full"
-                  placeholder="Price"
+                  placeholder="Original Price"
+                  type="number"
+                  value={editForm.originalPrice}
+                  onChange={
+                    (e) =>
+                      setEditForm({
+                        ...editForm,
+                        originalPrice: e.target.value,
+                      }) // ✅ correct
+                  }
+                />
+                <input
+                  className="border rounded px-2 py-1 w-full"
+                  placeholder="Selling Price"
                   type="number"
                   value={editForm.price}
                   onChange={(e) =>
                     setEditForm({ ...editForm, price: e.target.value })
                   }
                 />
-                <input
-                  className="border rounded px-2 py-1 w-full"
-                  placeholder="Discounted Price"
-                  type="number"
-                  value={editForm.originalPrice}
-                  onChange={
-                    (e) =>
-                      setCreateForm({
-                        ...createForm,
-                        originalPrice: e.target.value,
-                      }) // ✅ correct
-                  }
-                />
+
                 <input
                   className="border rounded px-2 py-1 w-full"
                   placeholder="Material"

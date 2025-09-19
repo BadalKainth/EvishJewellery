@@ -7,10 +7,9 @@ const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-white poppins-regular">
       {/* Hero Section */}
-      <section className=" p-8 md:px-8 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <section className=" p-8 md:px-8 bg-gradient-to-r from-blue-100 to-indigo-50">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold text-amber-800 p-2">
-            
             About Avish Jewellery
           </h1>
           <p className="text-lg md:text-xl text-justify md:text-center text-gray-950 max-w-7xl mx-auto leading-relaxed">
@@ -89,14 +88,14 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* product Section */}
       <section className="p-6 md:px-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-gray-900 p-6">
             Our Product
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8  md:h-72">
-            {/* Team Member 1 */}
+            {/* product 1 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
               <div className="h-full overflow-hidden">
                 <img
@@ -107,7 +106,7 @@ const AboutUsPage = () => {
               </div>
             </div>
 
-            {/* Team Member 2 */}
+            {/* product 2 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
               <div className="h-full overflow-hidden">
                 <img
@@ -118,7 +117,7 @@ const AboutUsPage = () => {
               </div>
             </div>
 
-            {/* Team Member 3 */}
+            {/* product 3 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
               <div className="h-full overflow-hidden">
                 <img
@@ -142,7 +141,10 @@ const AboutUsPage = () => {
             Interested in working with us or learning more about our services?
             We'd love to hear from you.
           </p>
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+
+          {/* Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12 justify-center items-center">
+            {/* Email */}
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
@@ -162,11 +164,13 @@ const AboutUsPage = () => {
                 hello@company.com
               </a>
             </div>
+
+            {/* Phone */}
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
                   href="tel:+919876543210"
-                  className="text-blue-600 hover:underline"
+                  className="text-gray-600 md:text-blue-600 hover:underline"
                 >
                   <div className="w-6 h-6 rounded-sm">
                     <Phone />
@@ -176,20 +180,22 @@ const AboutUsPage = () => {
               <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
               <a
                 href="tel:+919876543210"
-                className="text-blue-600 hover:underline"
+                className="text-gray-600 md:text-blue-600 hover:underline"
               >
                 +91 98765 43210
               </a>
             </div>
-            <div className="text-center">
+
+            {/* Location */}
+            <div className="text-center col-span-2 md:col-span-1">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
                   href="https://www.google.com/maps?q=28.6139,77.2090"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:underline"
+                  className="md:text-gray-600 text-blue-600 hover:underline"
                 >
-                  <div className="w-6 h-6  rounded-sm">
+                  <div className="w-6 h-6 rounded-sm">
                     <MapPinPlus />
                   </div>
                 </a>
@@ -199,7 +205,7 @@ const AboutUsPage = () => {
                 href="https://www.google.com/maps?q=28.6139,77.2090"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:underline"
+                className="md:text-gray-600 text-blue-600 hover:underline"
               >
                 📍 New Delhi, India
               </a>

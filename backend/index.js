@@ -34,7 +34,7 @@ const limiter = rateLimit({
 // Middleware
 app.use(helmet());
 app.use(compression());
-app.use(limiter);
+// app.use(limiter);
 // Allow all origins (wildcard CORS)
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -71,6 +71,7 @@ app.use("/api/returns", returnRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
+
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

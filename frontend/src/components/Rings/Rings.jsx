@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 // import Ringsdata from "./Ringsdata";
-import { apiGet } from "../../api/client"; //
+import { apiGet } from "../../api/client"; 
 import { CartContext } from "../../context/CartContext";
 
 import "slick-carousel/slick/slick.css";
@@ -94,8 +94,9 @@ const Rings = () => {
 const ProductCard = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
 
-  const discount = product.price - product.discountPrice;
-  const discountPercent = Math.round((discount / product.price) * 100);
+
+  const discount = product.originalPrice - product.price;
+  const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
@@ -121,13 +122,13 @@ const ProductCard = ({ product, addToCart, onClick }) => {
             loading="lazy"
             className="w-full h-64 object-cover cursor-pointer"
           />
-          {product.badge && (
+          {product.tags && (
             <span
               className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                product.badge === "SALE" ? "bg-red-500" : "bg-amber-500"
+                product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
               }`}
             >
-              {product.badge}
+              {product.tags}
             </span>
           )}
         </div>
@@ -149,12 +150,15 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           </p>
 
           <div className="flex justify-between items-center mt-4">
-            <div className="flex flex-col text-amber-600 text-lg">
+            <div className="flex flex-col font-bold text-amber-600 text-lg">
               <span>
-                Price: <span className="line-through">₹{product.price}</span>
+                Price:{" "}
+                <span className="line-through decoration-2 decoration-amber-700 text-2xl">
+                  ₹{product.originalPrice}
+                </span>
               </span>
               <span className="font-bold text-green-600 text-lg">
-                ₹{product.originalPrice}
+                Discounted price : ₹{product.price}
               </span>
               <span className="text-sm text-gray-600 line-clamp-1 animate-pulse">
                 🎉 You saved ₹{discount} ({discountPercent}% OFF)
