@@ -125,7 +125,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           {product.tags && (
             <span
               className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
+                product.badge === "SALE" ? "bg-red-500" : "bg-amber-500"
               }`}
             >
               {product.tags}
