@@ -21,7 +21,7 @@ const RingsGrid = ({ addToCart }) => {
         const data = response.data?.products;
         console.log(data);
       } catch (err) {
-        setError(err.message || "Failed to lode Rings"); 
+        setError(err.message || "Failed to load Rings"); 
       } finally {
         setLoading(false);
       }
@@ -271,7 +271,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
-  const handleAddToCart = (e) => {
+  const  handleAddToCart = (e) => {
     e.stopPropagation();
     addToCart(product);
     setShowPopup(true);
