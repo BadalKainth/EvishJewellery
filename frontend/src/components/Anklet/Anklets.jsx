@@ -10,65 +10,71 @@ import { CartContext } from "../../context/CartContext";
 
 const Anklets = () => {
   const navigate = useNavigate();
-  
-  
-    const [anklets, setAnklets] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const { addItem } = useContext(CartContext);
-  
-    useEffect(() => {
-      const fetchAnklets = async () => {
-        try {
-          const response = await apiGet("/products", { category: "anklets" });
-          setAnklets(response.data?.products || []);
-          const data = response.data?.products;
-          console.log(data);
-        } catch (err) {
-          setError(err.message || "Failed to load Anklets");
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchAnklets();
-    }, []);
-  
+
+  const [anklets, setAnklets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchAnklets = async () => {
+      try {
+        const response = await apiGet("/products", { category: "anklets" });
+        setAnklets(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load Anklets");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAnklets();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
+    dots: true,
+    infinite: anklets.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, anklets.length)
+        : viewportWidth < 1024
+        ? Math.min(2, anklets.length)
+        : Math.min(3, anklets.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    // responsive: [
-    //   {
-    //     breakpoint: 3000, // बड़ी स्क्रीन
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1024, // Tablet और नीचे
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 768, // Mobile और नीचे
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    // ],
+    autoplaySpeed: 2000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, anklets.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, anklets.length),
+        },
+      },
+    ],
   };
-if (loading) return <p className="text-center py-6">Loading rings...</p>;
-if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
+
+  if (loading) return <p className="text-center py-6">Loading rings...</p>;
+  if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
     <div
@@ -91,7 +97,7 @@ if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
           </div>
         </div>
         {/* Conditional Rendering */}
-        <Slider {...settings}>
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
           {anklets.map((product) => (
             <ProductCard
               key={product.id}
@@ -150,7 +156,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}

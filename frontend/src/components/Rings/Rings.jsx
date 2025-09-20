@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 // import Ringsdata from "./Ringsdata";
-import { apiGet } from "../../api/client"; 
+import { apiGet } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 
 import "slick-carousel/slick/slick.css";
@@ -14,6 +14,9 @@ const Rings = () => {
   const [rings, setRings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
 
   const { addItem } = useContext(CartContext);
 
@@ -33,21 +36,39 @@ const Rings = () => {
     fetchRings();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
+    dots: true,
+    infinite: rings.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, rings.length)
+        : viewportWidth < 1024
+        ? Math.min(2, rings.length)
+        : Math.min(3, rings.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    accessibility: false,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    autoplaySpeed: 2000,
+    arrows: false,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, rings.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, rings.length),
+        },
+      },
     ],
   };
 
@@ -74,7 +95,7 @@ const Rings = () => {
           </div>
         </div>
 
-        <Slider {...settings}>
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
           {rings.map((product) => (
             <div key={product.id}>
               <ProductCard
@@ -93,7 +114,6 @@ const Rings = () => {
 // Product Card
 const ProductCard = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
-
 
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
@@ -133,7 +153,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}

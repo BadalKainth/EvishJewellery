@@ -10,63 +10,67 @@ import { apiGet } from "../../api/client";
 const CoupleSets = () => {
   const navigate = useNavigate();
 
-   const [coupleSets, setCoupleSets] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const { addItem } = useContext(CartContext);
-  
-    useEffect(() => {
-      const fetchCoupleSets = async () => {
-        try {
-          const response = await apiGet("/products", {
-            category: "couple-sets",
-          });
-          setCoupleSets(response.data?.products || []);
-          const data = response.data?.products;
-          console.log(data);
-        } catch (err) {
-          setError(err.message || "Failed to load CoupleSets");
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchCoupleSets();
-    }, []);
+  const [coupleSets, setCoupleSets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
 
-    
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchCoupleSets = async () => {
+      try {
+        const response = await apiGet("/products", {
+          category: "couple-sets",
+        });
+        setCoupleSets(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load CoupleSets");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCoupleSets();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
+    dots: true,
+    infinite: coupleSets.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, coupleSets.length)
+        : viewportWidth < 1024
+        ? Math.min(2, coupleSets.length)
+        : Math.min(3, coupleSets.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    // responsive: [
-    //   {
-    //     breakpoint: 3000, // बड़ी स्क्रीन
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1024, // Tablet और नीचे
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 768, // Mobile और नीचे
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    // ],
+    autoplaySpeed: 2000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, coupleSets.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, coupleSets.length),
+        },
+      },
+    ],
   };
 
   if (loading) return <p className="text-center py-6">Loading rings...</p>;
@@ -95,7 +99,7 @@ const CoupleSets = () => {
 
         {/* Conditional Rendering */}
 
-        <Slider {...settings}>
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
           {coupleSets.map((product) => (
             <ProductCard
               key={product.id}
@@ -122,7 +126,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
   };
 
   // Discount calculation
-  
+
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
@@ -155,7 +159,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}

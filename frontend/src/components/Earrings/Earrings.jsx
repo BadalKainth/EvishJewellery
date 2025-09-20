@@ -11,40 +11,66 @@ import { CartContext } from "../../context/CartContext";
 const Earrings = () => {
   const navigate = useNavigate();
 
-   const [earrings, setEarrings] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const { addItem } = useContext(CartContext);
-  
-    useEffect(() => {
-      const fetchEarrings = async () => {
-        try {
-          const response = await apiGet("/products", { category: "earrings" });
-          setEarrings(response.data?.products || []);
-          const data = response.data?.products;
-          console.log(data);
-        } catch (err) {
-          setError(err.message || "Failed to load rings");
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchEarrings();
-    }, []);
-  
+  const [earrings, setEarrings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchEarrings = async () => {
+      try {
+        const response = await apiGet("/products", { category: "earrings" });
+        setEarrings(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load rings");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEarrings();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
+    dots: true,
+    infinite: earrings.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, earrings.length)
+        : viewportWidth < 1024
+        ? Math.min(2, earrings.length)
+        : Math.min(3, earrings.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    autoplaySpeed: 2000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, earrings.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, earrings.length),
+        },
+      },
+    ],
   };
 
   return (
@@ -70,7 +96,7 @@ const Earrings = () => {
 
         {/* Slider or Grid */}
 
-        <Slider {...settings}>
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
           {earrings.map((product) => (
             <ProductCard
               key={product._id}
@@ -97,7 +123,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
   };
 
   // Discount calculation
- 
+
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
@@ -129,7 +155,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}

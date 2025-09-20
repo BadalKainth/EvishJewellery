@@ -10,64 +10,70 @@ import { CartContext } from "../../context/CartContext";
 const Necklaces = () => {
   const navigate = useNavigate();
 
-  
-    const [necklaces, setNecklaces] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const { addItem } = useContext(CartContext);
-  
-    useEffect(() => {
-      const fetchNecklaces = async () => {
-        try {
-          const response = await apiGet("/products", { category: "necklaces" });
-          setNecklaces(response.data?.products || []);
-          const data = response.data?.products;
-          console.log(data);
-        } catch (err) {
-          setError(err.message || "Failed to load Necklaces");
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchNecklaces();
-    }, []);
-  
+  const [necklaces, setNecklaces] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchNecklaces = async () => {
+      try {
+        const response = await apiGet("/products", { category: "necklaces" });
+        setNecklaces(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load Necklaces");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNecklaces();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
+    dots: true,
+    infinite: necklaces.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, necklaces.length)
+        : viewportWidth < 1024
+        ? Math.min(2, necklaces.length)
+        : Math.min(3, necklaces.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    // responsive: [
-    //   {
-    //     breakpoint: 3000, // बड़ी स्क्रीन
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 1024, // Tablet और नीचे
-    //     settings: {
-    //       slidesToShow: 3,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 768, // Mobile और नीचे
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    // ],
+    autoplaySpeed: 2000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, necklaces.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, necklaces.length),
+        },
+      },
+    ],
   };
-if (loading) return <p className="text-center py-6">Loading rings...</p>;
-if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
+
+  if (loading) return <p className="text-center py-6">Loading rings...</p>;
+  if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
     <div
@@ -91,18 +97,18 @@ if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
         </div>
 
         {/* Slider or Grid */}
-        
-          <Slider {...settings}>
-            {necklaces.map((product) => (
-              <div key={product.id}>
-                <ProductCard
-                  product={product}
-                  addToCart={() => addItem(product._id)} // ✅ send productId to backend
-                  onClick={() => navigate(`/category/necklaces/${product._id}`)}
-                />
-              </div>
-            ))}
-          </Slider>
+
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
+          {necklaces.map((product) => (
+            <div key={product.id}>
+              <ProductCard
+                product={product}
+                addToCart={() => addItem(product._id)} // ✅ send productId to backend
+                onClick={() => navigate(`/category/necklaces/${product._id}`)}
+              />
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   );
@@ -112,11 +118,9 @@ if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 const ProductCard = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
 
- 
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
-  
   const handleAddToCart = () => {
     addToCart(product);
     setShowPopup(true);
@@ -151,7 +155,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}

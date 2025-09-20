@@ -5,51 +5,69 @@ import Slider from "react-slick";
 import { apiGet } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Bracelets = () => {
   const navigate = useNavigate();
-  
-    const [bracelets, setbracelets] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const { addItem } = useContext(CartContext);
-  
-    useEffect(() => {
-      const fetchbracelets = async () => {
-        try {
-          const response = await apiGet("/products", { category: "bracelets" });
-          setbracelets(response.data?.products || []);
-          const data = response.data?.products;
-          console.log(data);
-        } catch (err) {
-          setError(err.message || "Failed to load Bracelets");
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchbracelets();
-    }, []);
-  
+
+  const [bracelets, setbracelets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
+
+  const { addItem } = useContext(CartContext);
+
+  useEffect(() => {
+    const fetchbracelets = async () => {
+      try {
+        const response = await apiGet("/products", { category: "bracelets" });
+        setbracelets(response.data?.products || []);
+        const data = response.data?.products;
+        console.log(data);
+      } catch (err) {
+        setError(err.message || "Failed to load Bracelets");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchbracelets();
+  }, []);
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settings = {
-    dots: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
+    dots: true,
+    infinite: bracelets.length > 4,
+    speed: 500,
+    slidesToShow:
+      viewportWidth < 600
+        ? Math.min(1, bracelets.length)
+        : viewportWidth < 1024
+        ? Math.min(2, bracelets.length)
+        : Math.min(3, bracelets.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500,
-    accessibility: false,
-    arrows: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    autoplaySpeed: 2000,
+    arrows: false,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, bracelets.length),
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: Math.min(1, bracelets.length),
+        },
+      },
     ],
   };
 
@@ -73,7 +91,7 @@ const Bracelets = () => {
           </div>
         </div>
 
-        <Slider {...settings}>
+        <Slider key={`cat-${viewportWidth}`} {...settings}>
           {bracelets.map((product) => (
             <div key={product.id}>
               <ProductCard
@@ -95,12 +113,12 @@ const ProductCard = ({ product, addToCart, onClick }) => {
   const discount = product.originalPrice - product.price;
   const discountPercent = Math.round((discount / product.originalPrice) * 100);
 
- const handleAddToCart = async (e) => {
-   e.stopPropagation();
-   await addToCart(); // ✅ calls CartContext.addItem(product.id)
-   setShowPopup(true);
-   setTimeout(() => setShowPopup(false), 1500);
- };
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    await addToCart(); // ✅ calls CartContext.addItem(product.id)
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 1500);
+  };
 
   return (
     <div className="px-2 relative poppins">
@@ -130,7 +148,7 @@ const ProductCard = ({ product, addToCart, onClick }) => {
           )}
         </div>
 
-        <div className="py-4 px-2 md:px-32">
+        <div className="py-4 px-4">
           <h3 className="flex justify-between">
             <span className="font-semibold uppercase text-lg">
               {product.name}
