@@ -471,6 +471,14 @@ export default function AdminProducts() {
             <div className="text-xs capitalize">
               {p.category} / {p.type}
             </div>
+            {/* ✅ Stock Display with color coding */}
+            <div
+              className={`text-sm font-medium ${
+                p.stock < 10 ? "text-red-600" : "text-green-600"
+              }`}
+            >
+              Stock: {p.stock}
+            </div>
             <div className="flex gap-2 mt-3 flex-wrap">
               <button
                 onClick={() => toggleActive(p)}
