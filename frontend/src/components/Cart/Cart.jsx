@@ -8,19 +8,20 @@ import "swiper/css/pagination";
 
 const Cart = () => {
   const [preview, setPreview] = useState(null); // full preview state
-  const { cart, updateItem, removeItem, clear, applyCoupon, removeCoupon } =
-    useContext(CartContext);
+  const { cart, updateItem, removeItem, clear } = useContext(CartContext);
+
+  // Map cart items for display
   const cartItems =
     cart?.items?.map((i) => ({
       name: i.product?.name,
-      price: i.product?.price || 0,
+      price: i.product?.discountPrice || i.product?.originalPrice || 0,
       discountPrice: i.product?.price || 0,
       images:
         i.product?.images?.map((img) => img.url) ||
         (i.product?.primaryImage ? [i.product.primaryImage] : []),
       videos: [],
-      size: undefined,
-      deliveryCharges: 0,
+      size: i.product?.size,
+      deliveryCharges: i.product?.deliveryCharges || 99,
       productId: i.product?._id,
       quantity: i.quantity,
     })) || [];
@@ -31,48 +32,36 @@ const Cart = () => {
     if (item?.productId) removeItem(item.productId);
   };
 
-  // Total of all original prices
-  const originalTotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+  // ======= Corrected Calculations =======
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Total of all discounted prices
-  const discountedTotal = cartItems.reduce(
-    (acc, item) => acc + item.discountPrice,
+  const originalTotal = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
 
-  // Total discount amount
+  const discountedTotal = cartItems.reduce(
+    (acc, item) => acc + item.discountPrice * item.quantity,
+    0
+  );
+
   const discountAmount = originalTotal - discountedTotal;
   const discountPercent = originalTotal
     ? Math.round((discountAmount / originalTotal) * 100)
     : 0;
 
-  // Delivery charges
-  const productsWithCharge = cartItems.filter(
-    (item) => item.deliveryCharges !== undefined
-  );
-
-  const productsWithoutCharge = cartItems.filter(
-    (item) => item.deliveryCharges === undefined
-  );
-
-  const customChargesTotal = productsWithCharge.reduce(
-    (acc, item) => acc + item.deliveryCharges,
+  const deliveryCharge = cartItems.reduce(
+    (acc, item) => acc + item.deliveryCharges * item.quantity,
     0
   );
 
-  const defaultChargesTotal = productsWithoutCharge.length * 0;
-
-  const deliveryCharge = customChargesTotal + defaultChargesTotal;
-
-  // Final amount
   const finalAmount = discountedTotal + deliveryCharge;
 
-  // Render product media (image/video with slider condition)
+  // Render product media
   const renderMedia = (product) => {
     const totalMedia =
       (product.images?.length || 0) + (product.videos?.length || 0);
 
-    // Single image
     if (product.images?.length === 1 && !product.videos?.length) {
       return (
         <img
@@ -84,7 +73,6 @@ const Cart = () => {
       );
     }
 
-    // Single video
     if (product.videos?.length === 1 && !product.images?.length) {
       return (
         <video
@@ -99,7 +87,6 @@ const Cart = () => {
       );
     }
 
-    // Multiple media → Swiper
     if (totalMedia > 1) {
       return (
         <Swiper
@@ -177,13 +164,8 @@ const Cart = () => {
                           </span>
                         )}
                       </h2>
-
-                      {product.description && (
-                        <p className="text-gray-600 text-sm line-clamp-2">
-                          {product.description}
-                        </p>
-                      )}
                     </div>
+
                     <div className="flex justify-between items-center mt-3">
                       <div className="flex flex-col text-lg">
                         <span>
@@ -197,12 +179,15 @@ const Cart = () => {
                           {product.discountPrice.toLocaleString("en-IN")}
                         </span>
                         <span className="text-green-600 text-sm">
-                          Saved: ₹{itemDiscount} ({itemDiscountPercent}% Off)
+                          Saved: ₹{itemDiscount * product.quantity} (
+                          {itemDiscountPercent}% Off)
                         </span>
                         <span className="text-sm text-gray-500">
-                          Delivery: ₹{product.deliveryCharges || 99}
+                          Delivery: ₹
+                          {product.deliveryCharges * product.quantity}
                         </span>
                       </div>
+
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
@@ -239,7 +224,7 @@ const Cart = () => {
 
         <div className="flex justify-between mb-2">
           <span className="text-gray-700">Total Items:</span>
-          <span className="font-semibold">{cartItems.length}</span>
+          <span className="font-semibold">{totalItems}</span>
         </div>
 
         <div className="flex justify-between mb-2">
@@ -256,42 +241,20 @@ const Cart = () => {
           </span>
         </div>
 
-        {/* Discount Section */}
-        <div className="mb-2">
+        <div className="flex justify-between mb-2">
           <span className="text-gray-700">Total Discount:</span>
-          <div className="flex justify-between text-green-600 font-semibold">
-            <span>{discountPercent}%</span>
-            <span>-₹{discountAmount.toLocaleString("en-IN")}</span>
-          </div>
+          <span className="font-semibold text-green-600">
+            -₹{discountAmount.toLocaleString("en-IN")} ({discountPercent}%)
+          </span>
         </div>
 
-        {/* Delivery Charges Section */}
-        <div className="mb-2">
+        <div className="flex justify-between mb-4">
           <span className="text-gray-700">Delivery Charges:</span>
-          <div className="text-sm text-gray-600 mt-1">
-            {productsWithCharge.map((item, i) => (
-              <div key={i} className="flex justify-between">
-                <span>{item.name}</span>
-                <span>₹{item.deliveryCharges}</span>
-              </div>
-            ))}
-            {productsWithoutCharge.length > 0 && (
-              <div className="flex justify-between">
-                <span>{productsWithoutCharge.length} × 0</span>
-                <span>₹{defaultChargesTotal}</span>
-              </div>
-            )}
-          </div>
-
-          <div className="flex justify-between mt-1">
-            <span className="font-medium">Total Delivery:</span>
-            <span className="font-semibold text-red-600">
-              ₹{deliveryCharge.toLocaleString("en-IN")}
-            </span>
-          </div>
+          <span className="font-semibold text-red-600">
+            ₹{deliveryCharge.toLocaleString("en-IN")}
+          </span>
         </div>
 
-        {/* Final Amount */}
         <div className="flex justify-between mb-4 border-t pt-2">
           <span className="text-gray-900 font-bold">Final Amount:</span>
           <span className="font-bold text-amber-600">
@@ -318,13 +281,12 @@ const Cart = () => {
       {preview && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-3 overflow-auto"
-          onClick={() => setPreview(null)} // backdrop पर क्लिक करने से भी बंद
+          onClick={() => setPreview(null)}
         >
           <div
             className="relative max-w-full max-h-full flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()} // content पर क्लिक से modal बंद न हो
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={() => setPreview(null)}
               className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md z-50 touch-manipulation"
@@ -333,7 +295,6 @@ const Cart = () => {
               Close
             </button>
 
-            {/* Media Preview */}
             {preview.type === "image" ? (
               <img
                 src={preview.src}
@@ -348,7 +309,6 @@ const Cart = () => {
                 muted
                 loop
                 className="max-w-full max-h-[90vh] object-contain rounded-lg"
-                onClick={(e) => e.stopPropagation()}
               />
             )}
           </div>

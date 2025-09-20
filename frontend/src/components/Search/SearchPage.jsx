@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import client from "../../api/client";
+import { CartContext } from "../../context/CartContext";
 
-export default function SearchPage() {
+export default function SearchPage({ product, addToCart, onClick }) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { addItem } = useContext(CartContext);
+  const [showPopup, setShowPopup] = useState(false);
 
   const doSearch = async () => {
     if (!q || q.trim().length < 2) return;
@@ -37,8 +40,30 @@ export default function SearchPage() {
     }
   };
 
+  // const handleAddToCart = async (e) => {
+  //   e.stopPropagation();
+  //   await addToCart(); // ✅ calls CartContext.addItem(product.id)
+  //   setShowPopup(true);
+  //   setTimeout(() => setShowPopup(false), 1500);
+  // };
+  const handleAddToCart = async (productId, e) => {
+    e.stopPropagation();
+    try {
+      addItem(productId); // ✅ CartContext function
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 1500);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="p-6">
+      {showPopup && (
+        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md z-50">
+          Added to Cart!
+        </div>
+      )}
       <div className="flex gap-2 mb-4">
         <input
           className="flex-1 border rounded px-3 py-2"
@@ -111,7 +136,7 @@ export default function SearchPage() {
 
                 {/* ✅ Add to Cart Button */}
                 <button
-                  // onClick={handleAddToCart}
+                  onClick={(e) => handleAddToCart(p._id, e)}
                   className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm"
                 >
                   Add to Cart
