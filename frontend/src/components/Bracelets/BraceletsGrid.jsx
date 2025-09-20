@@ -54,7 +54,7 @@ const BraceletsGrid = () => {
               key={product.id}
               product={product}
               addToCart={() => addItem(product._id)} // ✅ send productId to backend
-              onClick={() => navigate(`/category/bracelets/${product._id}`)}
+              onClick={() => navigate(`/category/bracelets/${product.id}`)}
             />
           ))}
         </div>

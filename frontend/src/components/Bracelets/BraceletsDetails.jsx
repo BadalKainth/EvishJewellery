@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { apiGet } from "../../api/client";
+import { CartContext } from "../../context/CartContext";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import braceletsData from "./BraceletsData";
+import Bracelets from "./Bracelets";
 
 const BraceletsDetails = ({ addToCart }) => {
+     const [bracelets, setbracelets] = useState([]);
+  
+
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [showPopup, setShowPopup] = useState(false);
 
-  const product = braceletsData.find((p) => p.id.toString() === id);
+   useEffect(() => {
+     const fetchbracelets = async () => {
+       try {
+         const response = await apiGet("/products", { category: "bracelets" });
+         setbracelets(response.data?.products || []);
+         const data = response.data?.products;
+         console.log(data);
+       } catch (err) {
+         setError(err.message || "Failed to load Bracelets");
+       } finally {
+         setLoading(false);
+       }
+     };
+     fetchbracelets();
+   }, []);
+  const product = bracelets.find((p) => p.id.toString() === id);
+
 
   if (!product) {
     return (
@@ -105,7 +128,7 @@ const BraceletsDetails = ({ addToCart }) => {
 
         {/* ✅ Right Info */}
         <div>
-          <h3 className="flex items-center justify-between">
+          <h3 className="flex  items-center justify-between">
             <span className="font-semibold text-gray-900 uppercase poppins-semibold text-lg">
               {product.name}
             </span>
