@@ -21,6 +21,7 @@ const Cart = () => {
         (i.product?.primaryImage ? [i.product.primaryImage] : []),
       videos: [],
       size: i.product?.size,
+      description: i.product?.description,
       deliveryCharges: i.product?.deliveryCharges || 99,
       productId: i.product?._id,
       quantity: i.quantity,
@@ -156,7 +157,7 @@ const Cart = () => {
                   {/* Product Details */}
                   <div className="p-4 flex flex-col justify-between flex-1">
                     <div>
-                      <h2 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
+                      <h2 className=" uppercase text-lg md:text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
                         {product.name}
                         {product.size && (
                           <span className="pl-4 md:pl-20 text-green-600 font-medium text-base">
@@ -165,26 +166,25 @@ const Cart = () => {
                         )}
                       </h2>
                     </div>
-
+                    <p className="text-sm text-gray-800 line-clamp-2">
+                      {product.description}
+                    </p>
+                    <span className="text-sm text-gray-500">
+                      Delivery: ₹{product.deliveryCharges * product.quantity}
+                    </span>
                     <div className="flex justify-between items-center mt-3">
                       <div className="flex flex-col text-lg">
-                        <span>
-                          Price:{" "}
-                          <span className="line-through decoration-2 decoration-black">
-                            ₹{product.price.toLocaleString("en-IN")}
-                          </span>
+                        <span className="line-through decoration-2 text-amber-600 font-bold decoration-amber-700 text-2xl">
+                          Price: ₹{product.price.toLocaleString("en-IN")}
                         </span>
-                        <span className="font-bold text-amber-600">
+
+                        <span className="font-bold text-green-600 text-lg">
                           Discount Price: ₹
                           {product.discountPrice.toLocaleString("en-IN")}
                         </span>
-                        <span className="text-green-600 text-sm">
-                          Saved: ₹{itemDiscount * product.quantity} (
+                        <span className="text-sm text-gray-600 font-bold">
+                          🎉 You saved ₹{itemDiscount * product.quantity} (
                           {itemDiscountPercent}% Off)
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          Delivery: ₹
-                          {product.deliveryCharges * product.quantity}
                         </span>
                       </div>
 
