@@ -1,14 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
-import { CartContext } from "./context/CartContext"; // ✅ import cart context
+import { CartContext } from "./context/CartContext";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext);
-  const { cart } = useContext(CartContext); // ✅ access cart from context
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // सारे menu links एक array में रखे
+  const { user, logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
+
   const menuLinks = [
     { name: "Home", path: "/" },
     { name: "Bracelets", path: "/category/bracelets" },
@@ -20,136 +23,145 @@ const Navbar = () => {
     { name: "About", path: "/about" },
   ];
 
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <nav className="bg-[#faf9eb] shadow-md sticky top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase overflow-x-hidden">
-      <div className="container mx-auto px-1 overflow-x-hidden">
-        <div className="flex justify-between items-center py-4 px-1">
-          {/* Logo - Left side */}
-          <Link
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            to="/"
-            className="flex items-center"
-          >
-            <span className="text-4xl font-sans font-bold text-[#ed9d58]">
-              LUXURY
-            </span>
-            <span className="text-2xl font-sans font-bold pl-1 pt-4">
-              JEWELS
-            </span>
+    <nav className="bg-[#faf9eb] shadow-md sticky top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <span className="text-4xl font-bold text-[#ed9d58]">LUXURY</span>
+            <span className="text-2xl font-bold pl-1 pt-4">JEWELS</span>
           </Link>
 
-          {/* Right side (Links + Cart + Mobile Button) */}
-          <div className="flex items-center space-x-4">
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-6">
-              {menuLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-dark hover:text-amber-600 transition"
-                >
-                  {link.name}
-                </Link>
-              ))}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-6 relative">
+            {menuLinks.map((link) => (
               <Link
-                to="/search"
+                key={link.path}
+                to={link.path}
                 className="text-dark hover:text-amber-600 transition"
               >
-                Search
+                {link.name}
               </Link>
-              {user && (
-                <Link
-                  to="/account"
-                  className="text-dark hover:text-amber-600 transition"
-                >
-                  Account
-                </Link>
-              )}
-              {user?.role === "admin" && (
-                <Link
-                  to="/admin"
-                  className="text-dark hover:text-amber-600 transition"
-                >
-                  Admin
-                </Link>
-              )}
-              {user ? (
+            ))}
+            <Link
+              to="/search"
+              className="text-dark hover:text-amber-600 transition"
+            >
+              Search
+            </Link>
+
+            {/* User Icon Dropdown */}
+            {user ? (
+              <div ref={dropdownRef} className="relative">
                 <button
-                  onClick={logout}
-                  className="text-dark hover:text-amber-600 transition"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center text-dark hover:text-amber-600 transition focus:outline-none"
                 >
-                  Logout
+                  <FaUserCircle className="h-8 w-8" />
                 </button>
-              ) : (
-                <Link
-                  to="/authForm"
-                  className="text-dark hover:text-amber-600 transition"
-                >
-                  Login
-                </Link>
-              )}
-            </div>
 
-            {/* Cart Icon (Desktop) */}
-            <div className="hidden md:flex items-center">
-              <Link to="/cart">
-                <button className="relative">
-                  <svg
-                    className="h-6 w-6 text-dark hover:text-amber-600 transition"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
-                  <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cart?.totals?.totalItems || 0} {/* ✅ show item count */}
-                  </span>
-                </button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-dark focus:outline-none"
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-50">
+                    <Link
+                      to="/account"
+                      className="block px-4 py-2 text-gray-800 hover:bg-amber-100"
+                    >
+                      Account
+                    </Link>
+                    {user.role === "admin" && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 text-gray-800 hover:bg-amber-100"
+                      >
+                        Admin
+                      </Link>
+                    )}
+                    <button
+                      onClick={logout}
+                      className="w-full text-left px-4 py-2 text-gray-800 hover:bg-amber-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                to="/authForm"
+                className="text-dark hover:text-amber-600 transition"
               >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {isMobileMenuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  )}
-                </svg>
-              </button>
-            </div>
+                Login
+              </Link>
+            )}
+
+            {/* Cart Icon */}
+            <Link to="/cart" className="relative">
+              <svg
+                className="h-6 w-6 text-dark hover:text-amber-600 transition"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cart?.totals?.totalItems || 0}
+              </span>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-dark focus:outline-none"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-4">
+          <div className="md:hidden pb-4 space-y-2">
             {menuLinks.map((link) => (
               <Link
                 key={link.path}
@@ -167,34 +179,34 @@ const Navbar = () => {
             >
               Search
             </Link>
-            {user && (
-              <Link
-                to="/account"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-dark hover:text-amber-600 transition"
-              >
-                Account
-              </Link>
-            )}
-            {user?.role === "admin" && (
-              <Link
-                to="/admin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-dark hover:text-amber-600 transition"
-              >
-                Admin
-              </Link>
-            )}
             {user ? (
-              <button
-                onClick={() => {
-                  logout();
-                  setIsMobileMenuOpen(false);
-                }}
-                className="block py-2 text-left w-full text-dark hover:text-amber-600 transition"
-              >
-                Logout
-              </button>
+              <>
+                <Link
+                  to="/account"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-2 text-dark hover:text-amber-600 transition"
+                >
+                  Account
+                </Link>
+                {user.role === "admin" && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2 text-dark hover:text-amber-600 transition"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block py-2 text-left w-full text-dark hover:text-amber-600 transition"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <Link
                 to="/authForm"
@@ -204,30 +216,6 @@ const Navbar = () => {
                 Login
               </Link>
             )}
-
-            {/* Cart Icon (Mobile) */}
-            <div className="pt-2">
-              <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="relative">
-                  <svg
-                    className="h-6 w-6 text-dark hover:text-amber-600 transition"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
-                  <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cart?.totals?.totalItems || 0}
-                  </span>
-                </button>
-              </Link>
-            </div>
           </div>
         )}
       </div>
