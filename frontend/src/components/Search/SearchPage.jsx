@@ -8,26 +8,34 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
 
   const doSearch = async () => {
-
     if (!q || q.trim().length < 2) return;
-    setLoading(true); setError("");
+    setLoading(true);
+    setError("");
     try {
       const res = await client.get("/products/search/query", { q, limit: 12 });
-      if (res?.success) setResults(res.data.products);
-      console.log(res);
-      
+      if (res?.success) {
+        // map through each product to calculate discount and discountPercent
+        const productsWithDiscount = res.data.products.map((p) => {
+          const discount = p.originalPrice - p.price;
+          const discountPercent = p.originalPrice
+            ? Math.round((discount / p.originalPrice) * 100)
+            : 0; // avoid division by zero
+          return {
+            ...p,
+            discount,
+            discountPercent,
+          };
+        });
+
+        setResults(productsWithDiscount);
+        console.log(productsWithDiscount);
+      }
     } catch (e) {
-      setError(e.message || 'Search failed');
+      setError(e.message || "Search failed");
     } finally {
       setLoading(false);
     }
   };
-
-  const p = results
-     const discount = p.originalPrice - p.price;
-     const discountPercent = Math.round((discount / p.originalPrice) * 100);
-
-console.log(discount, discountPercent)
 
   return (
     <div className="p-6">
@@ -96,7 +104,7 @@ console.log(discount, discountPercent)
                       Discounted price : ₹{p.price}
                     </span>
                     <span className="text-sm text-gray-600">
-                      🎉 You saved ₹{discount} ({discountPercent}% OFF)
+                      🎉 You saved ₹{p.discount} ({p.discountPercent}% OFF)
                     </span>
                   </>
                 </div>
@@ -117,5 +125,3 @@ console.log(discount, discountPercent)
     </div>
   );
 }
-
-
