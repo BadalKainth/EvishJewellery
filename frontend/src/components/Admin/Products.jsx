@@ -12,7 +12,7 @@ export default function AdminProducts() {
     description: "",
     originalPrice: "",
     price: "",
-    category: "rings",
+    category: "bracelets",
     type: "gold",
     material: "",
     weight: "",
@@ -273,12 +273,15 @@ export default function AdminProducts() {
             }
           >
             {[
-              "necklaces",
-              "earrings",
               "bracelets",
               "rings",
-              "anklets",
+              "earrings",
+              "necklaces",
               "couple-sets",
+              "anklets",
+              "bags",
+              "women-dress",
+              "watch",
             ].map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -299,6 +302,7 @@ export default function AdminProducts() {
               "platinum",
               "rose-gold",
               "white-gold",
+              "cotton",
               "other",
             ].map((t) => (
               <option key={t} value={t}>

@@ -37,6 +37,12 @@ import ResetPassword from "./components/Auth/ResetPassword";
 import ChangePassword from "./components/Auth/ChangePassword";
 import About from "./components/about/about";
 import CategoryWrapper from "./components/CategoryWrapper";
+import BagsGrid from "./components/Bags/BagsGrid";
+import BagsDetails from "./components/Bags/BagsDetails";
+import WomenDressGrid from "./components/WomenDress/WomenDressGrid";
+import WomenDetails from "./components/WomenDress/WomenDetails";
+import WatchGrind from "./components/Watch/WatchGrid";
+import WatchDetails from "./components/Watch/WatchDetails";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -183,6 +189,30 @@ function App() {
         <Route
           path="category/anklets/:id"
           element={<AnkletDetails addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/bags"
+          element={<BagsGrid addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/bags/:id"
+          element={<BagsDetails addToCart={addToCart} />}
+        />
+        <Route
+          path="category/womendress"
+          element={<WomenDressGrid addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/womendress/:id"
+          element={<WomenDetails addToCart={addToCart} />}
+        />
+        <Route
+          path="category/watch"
+          element={<WatchGrind addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/watch/:id"
+          element={<WatchDetails addToCart={addToCart} slider={false} />}
         />
         <Route path="/about" element={<About />} />
         <Route

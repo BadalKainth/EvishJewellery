@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
 
-const AnkletDetails = ({ addToCart }) => {
-  const [anklet, setanklet] = useState([]);
+const WatchDetails = ({ addToCart }) => {
+  const [watch, setwatch] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -20,23 +20,21 @@ const AnkletDetails = ({ addToCart }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const fetchanklet = async () => {
+    const fetchwatch = async () => {
       try {
-        const response = await apiGet("/products", {
-          category: "anklets",
-        });
-        setanklet(response.data?.products || []);
-        console.log("Fetched anklet:", response.data?.products);
+        const response = await apiGet("/products", { category: "watch" });
+        setwatch(response.data?.products || []);
+        console.log("Fetched Watches:", response.data?.products);
       } catch (err) {
-        setError(err.message || "Failed to load anklet");
+        setError(err.message || "Failed to load watch");
       } finally {
         setLoading(false);
       }
     };
-    fetchanklet();
+    fetchwatch();
   }, []);
 
-  const product = anklet.find((p) => p.id.toString() === id);
+  const product = watch.find((p) => p.id.toString() === id);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
@@ -52,15 +50,13 @@ const AnkletDetails = ({ addToCart }) => {
     );
   }
 
-
   return (
     <>
     <CartDesignId
       product={product} 
       addToCart={addToCart} 
       />
-    
     </>
   );
 };
-export default AnkletDetails;
+export default WatchDetails;

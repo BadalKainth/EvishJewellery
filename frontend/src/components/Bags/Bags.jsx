@@ -1,20 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
+// import braceletsdata from "./BraceletsData";
+import { apiGet } from "../../api/client";
+import { CartContext } from "../../context/CartContext";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useNavigate } from "react-router-dom";
-import { apiGet } from "../../api/client";
-import { CartContext } from "../../context/CartContext";
 import CartDesign from "../CartDesignCode/CartDesign";
 
-const Necklaces = () => {
+const Bags = () => {
   const navigate = useNavigate();
 
-  const [necklaces, setNecklaces] = useState([]);
+  const [bags, setbags] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const [viewportWidth, setViewportWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
@@ -22,21 +22,20 @@ const Necklaces = () => {
   const { addItem } = useContext(CartContext);
 
   useEffect(() => {
-    const fetchNecklaces = async () => {
+    const fetchbags = async () => {
       try {
-        const response = await apiGet("/products", { category: "necklaces" });
-        setNecklaces(response.data?.products || []);
+        const response = await apiGet("/products", { category: "bags" });
+        setbags(response.data?.products || []);
         const data = response.data?.products;
         console.log(data);
       } catch (err) {
-        setError(err.message || "Failed to load Necklaces");
+        setError(err.message || "Failed to load bags");
       } finally {
         setLoading(false);
       }
     };
-    fetchNecklaces();
+    fetchbags();
   }, []);
-
   useEffect(() => {
     const handleResize = () => setViewportWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -45,14 +44,14 @@ const Necklaces = () => {
 
   const settings = {
     dots: true,
-    infinite: necklaces.length > 4,
+    infinite: bags.length > 4,
     speed: 500,
     slidesToShow:
       viewportWidth < 600
-        ? Math.min(1, necklaces.length)
+        ? Math.min(1, bags.length)
         : viewportWidth < 1024
-        ? Math.min(2, necklaces.length)
-        : Math.min(3, necklaces.length),
+        ? Math.min(2, bags.length)
+        : Math.min(3, bags.length),
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -61,51 +60,49 @@ const Necklaces = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: Math.min(2, necklaces.length),
+          slidesToShow: Math.min(2, bags.length),
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: Math.min(1, necklaces.length),
+          slidesToShow: Math.min(1, bags.length),
         },
       },
     ],
   };
 
-  if (loading) return <p className="text-center py-6">Loading Necklaces...</p>;
+  
+  if (loading) return <p className="text-center py-6">Loading Bags...</p>;
   if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
     <div
-      id="necklaces"
+      id="bags"
       className="scroll-mt-24 flex flex-col md:flex-row bg-[#ECEEDF] w-full pb-10"
     >
       <div className="w-full">
-        {/* Heading */}
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/necklaces"
+              to="/bracelets"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
-              Necklaces
+              Bags
             </Link>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that sparkles around your neck
+              Elegance that shines on your wrist
             </p>
           </div>
         </div>
 
-        {/* Slider or Grid */}
-
         <Slider key={`cat-${viewportWidth}`} {...settings}>
-          {necklaces.map((product) => (
+          {bags.map((product) => (
             <div key={product.id}>
               <ProductCard
                 product={product}
                 addToCart={() => addItem(product._id)} // ✅ send productId to backend
-                onClick={() => navigate(`/category/necklaces/${product._id}`)}
+                onClick={() => navigate(`/category/bags/${product._id}`)}
               />
             </div>
           ))}
@@ -115,19 +112,30 @@ const Necklaces = () => {
   );
 };
 
-// Product Card with discount + popup
 const ProductCard = ({ product, addToCart, onClick }) => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const discount = product.originalPrice - product.price;
+  const discountPercent = Math.round((discount / product.originalPrice) * 100);
+
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    await addToCart(); // ✅ calls CartContext.addItem(product.id)
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 1500);
+  };
 
   return (
     <>
-    <CartDesign 
+    <CartDesign
     product={product} 
       addToCart={addToCart} 
       onClick={onClick}
       />
+    
     </>
   );
 };
 
 
-export default Necklaces;
+export default Bags;

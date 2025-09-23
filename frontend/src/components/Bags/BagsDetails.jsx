@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
 
-const AnkletDetails = ({ addToCart }) => {
-  const [anklet, setanklet] = useState([]);
+const BagsDetails = ({ addToCart }) => {
+  const [bags, setbags] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -20,23 +20,23 @@ const AnkletDetails = ({ addToCart }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    const fetchanklet = async () => {
+    const fetchbags = async () => {
       try {
         const response = await apiGet("/products", {
-          category: "anklets",
+          category: "bags",
         });
-        setanklet(response.data?.products || []);
-        console.log("Fetched anklet:", response.data?.products);
+        setbags(response.data?.products || []);
+        console.log("Fetched bags:", response.data?.products);
       } catch (err) {
-        setError(err.message || "Failed to load anklet");
+        setError(err.message || "Failed to load bags");
       } finally {
         setLoading(false);
       }
     };
-    fetchanklet();
+    fetchbags();
   }, []);
 
-  const product = anklet.find((p) => p.id.toString() === id);
+  const product = bags.find((p) => p.id.toString() === id);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
@@ -53,14 +53,14 @@ const AnkletDetails = ({ addToCart }) => {
   }
 
 
+
   return (
     <>
     <CartDesignId
       product={product} 
       addToCart={addToCart} 
       />
-    
     </>
   );
 };
-export default AnkletDetails;
+export default BagsDetails;

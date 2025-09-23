@@ -184,6 +184,7 @@ const OurCollections = () => {
                 </a>
               </div>
             </div>
+            
           </div>
         </div>
       </section>

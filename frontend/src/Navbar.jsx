@@ -18,8 +18,12 @@ const Navbar = () => {
     { name: "Rings", path: "/category/rings" },
     { name: "Earrings", path: "/category/earrings" },
     { name: "Necklaces", path: "/category/necklaces" },
-    { name: "Couple Sets", path: "/category/couplesets" },
+    { name: "Couple-Sets", path: "/category/couplesets" },
     { name: "Anklets", path: "/category/anklets" },
+    { name: "Bags", path: "/category/bags" },
+    { name: "Women-Dress", path: "/category/womendress" },
+    { name: "Watch", path: "/category/watch" },
+
     { name: "About", path: "/about" },
   ];
 
@@ -35,17 +39,17 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[#faf9eb] shadow-md sticky top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
-      <div className="container mx-auto px-4">
+    <nav className="bg-[#faf9eb] shadow-md sticky px-2 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
+      <div className=" mx-auto">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-4xl font-bold text-[#ed9d58]">LUXURY</span>
-            <span className="text-2xl font-bold pl-1 pt-4">JEWELS</span>
+            <span className="text-3xl font-bold text-[#ed9d58]">LUXURY</span>
+            <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6 relative">
+          <div className="hidden md:flex items-center space-x-3 relative">
             {menuLinks.map((link) => (
               <Link
                 key={link.path}
@@ -55,12 +59,12 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link
+            {/* <Link
               to="/search"
               className="text-dark hover:text-amber-600 transition"
             >
               Search
-            </Link>
+            </Link> */}
 
             {/* User Icon Dropdown */}
             {user ? (
@@ -73,24 +77,24 @@ const Navbar = () => {
                 </button>
 
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-50">
+                  <div className="absolute right-0 mt-2 w-40 bg-[#faf9eb] shadow-lg rounded-md z-50">
                     <Link
                       to="/account"
-                      className="block px-4 py-2 text-gray-800 hover:bg-amber-100"
+                      className="block px-4 py-2 text-dark hover:text-amber-600 transition"
                     >
                       Account
                     </Link>
                     {user.role === "admin" && (
                       <Link
                         to="/admin"
-                        className="block px-4 py-2 text-gray-800 hover:bg-amber-100"
+                        className="block px-4 py-2 text-dark hover:text-amber-600 transition"
                       >
                         Admin
                       </Link>
                     )}
                     <button
                       onClick={logout}
-                      className="w-full text-left px-4 py-2 text-gray-800 hover:bg-amber-100"
+                      className="w-full text-left px-4 py-2 text-dark hover:text-amber-600 transition"
                     >
                       Logout
                     </button>

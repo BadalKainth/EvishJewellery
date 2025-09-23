@@ -104,6 +104,9 @@ export const validateProduct = [
       "rings",
       "anklets",
       "couple-sets",
+      "bags",
+      "women-dress",
+      "watch",
     ])
     .withMessage("Invalid product category"),
   body("type")
@@ -114,6 +117,7 @@ export const validateProduct = [
       "platinum",
       "rose-gold",
       "white-gold",
+      "cotton",
       "other",
     ])
     .withMessage("Invalid product type"),
@@ -305,6 +309,9 @@ export const validateProductFilters = [
       "rings",
       "anklets",
       "couple-sets",
+      "bags",
+      "women-dress",
+      "watch",
     ])
     .withMessage("Invalid category filter"),
   query("type")
@@ -316,6 +323,7 @@ export const validateProductFilters = [
       "platinum",
       "rose-gold",
       "white-gold",
+      "cotton",
       "other",
     ])
     .withMessage("Invalid type filter"),

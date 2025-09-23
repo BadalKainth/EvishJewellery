@@ -19,6 +19,9 @@ const Footer = () => {
     { name: "Necklaces", path: "/category/necklaces" },
     { name: "Couple Sets", path: "/category/couplesets" },
     { name: "Anklet", path: "/category/anklets" },
+    { name: "Bags", path: "/category/bags" },
+    { name: "Women Dress", path: "/category/womendress" },
+    { name: "Watch", path: "/category/watch" },
   ];
 
   // Quick Links with routes
@@ -56,7 +59,7 @@ const Footer = () => {
           <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
             Collections
           </h3>
-          <ul className="space-y-2 text-gray-100">
+          <ul className="space-y-2 text-gray-100 grid grid-cols-2 ">
             {collections.map((item, index) => (
               <li key={index}>
                 <Link
@@ -72,7 +75,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+          <h3 className="text-[#d4af37] font-serif  font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
             Quick Links
           </h3>
           <ul className="space-y-2 text-gray-100">

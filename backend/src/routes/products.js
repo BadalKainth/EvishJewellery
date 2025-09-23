@@ -394,6 +394,9 @@ router.get(
         "rings",
         "anklets",
         "couple-sets",
+        "bags",
+        "women-dress",
+        "watch",
       ];
       if (!validCategories.includes(category)) {
         return res.status(400).json({
