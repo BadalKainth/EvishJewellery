@@ -76,7 +76,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
 
               <button
                 onClick={handleAddToCart}
-                className="bg-amber-500 hover:bg-amber-600 text-white px-3 py-0 mt-8 md:mt-0 md:px-5 md:py-4  rounded-lg text-sm md:text-base "
+                className="bg-amber-500 hover:bg-amber-600 text-white px-4 md:py-2 py-0 rounded-lg text-sm"
               >
                 Add to Cart
               </button>

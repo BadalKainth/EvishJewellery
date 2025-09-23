@@ -8,12 +8,17 @@ const CartDesignId = ({ product, addToCart }) => {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false); // ✅ define state
 
+  // const handleAddToCart = () => {
+  //   addToCart(product);
+  //   setShowPopup(true);
+  //   setTimeout(() => setShowPopup(false), 1500);
+  // };
+
   const handleAddToCart = () => {
-    addToCart(product);
+    addToCart(); // parameter already CoupleDetails se pass ho raha
     setShowPopup(true);
     setTimeout(() => setShowPopup(false), 1500);
   };
-
   // ✅ Discount Calculation (originalPrice - price)
   const discount =
     product.originalPrice && product.price
@@ -24,7 +29,7 @@ const CartDesignId = ({ product, addToCart }) => {
     product.originalPrice && product.price
       ? Math.round((discount / product.originalPrice) * 100)
       : 0;   
-
+      
   return (
     <>
       <div className="min-h-screen bg-[#f9f9f9] pb-10 px-5 md:px-20 relative poppins">

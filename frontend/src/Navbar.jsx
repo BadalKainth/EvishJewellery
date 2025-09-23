@@ -49,7 +49,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-3 relative">
+          <div className="hidden md:flex items-center space-x-4 relative">
             {menuLinks.map((link) => (
               <Link
                 key={link.path}
@@ -125,7 +125,7 @@ const Navbar = () => {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-              <span className="absolute -top-2 -right-2 bg-primary text-green-600 text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-primary text-green-600 font-bold text-base rounded-full h-5 w-5 flex items-center justify-center">
                 {cart?.totals?.totalItems || 0}
               </span>
             </Link>
@@ -220,6 +220,30 @@ const Navbar = () => {
                 Login
               </Link>
             )}
+
+            {/* Cart Icon */}
+            <Link
+              to="/cart"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="relative"
+            >
+              <svg
+                className="h-6 w-6 text-dark hover:text-amber-600 transition"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span className="absolute top-1 left-8 bg-primary text-green-600 font-bold text-xl rounded-full h-5 w-5 flex items-center justify-center">
+                {cart?.totals?.totalItems || 0}
+              </span>
+            </Link>
           </div>
         )}
       </div>

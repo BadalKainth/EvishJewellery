@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
+import { CartContext } from "../../context/CartContext";
 
 const BagsDetails = ({ addToCart }) => {
   const [bags, setbags] = useState([]);
@@ -15,9 +16,8 @@ const BagsDetails = ({ addToCart }) => {
   const [error, setError] = useState("");
 
   const { id } = useParams();
-  const navigate = useNavigate();
+  const { addItem } = useContext(CartContext);
 
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchbags = async () => {
@@ -57,9 +57,10 @@ const BagsDetails = ({ addToCart }) => {
   return (
     <>
     <CartDesignId
-      product={product} 
-      addToCart={addToCart} 
-      />
+            key={product._id}
+            product={product}
+            addToCart={() => addItem(product._id)} // 🔹 _id bhejo
+          />
     </>
   );
 };

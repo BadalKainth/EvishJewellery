@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
 import { apiGet } from "../../api/client";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
+import { CartContext } from "../../context/CartContext";
 
 const WatchDetails = ({ addToCart }) => {
   const [watch, setwatch] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+    const { addItem } = useContext(CartContext);
+
 
   const { id } = useParams();
-  const navigate = useNavigate();
-
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchwatch = async () => {
@@ -52,9 +50,10 @@ const WatchDetails = ({ addToCart }) => {
 
   return (
     <>
-    <CartDesignId
-      product={product} 
-      addToCart={addToCart} 
+      <CartDesignId
+        key={product._id}
+        product={product}
+        addToCart={() => addItem(product._id)} // 🔹 _id bhejo
       />
     </>
   );

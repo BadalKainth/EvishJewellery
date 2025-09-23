@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -6,7 +7,7 @@ const Hero = () => {
       {/* <!-- Jewelry Hero Section --> */}
       <section className="relative overflow-hidden h-[560px]">
         {/* <!-- Background overlay and content container --> */}
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
+        <div className="absolute inset-96 bg-black/5 z-10"></div>
 
         {/* <!-- Hero image with elegant jewelry --> */}
         <div className="absolute inset-0">
@@ -23,21 +24,21 @@ const Hero = () => {
             {/* <!-- Main heading --> */}
             <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-amber-50 pb-10 leading-tight poppins-semibold">
               Timeless Shine <br />
-              <span className="text-[#f3c806] pl-36">Endless Love</span>
+              <span className="text-[#f3c806] pl-10 md:pl-36">
+                Endless Love
+              </span>
             </h1>
-
-            {/* <!-- Description --> */}
-            <p className="text-white font-montserrat max-w-xl text-lg md:text-xl mb-8 opacity-90 poppins-regular">
-              Celebrate life’s most precious moments with jewelry that blends
+            {/* <!-- Description --> // bg-[#888885] bg-opacity-80 */}
+            <p className="text-white md:bg-transparent p-2 font-montserrat max-w-xl text-lg md:text-xl mb-8 opacity-100 poppins-regular">
+              Celebrate lifes most precious moments with jewelry that blends
               tradition and modern design, crafted to shine as brightly as your
               story.
             </p>
-
             {/* <!-- CTA Buttons --> */}
             <div className="flex flex-wrap gap-4 pl-32">
-              <button className="px-10 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-montserrat font-medium rounded-full transition-all duration-300 transform hover:scale-105 poppins-regular">
+              <Link to='/'  className="px-5 py-2 md:px-8 md:py-3 text-lg md:text-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-montserrat font-medium rounded-xl md:rounded-full transition-all duration-300 transform hover:scale-105 poppins-regular">
                 Explore Collection
-              </button>
+              </Link>
             </div>
           </div>
         </div>

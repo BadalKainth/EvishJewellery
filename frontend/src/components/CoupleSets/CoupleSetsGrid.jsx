@@ -59,7 +59,7 @@ const CoupleSetsGrid = () => {
             <ProductCard
               key={product.id}
               product={product}
-              addToCart={() => addItem(product._id)} // ✅ send productId to backend
+              addToCart={() => addItem(product.id)} // ✅ send productId to backend
               onClick={() => navigate(`/category/couplesets/${product._id}`)}
             />
           ))}
