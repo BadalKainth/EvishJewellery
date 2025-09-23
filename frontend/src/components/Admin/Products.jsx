@@ -473,7 +473,7 @@ export default function AdminProducts() {
             <div className="text-sm text-gray-600">₹{p.originalPrice}</div>
             <div className="text-sm text-gray-600">₹{p.price}</div>
             <div className="text-xs capitalize">
-              {p.category} / {p.type}
+              {p.category} /{p.type}
             </div>
             {/* ✅ Stock Display with color coding */}
             <div
