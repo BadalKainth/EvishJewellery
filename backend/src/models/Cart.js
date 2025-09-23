@@ -31,9 +31,12 @@ const cartSchema = new mongoose.Schema(
     },
     items: [cartItemSchema],
     coupon: {
-      code: String,
-      discount: Number,
-      type: String, // percentage or fixed
+      type: {
+        code: { type: String },
+        discount: { type: Number },
+        couponType: { type: String, enum: ["percentage", "fixed"] },
+      },
+      default: undefined, // <- important
     },
     lastUpdated: {
       type: Date,
@@ -54,28 +57,22 @@ cartSchema.pre("save", function (next) {
   next();
 });
 
-// Method to add item to cart
+// Add item
 cartSchema.methods.addItem = function (productId, quantity = 1) {
   const existingItem = this.items.find(
     (item) => item.product.toString() === productId.toString()
   );
 
   if (existingItem) {
-    existingItem.quantity += quantity;
-    if (existingItem.quantity > 10) {
-      existingItem.quantity = 10;
-    }
+    existingItem.quantity = Math.min(existingItem.quantity + quantity, 10);
   } else {
-    this.items.push({
-      product: productId,
-      quantity: quantity,
-    });
+    this.items.push({ product: productId, quantity });
   }
 
   return this.save();
 };
 
-// Method to remove item from cart
+// Remove item
 cartSchema.methods.removeItem = function (productId) {
   this.items = this.items.filter(
     (item) => item.product.toString() !== productId.toString()
@@ -83,37 +80,34 @@ cartSchema.methods.removeItem = function (productId) {
   return this.save();
 };
 
-// Method to update item quantity
+// Update quantity
 cartSchema.methods.updateItemQuantity = function (productId, quantity) {
   const item = this.items.find(
     (item) => item.product.toString() === productId.toString()
   );
 
   if (item) {
-    if (quantity <= 0) {
-      return this.removeItem(productId);
-    }
+    if (quantity <= 0) return this.removeItem(productId);
     item.quantity = Math.min(quantity, 10);
   }
 
   return this.save();
 };
 
-// Method to clear cart
+// Clear cart
 cartSchema.methods.clearCart = function () {
   this.items = [];
   this.coupon = undefined;
   return this.save();
 };
 
-// Method to get cart items with product details
+// Populate products
 cartSchema.methods.getCartWithProducts = async function () {
   await this.populate({
     path: "items.product",
     select: "name price images stock isActive primaryImage",
   });
 
-  // Filter out inactive or out-of-stock products
   this.items = this.items.filter(
     (item) =>
       item.product &&
@@ -124,7 +118,7 @@ cartSchema.methods.getCartWithProducts = async function () {
   return this;
 };
 
-// Method to calculate cart totals
+// Calculate totals
 cartSchema.methods.calculateTotals = async function () {
   await this.populate("items.product");
 
@@ -138,15 +132,14 @@ cartSchema.methods.calculateTotals = async function () {
     }
   });
 
-  // Apply coupon discount if any
   let discount = 0;
   if (this.coupon && this.coupon.code) {
-    if (this.coupon.type === "percentage") {
+    if (this.coupon.couponType === "percentage") {
       discount = (subtotal * this.coupon.discount) / 100;
-    } else {
+    } else if (this.coupon.couponType === "fixed") {
       discount = this.coupon.discount;
     }
-    discount = Math.min(discount, subtotal); // Discount cannot exceed subtotal
+    discount = Math.min(discount, subtotal);
   }
 
   const total = subtotal - discount;
@@ -160,12 +153,12 @@ cartSchema.methods.calculateTotals = async function () {
   };
 };
 
-// Method to check if cart is empty
+// Check if cart is empty
 cartSchema.methods.isEmpty = function () {
   return this.items.length === 0;
 };
 
-// Method to get cart summary
+// Get summary
 cartSchema.methods.getSummary = async function () {
   const totals = await this.calculateTotals();
   return {
@@ -178,24 +171,22 @@ cartSchema.methods.getSummary = async function () {
   };
 };
 
-// Static method to find or create cart for user
+// Find or create cart
 cartSchema.statics.findOrCreate = async function (userId) {
   let cart = await this.findOne({ user: userId });
-
   if (!cart) {
     cart = new this({ user: userId, items: [] });
     await cart.save();
   }
-
   return cart;
 };
 
-// Virtual for cart item count
+// Virtual for item count
 cartSchema.virtual("itemCount").get(function () {
   return this.items.reduce((count, item) => count + item.quantity, 0);
 });
 
-// Ensure virtual fields are serialized
+// Ensure virtuals are serialized
 cartSchema.set("toJSON", { virtuals: true });
 
 const Cart = mongoose.model("Cart", cartSchema);

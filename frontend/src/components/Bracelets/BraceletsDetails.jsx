@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiGet } from "../../api/client";
 
 import "swiper/css";
@@ -11,9 +11,6 @@ const BraceletsDetails = ({ addToCart }) => {
   const [bracelets, setbracelets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
- 
-
 
   useEffect(() => {
     const fetchbracelets = async () => {
@@ -46,14 +43,9 @@ const BraceletsDetails = ({ addToCart }) => {
     );
   }
 
- 
   return (
     <>
-      <CartDesignId
-      product={product} 
-      addToCart={addToCart} 
-      
-      />
+      <CartDesignId product={product} addToCart={addToCart} />
     </>
   );
 };

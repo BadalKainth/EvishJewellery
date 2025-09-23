@@ -38,9 +38,13 @@ export default function ProductDetail() {
         <div className="mt-2 text-gray-600 capitalize">{product.category}</div>
         <div className="mt-4 text-2xl font-bold">₹{product.price}</div>
         {product.originalPrice && (
-          <div className="text-sm text-gray-500 line-through">₹{product.originalPrice}</div>
+          <div className="text-sm text-gray-500 line-through">
+            ₹{product.originalPrice}
+          </div>
         )}
-        <p className="mt-4 text-gray-800 whitespace-pre-line">{product.description}</p>
+        <p className="mt-4 text-gray-800 whitespace-pre-line">
+          {product.description}
+        </p>
 
         <div className="mt-6 flex items-center gap-3">
           <input
@@ -62,5 +66,3 @@ export default function ProductDetail() {
     </div>
   );
 }
-
-
