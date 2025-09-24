@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Static files
 app.use("/uploads", express.static("uploads"));
-z
+
 // Swagger Documentation
 app.use(
   "/api-docs",
@@ -71,7 +71,6 @@ app.use("/api/returns", returnRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
-
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

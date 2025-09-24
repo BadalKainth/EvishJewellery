@@ -85,7 +85,7 @@ router.post(
 
       // Calculate pricing
       const discount = cart.coupon ? cartTotals.discount : 0;
-      const shipping = subtotal > 1000 ? 0 : 100; // Free shipping above ₹1000
+      const shipping = 0; // Free shipping above ₹1000
       const tax = Math.round(subtotal * 0.18); // 18% GST
       const total = subtotal - discount + shipping + tax;
 
@@ -106,13 +106,9 @@ router.post(
         paymentMethod,
         paymentDetails: { ...paymentDetails, paymentStatus: "pending" },
         pricing: { subtotal, discount, shipping, tax, total },
-        coupon: cart.coupon
-          ? {
-              code: cart.coupon.code,
-              discount: cart.coupon.discount,
-              type: cart.coupon.type,
-            }
-          : undefined,
+
+        coupon: req.body.coupon || null, // must be a string
+
         notes: { customer: notes || "" },
       });
 

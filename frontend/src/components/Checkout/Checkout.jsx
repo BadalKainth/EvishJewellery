@@ -44,6 +44,7 @@ export default function Checkout() {
         billingAddress: billingSame ? shipping : billing,
         paymentMethod,
         paymentDetails: {},
+        coupon: cart?.totals?.coupon?.code || null, // <-- send only the code
       });
 
       if (res?.data?.success) {
@@ -99,6 +100,13 @@ export default function Checkout() {
   );
 
   const totals = cart?.totals || { subtotal: 0, discount: 0, total: 0 };
+  // coupon from cart
+  const couponDiscount = cart?.totals?.coupon?.discount || 0;
+
+  // compute final totals
+  const subtotal = totals.subtotal;
+  const discount = (totals.discount || 0) + couponDiscount; // add coupon to discount
+  const total = subtotal - discount;
 
   return (
     <div className="p-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -120,6 +128,7 @@ export default function Checkout() {
               Same as shipping
             </label>
           </div>
+
           {!billingSame &&
             addrFields(billing, setBilling, "Billing", "billingAddress")}
         </div>
@@ -149,17 +158,24 @@ export default function Checkout() {
         <div className="space-y-1 text-sm">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span>₹{totals.subtotal}</span>
+            <span>₹{subtotal.toLocaleString("en-IN")}</span>
           </div>
           <div className="flex justify-between">
             <span>Discount</span>
-            <span>- ₹{totals.discount}</span>
+            <span>- ₹{discount.toLocaleString("en-IN")}</span>
           </div>
+          {couponDiscount > 0 && (
+            <div className="flex justify-between text-green-600">
+              <span>Coupon Discount</span>
+              <span>- ₹{couponDiscount.toLocaleString("en-IN")}</span>
+            </div>
+          )}
           <div className="flex justify-between font-bold pt-2 border-t">
             <span>Total</span>
-            <span>₹{totals.total}</span>
+            <span>₹{total.toLocaleString("en-IN")}</span>
           </div>
         </div>
+
         {success && (
           <div className="text-green-600 text-sm mt-3">{success}</div>
         )}

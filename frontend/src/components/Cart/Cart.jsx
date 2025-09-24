@@ -1,20 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const [preview, setPreview] = useState(null); // full preview state
-  const { cart, updateItem, removeItem, clear } = useContext(CartContext);
+  const [preview, setPreview] = useState(null);
+  const [couponCode, setCouponCode] = useState("");
 
-  // Map cart items for display
+  // get everything from context
+  const { cart, applyCoupon, updateItem, removeItem, clear, setCart } =
+    useContext(CartContext);
+
+  // map items safely (cart may be null initially)
   const cartItems =
     cart?.items?.map((i) => ({
       name: i.product?.name,
-      price: i.product?.discountPrice || i.product?.originalPrice || 0,
+      price: i.product?.originalPrice || 0,
       discountPrice: i.product?.price || 0,
       images:
         i.product?.images?.map((img) => img.url) ||
@@ -27,42 +32,63 @@ const Cart = () => {
       quantity: i.quantity,
     })) || [];
 
-  // Remove product from cart
-  const removeProduct = (index) => {
-    const item = cartItems[index];
-    if (item?.productId) removeItem(item.productId);
-  };
-
-  // ======= Corrected Calculations =======
+  // local derived values as fallback if server totals are not present
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
   const originalTotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
   const discountedTotal = cartItems.reduce(
     (acc, item) => acc + item.discountPrice * item.quantity,
     0
   );
-
   const discountAmount = originalTotal - discountedTotal;
-  const discountPercent = originalTotal
-    ? Math.round((discountAmount / originalTotal) * 100)
-    : 0;
-
   const deliveryCharge = cartItems.reduce(
     (acc, item) => acc + item.deliveryCharges * item.quantity,
     0
   );
 
-  const finalAmount = discountedTotal + deliveryCharge;
+  // If server sent totals, use them — otherwise fallback to local calc
+  const subtotal = cart?.totals?.subtotal ?? discountedTotal;
+  const serverCouponDiscount = cart?.totals?.coupon?.discount ?? 0;
+  const totalFromServer =
+    (cart?.totals?.total ?? subtotal) - serverCouponDiscount;
 
-  // Render product media
+  const couponCodeFromServer = cart?.totals?.coupon?.code ?? null;
+
+  // When user clicks Apply, call context.applyCoupon
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) {
+      toast.error("Please enter a coupon code");
+      return;
+    }
+
+    try {
+      const res = await applyCoupon(couponCode.trim());
+      console.debug("[Cart] applyCoupon returned:", res);
+
+      if (res?.success) {
+        // context already calls setCart with server cart, so cart is updated
+        toast.success(res.message || "Coupon applied");
+        // optionally clear local input or show code from server
+        setCouponCode("");
+      } else {
+        toast.error(res?.message || "Coupon invalid");
+      }
+    } catch (err) {
+      console.error("applyCoupon error", err);
+      toast.error("Coupon validation failed");
+    }
+  };
+
+  const handleRemoveProduct = (index) => {
+    const item = cartItems[index];
+    if (item?.productId) removeItem(item.productId);
+  };
+
   const renderMedia = (product) => {
     const totalMedia =
       (product.images?.length || 0) + (product.videos?.length || 0);
-
     if (product.images?.length === 1 && !product.videos?.length) {
       return (
         <img
@@ -73,7 +99,6 @@ const Cart = () => {
         />
       );
     }
-
     if (product.videos?.length === 1 && !product.images?.length) {
       return (
         <video
@@ -87,7 +112,6 @@ const Cart = () => {
         />
       );
     }
-
     if (totalMedia > 1) {
       return (
         <Swiper
@@ -122,7 +146,6 @@ const Cart = () => {
         </Swiper>
       );
     }
-
     return null;
   };
 
@@ -141,23 +164,20 @@ const Cart = () => {
             {cartItems.map((product, index) => {
               const itemDiscount = product.price - product.discountPrice;
               const itemDiscountPercent = Math.round(
-                (itemDiscount / product.price) * 100
+                (itemDiscount / Math.max(product.price, 1)) * 100
               );
-
               return (
                 <div
                   key={index}
                   className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 flex flex-col"
                 >
-                  {/* Product Media */}
                   <div className="w-full h-48 overflow-hidden rounded-t-xl">
                     {renderMedia(product)}
                   </div>
 
-                  {/* Product Details */}
                   <div className="p-4 flex flex-col justify-between flex-1">
                     <div>
-                      <h2 className=" uppercase text-lg md:text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
+                      <h2 className="uppercase text-lg md:text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
                         {product.name}
                         {product.size && (
                           <span className="pl-4 md:pl-20 text-green-600 font-medium text-base">
@@ -166,25 +186,32 @@ const Cart = () => {
                         )}
                       </h2>
                     </div>
+
                     <p className="text-sm text-gray-800 line-clamp-2">
                       {product.description}
                     </p>
                     <span className="text-sm text-gray-500">
-                      Delivery: ₹{product.deliveryCharges * product.quantity}
+                      Delivery: ₹
+                      {(
+                        product.deliveryCharges * product.quantity
+                      ).toLocaleString("en-IN")}
                     </span>
+
                     <div className="flex justify-between items-center mt-3">
                       <div className="flex flex-col text-lg">
                         <span className="line-through decoration-2 text-amber-600 font-bold decoration-amber-700 text-2xl">
                           Price: ₹{product.price.toLocaleString("en-IN")}
                         </span>
-
                         <span className="font-bold text-green-600 text-lg">
                           Discount Price: ₹
                           {product.discountPrice.toLocaleString("en-IN")}
                         </span>
                         <span className="text-sm text-gray-600 font-bold">
-                          🎉 You saved ₹{itemDiscount * product.quantity} (
-                          {itemDiscountPercent}% Off)
+                          🎉 You saved ₹
+                          {(itemDiscount * product.quantity).toLocaleString(
+                            "en-IN"
+                          )}{" "}
+                          ({itemDiscountPercent}% Off)
                         </span>
                       </div>
 
@@ -203,7 +230,7 @@ const Cart = () => {
                           className="w-20 border rounded px-2 py-1"
                         />
                         <button
-                          onClick={() => removeProduct(index)}
+                          onClick={() => handleRemoveProduct(index)}
                           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm transition"
                         >
                           Remove
@@ -218,7 +245,7 @@ const Cart = () => {
         )}
       </div>
 
-      {/* Right: Summary Panel */}
+      {/* Right: Summary */}
       <div className="w-full lg:w-96 bg-white p-6 rounded-xl shadow-md h-fit lg:sticky lg:top-20">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">Summary</h2>
 
@@ -226,25 +253,22 @@ const Cart = () => {
           <span className="text-gray-700">Total Items:</span>
           <span className="font-semibold">{totalItems}</span>
         </div>
-
         <div className="flex justify-between mb-2">
           <span className="text-gray-700">Original Total:</span>
           <span className="font-semibold">
             ₹{originalTotal.toLocaleString("en-IN")}
           </span>
         </div>
-
         <div className="flex justify-between mb-2">
           <span className="text-gray-700">Discounted Total:</span>
           <span className="font-semibold text-amber-600">
             ₹{discountedTotal.toLocaleString("en-IN")}
           </span>
         </div>
-
         <div className="flex justify-between mb-2">
           <span className="text-gray-700">Total Discount:</span>
           <span className="font-semibold text-green-600">
-            -₹{discountAmount.toLocaleString("en-IN")} ({discountPercent}%)
+            -₹{discountAmount.toLocaleString("en-IN")}
           </span>
         </div>
 
@@ -255,11 +279,41 @@ const Cart = () => {
           </span>
         </div>
 
-        <div className="flex justify-between mb-4 border-t pt-2">
-          <span className="text-gray-900 font-bold">Final Amount:</span>
-          <span className="font-bold text-amber-600">
-            ₹{finalAmount.toLocaleString("en-IN")}
-          </span>
+        {/* server totals box (will show coupon and final total returned by backend) */}
+        <div className="p-4 border rounded-lg shadow mb-4">
+          <div className="flex justify-between mb-2">
+            <span>Subtotal:</span>
+            <span>₹{(subtotal ?? 0).toLocaleString("en-IN")}</span>
+          </div>
+
+          {serverCouponDiscount > 0 && (
+            <div className="flex justify-between mb-2 text-green-600 font-semibold">
+              <span>Coupon Discount:</span>
+              <span>-₹{serverCouponDiscount.toLocaleString("en-IN")}</span>
+            </div>
+          )}
+
+          <div className="flex justify-between font-bold text-lg">
+            <span>Total:</span>
+            <span>₹{(totalFromServer ?? 0).toLocaleString("en-IN")}</span>
+          </div>
+        </div>
+
+        {/* Coupon input */}
+        <div className="flex gap-2 mb-4">
+          <input
+            type="text"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
+            placeholder="Enter coupon code"
+            className="border px-3 py-2 rounded-lg flex-1"
+          />
+          <button
+            onClick={handleApplyCoupon}
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
+          >
+            Apply
+          </button>
         </div>
 
         {cartItems.length > 0 && (
@@ -270,14 +324,30 @@ const Cart = () => {
             >
               Proceed to Checkout
             </button>
-            <button className="w-full border py-3 rounded-lg" onClick={clear}>
+            <button
+              className="w-full border py-3 rounded-lg"
+              onClick={() => {
+                clear();
+                setCart({
+                  items: [],
+                  totals: {
+                    subtotal: 0,
+                    discount: 0,
+                    total: 0,
+                    totalItems: 0,
+                    coupon: { discount: 0 },
+                  },
+                  itemCount: 0,
+                });
+              }}
+            >
               Clear Cart
             </button>
           </div>
         )}
       </div>
 
-      {/* Fullscreen Preview Modal */}
+      {/* Preview Modal */}
       {preview && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-3 overflow-auto"
@@ -289,12 +359,10 @@ const Cart = () => {
           >
             <button
               onClick={() => setPreview(null)}
-              className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md z-50 touch-manipulation"
-              aria-label="Close preview"
+              className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md z-50"
             >
               Close
             </button>
-
             {preview.type === "image" ? (
               <img
                 src={preview.src}
