@@ -94,8 +94,9 @@ router.post(
       const shipping = 0; // Free shipping above ₹1000
 
       // Customer is paying `subtotal` as final amount (including tax)
-      const tax = Math.round((totalPaid * 18) / 118);
-      const totalPaid = subtotal - discount - tax + shipping;
+     const totaltopay = subtotal - discount + shipping;
+     const tax = Math.round((totaltopay * 18) / 118);
+     const totalPaid = totaltopay - tax;
 
       // Calculate tax included in the total (reverse calculation)
       // 18% GST included in totalPaid

@@ -95,6 +95,13 @@ export default function Account() {
                       <span className="font-medium">Payment:</span>{" "}
                       {order.paymentDetails?.paymentStatus || "N/A"}
                     </div>
+                    {/* 🔥 Transaction ID (UTR Number) Show */}
+                    {order.paymentDetails?.transactionId && (
+                      <div className="text-sm">
+                        <span className="font-medium">Transaction UTR ID:</span>{" "}
+                        <b> {order.paymentDetails.transactionId}</b>
+                      </div>
+                    )}
                   </div>
                   <div className="text-xl font-bold text-green-600">
                     ₹{total.toLocaleString("en-IN")}
