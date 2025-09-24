@@ -22,7 +22,7 @@ const Cart = () => {
       videos: [],
       size: i.product?.size,
       description: i.product?.description,
-      deliveryCharges: i.product?.deliveryCharges || 99,
+      deliveryCharges: i.product?.deliveryCharges || 0,
       productId: i.product?._id,
       quantity: i.quantity,
     })) || [];
