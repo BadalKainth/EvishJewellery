@@ -4,6 +4,7 @@ import Cart from "../models/Cart.js";
 import Product from "../models/Product.js";
 import Coupon from "../models/Coupon.js";
 import { authenticate, authorizeAdmin } from "../middleware/auth.js";
+import User from "../models/User.js";
 import {
   validateOrder,
   validateAddress,
@@ -16,8 +17,7 @@ import { sendEmail } from "../utils/email.js";
 const router = express.Router();
 
 // Create new order
-// Create new order
-
+router.post(
   "/",
   authenticate,
   validateOrder,
@@ -94,11 +94,11 @@ const router = express.Router();
       const shipping = 0; // Free shipping above ₹1000
 
       // Customer is paying `subtotal` as final amount (including tax)
-      const tax = Math.round((totalPaid * 18) / 118); 
+      const tax = Math.round((totalPaid * 18) / 118);
       const totalPaid = subtotal - discount - tax + shipping;
 
       // Calculate tax included in the total (reverse calculation)
-     // 18% GST included in totalPaid
+      // 18% GST included in totalPaid
       const productAmountExclTax = totalPaid - tax;
 
       const total = totalPaid; // Total amount customer actually paid
