@@ -71,7 +71,7 @@ const EarringsGrid = () => {
         <h1 className="font-bold">
           {" "}
           Earrings – Beautiful Earrings Collection to Elevate Your Style
-        </h1>
+        </h1>                                                                                                                                                                           
         "Discover beautiful silver earrings online. Shop to your heart's content
         from pearls, classic stud earrings, or contemporary Sui Dhaga earrings
         or minimalistic studs and quirky designs. All available in 925 sterling
