@@ -17,7 +17,7 @@ const router = express.Router();
 
 // Create new order
 // Create new order
-router.post(
+
   "/",
   authenticate,
   validateOrder,
@@ -83,11 +83,35 @@ router.post(
         });
       }
 
+      // // Calculate pricing
+      // const discount = cart.coupon ? cartTotals.discount : 0;
+      // const shipping = 0; // Free shipping above ₹1000
+      // const tax = Math.round(subtotal * 0.18); // 18% GST
+      // constrouter.post( total = subtotal - discount + shipping + tax;
+
       // Calculate pricing
       const discount = cart.coupon ? cartTotals.discount : 0;
       const shipping = 0; // Free shipping above ₹1000
-      const tax = Math.round(subtotal * 0.18); // 18% GST
-      const total = subtotal - discount + shipping + tax;
+
+      // Customer is paying `subtotal` as final amount (including tax)
+      const tax = Math.round((totalPaid * 18) / 118); 
+      const totalPaid = subtotal - discount - tax + shipping;
+
+      // Calculate tax included in the total (reverse calculation)
+     // 18% GST included in totalPaid
+      const productAmountExclTax = totalPaid - tax;
+
+      const total = totalPaid; // Total amount customer actually paid
+
+      // Save pricing in order
+      const pricing = {
+        subtotal: total, // total paid by customer
+        discount,
+        shipping,
+        tax,
+        productAmount: productAmountExclTax,
+        total,
+      };
 
       // Set order name and phone
       const orderName = name || shippingAddress?.name || req.user.name;

@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Static files
 app.use("/uploads", express.static("uploads"));
-z
+
 // Swagger Documentation
 app.use(
   "/api-docs",

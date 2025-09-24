@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import client from "../../api/client";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const { cart, refreshCart } = useContext(CartContext);
@@ -27,6 +28,8 @@ export default function Checkout() {
   const [fieldErrors, setFieldErrors] = useState({}); // ✅ inline field errors
   const [globalError, setGlobalError] = useState(""); // ✅ single error under Place Order
 
+  const navigate = useNavigate();
+
   const placeOrder = async () => {
     setProcessing(true);
     setSuccess("");
@@ -48,9 +51,11 @@ export default function Checkout() {
       });
 
       if (res?.data?.success) {
-        setSuccess(`Order placed: ${res.data.order.orderNumber}`);
+        console.log("Order success:", res.data.data.order.orderNumber);
+        setSuccess(`Order placed: ${res.data.data.order.orderNumber}`);
         await refreshCart();
         cart.clear();
+        setTimeout(() => navigate("/account"), 500); // small delay to see success message
       }
     } catch (e) {
       const apiError = e.response?.data;

@@ -8,8 +8,6 @@ export default function Account() {
   const [orders, setOrders] = useState([]);
   const [returns, setReturns] = useState([]);
   const [error, setError] = useState("");
-
-  // popup image state
   const [popupImg, setPopupImg] = useState(null);
 
   useEffect(() => {
@@ -28,6 +26,14 @@ export default function Account() {
       }
     })();
   }, []);
+
+  // Helper function to calculate product amount excl tax
+  const getAmounts = (order) => {
+    const total = order.pricing?.total || 0;
+    const tax = order.pricing?.tax || 0;
+    const productAmountExclTax = total - tax;
+    return { total, tax, productAmountExclTax };
+  };
 
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
@@ -48,7 +54,6 @@ export default function Account() {
             <div>
               <span className="font-medium">Phone:</span> {profile.phone}
             </div>
-
             <div>
               <span className="font-medium">Account Created:</span>{" "}
               {new Date(profile.createdAt).toLocaleString()}
@@ -63,99 +68,105 @@ export default function Account() {
       <section className="bg-white rounded-xl shadow p-4">
         <h2 className="font-semibold mb-4">Recent Orders</h2>
         <div className="space-y-6">
-          {orders.map((o) => (
-            <div
-              key={o._id}
-              className="border rounded-xl p-4 shadow-sm bg-gray-50"
-            >
-              {/* Order Header */}
-              <div className="flex justify-between items-center mb-3">
-                <div>
-                  <div className="font-medium text-lg">
-                    Order #{o.orderNumber}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {new Date(o.createdAt).toLocaleString()}
-                  </div>
-                  <div className="text-sm">
-                    <span className="font-medium">Status:</span>{" "}
-                    <span className="capitalize">{o.status}</span>
-                  </div>
-                  <div className="text-sm">
-                    <span className="font-medium">Payment:</span>{" "}
-                    {o.paymentDetails?.paymentStatus || "N/A"}
-                  </div>
-                </div>
-                <div className="text-xl font-bold text-green-600">
-                  ₹{o.pricing?.total}
-                </div>
-              </div>
+          {orders.length === 0 && <div>No recent orders.</div>}
 
-              {/* Items List */}
-              <div className="space-y-3">
-                {o.items.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-4 border-b pb-2 last:border-none"
-                  >
-                    <img
-                      src={item.image || item.product?.primaryImage}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover rounded cursor-pointer"
-                      onClick={() =>
-                        setPopupImg(item.image || item.product?.primaryImage)
-                      }
-                    />
-                    <div className="flex-1">
-                      <div className="font-medium">{item.product?.name}</div>
-                      <div className="text-sm text-gray-600">
-                        Qty: {item.quantity} × ₹{item.price}
-                      </div>
+          {orders.map((order) => {
+            const { total, tax, productAmountExclTax } = getAmounts(order);
+
+            return (
+              <div
+                key={order._id}
+                className="border rounded-xl p-4 shadow-sm bg-gray-50"
+              >
+                {/* Order Header */}
+                <div className="flex justify-between items-center mb-3">
+                  <div>
+                    <div className="font-medium text-lg">
+                      Order #{order.orderNumber}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {new Date(order.createdAt).toLocaleString()}
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Status:</span>{" "}
+                      <span className="capitalize">{order.status}</span>
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">Payment:</span>{" "}
+                      {order.paymentDetails?.paymentStatus || "N/A"}
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="text-xl font-bold text-green-600">
+                    ₹{total.toLocaleString("en-IN")}
+                  </div>
+                </div>
 
-              {/* Shipping Address */}
-              <div className="mt-4">
-                <h3 className="font-medium">Shipping Address</h3>
-                <div className="text-sm text-gray-700">
-                  {o.shippingAddress?.name}, {o.shippingAddress?.address},{" "}
-                  {o.shippingAddress?.city}, {o.shippingAddress?.state} -{" "}
-                  {o.shippingAddress?.pincode}
-                  <br />
-                  Phone: {o.shippingAddress?.phone}
+                {/* Items List */}
+                <div className="space-y-3">
+                  {order.items.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-4 border-b pb-2 last:border-none"
+                    >
+                      <img
+                        src={item.image || item.product?.primaryImage}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded cursor-pointer"
+                        onClick={() =>
+                          setPopupImg(item.image || item.product?.primaryImage)
+                        }
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium">{item.product?.name}</div>
+                        <div className="text-sm text-gray-600">
+                          Qty: {item.quantity} × ₹{item.price}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Shipping & Billing Address */}
+                <div className="mt-4">
+                  <h3 className="font-medium">Shipping Address</h3>
+                  <div className="text-sm text-gray-700">
+                    {order.shippingAddress?.name},{" "}
+                    {order.shippingAddress?.address},{" "}
+                    {order.shippingAddress?.city},{" "}
+                    {order.shippingAddress?.state} -{" "}
+                    {order.shippingAddress?.pincode}
+                    <br />
+                    Phone: {order.shippingAddress?.phone}
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <h3 className="font-medium">Billing Address</h3>
+                  <div className="text-sm text-gray-700">
+                    {order.billingAddress?.name},{" "}
+                    {order.billingAddress?.address},{" "}
+                    {order.billingAddress?.city}, {order.billingAddress?.state}{" "}
+                    - {order.billingAddress?.pincode}
+                    <br />
+                    Phone: {order.billingAddress?.phone}
+                  </div>
+                </div>
+
+                {/* Payment & Summary */}
+                <div className="mt-4 border-t pt-3 flex justify-between text-sm">
+                  <div>
+                    <div>
+                      Product Amount (Excl. Tax): ₹
+                      {productAmountExclTax.toLocaleString("en-IN")}
+                    </div>
+                    <div>Tax: ₹{tax.toLocaleString("en-IN")}</div>
+                  </div>
+                  <div className="text-right font-bold text-lg">
+                    Total Paid: ₹{total.toLocaleString("en-IN")}
+                  </div>
                 </div>
               </div>
-
-              {/* Billing Address */}
-              <div className="mt-2">
-                <h3 className="font-medium">Billing Address</h3>
-                <div className="text-sm text-gray-700">
-                  {o.billingAddress?.name}, {o.billingAddress?.address},{" "}
-                  {o.billingAddress?.city}, {o.billingAddress?.state} -{" "}
-                  {o.billingAddress?.pincode}
-                  <br />
-                  Phone: {o.billingAddress?.phone}
-                </div>
-              </div>
-
-              {/* Payment & Summary */}
-              <div className="mt-4 border-t pt-3 flex justify-between text-sm">
-                <div>
-                  <div>Subtotal: ₹{o.pricing?.subtotal}</div>
-                  <div>Tax: ₹{o.pricing?.tax}</div>
-                  {/* <div>Shipping: ₹{o.pricing?.shipping}</div>
-                  <div>Discount: ₹{o.pricing?.discount}</div> */}
-                </div>
-                <div className="text-right font-bold text-lg">
-                  Total: ₹{o.pricing?.total}
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {orders.length === 0 && <div>No recent orders.</div>}
+            );
+          })}
         </div>
       </section>
 
@@ -163,6 +174,7 @@ export default function Account() {
       <section className="bg-white rounded-xl shadow p-4">
         <h2 className="font-semibold mb-2">Recent Returns</h2>
         <div className="space-y-2">
+          {returns.length === 0 && <div>No recent returns.</div>}
           {returns.map((r) => (
             <div
               key={r._id}
@@ -175,7 +187,6 @@ export default function Account() {
               <div className="font-semibold">₹{r.refund?.amount || 0}</div>
             </div>
           ))}
-          {returns.length === 0 && <div>No recent returns.</div>}
         </div>
       </section>
 
