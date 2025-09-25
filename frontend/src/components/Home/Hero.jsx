@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SearchPage from "../Search/SearchPage";
 
 const Hero = () => {
   return (
@@ -36,10 +37,14 @@ const Hero = () => {
             </p>
             {/* <!-- CTA Buttons --> */}
             <div className="flex flex-wrap gap-4 pl-32">
-              <Link to='/'  className="px-5 py-2 md:px-8 md:py-3 text-lg md:text-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-montserrat font-medium rounded-xl md:rounded-full transition-all duration-300 transform hover:scale-105 poppins-regular">
+              <Link
+                to="/"
+                className="px-5 py-2 md:px-8 md:py-3 text-lg md:text-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-montserrat font-medium rounded-xl md:rounded-full transition-all duration-300 transform hover:scale-105 poppins-regular"
+              >
                 Explore Collection
               </Link>
             </div>
+            {/* <SearchPage /> */}
           </div>
         </div>
 

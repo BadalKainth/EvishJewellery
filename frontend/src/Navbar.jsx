@@ -59,12 +59,12 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            {/* <Link
+            <Link
               to="/search"
               className="text-dark hover:text-amber-600 transition"
             >
               Search
-            </Link> */}
+            </Link>
 
             {/* User Icon Dropdown */}
             {user ? (
