@@ -35,7 +35,7 @@ import VerifyEmail from "./components/Auth/VerifyEmail";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import ChangePassword from "./components/Auth/ChangePassword";
-import About from "./components/about/about";
+import About from "./components/about/About";
 import CategoryWrapper from "./components/CategoryWrapper";
 import BagsGrid from "./components/Bags/BagsGrid";
 import BagsDetails from "./components/Bags/BagsDetails";
