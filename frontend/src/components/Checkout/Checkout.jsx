@@ -303,7 +303,7 @@ export default function Checkout() {
               <img
                 src="/qr-code.png"
                 alt="QR Code"
-                className="w-40 h-40 border"
+                className="w-72 h-72 border"
               />
             </div>
 
