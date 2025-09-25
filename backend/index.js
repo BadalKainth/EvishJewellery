@@ -47,11 +47,28 @@ const limiter = rateLimit({
 });
 
 // Middleware
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow cross-origin requests
+  contentSecurityPolicy: false, // Disable CSP for static assets
+}));
 app.use(compression());
 // app.use(limiter);
-// Allow all origins (wildcard CORS)
-app.use(cors());
+
+// CORS configuration
+app.use(cors({
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    'https://www.avishjewels.com',
+    'https://avishjewels.com',
+    'http://localhost:3000',
+    'http://localhost:5000'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Length', 'Content-Type']
+}));
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
@@ -77,8 +94,15 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Serve static files from uploads directory
-app.use('/uploads', express.static(path.join(__dirname, process.env.UPLOAD_PATH || 'uploads/')));
+// Serve static files from uploads directory with CORS headers
+app.use('/uploads', (req, res, next) => {
+  // Set CORS headers for static files
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+}, express.static(path.join(__dirname, process.env.UPLOAD_PATH || 'uploads/')));
 
 // Routes
 app.use("/api/auth", authRoutes);

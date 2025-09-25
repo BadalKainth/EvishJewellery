@@ -77,8 +77,23 @@ console.log('📂 Uploads directory configured at:', uploadsDir);
  *                   type: string
  *                   example: "Invalid filename"
  */
+// Handle preflight OPTIONS requests
+router.options("/:filename", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.status(200).end();
+});
+
 router.get("/:filename", (req, res) => {
   try {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    
     const { filename } = req.params;
     
     // Basic filename validation
