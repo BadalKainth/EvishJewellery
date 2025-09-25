@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import client from "../../api/client";
 import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchPage({ product, addToCart, onClick }) {
   const [q, setQ] = useState("");
@@ -9,6 +10,8 @@ export default function SearchPage({ product, addToCart, onClick }) {
   const [loading, setLoading] = useState(false);
   const { addItem } = useContext(CartContext);
   const [showPopup, setShowPopup] = useState(false);
+
+  const navigate = useNavigate();
 
   const doSearch = async () => {
     if (!q || q.trim().length < 2) return;
@@ -31,7 +34,10 @@ export default function SearchPage({ product, addToCart, onClick }) {
         });
 
         setResults(productsWithDiscount);
-        console.log(productsWithDiscount);
+        // console.log(productsWithDiscount);
+        navigate("/search", {
+          state: { query: q, results: productsWithDiscount },
+        });
       }
     } catch (e) {
       setError(e.message || "Search failed");

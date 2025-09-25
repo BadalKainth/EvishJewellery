@@ -141,7 +141,7 @@ export default function Checkout() {
 
         setSuccess(`Order placed: ${orderNumber}`);
         await refreshCart();
-        // cart.clear();
+        // cart.clear(); --- causing fail after success too
         setShowPopup(false);
         setTimeout(() => navigate("/account"), 800);
       } else {
