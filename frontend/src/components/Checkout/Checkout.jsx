@@ -135,12 +135,17 @@ export default function Checkout() {
 
       const res = await client.post("/orders", payload);
 
-      if (res?.data?.success) {
-        setSuccess(`Order placed: ${res.data.data.order.orderNumber}`);
+      // Check if order object exists
+      if (res?.data?.order) {
+        const orderNumber = res.data.order.orderNumber;
+
+        setSuccess(`Order placed: ${orderNumber}`);
         await refreshCart();
-        cart.clear();
+        // cart.clear();
         setShowPopup(false);
         setTimeout(() => navigate("/account"), 800);
+      } else {
+        setGlobalError(res?.data?.message || "Failed to place order");
       }
     } catch (e) {
       const apiError = e.response?.data;
