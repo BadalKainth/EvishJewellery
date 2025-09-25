@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getImageURL } from '../../api/client';
 
 const CartDesign = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -26,8 +27,8 @@ const CartDesign = ({ product, addToCart, onClick }) => {
           <div className="relative overflow-hidden">
             <img
               onClick={onClick}
-              src={product.images[0]}
-              alt={product.name}
+              src={getImageURL(product.images[0]?.url || product.images[0])}
+              alt={product.images[0]?.alt || product.name}
               loading="lazy"
               className="w-full h-64 object-cover cursor-pointer"
             />

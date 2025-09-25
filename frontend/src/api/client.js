@@ -1,6 +1,26 @@
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
+// Get the base URL for static files (without /api suffix)
+const getStaticBaseURL = () => {
+  return API_BASE_URL.replace('/api', '');
+};
+
+// Convert relative image URL to absolute URL
+export const getImageURL = (imagePath) => {
+  if (!imagePath) return '';
+  // If it's already an absolute URL, return as is
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  // If it starts with /, it's a relative path from the server root
+  if (imagePath.startsWith('/')) {
+    return `${getStaticBaseURL()}${imagePath}`;
+  }
+  // Otherwise, assume it's a relative path and add /uploads/
+  return `${getStaticBaseURL()}/uploads/${imagePath}`;
+};
+
 const getAuthToken = () => {
   try {
     return localStorage.getItem("token") || "";
@@ -121,4 +141,5 @@ export default {
   patch: apiPatch,
   delete: apiDelete,
   setAuthToken,
+  getImageURL,
 };

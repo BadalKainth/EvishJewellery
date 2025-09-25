@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import client from "../api/client";
+import client, { getImageURL } from "../api/client";
 import { CartContext } from "../context/CartContext";
 
 export default function ProductDetail() {
@@ -28,11 +28,11 @@ export default function ProductDetail() {
   if (error) return <div className="p-6 text-red-600">{error}</div>;
   if (!product) return <div className="p-6">Product not found</div>;
 
-  const primary = product.primaryImage || product.images?.[0]?.url;
+  const primary = product.primaryImage || product.images?.[0]?.url || product.images?.[0];
 
   return (
     <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-      <img src={primary} alt={product.name} className="w-full rounded" />
+      <img src={getImageURL(primary)} alt={product.name} className="w-full rounded" />
       <div>
         <h1 className="text-2xl font-bold">{product.name}</h1>
         <div className="mt-2 text-gray-600 capitalize">{product.category}</div>

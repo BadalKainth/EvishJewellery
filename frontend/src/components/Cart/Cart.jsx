@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { toast } from "react-toastify";
+import { getImageURL } from "../../api/client";
 
 const Cart = () => {
   const [preview, setPreview] = useState(null);
@@ -92,19 +93,19 @@ const Cart = () => {
     if (product.images?.length === 1 && !product.videos?.length) {
       return (
         <img
-          src={product.images[0]}
-          alt={product.name}
+          src={getImageURL(product.images[0]?.url || product.images[0])}
+          alt={product.images[0]?.alt || product.name}
           className="w-full h-full object-cover rounded-md cursor-pointer"
-          onClick={() => setPreview({ type: "image", src: product.images[0] })}
+          onClick={() => setPreview({ type: "image", src: getImageURL(product.images[0]?.url || product.images[0]) })}
         />
       );
     }
     if (product.videos?.length === 1 && !product.images?.length) {
       return (
         <video
-          src={product.videos[0]}
+          src={getImageURL(product.videos[0])}
           className="w-full h-full object-cover rounded-md cursor-pointer"
-          onClick={() => setPreview({ type: "video", src: product.videos[0] })}
+          onClick={() => setPreview({ type: "video", src: getImageURL(product.videos[0]) })}
           controls
           autoPlay
           muted
@@ -123,19 +124,19 @@ const Cart = () => {
           {product.images?.map((img, i) => (
             <SwiperSlide key={`img-${i}`}>
               <img
-                src={img}
-                alt={product.name}
+                src={getImageURL(img.url || img)}
+                alt={img.alt || product.name}
                 className="w-full h-full object-cover rounded-md cursor-pointer"
-                onClick={() => setPreview({ type: "image", src: img })}
+                onClick={() => setPreview({ type: "image", src: getImageURL(img.url || img) })}
               />
             </SwiperSlide>
           ))}
           {product.videos?.map((vid, i) => (
             <SwiperSlide key={`vid-${i}`}>
               <video
-                src={vid}
+                src={getImageURL(vid.url || vid)}
                 className="w-full h-full object-cover rounded-md cursor-pointer"
-                onClick={() => setPreview({ type: "video", src: vid })}
+                onClick={() => setPreview({ type: "video", src: getImageURL(vid.url || vid) })}
                 controls
                 muted
                 autoPlay

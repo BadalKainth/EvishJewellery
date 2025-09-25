@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 // import braceletsdata from "./BraceletsData";
-import { apiGet } from "../../api/client";
+import { apiGet, getImageURL } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 
 
@@ -134,8 +134,8 @@ const ProductCard = ({ product, addToCart, onClick }) => {
         <div className="relative overflow-hidden">
           <img
             onClick={onClick}
-            src={product.images[0]}
-            alt={product.name}
+            src={getImageURL(product.images[0]?.url || product.images[0])}
+            alt={product.images[0]?.alt || product.name}
             loading="lazy"
             className="w-full h-64 object-cover cursor-pointer"
           />

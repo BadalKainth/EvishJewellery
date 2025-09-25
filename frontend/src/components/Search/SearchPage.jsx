@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import client from "../../api/client";
+import client, { getImageURL } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
@@ -91,7 +91,7 @@ export default function SearchPage({ product, addToCart, onClick }) {
         {results.map((p) => (
           <div key={p._id} className="border rounded p-3">
             <img
-              src={p.primaryImage || p.images?.[0]?.url}
+              src={getImageURL(p.primaryImage || p.images?.[0]?.url || p.images?.[0])}
               alt={p.name}
               className="w-full h-40 object-cover rounded"
             />

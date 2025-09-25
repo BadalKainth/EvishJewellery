@@ -6,6 +6,9 @@ import rateLimit from "express-rate-limit";
 import swaggerUi from "swagger-ui-express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 import swaggerSpecs from "./src/config/swagger.js";
 
 // Import routes
@@ -17,12 +20,24 @@ import returnRoutes from "./src/routes/returns.js";
 import couponRoutes from "./src/routes/coupons.js";
 import adminRoutes from "./src/routes/admin.js";
 import userRoutes from "./src/routes/users.js";
+import uploadRoutes from "./src/routes/uploads.js";
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Get directory name for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, process.env.UPLOAD_PATH || 'uploads/');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+  console.log('📁 Created uploads directory at:', uploadsDir);
+}
 
 // Rate limiting
 const limiter = rateLimit({
@@ -62,6 +77,9 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, process.env.UPLOAD_PATH || 'uploads/')));
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -71,6 +89,7 @@ app.use("/api/returns", returnRoutes);
 app.use("/api/coupons", couponRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
+app.use("/uploads", uploadRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
@@ -97,6 +116,7 @@ app.get("/", (req, res) => {
       coupons: "/api/coupons",
       admin: "/api/admin",
       users: "/api/users",
+      uploads: "/uploads",
     },
   });
 });

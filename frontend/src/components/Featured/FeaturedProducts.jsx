@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import client from "../../api/client";
+import client, { getImageURL } from "../../api/client";
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState([]);
@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((p) => (
           <div key={p._id} className="border rounded p-3">
-            <img src={p.primaryImage || p.images?.[0]?.url} alt={p.name} className="w-full h-32 object-cover rounded" />
+            <img src={getImageURL(p.primaryImage || p.images?.[0]?.url || p.images?.[0])} alt={p.name} className="w-full h-32 object-cover rounded" />
             <div className="mt-1 font-medium truncate">{p.name}</div>
             <div className="text-sm">₹{p.price}</div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import client from "../../api/client";
+import client, { getImageURL } from "../../api/client";
 import { useDropzone } from "react-dropzone"; // ✅ added
 
 export default function AdminProducts() {
@@ -465,7 +465,7 @@ export default function AdminProducts() {
               />
             </div>
             <img
-              src={p.primaryImage || p.images?.[0]?.url}
+              src={getImageURL(p.primaryImage || p.images?.[0]?.url || p.images?.[0])}
               alt={p.name}
               className="w-full h-36 object-cover rounded"
             />

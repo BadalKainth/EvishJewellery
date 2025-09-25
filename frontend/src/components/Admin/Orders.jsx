@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import client from "../../api/client";
+import client, { getImageURL } from "../../api/client";
 
 function OrderRow({ o, load, updatingId, setUpdatingId }) {
   const [statusForm, setStatusForm] = useState({
@@ -205,8 +205,8 @@ function OrderRow({ o, load, updatingId, setUpdatingId }) {
                   className="flex items-center gap-4 border p-3 rounded shadow-sm"
                 >
                   <img
-                    src={item.product?.images?.[0] || item.image}
-                    alt={item.name}
+                    src={getImageURL(item.product?.images?.[0]?.url || item.product?.images?.[0] || item.image)}
+                    alt={item.product?.images?.[0]?.alt || item.name}
                     className="w-16 h-16 object-cover rounded"
                   />
                   <div className="flex-1">

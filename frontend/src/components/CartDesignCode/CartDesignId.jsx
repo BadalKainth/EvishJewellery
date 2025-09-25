@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { getImageURL } from "../../api/client";
 
 const CartDesignId = ({ product, addToCart }) => {
 
@@ -62,8 +63,8 @@ const CartDesignId = ({ product, addToCart }) => {
               {product.images?.map((img, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    src={img}
-                    alt={`${product.name}-${index}`}
+                    src={getImageURL(img.url || img)}
+                    alt={img.alt || `${product.name}-${index}`}
                     className="w-full h-full object-cover rounded-xl"
                   />
                 </SwiperSlide>
@@ -79,7 +80,7 @@ const CartDesignId = ({ product, addToCart }) => {
                     loop
                     className="w-full h-full rounded-xl object-cover"
                   >
-                    <source src={vid} type="video/mp4" />
+                    <source src={getImageURL(vid.url || vid)} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </SwiperSlide>

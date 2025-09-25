@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import client from "../../api/client";
+import client, { getImageURL } from "../../api/client";
 
 export default function AdminDashboard() {
   const [data, setData] = useState(null);
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
               className="border rounded p-3 flex items-center gap-3"
             >
               <img
-                src={p.primaryImage || p.images?.[0]?.url}
+                src={getImageURL(p.primaryImage || p.images?.[0]?.url || p.images?.[0])}
                 alt={p.name}
                 className="w-16 h-16 object-cover rounded"
               />
