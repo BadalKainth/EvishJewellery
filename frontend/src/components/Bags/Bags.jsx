@@ -85,7 +85,7 @@ const Bags = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/bracelets"
+              to="/category/bags"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
               Bags

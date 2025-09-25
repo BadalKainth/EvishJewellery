@@ -86,10 +86,10 @@ const Watch = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/bracelets"
+              to="/category/watch"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
-               Watch
+              Watch
             </Link>
             <p className="text-lg poppins-medium text-amber-800">
               Elegance that shines on your wrist
