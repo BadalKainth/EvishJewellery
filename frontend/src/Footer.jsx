@@ -40,7 +40,7 @@ const Footer = () => {
           <h2 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
             ✨{" "}
             <span className="text-4xl font-sans font-bold text-[#ed9d58]">
-              LUXURY
+              Avish
             </span>
             <span className="text-2xl font-sans font-bold pl-1 pt-4">
               JEWELS
@@ -133,7 +133,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-800 py-4 text-center text-gray-100">
-        © {new Date().getFullYear()} Jewellery Store. All Rights Reserved.
+        © {new Date().getFullYear()} Avish Jewellery Store. All Rights Reserved.
       </div>
 
       {/* Floating WhatsApp Button */}
