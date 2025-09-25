@@ -2,10 +2,12 @@
   "name": "jewellery",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "start": "npm main.jsx",
-    "dev": "vite"
-  },
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+},
+
   "dependencies": {
     "@fortawesome/react-fontawesome": "^3.0.2",
     "lucide-react": "^0.542.0",
