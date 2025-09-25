@@ -5,8 +5,8 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 # Accept build arguments
-ARG REACT_APP_API_URL=https://api.avishjewels.com/api/v1
-ARG REACT_APP_ENV=production
+ARG VITE_API_BASE_URL=https://api.avishjewels.com/api
+ARG VITE_ENV=production
 
 # Copy package files
 COPY package*.json ./
@@ -19,8 +19,8 @@ COPY . .
 
 # Set environment variables from build args
 ENV NODE_ENV=production
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
-ENV REACT_APP_ENV=$REACT_APP_ENV
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_ENV=$VITE_ENV
 
 RUN npm run build
 

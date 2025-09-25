@@ -65,6 +65,6 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
-          REACT_APP_API_URL=https://api.avishjewels.com/api/v1
-          REACT_APP_ENV=production
+          VITE_API_BASE_URL=https://api.avishjewels.com/api
+          VITE_ENV=production
 
