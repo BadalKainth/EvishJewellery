@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchPage from "../Search/SearchPage";
+// import SearchPage from "../Search/SearchPage";
 
 const Hero = () => {
   return (
