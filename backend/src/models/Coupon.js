@@ -192,8 +192,8 @@ couponSchema.methods.isApplicable = function (
 };
 
 // Method to calculate discount
-couponSchema.methods.calculateDiscount = function (orderValue) {
-  if (!this.isApplicable(orderValue)) return 0;
+couponSchema.methods.calculateDiscount = function (orderValue, userId) {
+  if (!this.isApplicable(orderValue, userId)) return 0;
 
   let discount = 0;
 
@@ -273,7 +273,7 @@ couponSchema.statics.validateCoupon = async function (
     return { valid: false, message: "Coupon is not applicable for this order" };
   }
 
-  const discount = coupon.calculateDiscount(orderValue);
+  const discount = coupon.calculateDiscount(orderValue, userId);
 
   return {
     valid: true,
