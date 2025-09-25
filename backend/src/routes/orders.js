@@ -11,12 +11,15 @@ import {
   validateMongoId,
   handleValidationErrors,
 } from "../middleware/validation.js";
-import { body, param, query } from "express-validator";
+import { body, query } from "express-validator";
 import { sendEmail } from "../utils/email.js";
 
 const router = express.Router();
 
+//
+// ===============================
 // Create new order
+// ===============================
 router.post(
   "/",
   authenticate,
@@ -43,14 +46,13 @@ router.post(
           .json({ success: false, message: "Cart is empty" });
       }
 
-      // Calculate totals from cart
+      // Load products into cart
       await cart.getCartWithProducts();
-      const cartTotals = await cart.calculateTotals();
 
-      // Validate items & prepare orderItems
       const orderItems = [];
       let subtotal = 0;
 
+      // Validate each item
       for (const item of payloadItems) {
         const product = await Product.findById(item.product);
 
@@ -76,37 +78,26 @@ router.post(
         orderItems.push({
           product: product._id,
           name: product.name,
-          image: product.primaryImage || "/images/fallback.png", // fallback
+          image: product.primaryImage || "/images/fallback.png",
           price: product.price,
           quantity: item.quantity,
           total: itemTotal,
         });
       }
 
-      // // Calculate pricing
-      // const discount = cart.coupon ? cartTotals.discount : 0;
-      // const shipping = 0; // Free shipping above ₹1000
-      // const tax = Math.round(subtotal * 0.18); // 18% GST
-      // constrouter.post( total = subtotal - discount + shipping + tax;
+      // Coupon handling (cart.coupon should be object)
+      const couponData = cart.coupon || null;
+      const discount = couponData ? Number(couponData.discount) : 0;
 
-      // Calculate pricing
-      const discount = cart.coupon ? cartTotals.discount : 0;
-      const shipping = 0; // Free shipping above ₹1000
+      // Pricing
+      const shipping = 0;
+      const totaltopay = subtotal - discount + shipping;
+      const tax = Math.round((totaltopay * 18) / 118);
+      const productAmountExclTax = totaltopay - tax;
+      const total = totaltopay;
 
-      // Customer is paying `subtotal` as final amount (including tax)
-     const totaltopay = subtotal - discount + shipping;
-     const tax = Math.round((totaltopay * 18) / 118);
-     const totalPaid = totaltopay - tax;
-
-      // Calculate tax included in the total (reverse calculation)
-      // 18% GST included in totalPaid
-      const productAmountExclTax = totalPaid - tax;
-
-      const total = totalPaid; // Total amount customer actually paid
-
-      // Save pricing in order
       const pricing = {
-        subtotal: total, // total paid by customer
+        subtotal: total,
         discount,
         shipping,
         tax,
@@ -114,7 +105,7 @@ router.post(
         total,
       };
 
-      // Set order name and phone
+      // Set name/phone
       const orderName = name || shippingAddress?.name || req.user.name;
       const orderPhone = phone || shippingAddress?.phone || req.user.phone;
 
@@ -130,33 +121,30 @@ router.post(
         billingAddress: billingAddress || shippingAddress,
         paymentMethod,
         paymentDetails: { ...paymentDetails, paymentStatus: "pending" },
-        pricing: { subtotal, discount, shipping, tax, total },
-
-        coupon: req.body.coupon || null, // must be a string
-
+        pricing,
+        coupon: couponData ? couponData.code : null, // ✅ save only string
         notes: { customer: notes || "" },
       });
 
-      // Save order first (triggers orderNumber)
       await order.save();
 
-      // Add initial timeline entry
+      // Add timeline entry
       await order.addTimelineEntry(
         "pending",
         "Order placed successfully",
         req.user._id
       );
 
-      // Update product stock and sales
+      // Update stock
       for (const item of orderItems) {
         await Product.findByIdAndUpdate(item.product, {
           $inc: { stock: -item.quantity, sales: item.quantity },
         });
       }
 
-      // Apply coupon if used
-      if (cart.coupon) {
-        const coupon = await Coupon.findOne({ code: cart.coupon.code });
+      // Mark coupon used
+      if (couponData?.code) {
+        const coupon = await Coupon.findOne({ code: couponData.code });
         if (coupon) {
           await coupon.applyCoupon(order._id, req.user._id, discount);
         }
@@ -165,7 +153,7 @@ router.post(
       // Clear cart
       await cart.clearCart();
 
-      // Send order confirmation email
+      // Send confirmation email
       try {
         await sendEmail({
           to: req.user.email,
@@ -192,14 +180,19 @@ router.post(
       });
     } catch (error) {
       console.error("Create order error:", error);
-      res
-        .status(500)
-        .json({ success: false, message: "Failed to create order" });
+      res.status(500).json({
+        success: false,
+        message: "Failed to create order",
+        error: error.message,
+      });
     }
   }
 );
 
+//
+// ===============================
 // Get user's orders
+// ===============================
 router.get(
   "/",
   authenticate,
@@ -214,22 +207,14 @@ router.get(
         "delivered",
         "cancelled",
         "returned",
-      ])
-      .withMessage("Invalid status filter"),
-    query("page")
-      .optional()
-      .isInt({ min: 1 })
-      .withMessage("Page must be a positive integer"),
-    query("limit")
-      .optional()
-      .isInt({ min: 1, max: 50 })
-      .withMessage("Limit must be between 1 and 50"),
+      ]),
+    query("page").optional().isInt({ min: 1 }),
+    query("limit").optional().isInt({ min: 1, max: 50 }),
     handleValidationErrors,
   ],
   async (req, res) => {
     try {
       const { status, page = 1, limit = 10 } = req.query;
-
       const filter = { user: req.user._id };
       if (status) filter.status = status;
 
@@ -259,15 +244,17 @@ router.get(
       });
     } catch (error) {
       console.error("Get orders error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to fetch orders",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to fetch orders" });
     }
   }
 );
 
-// Get single order by ID
+//
+// ===============================
+// Get single order
+// ===============================
 router.get("/:id", authenticate, validateMongoId("id"), async (req, res) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -281,31 +268,24 @@ router.get("/:id", authenticate, validateMongoId("id"), async (req, res) => {
       });
     }
 
-    // Check if user owns this order or is admin
     if (
       order.user._id.toString() !== req.user._id.toString() &&
       req.user.role !== "admin"
     ) {
-      return res.status(403).json({
-        success: false,
-        message: "Access denied",
-      });
+      return res.status(403).json({ success: false, message: "Access denied" });
     }
 
-    res.json({
-      success: true,
-      data: { order },
-    });
+    res.json({ success: true, data: { order } });
   } catch (error) {
     console.error("Get order error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch order",
-    });
+    res.status(500).json({ success: false, message: "Failed to fetch order" });
   }
 });
 
+//
+// ===============================
 // Cancel order (user)
+// ===============================
 router.patch(
   "/:id/cancel",
   authenticate,
@@ -323,21 +303,17 @@ router.patch(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return res.status(404).json({
-          success: false,
-          message: "Order not found",
-        });
+        return res
+          .status(404)
+          .json({ success: false, message: "Order not found" });
       }
 
-      // Check if user owns this order
       if (order.user.toString() !== req.user._id.toString()) {
-        return res.status(403).json({
-          success: false,
-          message: "Access denied",
-        });
+        return res
+          .status(403)
+          .json({ success: false, message: "Access denied" });
       }
 
-      // Check if order can be cancelled
       if (!order.canBeCancelled()) {
         return res.status(400).json({
           success: false,
@@ -345,7 +321,6 @@ router.patch(
         });
       }
 
-      // Update order status
       order.status = "cancelled";
       order.cancellation = {
         reason,
@@ -359,7 +334,6 @@ router.patch(
         req.user._id
       );
 
-      // Restore product stock
       for (const item of order.items) {
         await Product.findByIdAndUpdate(item.product, {
           $inc: { stock: item.quantity, sales: -item.quantity },
@@ -373,15 +347,17 @@ router.patch(
       });
     } catch (error) {
       console.error("Cancel order error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to cancel order",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to cancel order" });
     }
   }
 );
 
+//
+// ===============================
 // Admin: Get all orders
+// ===============================
 router.get(
   "/admin/all",
   authenticate,
@@ -397,20 +373,12 @@ router.get(
         "delivered",
         "cancelled",
         "returned",
-      ])
-      .withMessage("Invalid status filter"),
+      ]),
     query("paymentStatus")
       .optional()
-      .isIn(["pending", "completed", "failed", "refunded", "partial_refund"])
-      .withMessage("Invalid payment status filter"),
-    query("page")
-      .optional()
-      .isInt({ min: 1 })
-      .withMessage("Page must be a positive integer"),
-    query("limit")
-      .optional()
-      .isInt({ min: 1, max: 100 })
-      .withMessage("Limit must be between 1 and 100"),
+      .isIn(["pending", "completed", "failed", "refunded", "partial_refund"]),
+    query("page").optional().isInt({ min: 1 }),
+    query("limit").optional().isInt({ min: 1, max: 100 }),
     handleValidationErrors,
   ],
   async (req, res) => {
@@ -448,15 +416,17 @@ router.get(
       });
     } catch (error) {
       console.error("Get all orders error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to fetch orders",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to fetch orders" });
     }
   }
 );
 
+//
+// ===============================
 // Admin: Update order status
+// ===============================
 router.patch(
   "/:id/status",
   authenticate,
@@ -474,16 +444,10 @@ router.patch(
         "returned",
       ])
       .withMessage("Invalid status"),
-    body("message")
-      .trim()
-      .notEmpty()
-      .withMessage("Status update message is required"),
+    body("message").trim().notEmpty(),
     body("trackingNumber").optional().trim(),
     body("carrier").optional().trim(),
-    body("estimatedDelivery")
-      .optional()
-      .isISO8601()
-      .withMessage("Invalid estimated delivery date"),
+    body("estimatedDelivery").optional().isISO8601(),
     handleValidationErrors,
   ],
   async (req, res) => {
@@ -493,13 +457,11 @@ router.patch(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return res.status(404).json({
-          success: false,
-          message: "Order not found",
-        });
+        return res
+          .status(404)
+          .json({ success: false, message: "Order not found" });
       }
 
-      // Update tracking information if provided
       if (trackingNumber || carrier || estimatedDelivery) {
         order.tracking = {
           ...order.tracking,
@@ -511,20 +473,12 @@ router.patch(
         };
       }
 
-      // Handle special status updates
-      if (status === "shipped" && trackingNumber) {
-        order.tracking.trackingNumber = trackingNumber;
-        order.tracking.carrier = carrier;
-      }
-
       if (status === "delivered") {
         order.tracking.deliveredAt = new Date();
       }
 
-      // Update order status
       await order.updateStatus(status, message, req.user._id);
 
-      // Send email notification for status updates
       try {
         const user = await User.findById(order.user);
         if (user && user.emailVerified) {
@@ -561,7 +515,6 @@ router.patch(
         }
       } catch (emailError) {
         console.error("Status update email failed:", emailError);
-        // Don't fail status update if email fails
       }
 
       res.json({
@@ -571,24 +524,30 @@ router.patch(
       });
     } catch (error) {
       console.error("Update order status error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to update order status",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to update order status" });
     }
   }
 );
 
+//
+// ===============================
 // Admin: Update payment status
+// ===============================
 router.patch(
   "/:id/payment",
   authenticate,
   authorizeAdmin,
   validateMongoId("id"),
   [
-    body("paymentStatus")
-      .isIn(["pending", "completed", "failed", "refunded", "partial_refund"])
-      .withMessage("Invalid payment status"),
+    body("paymentStatus").isIn([
+      "pending",
+      "completed",
+      "failed",
+      "refunded",
+      "partial_refund",
+    ]),
     body("transactionId").optional().trim(),
     body("notes").optional().trim(),
     handleValidationErrors,
@@ -599,18 +558,16 @@ router.patch(
       const order = await Order.findById(req.params.id);
 
       if (!order) {
-        return res.status(404).json({
-          success: false,
-          message: "Order not found",
-        });
+        return res
+          .status(404)
+          .json({ success: false, message: "Order not found" });
       }
 
-      // Update payment details
       order.paymentDetails.paymentStatus = paymentStatus;
       if (transactionId) order.paymentDetails.transactionId = transactionId;
+
       if (paymentStatus === "completed") {
         order.paymentDetails.paidAt = new Date();
-        // Update order status to confirmed if payment is completed
         if (order.status === "pending") {
           await order.updateStatus(
             "confirmed",
@@ -630,15 +587,17 @@ router.patch(
       });
     } catch (error) {
       console.error("Update payment status error:", error);
-      res.status(500).json({
-        success: false,
-        message: "Failed to update payment status",
-      });
+      res
+        .status(500)
+        .json({ success: false, message: "Failed to update payment status" });
     }
   }
 );
 
-// Get order statistics (Admin)
+//
+// ===============================
+// Admin: Order statistics
+// ===============================
 router.get("/admin/stats", authenticate, authorizeAdmin, async (req, res) => {
   try {
     const stats = await Order.aggregate([
@@ -711,10 +670,9 @@ router.get("/admin/stats", authenticate, authorizeAdmin, async (req, res) => {
     });
   } catch (error) {
     console.error("Get order stats error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch order statistics",
-    });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch order statistics" });
   }
 });
 

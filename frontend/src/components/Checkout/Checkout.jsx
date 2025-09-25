@@ -125,13 +125,12 @@ export default function Checkout() {
           total: cart.totals.total,
         },
         coupon: cart.totals.coupon
-          ? {
+          ? JSON.stringify({
               code: cart.totals.coupon.code,
               discount: cart.totals.coupon.discount,
               type: cart.totals.coupon.type || "fixed",
-            }
+            })
           : null,
-      
       };
 
       const res = await client.post("/orders", payload);
