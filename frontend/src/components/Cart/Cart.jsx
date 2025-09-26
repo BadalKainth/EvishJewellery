@@ -16,24 +16,30 @@ const Cart = () => {
   const { cart, applyCoupon, updateItem, removeItem, clear, setCart } =
     useContext(CartContext);
 
-  const GUEST_CART_KEY = "guestCart";
+  ///////////////////////////////////////////////////////////
 
-  const loadGuestCart = () => {
-    try {
-      return (
-        JSON.parse(localStorage.getItem(GUEST_CART_KEY)) || {
-          items: [],
-          totals: {},
-        }
-      );
-    } catch {
-      return { items: [], totals: {} };
-    }
-  };
+  /// Guest cart logic ///
 
-  const saveGuestCart = (cart) => {
-    localStorage.setItem(GUEST_CART_KEY, JSON.stringify(cart));
-  };
+  ///////////////////////////////////////////////////
+
+  // const GUEST_CART_KEY = "guestCart";
+
+  // const loadGuestCart = () => {
+  //   try {
+  //     return (
+  //       JSON.parse(localStorage.getItem(GUEST_CART_KEY)) || {
+  //         items: [],
+  //         totals: {},
+  //       }
+  //     );
+  //   } catch {
+  //     return { items: [], totals: {} };
+  //   }
+  // };
+
+  // const saveGuestCart = (cart) => {
+  //   localStorage.setItem(GUEST_CART_KEY, JSON.stringify(cart));
+  // };
 
   // map items safely (cart may be null initially)
   const cartItems =
