@@ -118,7 +118,7 @@ export default function SearchPage({ product, addToCart, onClick }) {
                 {p.description}
               </p>
               <p className="text-gray-500 text-sm mt-1">
-                Delivery: ₹ {p.deliveryCharge || 99}
+                Delivery: ₹ {p.deliveryCharge || 0}
               </p>
 
               {/* ✅ Price + Discount */}

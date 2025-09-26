@@ -8,32 +8,32 @@ const getStaticBaseURL = () => {
   // Production: https://api.avishjewels.com/api -> https://api.avishjewels.com
   // Production: https://api.avishjewels.com/ -> https://api.avishjewels.com
   let baseUrl = API_BASE_URL;
-  
+
   // Remove /api suffix if present
-  if (baseUrl.endsWith('/api') || baseUrl.endsWith('/api/')) {
-    baseUrl = baseUrl.replace(/\/api\/?$/, '');
+  if (baseUrl.endsWith("/api") || baseUrl.endsWith("/api/")) {
+    baseUrl = baseUrl.replace(/\/api\/?$/, "");
   }
-  
+
   // Remove trailing slashes
-  baseUrl = baseUrl.replace(/\/+$/, '');
-  
+  baseUrl = baseUrl.replace(/\/+$/, "");
+
   return baseUrl;
 };
 
 // Convert relative image URL to absolute URL
 export const getImageURL = (imagePath) => {
-  if (!imagePath) return '';
-  
+  if (!imagePath) return "";
+
   // If it's already an absolute URL, return as is
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
     return imagePath;
   }
-  
+
   // If it starts with /, it's a relative path from the server root
-  if (imagePath.startsWith('/')) {
+  if (imagePath.startsWith("/")) {
     return `${getStaticBaseURL()}${imagePath}`;
   }
-  
+
   // Otherwise, assume it's a relative path and add /uploads/
   return `${getStaticBaseURL()}/uploads/${imagePath}`;
 };

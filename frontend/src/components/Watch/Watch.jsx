@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import { apiGet, getImageURL } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CartDesign from "../CartDesignCode/CartDesign";
@@ -43,7 +42,6 @@ const Watch = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
   if (loading) return <p className="text-center py-6">Loading watch...</p>;
   if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
@@ -114,14 +112,9 @@ const Watch = () => {
 };
 
 const ProductCard = ({ product, addToCart, onClick }) => {
- 
   return (
     <>
-      <CartDesign 
-      product={product} 
-      addToCart={addToCart} 
-      onClick={onClick} 
-      />
+      <CartDesign product={product} addToCart={addToCart} onClick={onClick} />
 
       {/* <div className="px-2 relative poppins">
       {showPopup && (

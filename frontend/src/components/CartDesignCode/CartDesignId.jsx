@@ -5,7 +5,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import { getImageURL } from "../../api/client";
 
 const CartDesignId = ({ product, addToCart }) => {
-
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false); // ✅ define state
 
@@ -29,8 +28,8 @@ const CartDesignId = ({ product, addToCart }) => {
   const discountPercent =
     product.originalPrice && product.price
       ? Math.round((discount / product.originalPrice) * 100)
-      : 0;   
-      
+      : 0;
+
   return (
     <>
       <div className="min-h-screen bg-[#f9f9f9] pb-10 px-5 md:px-20 relative poppins">
@@ -80,7 +79,10 @@ const CartDesignId = ({ product, addToCart }) => {
                     loop
                     className="w-full h-full rounded-xl object-cover"
                   >
-                    <source src={getImageURL(vid.url || vid)} type="video/mp4" />
+                    <source
+                      src={getImageURL(vid.url || vid)}
+                      type="video/mp4"
+                    />
                     Your browser does not support the video tag.
                   </video>
                 </SwiperSlide>
@@ -115,7 +117,7 @@ const CartDesignId = ({ product, addToCart }) => {
             <p className="text-gray-500 text-base mt-1">
               Delivery: ₹
               {/* {product.deliveryCharge !== null ? product.deliveryCharge : 0} */}
-              {product.deliveryCharge || " 99"}
+              {product.deliveryCharge || " 0"}
             </p>
 
             {/* ✅ Price Section */}

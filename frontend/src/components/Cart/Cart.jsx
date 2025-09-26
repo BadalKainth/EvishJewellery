@@ -16,6 +16,25 @@ const Cart = () => {
   const { cart, applyCoupon, updateItem, removeItem, clear, setCart } =
     useContext(CartContext);
 
+  const GUEST_CART_KEY = "guestCart";
+
+  const loadGuestCart = () => {
+    try {
+      return (
+        JSON.parse(localStorage.getItem(GUEST_CART_KEY)) || {
+          items: [],
+          totals: {},
+        }
+      );
+    } catch {
+      return { items: [], totals: {} };
+    }
+  };
+
+  const saveGuestCart = (cart) => {
+    localStorage.setItem(GUEST_CART_KEY, JSON.stringify(cart));
+  };
+
   // map items safely (cart may be null initially)
   const cartItems =
     cart?.items?.map((i) => ({
@@ -96,7 +115,12 @@ const Cart = () => {
           src={getImageURL(product.images[0]?.url || product.images[0])}
           alt={product.images[0]?.alt || product.name}
           className="w-full h-full object-cover rounded-md cursor-pointer"
-          onClick={() => setPreview({ type: "image", src: getImageURL(product.images[0]?.url || product.images[0]) })}
+          onClick={() =>
+            setPreview({
+              type: "image",
+              src: getImageURL(product.images[0]?.url || product.images[0]),
+            })
+          }
         />
       );
     }
@@ -105,7 +129,9 @@ const Cart = () => {
         <video
           src={getImageURL(product.videos[0])}
           className="w-full h-full object-cover rounded-md cursor-pointer"
-          onClick={() => setPreview({ type: "video", src: getImageURL(product.videos[0]) })}
+          onClick={() =>
+            setPreview({ type: "video", src: getImageURL(product.videos[0]) })
+          }
           controls
           autoPlay
           muted
@@ -127,7 +153,12 @@ const Cart = () => {
                 src={getImageURL(img.url || img)}
                 alt={img.alt || product.name}
                 className="w-full h-full object-cover rounded-md cursor-pointer"
-                onClick={() => setPreview({ type: "image", src: getImageURL(img.url || img) })}
+                onClick={() =>
+                  setPreview({
+                    type: "image",
+                    src: getImageURL(img.url || img),
+                  })
+                }
               />
             </SwiperSlide>
           ))}
@@ -136,7 +167,12 @@ const Cart = () => {
               <video
                 src={getImageURL(vid.url || vid)}
                 className="w-full h-full object-cover rounded-md cursor-pointer"
-                onClick={() => setPreview({ type: "video", src: getImageURL(vid.url || vid) })}
+                onClick={() =>
+                  setPreview({
+                    type: "video",
+                    src: getImageURL(vid.url || vid),
+                  })
+                }
                 controls
                 muted
                 autoPlay

@@ -56,7 +56,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
               {product.description}
             </p>
             <p className="text-gray-500 text-sm mt-1">
-              Delivery: ₹ {product.deliveryCharge || 99}
+              Delivery: ₹ {product.deliveryCharge || 0}
             </p>
 
             <div className="flex justify-between items-center mt-4">
