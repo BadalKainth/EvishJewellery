@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const { login, register } = useContext(AuthContext);
-  const [isSignup, setIsSignup] = useState(true);
+  const [isSignup, setIsSignup] = useState(false);
   const [signupData, setSignupData] = useState({
     name: "",
     email: "",

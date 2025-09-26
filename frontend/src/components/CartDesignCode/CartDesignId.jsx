@@ -1,25 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { getImageURL } from "../../api/client";
+import { AuthContext } from "../../context/AuthContext"; // ✅ Import AuthContext
 
 const CartDesignId = ({ product, addToCart }) => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(false); // ✅ define state
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState("success"); // success or error
+  const { user } = useContext(AuthContext); // ✅ user context
 
-  // const handleAddToCart = () => {
-  //   addToCart(product);
-  //   setShowPopup(true);
-  //   setTimeout(() => setShowPopup(false), 1500);
-  // };
-
+  // ✅ Add to Cart with Login Check
   const handleAddToCart = () => {
-    addToCart(); // parameter already CoupleDetails se pass ho raha
+    if (!user) {
+      // User not logged in
+      setPopupMessage("⚠️ Please login to add items!");
+      setPopupType("error");
+      setShowPopup(true);
+
+      setTimeout(() => {
+        setShowPopup(false);
+        navigate("/authForm"); // Redirect to login
+      }, 1500);
+      return;
+    }
+
+    // User logged in → add product
+    addToCart(product);
+    setPopupMessage("✅ Added to Cart!");
+    setPopupType("success");
     setShowPopup(true);
     setTimeout(() => setShowPopup(false), 1500);
   };
-  // ✅ Discount Calculation (originalPrice - price)
+
+  // ✅ Discount Calculation
   const discount =
     product.originalPrice && product.price
       ? product.originalPrice - product.price
@@ -35,8 +51,14 @@ const CartDesignId = ({ product, addToCart }) => {
       <div className="min-h-screen bg-[#f9f9f9] pb-10 px-5 md:px-20 relative poppins">
         {/* ✅ Popup */}
         {showPopup && (
-          <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg z-50 animate-bounce">
-            ✅ Added to Cart!
+          <div
+            className={`fixed top-5 left-1/2 transform -translate-x-1/2 px-5 py-3 rounded-lg shadow-lg z-50 text-white font-medium transition-all duration-500 ${
+              popupType === "success"
+                ? "bg-green-600 animate-bounce"
+                : "bg-red-500 animate-pulse"
+            }`}
+          >
+            {popupMessage}
           </div>
         )}
 
@@ -103,7 +125,7 @@ const CartDesignId = ({ product, addToCart }) => {
 
           {/* ✅ Right Info */}
           <div className="break-words">
-            <h3 className="flex  items-center justify-between">
+            <h3 className="flex items-center justify-between">
               <span className="font-semibold text-gray-900 uppercase poppins-semibold text-lg">
                 {product.name}
               </span>
@@ -113,11 +135,9 @@ const CartDesignId = ({ product, addToCart }) => {
                 </span>
               )}
             </h3>
-            <p className="text-gray-600 ">{product.description}</p>
+            <p className="text-gray-600">{product.description}</p>
             <p className="text-gray-500 text-base mt-1">
-              Delivery: ₹
-              {/* {product.deliveryCharge !== null ? product.deliveryCharge : 0} */}
-              {product.deliveryCharge || " 0"}
+              Delivery: ₹{product.deliveryCharge || "0"}
             </p>
 
             {/* ✅ Price Section */}
@@ -143,11 +163,11 @@ const CartDesignId = ({ product, addToCart }) => {
             </div>
 
             {/* ✅ Extra Info */}
-            <div className=" text-sm text-gray-700 pt-3 space-y-2">
+            <div className="text-sm text-gray-700 pt-3 space-y-2">
               <p>✅ 7 Days Easy Return</p>
               <p>✅ Free Packaging</p>
               <p>⭐ 4.5/5 (120 reviews)</p>
-              <span className="text-sm font-bold text-gray-600 ">
+              <span className="text-sm font-bold text-gray-600">
                 🎉 You saved ₹{discount} ({discountPercent}% OFF)
               </span>
             </div>
