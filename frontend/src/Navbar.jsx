@@ -23,7 +23,6 @@ const Navbar = () => {
     { name: "Bags", path: "/category/bags" },
     { name: "Women-Dress", path: "/category/womendress" },
     { name: "Watch", path: "/category/watch" },
-
     { name: "About", path: "/about" },
   ];
 
@@ -40,7 +39,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#faf9eb] shadow-md sticky px-2 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
-      <div className=" mx-auto">
+      <div className="mx-auto">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -131,8 +130,28 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button & Cart */}
+          <div className="flex md:hidden items-center space-x-4">
+            {/* Cart Icon for mobile */}
+            <Link to="/cart" className="relative">
+              <svg
+                className="h-6 w-6 text-dark hover:text-amber-600 transition"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              <span className="absolute -top-2 -right-2 bg-primary text-green-600 font-bold text-base rounded-full h-5 w-5 flex items-center justify-center">
+                {cart?.totals?.totalItems || 0}
+              </span>
+            </Link>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-dark focus:outline-none"
@@ -183,6 +202,7 @@ const Navbar = () => {
             >
               Search
             </Link>
+
             {user ? (
               <>
                 <Link
@@ -220,30 +240,6 @@ const Navbar = () => {
                 Login
               </Link>
             )}
-
-            {/* Cart Icon */}
-            <Link
-              to="/cart"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="relative"
-            >
-              <svg
-                className="h-6 w-6 text-dark hover:text-amber-600 transition"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
-              <span className="absolute top-1 left-8 bg-primary text-green-600 font-bold text-xl rounded-full h-5 w-5 flex items-center justify-center">
-                {cart?.totals?.totalItems || 0}
-              </span>
-            </Link>
           </div>
         )}
       </div>
