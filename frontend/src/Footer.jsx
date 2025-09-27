@@ -111,18 +111,21 @@ const Footer = () => {
           </ul>
           <div className="flex gap-8 px-6 py-4">
             <a
+              target="_blank"
               href="https://www.facebook.com/people/World-Wide-Marketing/61564046626414/"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Facebook />
             </a>
             <a
+              target="_blank"
               href="https://www.instagram.com/avish_jewels/"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Instagram />
             </a>
             <a
+              target="_blank"
               href="#"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
