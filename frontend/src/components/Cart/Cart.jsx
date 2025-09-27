@@ -14,11 +14,6 @@ const Cart = () => {
 
   const [preview, setPreview] = useState(null);
   const [couponCode, setCouponCode] = useState("");
-
-  // get everything from context
-  const { cart, applyCoupon, updateItem, removeItem, clear, setCart } =
-    useContext(CartContext);
-
   ///////////////////////////////////////////////////////////
 
   /// Guest cart logic ///
