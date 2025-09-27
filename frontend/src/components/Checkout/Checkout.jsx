@@ -81,7 +81,7 @@ export default function Checkout() {
 
     // Generate UPI string for QR dynamically
     const totalAmount = cart?.totals?.total || 0;
-    const upi = `upi://pay?pa=9368816614@axl&pn=RajeevKumar&am=${totalAmount}&cu=INR`;
+    const upi = `upi://pay?pa=paytmqr1vw6ypkkhx@paytm&pn=NehaGupta&am=${totalAmount}&cu=INR`;
     setUpiString(upi);
 
     setShowPopup(true);
