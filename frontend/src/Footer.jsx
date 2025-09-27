@@ -103,7 +103,7 @@ const Footer = () => {
               , Uttam Nagar New Delhi-110059
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={18} /> +91 88828 25761
+              <Phone size={18} /> +91 8882825761
             </li>
             <li className="flex items-center gap-2">
               <Mail size={18} /> info.avishjewels@gmail.com
@@ -111,13 +111,13 @@ const Footer = () => {
           </ul>
           <div className="flex gap-8 px-6 py-4">
             <a
-              href="#"
+              href="https://www.facebook.com/people/World-Wide-Marketing/61564046626414/"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Facebook />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/avish_jewels/"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Instagram />
