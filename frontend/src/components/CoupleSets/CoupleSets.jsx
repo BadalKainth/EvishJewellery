@@ -74,7 +74,8 @@ const CoupleSets = () => {
     ],
   };
 
-  if (loading) return <p className="text-center py-6">Loading Couple Sets...</p>;
+  if (loading)
+    return <p className="text-center py-6">Loading Couple Sets...</p>;
   if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   return (
@@ -87,7 +88,7 @@ const CoupleSets = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <Link
-              to="/category/couplesets"
+              to="/category/couple-sets"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
               Couple Sets
@@ -106,7 +107,7 @@ const CoupleSets = () => {
               key={product.id}
               product={product}
               addToCart={() => addItem(product._id)} // ✅ send productId to backend
-              onClick={() => navigate(`/category/couplesets/${product._id}`)}
+              onClick={() => navigate(`/category/couple-sets/${product._id}`)}
             />
           ))}
         </Slider>
@@ -117,17 +118,11 @@ const CoupleSets = () => {
 
 // ==================== PRODUCT CARD ====================
 const ProductCard = ({ product, addToCart, onClick }) => {
-
   return (
     <>
-    <CartDesign
-    product={product} 
-      addToCart={addToCart} 
-      onClick={onClick}
-      />
+      <CartDesign product={product} addToCart={addToCart} onClick={onClick} />
     </>
   );
 };
-
 
 export default CoupleSets;

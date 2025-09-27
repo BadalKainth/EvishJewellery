@@ -48,7 +48,7 @@ const OurCollections = () => {
 
               <div className="p-4">
                 <a
-                  href="#bracelets"
+                  href="category/bracelets"
                   className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg"
                 >
                   View Collection →
@@ -98,7 +98,7 @@ const OurCollections = () => {
               </div>
               <div className="p-4">
                 <a
-                  href="#earrings"
+                  href="category/earrings"
                   className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
                 >
                   View Collection →
@@ -125,7 +125,7 @@ const OurCollections = () => {
               </div>
               <div className="p-4">
                 <a
-                  href="#necklaces"
+                  href="category/necklaces"
                   className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
                 >
                   View Collection →
@@ -135,7 +135,7 @@ const OurCollections = () => {
             {/* <!-- Collection 5 --> */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
               <div className="relative overflow-hidden">
-                <Link to="/category/couplesets" className="block">
+                <Link to="/category/couple-sets" className="block">
                   <img
                     src="https://salty.co.in/cdn/shop/files/BC24358-G_MODEL.jpg?v=1754893646&width=1800"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
@@ -152,7 +152,7 @@ const OurCollections = () => {
               </div>
               <div className="p-4">
                 <a
-                  href="#couple_sets"
+                  href="category/couple-sets"
                   className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
                 >
                   View Collection →
@@ -177,14 +177,13 @@ const OurCollections = () => {
               </div>
               <div className="p-4">
                 <a
-                  href="#anklets"
+                  href="category/anklets"
                   className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
                 >
                   View Collection →
                 </a>
               </div>
             </div>
-            
           </div>
         </div>
       </section>

@@ -35,7 +35,7 @@ const CartDesignId = ({ product, addToCart }) => {
 
   // ✅ Share Function
   const handleShare = async () => {
-    const shareUrl = `${window.location.origin}/product/${product._id}`;
+    const shareUrl = `${window.location.origin}/category/${product.category}/${product._id}`;
     try {
       if (navigator.share) {
         await navigator.share({

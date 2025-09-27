@@ -175,11 +175,11 @@ function App() {
           element={<NecklaceDetails addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="category/couplesets"
+          path="category/couple-sets"
           element={<CoupleSetsGrid addToCart={addToCart} slider={false} />}
         />
         <Route
-          path="category/couplesets/:id"
+          path="category/couple-sets/:id"
           element={<CoupleDetails addToCart={addToCart} slider={false} />}
         />
         <Route

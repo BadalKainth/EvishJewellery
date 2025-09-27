@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: "Rings", path: "/category/rings" },
     { name: "Earrings", path: "/category/earrings" },
     { name: "Necklaces", path: "/category/necklaces" },
-    { name: "Couple-Sets", path: "/category/couplesets" },
+    { name: "Couple-Sets", path: "/category/couple-sets" },
     { name: "Anklets", path: "/category/anklets" },
     { name: "Bags", path: "/category/bags" },
     { name: "Women-Dress", path: "/category/womendress" },

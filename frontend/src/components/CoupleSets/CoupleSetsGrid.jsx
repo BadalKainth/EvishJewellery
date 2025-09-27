@@ -60,7 +60,7 @@ const CoupleSetsGrid = () => {
               key={product.id}
               product={product}
               addToCart={() => addItem(product.id)} // ✅ send productId to backend
-              onClick={() => navigate(`/category/couplesets/${product._id}`)}
+              onClick={() => navigate(`/category/couple-sets/${product._id}`)}
             />
           ))}
         </div>
