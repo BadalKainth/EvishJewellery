@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { toast } from "react-toastify";
 import { getImageURL } from "../../api/client";
+import CartCoupons from "../CartCoupons";
 
 const Cart = () => {
   const { cart, applyCoupon, updateItem, removeItem, clear, setCart } =
@@ -346,6 +347,7 @@ const Cart = () => {
               Apply
             </button>
           </div>
+          <CartCoupons />
           {/* server totals box (will show coupon and final total returned by backend) */}
           <div className="p-4 border rounded-lg shadow mb-4">
             <div className="flex justify-between mb-2">

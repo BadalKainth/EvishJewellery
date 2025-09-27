@@ -68,8 +68,14 @@ export const CartProvider = ({ children }) => {
   );
 
   const clear = useCallback(async () => {
-    await client.delete("/cart/clear");
-    await refreshCart();
+    // Clear frontend immediately
+    setCart({ items: [], totals: {} }); // or your context method
+    try {
+      await client.delete("/cart/clear"); // clear backend
+      await refreshCart(); // optional: sync
+    } catch (e) {
+      console.error("Failed to clear cart:", e);
+    }
   }, [refreshCart]);
 
   const applyCoupon = useCallback(
