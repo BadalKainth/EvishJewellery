@@ -1,12 +1,14 @@
+// Checkout.jsx
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { AuthContext } from "../../context/AuthContext"; // ✅ Add AuthContext
+import { AuthContext } from "../../context/AuthContext";
 import client from "../../api/client";
 import { useNavigate } from "react-router-dom";
+import { QRCodeCanvas } from "qrcode.react"; // ✅ Named import
 
 export default function Checkout() {
   const { cart, refreshCart } = useContext(CartContext);
-  const { user } = useContext(AuthContext); // ✅ Get user from context
+  const { user } = useContext(AuthContext);
 
   const [shipping, setShipping] = useState({
     name: "",
@@ -34,6 +36,7 @@ export default function Checkout() {
   const [showPopup, setShowPopup] = useState(false);
   const [transactionId, setUtrNumber] = useState("");
   const [utrError, setUtrError] = useState("");
+  const [upiString, setUpiString] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,7 +45,6 @@ export default function Checkout() {
     const errors = {};
     const fields = ["name", "phone", "address", "city", "state", "pincode"];
 
-    // Shipping
     fields.forEach((f) => {
       if (!shipping[f]?.trim())
         errors[`shippingAddress.${f}`] = `${f} is required`;
@@ -52,7 +54,6 @@ export default function Checkout() {
     if (shipping.pincode && !/^\d+$/.test(shipping.pincode))
       errors["shippingAddress.pincode"] = "Pincode must be numeric";
 
-    // Billing
     if (!billingSame) {
       fields.forEach((f) => {
         if (!billing[f]?.trim())
@@ -64,7 +65,6 @@ export default function Checkout() {
         errors["billingAddress.pincode"] = "Pincode must be numeric";
     }
 
-    // Payment method
     if (!paymentMethod) errors["paymentMethod"] = "Payment method required";
 
     setFieldErrors(errors);
@@ -78,6 +78,12 @@ export default function Checkout() {
       return;
     }
     setGlobalError("");
+
+    // Generate UPI string for QR dynamically
+    const totalAmount = cart?.totals?.total || 0;
+    const upi = `upi://pay?pa=9368816614@axl&pn=RajeevKumar&am=${totalAmount}&cu=INR`;
+    setUpiString(upi);
+
     setShowPopup(true);
   };
 
@@ -95,7 +101,6 @@ export default function Checkout() {
     setGlobalError("");
 
     try {
-      // Map cart items to schema format
       const items = (cart?.items || []).map((i) => ({
         product: i.product._id,
         name: i.product.name,
@@ -105,9 +110,8 @@ export default function Checkout() {
         total: i.quantity * i.product.price,
       }));
 
-      // ✅ Build payload for backend
       const payload = {
-        user: user?._id, // 🔥 FIX: send logged-in user
+        user: user?._id,
         items,
         shippingAddress: shipping,
         billingAddress: billingSame ? shipping : billing,
@@ -135,31 +139,16 @@ export default function Checkout() {
 
       const res = await client.post("/orders", payload);
 
-      // Check if order object exists
       if (res?.data?.order) {
-        const orderNumber = res.data.order.orderNumber;
-
-        setSuccess(`Order placed: ${orderNumber}`);
+        setSuccess(`Order placed: ${res.data.order.orderNumber}`);
         await refreshCart();
-        // cart.clear(); --- causing fail after success too
         setShowPopup(false);
         setTimeout(() => navigate("/account"), 800);
       } else {
         setGlobalError(res?.data?.message || "Failed to place order");
       }
     } catch (e) {
-      const apiError = e.response?.data;
-      if (apiError?.details?.length) {
-        const mapped = {};
-        apiError.details.forEach((d) => {
-          mapped[d.field] = d.error;
-        });
-        setFieldErrors(mapped);
-      } else {
-        setGlobalError(
-          apiError?.message || e.message || "Failed to place order"
-        );
-      }
+      setGlobalError(e.message || "Failed to place order");
     } finally {
       setProcessing(false);
     }
@@ -186,7 +175,6 @@ export default function Checkout() {
             placeholder={f.label}
             value={obj[f.key]}
             onChange={(e) => setObj({ ...obj, [f.key]: e.target.value })}
-            pattern={f.key === "phone" ? "[0-9]{10}" : undefined}
           />
           {fieldErrors[`${prefix}.${f.key}`] && (
             <p className="text-red-500 text-xs mt-1">
@@ -198,7 +186,6 @@ export default function Checkout() {
     </div>
   );
 
-  // ----------------- Totals -----------------
   const totals = cart?.totals || { subtotal: 0, discount: 0, total: 0 };
   const couponDiscount = cart?.totals?.coupon?.discount || 0;
   const subtotal = totals.subtotal;
@@ -209,13 +196,10 @@ export default function Checkout() {
   return (
     <div className="p-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-2 space-y-6">
-        {/* Shipping */}
         <div className="bg-white rounded shadow p-4">
           <h2 className="font-semibold mb-3">Shipping Address</h2>
           {addrFields(shipping, setShipping, "Shipping", "shippingAddress")}
         </div>
-
-        {/* Billing */}
         <div className="bg-white rounded shadow p-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold">Billing Address</h2>
@@ -232,31 +216,8 @@ export default function Checkout() {
           {!billingSame &&
             addrFields(billing, setBilling, "Billing", "billingAddress")}
         </div>
-
-        {/* Payment Method */}
-        {/* <div className="bg-white rounded shadow p-4">
-          <h2 className="font-semibold mb-3">Payment Method</h2>
-          <select
-            className={`border rounded px-3 py-2 w-full ${
-              fieldErrors["paymentMethod"] ? "border-red-500" : ""
-            }`}
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <option value="upi">UPI</option>
-            <option value="reference">Reference</option>
-            <option value="card">Card</option>
-            <option value="wallet">Wallet</option>
-          </select>
-          {fieldErrors["paymentMethod"] && (
-            <p className="text-red-500 text-xs mt-1">
-              {fieldErrors["paymentMethod"]}
-            </p>
-          )}
-        </div> */}
       </div>
 
-      {/* Order Summary */}
       <div className="bg-white rounded shadow p-4 h-fit">
         <h2 className="font-semibold mb-3">Order Summary</h2>
         <div className="space-y-1 text-sm">
@@ -287,32 +248,28 @@ export default function Checkout() {
           <div className="text-red-600 text-sm mt-3">{globalError}</div>
         )}
 
-        {/* Proceed to Payment */}
         <button
           disabled={processing}
           onClick={openPaymentPopup}
           className="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-60"
         >
-          Proceed to Payment
+          {processing ? "Processing..." : "Proceed to Payment"}
         </button>
       </div>
 
-      {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
             <h2 className="text-lg font-semibold mb-4">Complete Payment</h2>
 
-            {/* QR Code */}
             <div className="flex justify-center mb-4">
-              <img
-                src="/qr-code.png"
-                alt="QR Code"
-                className="w-72 h-72 border"
-              />
+              {upiString ? (
+                <QRCodeCanvas value={upiString} size={288} />
+              ) : (
+                <p className="text-gray-500">Generating QR...</p>
+              )}
             </div>
 
-            {/* UTR Input */}
             <input
               type="text"
               maxLength={16}
@@ -329,7 +286,6 @@ export default function Checkout() {
               <p className="text-red-500 text-xs mt-1">{utrError}</p>
             )}
 
-            {/* Buttons */}
             <div className="flex justify-between mt-4">
               <button
                 onClick={() => setShowPopup(false)}

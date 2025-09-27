@@ -3,18 +3,12 @@ const API_BASE_URL =
 
 // Get the base URL for static files
 const getStaticBaseURL = () => {
-  // Remove /api suffix and trailing slashes to get server base URL
-  // Development: http://localhost:5000/api -> http://localhost:5000
-  // Production: https://api.avishjewels.com/api -> https://api.avishjewels.com
-  // Production: https://api.avishjewels.com/ -> https://api.avishjewels.com
   let baseUrl = API_BASE_URL;
 
-  // Remove /api suffix if present
   if (baseUrl.endsWith("/api") || baseUrl.endsWith("/api/")) {
     baseUrl = baseUrl.replace(/\/api\/?$/, "");
   }
 
-  // Remove trailing slashes
   baseUrl = baseUrl.replace(/\/+$/, "");
 
   return baseUrl;
@@ -24,17 +18,14 @@ const getStaticBaseURL = () => {
 export const getImageURL = (imagePath) => {
   if (!imagePath) return "";
 
-  // If it's already an absolute URL, return as is
   if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
     return imagePath;
   }
 
-  // If it starts with /, it's a relative path from the server root
   if (imagePath.startsWith("/")) {
     return `${getStaticBaseURL()}${imagePath}`;
   }
 
-  // Otherwise, assume it's a relative path and add /uploads/
   return `${getStaticBaseURL()}/uploads/${imagePath}`;
 };
 
@@ -151,6 +142,11 @@ export const setAuthToken = (token) => {
   else localStorage.removeItem("token");
 };
 
+// ✅ New helper for placing order and getting QR code
+export const placeOrder = async (orderData) => {
+  return apiPost("/orders", orderData); // backend returns { order, payment: { upiString, qrCode } }
+};
+
 export default {
   get: apiGet,
   post: apiPost,
@@ -159,4 +155,5 @@ export default {
   delete: apiDelete,
   setAuthToken,
   getImageURL,
+  placeOrder, // added
 };

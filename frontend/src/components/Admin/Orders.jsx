@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import client, { getImageURL } from "../../api/client";
+import { FaWhatsapp } from "react-icons/fa"; // ✅ WhatsApp icon
 
 function OrderRow({ o, load, updatingId, setUpdatingId }) {
   const [statusForm, setStatusForm] = useState({
@@ -32,10 +33,27 @@ function OrderRow({ o, load, updatingId, setUpdatingId }) {
             View
           </button>
         </td>
+
+        {/* Customer Info with WhatsApp */}
         <td className="p-3">
-          {o.user?.name}{" "}
-          <span className="text-gray-500 text-sm">({o.user?.email})</span>
+          <div>
+            {o.user?.name}{" "}
+            <span className="text-gray-500 text-sm">({o.user?.email})</span>
+          </div>
+
+          {/* ✅ WhatsApp Button */}
+          {o.user?.phone && (
+            <a
+              href={`https://wa.me/${o.user.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-1 px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600 transition"
+            >
+              <FaWhatsapp /> {o.user.phone}
+            </a>
+          )}
         </td>
+
         <td className="p-3 font-semibold text-green-700">₹{o.pricing.total}</td>
         <td className="p-3 capitalize font-medium">{o.status}</td>
         <td className="p-3">
@@ -205,7 +223,11 @@ function OrderRow({ o, load, updatingId, setUpdatingId }) {
                   className="flex items-center gap-4 border p-3 rounded shadow-sm"
                 >
                   <img
-                    src={getImageURL(item.product?.images?.[0]?.url || item.product?.images?.[0] || item.image)}
+                    src={getImageURL(
+                      item.product?.images?.[0]?.url ||
+                        item.product?.images?.[0] ||
+                        item.image
+                    )}
                     alt={item.product?.images?.[0]?.alt || item.name}
                     className="w-16 h-16 object-cover rounded"
                   />
@@ -239,7 +261,7 @@ export default function AdminOrders() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await client.get("/orders/admin/all", { limit: 20 });
+      const res = await client.get("/orders/admin/all", { limit: 50 });
       if (res?.success) setOrders(res.data.orders);
     } catch (e) {
       setError(e.message || "Failed to load orders");

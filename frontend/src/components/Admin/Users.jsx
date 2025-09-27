@@ -32,6 +32,7 @@ export default function AdminUsers() {
             <tr className="bg-gray-50 text-left">
               <th className="p-3">Name</th>
               <th className="p-3">Email</th>
+              <th className="p-3">Number</th>
               <th className="p-3">Role</th>
               <th className="p-3">Status</th>
               <th className="p-3">Actions</th>
@@ -42,21 +43,36 @@ export default function AdminUsers() {
               <tr key={u._id} className="border-t">
                 <td className="p-3">{u.name}</td>
                 <td className="p-3">{u.email}</td>
+                <td className="p-3">{u.phone}</td>
                 <td className="p-3 capitalize">{u.role}</td>
-                <td className="p-3">{u.isActive ? 'Active' : 'Inactive'}</td>
+                <td className="p-3">{u.isActive ? "Active" : "Inactive"}</td>
                 <td className="p-3">
-                  <button disabled={toggling===u._id} className="px-3 py-1 border rounded" onClick={async ()=>{
-                    try {
-                      setToggling(u._id);
-                      await client.patch(`/users/admin/${u._id}/status`, { isActive: !u.isActive });
-                      const res = await client.get("/users/admin/all", { limit: 50 });
-                      if (res?.success) setUsers(res.data.users);
-                    } catch (e) {
-                      alert(e.message || 'Failed to update user');
-                    } finally {
-                      setToggling("");
-                    }
-                  }}>{toggling===u._id? 'Updating...' : (u.isActive? 'Deactivate' : 'Activate')}</button>
+                  <button
+                    disabled={toggling === u._id}
+                    className="px-3 py-1 border rounded"
+                    onClick={async () => {
+                      try {
+                        setToggling(u._id);
+                        await client.patch(`/users/admin/${u._id}/status`, {
+                          isActive: !u.isActive,
+                        });
+                        const res = await client.get("/users/admin/all", {
+                          limit: 50,
+                        });
+                        if (res?.success) setUsers(res.data.users);
+                      } catch (e) {
+                        alert(e.message || "Failed to update user");
+                      } finally {
+                        setToggling("");
+                      }
+                    }}
+                  >
+                    {toggling === u._id
+                      ? "Updating..."
+                      : u.isActive
+                      ? "Deactivate"
+                      : "Activate"}
+                  </button>
                 </td>
               </tr>
             ))}
@@ -66,5 +82,3 @@ export default function AdminUsers() {
     </div>
   );
 }
-
-

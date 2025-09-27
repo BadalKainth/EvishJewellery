@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { getImageURL } from "../../api/client";
-import { AuthContext } from "../../context/AuthContext"; // ✅ AuthContext
-import { useNavigate } from "react-router-dom"; // ✅ redirect
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CartDesign = ({ product, addToCart, onClick }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState("success"); // ✅ success or error
+  const [popupType, setPopupType] = useState("success");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -17,19 +17,17 @@ const CartDesign = ({ product, addToCart, onClick }) => {
     e.stopPropagation();
 
     if (!user) {
-      // ✅ user not logged in
       setPopupMessage("⚠️ Please login to add items!");
       setPopupType("error");
       setShowPopup(true);
 
       setTimeout(() => {
         setShowPopup(false);
-        navigate("/authForm"); // ✅ redirect to login
+        navigate("/authForm");
       }, 1500);
       return;
     }
 
-    // ✅ user logged in → add to cart
     addToCart(product);
     setPopupMessage("✅ Added to Cart!");
     setPopupType("success");
@@ -93,7 +91,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
               Delivery: ₹ {product.deliveryCharge || 0}
             </p>
 
-            {/* ✅ Price & Cart Button */}
+            {/* ✅ Price, Stock & Cart Button */}
             <div className="flex justify-between items-center mt-4">
               <div className="flex flex-col font-bold text-amber-600 text-lg">
                 <span>
@@ -108,13 +106,33 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                 <span className="text-sm text-gray-600 animate-pulse">
                   🎉 You saved ₹{discount} ({discountPercent}% OFF)
                 </span>
+
+                {/* ✅ Stock Count */}
+                <span
+                  className={`text-sm font-medium mt-1 ${
+                    product.stock > 5
+                      ? "text-green-600"
+                      : product.stock > 0
+                      ? "text-orange-500"
+                      : "text-red-600"
+                  }`}
+                >
+                  {product.stock > 0
+                    ? `Stock: ${product.stock}`
+                    : "Out of Stock"}
+                </span>
               </div>
 
               <button
                 onClick={handleAddToCart}
-                className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm shadow-md transition-all duration-300 hover:scale-105"
+                disabled={product.stock <= 0}
+                className={`${
+                  product.stock <= 0
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-amber-500 hover:bg-amber-600"
+                } text-white px-4 py-2 rounded-lg text-sm shadow-md transition-all duration-300 hover:scale-105`}
               >
-                Add to Cart
+                {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
               </button>
             </div>
           </div>

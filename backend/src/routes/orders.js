@@ -13,6 +13,7 @@ import {
 } from "../middleware/validation.js";
 import { body, query } from "express-validator";
 import { sendEmail } from "../utils/email.js";
+import QRCode from "qrcode";
 
 const router = express.Router();
 
@@ -173,10 +174,25 @@ router.post(
         console.error("Order confirmation email failed:", emailError);
       }
 
+      // ✅ Generate UPI QR for payment
+      const upiString = `upi://pay?pa=yourupi@upi&pn=YourStore&am=${total}&cu=INR`;
+      let qrCode = null;
+      try {
+        qrCode = await QRCode.toDataURL(upiString);
+      } catch (qrError) {
+        console.error("QR generation failed:", qrError);
+      }
+
       res.status(201).json({
         success: true,
         message: "Order placed successfully",
-        data: { order },
+        data: {
+          order,
+          payment: {
+            upiString,
+            qrCode, // base64 string, frontend can render directly in <img src={qrCode} />
+          },
+        },
       });
     } catch (error) {
       console.error("Create order error:", error);
@@ -214,7 +230,7 @@ router.get(
   ],
   async (req, res) => {
     try {
-      const { status, page = 1, limit = 10 } = req.query;
+      const { status, page = 1, limit = 20 } = req.query;
       const filter = { user: req.user._id };
       if (status) filter.status = status;
 
