@@ -99,13 +99,14 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-gray-100">
             <li className="flex items-center gap-2">
-              <MapPin size={18} /> 123, Delhi, India
+              <MapPin size={56} /> 35, I Block B , First floor ,Arya samaj Road
+              , Uttam Nagar New Delhi-110059
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={18} /> +91 9876543210
+              <Phone size={18} /> +91 88828 25761
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={18} /> support@jewellery.com
+              <Mail size={18} /> info.avishjewels@gmail.com
             </li>
           </ul>
           <div className="flex gap-8 px-6 py-4">
@@ -138,7 +139,8 @@ const Footer = () => {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/918882825761
+"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 text-white p-6 transition-all animate-bounce z-10"

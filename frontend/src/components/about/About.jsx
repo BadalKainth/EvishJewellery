@@ -142,7 +142,7 @@ const AboutUsPage = () => {
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
-                  href="mailto:hello@gmail.com"
+                  href="mailto:info.avishjewels@gmail.com "
                   className="text-gray-600 hover:underline"
                 >
                   <div className="w-6 h-6 rounded-sm">
@@ -152,10 +152,10 @@ const AboutUsPage = () => {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
               <a
-                href="mailto:hello@gmail.com"
+                href="mailto:info.avishjewels@gmail.com "
                 className="text-gray-600 hover:underline"
               >
-                hello@company.com
+                info.avishjewels@gmail.com
               </a>
             </div>
 
@@ -163,7 +163,7 @@ const AboutUsPage = () => {
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+9188828 25761"
                   className="text-gray-600 md:text-blue-600 hover:underline"
                 >
                   <div className="w-6 h-6 rounded-sm">
@@ -173,10 +173,10 @@ const AboutUsPage = () => {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
               <a
-                href="tel:+919876543210"
+                href="tel:+9188828 25761"
                 className="text-gray-600 md:text-blue-600 hover:underline"
               >
-                +91 98765 43210
+                +91 88828 25761
               </a>
             </div>
 
@@ -184,7 +184,7 @@ const AboutUsPage = () => {
             <div className="text-center col-span-2 md:col-span-1">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
-                  href="https://www.google.com/maps?q=28.6139,77.2090"
+                  href="https://maps.app.goo.gl/HUmqtcZjdoruMQD5A"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="md:text-gray-600 text-blue-600 hover:underline"
@@ -196,12 +196,13 @@ const AboutUsPage = () => {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Location</h3>
               <a
-                href="https://www.google.com/maps?q=28.6139,77.2090"
+                href="https://maps.app.goo.gl/HUmqtcZjdoruMQD5A"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="md:text-gray-600 text-blue-600 hover:underline"
               >
-                📍 New Delhi, India
+                📍 35, I Block B , First floor ,Arya samaj Road , Uttam Nagar
+                New Delhi-110059
               </a>
             </div>
           </div>
