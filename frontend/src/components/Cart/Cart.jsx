@@ -346,6 +346,25 @@ const Cart = () => {
               Apply
             </button>
           </div>
+          {/* server totals box (will show coupon and final total returned by backend) */}
+          <div className="p-4 border rounded-lg shadow mb-4">
+            <div className="flex justify-between mb-2">
+              <span>Subtotal:</span>
+              <span>₹{(subtotal ?? 0).toLocaleString("en-IN")}</span>
+            </div>
+
+            {serverCouponDiscount > 0 && (
+              <div className="flex justify-between mb-2 text-green-600 font-semibold">
+                <span>Coupon Discount:</span>
+                <span>-₹{serverCouponDiscount.toLocaleString("en-IN")}</span>
+              </div>
+            )}
+
+            <div className="flex justify-between font-bold text-lg">
+              <span>Total:</span>
+              <span>₹{(totalFromServer ?? 0).toLocaleString("en-IN")}</span>
+            </div>
+          </div>
 
           {cartItems.length > 0 && (
             <div className="space-y-2">
