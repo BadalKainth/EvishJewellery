@@ -163,7 +163,7 @@ const AboutUsPage = () => {
             <div className="text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
-                  href="tel:+9188828 25761"
+                  href="tel:+918882825761"
                   className="text-gray-600 md:text-blue-600 hover:underline"
                 >
                   <div className="w-6 h-6 rounded-sm">
@@ -173,7 +173,7 @@ const AboutUsPage = () => {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
               <a
-                href="tel:+9188828 25761"
+                href="tel:+918882825761"
                 className="text-gray-600 md:text-blue-600 hover:underline"
               >
                 +91 88828 25761

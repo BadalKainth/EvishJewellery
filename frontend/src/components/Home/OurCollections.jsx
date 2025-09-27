@@ -3,6 +3,8 @@ import React from "react";
 import bracelet9 from "../Bracelets/img/bracelet9.jpg";
 import necklaces1 from "../Necklaces/img/necklaces1.jpg";
 import { Link } from "react-router-dom";
+import coupleset from "../Home/coupleset.png"
+import anklet from "../Home/anklet.png";
 
 const OurCollections = () => {
   return (
@@ -31,7 +33,7 @@ const OurCollections = () => {
                 {/* Link सिर्फ image को घेरता है */}
                 <Link to="/category/bracelets" className="block">
                   <img
-                    src={bracelet9}
+                    src="https://images.unsplash.com/photo-1644341129030-95ee42ff8d30?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Sparkling diamond necklace on a woman's neck with elegant evening dress"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
@@ -60,7 +62,7 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/rings" className="block">
                   <img
-                    src="https://cdn.pixabay.com/photo/2018/04/04/18/28/golden-3290604_1280.jpg"
+                    src="https://plus.unsplash.com/premium_photo-1678749105286-9970ba61a724?q=80&w=812&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Golden engagement ring with diamond setting on a romantic wedding photo background"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
@@ -85,7 +87,7 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/earrings" className="block">
                   <img
-                    src="https://cdn.pixabay.com/photo/2019/02/11/19/53/jewel-3990596_1280.jpg"
+                    src="https://images.unsplash.com/photo-1716461534906-d31a17008801?q=80&w=655&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
                     className="w-full h-52 object-fill cursor-pointer"
                   />
@@ -110,7 +112,7 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/necklaces" className="block">
                   <img
-                    src={necklaces1}
+                    src="https://images.unsplash.com/photo-1641290748359-1d944fc8359a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
@@ -137,7 +139,7 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/couple-sets" className="block">
                   <img
-                    src="https://salty.co.in/cdn/shop/files/BC24358-G_MODEL.jpg?v=1754893646&width=1800"
+                    src={coupleset}
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
@@ -164,7 +166,7 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/anklets" className="block">
                   <img
-                    src="https://images.pexels.com/photos/7068000/pexels-photo-7068000.jpeg"
+                    src={anklet}
                     alt="Delicate gold earrings with pearl drops on a pastel pink background"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
