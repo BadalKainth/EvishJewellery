@@ -4,8 +4,10 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useContext,
 } from "react";
 import client from "../api/client";
+import { AuthContext } from "./AuthContext"; // ✅ import auth
 
 export const CartContext = createContext({
   cart: {
@@ -26,13 +28,32 @@ export const CartContext = createContext({
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { token } = useContext(AuthContext); // ✅ get token
 
   const refreshCart = useCallback(async () => {
     setLoading(true);
     try {
       const res = await client.get("/cart");
       if (res?.success) {
-        setCart(res.data.cart);
+        const newCart = res.data.cart;
+
+        // ✅ if cart is empty → remove coupon
+        if (!newCart.items || newCart.items.length === 0) {
+          try {
+            await client.delete("/cart/remove-coupon");
+            newCart.totals.coupon = { discount: 0 }; // clean local too if your API doesn’t return
+          } catch (err) {
+            console.error("Failed to remove coupon:", err);
+          }
+        }
+
+        setCart(newCart);
+      } else {
+        setCart({
+          items: [],
+          totals: { subtotal: 0, discount: 0, total: 0, totalItems: 0 },
+          itemCount: 0,
+        });
       }
     } finally {
       setLoading(false);
@@ -40,8 +61,18 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    refreshCart();
-  }, [refreshCart]);
+    if (token) {
+      // ✅ Logged in → fetch cart
+      refreshCart();
+    } else {
+      // ✅ Logged out → clear cart instantly
+      setCart({
+        items: [],
+        totals: { subtotal: 0, discount: 0, total: 0, totalItems: 0 },
+        itemCount: 0,
+      });
+    }
+  }, [token, refreshCart]);
 
   const addItem = useCallback(
     async (productId, quantity = 1) => {
@@ -68,11 +99,14 @@ export const CartProvider = ({ children }) => {
   );
 
   const clear = useCallback(async () => {
-    // Clear frontend immediately
-    setCart({ items: [], totals: {} }); // or your context method
+    setCart({
+      items: [],
+      totals: { subtotal: 0, discount: 0, total: 0, totalItems: 0 },
+      itemCount: 0,
+    });
     try {
-      await client.delete("/cart/clear"); // clear backend
-      await refreshCart(); // optional: sync
+      await client.delete("/cart/clear");
+      await refreshCart();
     } catch (e) {
       console.error("Failed to clear cart:", e);
     }

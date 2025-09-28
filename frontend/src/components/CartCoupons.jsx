@@ -42,7 +42,7 @@ export default function CartCoupons() {
         <div key={c._id} className="text-sm">
           <div className="font-medium">
             <span className="text-green-500">{c.code}</span> —{" "}
-            {c.type === "percentage" ? c.value + "%" : "₹" + c.value}
+            {c.type === "percentage" ? c.value + "%" : "₹" + c.value} Off
           </div>
           {/* <div className="text-gray-600">{c.name}</div> */}
         </div>

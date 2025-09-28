@@ -4,8 +4,10 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useContext,
 } from "react";
 import client, { setAuthToken } from "../api/client";
+import { CartContext } from "./CartContext"; // ✅ import CartContext
 
 export const AuthContext = createContext({
   user: null,
@@ -21,6 +23,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
+
+  // ✅ Access cart functions
+  const { clear, setCart } = useContext(CartContext);
 
   const fetchMe = useCallback(async () => {
     if (!token) return null;
@@ -94,11 +99,26 @@ export const AuthProvider = ({ children }) => {
     try {
       await client.post("/auth/logout");
     } catch {}
+
     setUser(null);
     setToken(null);
     setAuthToken("");
     localStorage.removeItem("refreshToken");
-  }, []);
+
+    // ✅ Clear Cart on logout
+    clear();
+    setCart({
+      items: [],
+      totals: {
+        subtotal: 0,
+        discount: 0,
+        total: 0,
+        totalItems: 0,
+        coupon: { discount: 0 },
+      },
+      itemCount: 0,
+    });
+  }, [clear, setCart]);
 
   const value = useMemo(
     () => ({ user, token, loading, login, register, logout, refresh }),
