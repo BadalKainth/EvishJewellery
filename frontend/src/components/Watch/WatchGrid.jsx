@@ -13,7 +13,7 @@ const WatchGrind = () => {
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 6; // Number of products per page
+  const limit = 12; // Number of products per page
 
   const gridRef = useRef(null);
 
