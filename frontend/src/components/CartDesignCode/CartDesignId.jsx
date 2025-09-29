@@ -149,9 +149,9 @@ const CartDesignId = ({ product, addToCart }) => {
             )}
           </h3>
           <p className="text-gray-600">{product.description}</p>
-          <p className="text-gray-500 text-base mt-1">
+          {/* <p className="text-gray-500 text-base mt-1">
             Delivery: ₹{product.deliveryCharge || "0"}
-          </p>
+          </p> */}
 
           {/* ✅ Price Section */}
           <div className="flex flex-col font-bold text-amber-600 space-y-1 text-lg mt-4">

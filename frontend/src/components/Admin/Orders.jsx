@@ -1,16 +1,30 @@
 import React, { useEffect, useState, useRef } from "react";
-import client, { getImageURL } from "../../api/client";
+import client from "../../api/client";
 import { FaWhatsapp } from "react-icons/fa";
 import avishLogo from "../../img/avishlogo.jpeg";
 import sign from "../../img/sign.jpeg";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
+// -------------------- Invoice Modal --------------------
 function InvoiceModal({ order, onClose }) {
   const printRef = useRef();
   const fmt = (val) => `₹${(val || 0).toFixed(2)}`;
 
+  const handleDownloadPDF = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "pt", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`Invoice_${order.orderNumber}.pdf`);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex poppins-regular items-center justify-center bg-black/50 overflow-auto p-2 sm:p-4">
-      <div className="bg-white rounded-lg mt-20 sm:mt-40 shadow-xl w-full max-w-full sm:max-w-4xl p-4 sm:p-6 relative animate-[fadeIn_0.3s_ease-out]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-auto p-2 sm:p-4">
+      <div className="bg-white rounded-lg mt-32 sm:mt-56 shadow-xl w-full max-w-4xl p-4 sm:p-6 relative animate-[fadeIn_0.3s_ease-out]">
         <button
           className="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition text-sm sm:text-base"
           onClick={onClose}
@@ -20,8 +34,8 @@ function InvoiceModal({ order, onClose }) {
 
         <div ref={printRef} className="p-3 sm:p-6">
           {/* Header */}
-          <div className="flex flex-row justify-between items-center sm:items-start border-b pb-3 sm:pb-4 mb-4 sm:mb-6">
-            <div className="text-left">
+          <div className="flex justify-between items-center border-b pb-3 sm:pb-4 mb-4 sm:mb-6">
+            <div>
               <h1 className="text-lg sm:text-xl font-bold text-gray-800">
                 Avish Jewels
               </h1>
@@ -34,14 +48,11 @@ function InvoiceModal({ order, onClose }) {
                 Email: info.avishjewels@gmail.com
               </p>
             </div>
-
-            <div className="flex-shrink-0 flex items-center justify-center">
-              <img
-                src={avishLogo}
-                alt="Avish Jewels"
-                className="h-12 sm:h-16 object-contain"
-              />
-            </div>
+            <img
+              src={avishLogo}
+              alt="Avish Logo"
+              className="h-12 sm:h-16 object-contain"
+            />
           </div>
 
           {/* Invoice Info */}
@@ -60,6 +71,12 @@ function InvoiceModal({ order, onClose }) {
             <p>
               <strong>Payment:</strong> {order.paymentDetails?.paymentStatus}
             </p>
+            {order.paymentDetails?.transactionId && (
+              <p>
+                <strong>Transaction UTR:</strong>{" "}
+                {order.paymentDetails.transactionId}
+              </p>
+            )}
           </div>
 
           {/* Billing & Shipping */}
@@ -107,7 +124,7 @@ function InvoiceModal({ order, onClose }) {
                 {order.items?.map((item, i) => (
                   <tr key={i} className="even:bg-gray-50">
                     <td className="px-2 sm:px-3 py-1 sm:py-2 border">
-                      {item.name}
+                      {item.product?.name || item.name}
                     </td>
                     <td className="px-2 sm:px-3 py-1 sm:py-2 border text-right">
                       {fmt(item.price)}
@@ -116,7 +133,7 @@ function InvoiceModal({ order, onClose }) {
                       {item.quantity}
                     </td>
                     <td className="px-2 sm:px-3 py-1 sm:py-2 border text-right">
-                      {fmt(item.total)}
+                      {fmt(item.total || item.price * item.quantity)}
                     </td>
                   </tr>
                 ))}
@@ -167,11 +184,28 @@ function InvoiceModal({ order, onClose }) {
             </div>
           </div>
         </div>
+
+        {/* Buttons */}
+        <div className="mt-4 flex gap-2 justify-end">
+          <button
+            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            onClick={() => window.print()}
+          >
+            Print
+          </button>
+          <button
+            className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition"
+            onClick={handleDownloadPDF}
+          >
+            Download PDF
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
+// -------------------- Single Order Row --------------------
 function OrderRow({ o }) {
   const [showModal, setShowModal] = useState(false);
   const [statusForm, setStatusForm] = useState({
@@ -196,7 +230,7 @@ function OrderRow({ o }) {
         await client.patch(`/orders/${o._id}/payment`, paymentForm);
       }
     } finally {
-      window.location.reload(); // hard refresh after update
+      window.location.reload();
     }
   };
 
@@ -230,7 +264,9 @@ function OrderRow({ o }) {
           )}
         </td>
 
-        <td className="p-3 font-semibold text-green-700">₹{o.pricing.total}</td>
+        <td className="p-3 font-semibold text-green-700">
+          ₹{o.pricing.total.toLocaleString("en-IN")}
+        </td>
         <td className="p-3 capitalize font-medium">{o.status}</td>
         <td className="p-3">
           <div className="flex flex-col gap-3">
@@ -330,6 +366,7 @@ function OrderRow({ o }) {
   );
 }
 
+// -------------------- Admin Orders --------------------
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -366,10 +403,10 @@ export default function AdminOrders() {
               <th className="p-3">Total</th>
               <th className="p-3">Status</th>
               <th className="p-3">Actions</th>
-              <th className="p-3">Created</th>
+              <th className="p-3">Created At</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y">
             {orders.map((o) => (
               <OrderRow key={o._id} o={o} />
             ))}

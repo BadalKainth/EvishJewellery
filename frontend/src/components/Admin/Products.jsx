@@ -31,7 +31,7 @@ export default function AdminProducts() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await client.get("/products", { limit: 50 });
+      const res = await client.get("/products", { limit: 100 });
       if (res?.success) setProducts(res.data.products);
     } catch (e) {
       setError(e.message || "Failed to load products");

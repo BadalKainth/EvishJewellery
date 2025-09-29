@@ -140,7 +140,7 @@ const AboutUsPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12 justify-center items-center">
             {/* Email */}
             <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12  bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <a
                   href="mailto:info.avishjewels@gmail.com "
                   className="text-gray-600 hover:underline"
@@ -153,7 +153,7 @@ const AboutUsPage = () => {
               <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
               <a
                 href="mailto:info.avishjewels@gmail.com "
-                className="text-gray-600 hover:underline"
+                className="text-gray-600 hover:underline break-words block"
               >
                 info.avishjewels@gmail.com
               </a>
