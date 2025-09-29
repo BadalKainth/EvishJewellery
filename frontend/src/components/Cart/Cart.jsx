@@ -241,13 +241,13 @@ const Cart = () => {
                         <p className="text-sm text-gray-800 line-clamp-2 break-words">
                           {product.description}
                         </p>
-                        <span className="text-sm text-gray-500 block mt-2">
+                        {/* <span className="text-sm text-gray-500 block mt-2">
                           Delivery: ₹
                           {(
                             (product.deliveryCharges || 0) *
                             (product.quantity || 0)
                           ).toLocaleString("en-IN")}
-                        </span>
+                        </span> */}
                       </div>
                       <div className="flex justify-between items-center mt-3 gap-4">
                         <div className="flex flex-col text-lg min-w-0">

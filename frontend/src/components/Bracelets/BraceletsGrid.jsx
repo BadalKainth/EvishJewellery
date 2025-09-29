@@ -66,7 +66,7 @@ const BraceletsGrid = () => {
         </div>
 
         {/* ✅ Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 px-1 md:px-20 gap-2 md:gap-4 mt-6">
           {bracelets.map((product) => (
             <ProductCard
               key={product._id}
@@ -120,7 +120,7 @@ const BraceletsGrid = () => {
       </div>
 
       {/* Existing Paragraphs & FAQ Section remain unchanged */}
-      <div className="p-10 text-justify poppins-regular">
+      <div className="p-10 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold">
           Bracelets – Elegant & Stylish Bracelet Designs for Every Occasion
         </h1>

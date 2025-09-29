@@ -74,7 +74,7 @@ const NecklacesGrid = () => {
         </div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-5 md:px-20 gap-4 mt-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 px-1 md:px-20 gap-2 md:gap-4 mt-6">
           {necklaces.map((product) => (
             <ProductCard
               key={product._id}
@@ -128,33 +128,33 @@ const NecklacesGrid = () => {
       </div>
 
       {/* Paragraph content (unchanged) */}
-      <div className="p-10 px-6 md:px-20 text-justify poppins-regular">
+      <div className="p-10 text-xs md:text-base px-6 md:px-20 text-justify poppins-regular">
         <b>Necklaces – Modern & Traditional Necklace Designs Online</b>
         <br />
-        Find traditional and modern necklace designs online. Shop designer,
-        gold, silver and diamond necklaces for weddings, occasions, every day.{" "}
+        Find traditional and modern necklace designs online. Shop designer, best
+        necklaces for weddings, occasions, every day.
         <br />
         <br />
         Necklaces are one of the most beloved pieces of jewelry, representing
         elegance, beauty and individuality. Whether it is a simple modern
-        necklace for daily wear or a comprehensive traditional gold necklace for
+        necklace for daily wear or a comprehensive traditional necklace for
         weddings, cultural events or festival occasions, necklaces lend charm
         and purpose to every outfit. In our online store, you will discover an
         exquisite variety of designer necklaces for sale in an array of styles,
-        including silver necklaces, diamond necklaces, statement chokers or
-        layered necklaces that can be worn as trendy or contemporary necklaces.
-        Each necklace is designed with meticulous precision, bringing together
+        including necklaces, diamond necklaces, statement chokers or layered
+        necklaces that can be worn as trendy or contemporary necklaces. Each
+        necklace is designed with meticulous precision, bringing together
         classic tradition with modern style. You will discover more than just
         necklaces, you will find necklaces that embrace your style and make
         moments more memorable! A necklace is more than just an accessory, it is
         a timeless piece of jewelry to finish any look or reflect your
-        creativity. Whether you are gazing at intricate traditional gold
-        necklaces, wearing simple modern silver and diamond link necklaces,
-        there are a world of necklaces and styles that have the ability to
-        unlock your outfit or special occasion. Whether you are looking for
-        elegance in daily wear, a gift for a loved one, or bridal jewelry that
-        makes a statement, you will find an exclusive private collection of
-        necklaces for every style and occasion.
+        creativity. Whether you are gazing at intricate traditional necklaces,
+        wearing simple modern and diamond link necklaces, there are a world of
+        necklaces and styles that have the ability to unlock your outfit or
+        special occasion. Whether you are looking for elegance in daily wear, a
+        gift for a loved one, or bridal jewelry that makes a statement, you will
+        find an exclusive private collection of necklaces for every style and
+        occasion.
         <br />
         <br />
         {/* … rest of paragraph content unchanged … */}

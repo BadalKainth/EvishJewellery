@@ -75,7 +75,7 @@ const RingsGrid = () => {
         </div>
 
         {/* ========================== Grid Layout ========================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-5 md:px-20 gap-4 mt-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 px-1 md:px-20 gap-2 md:gap-4 mt-6">
           {rings.map((product) => (
             <ProductCard
               key={product._id} // ✅ Unique key for React
@@ -132,7 +132,7 @@ const RingsGrid = () => {
       </div>
 
       {/* ========================== Paragraph Content (unchanged) ========================== */}
-      <div className="p-20 text-justify poppins-regular">
+      <div className="p-10 md:p-20 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold">
           Rings – Timeless & Trendy Rings for Men & Women
         </h1>
