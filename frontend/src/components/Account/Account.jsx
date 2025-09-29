@@ -1,11 +1,218 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import client from "../../api/client";
 import { AuthContext } from "../../context/AuthContext";
+import { FaWhatsapp } from "react-icons/fa";
+import avishLogo from "../../img/avishlogo.jpeg";
+import sign from "../../img/sign.jpeg";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
+function InvoiceModal({ order, onClose }) {
+  const printRef = useRef();
+  const fmt = (val) => `₹${(val || 0).toFixed(2)}`;
+
+  if (!order) return null;
+
+  const handleDownloadPDF = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "pt", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`Invoice_${order.orderNumber}.pdf`);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50  flex items-center justify-center bg-black/50 overflow-auto p-2 sm:p-4">
+      <div className="bg-white rounded-lg  mt-64 shadow-xl w-full max-w-4xl p-4 sm:p-6 relative animate-[fadeIn_0.3s_ease-out]">
+        <button
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition text-sm sm:text-base"
+          onClick={onClose}
+        >
+          ✕
+        </button>
+
+        <div ref={printRef} className="p-3 sm:p-6">
+          {/* Header */}
+          <div className="flex justify-between items-center border-b pb-3 sm:pb-4 mb-4 sm:mb-6">
+            <div>
+              <h1 className="text-lg sm:text-xl font-bold text-gray-800">
+                Avish Jewels
+              </h1>
+              <p className="text-xs sm:text-sm">
+                35 I-Block first floor Arya Samaj Road, Uttam Nagar
+              </p>
+              <p className="text-xs sm:text-sm">New Delhi, Delhi - 110059</p>
+              <p className="text-xs sm:text-sm">Phone: +91 8882825761</p>
+              <p className="text-xs sm:text-sm">
+                Email: info.avishjewels@gmail.com
+              </p>
+            </div>
+            <img
+              src={avishLogo}
+              alt="Avish Logo"
+              className="h-12 sm:h-16 object-contain"
+            />
+          </div>
+
+          {/* Invoice Info */}
+          <div className="text-center sm:text-right text-sm sm:text-base mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-2xl font-semibold">Invoice</h2>
+            <p>
+              <strong>No:</strong> {order.orderNumber}
+            </p>
+            <p>
+              <strong>Date:</strong>{" "}
+              {new Date(order.createdAt).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>Status:</strong> {order.status}
+            </p>
+            <p>
+              <strong>Payment:</strong> {order.paymentDetails?.paymentStatus}
+            </p>
+            {order.paymentDetails?.transactionId && (
+              <p>
+                <strong>Transaction UTR:</strong>{" "}
+                {order.paymentDetails.transactionId}
+              </p>
+            )}
+          </div>
+
+          {/* Billing & Shipping */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6 text-xs sm:text-sm">
+            <div>
+              <p className="font-semibold text-gray-700 mb-1">Bill To:</p>
+              <p>{order.billingAddress?.name}</p>
+              <p>{order.billingAddress?.address}</p>
+              <p>
+                {order.billingAddress?.city}, {order.billingAddress?.state}
+              </p>
+              <p>{order.billingAddress?.phone}</p>
+            </div>
+            <div>
+              <p className="font-semibold text-gray-700 mb-1">Ship To:</p>
+              <p>{order.shippingAddress?.name}</p>
+              <p>{order.shippingAddress?.address}</p>
+              <p>
+                {order.shippingAddress?.city}, {order.shippingAddress?.state}
+              </p>
+              <p>{order.shippingAddress?.phone}</p>
+            </div>
+          </div>
+
+          {/* Products Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-xs sm:text-sm">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="text-left px-2 sm:px-3 py-1 sm:py-2 border">
+                    Product
+                  </th>
+                  <th className="text-right px-2 sm:px-3 py-1 sm:py-2 border">
+                    Price
+                  </th>
+                  <th className="text-right px-2 sm:px-3 py-1 sm:py-2 border">
+                    Qty
+                  </th>
+                  <th className="text-right px-2 sm:px-3 py-1 sm:py-2 border">
+                    Total
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.items?.map((item, i) => (
+                  <tr key={i} className="even:bg-gray-50">
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 border">
+                      {item.product?.name}
+                    </td>
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 border text-right">
+                      {fmt(item.price)}
+                    </td>
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 border text-right">
+                      {item.quantity}
+                    </td>
+                    <td className="px-2 sm:px-3 py-1 sm:py-2 border text-right">
+                      {fmt(item.price * item.quantity)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Totals */}
+          <div className="mt-4 flex justify-end">
+            <div className="w-full sm:w-1/2 max-w-sm text-xs sm:text-sm">
+              {order.pricing.discount && (
+                <div className="flex justify-between px-2 sm:px-3 py-1 sm:py-2 border-b">
+                  <span>Discount:</span>
+                  <span>-{fmt(order.pricing.discount)}</span>
+                </div>
+              )}
+              <div className="flex justify-between px-2 sm:px-3 py-1 sm:py-2 border-t border-b">
+                <span>Subtotal:</span>
+                <span>{fmt(order.pricing.total - order.pricing.tax)}</span>
+              </div>
+              {order.pricing.tax != null && (
+                <div className="flex justify-between px-2 sm:px-3 py-1 sm:py-2 border-b">
+                  <span>Tax:</span>
+                  <span>{fmt(order.pricing.tax)}</span>
+                </div>
+              )}
+              <div className="flex justify-between px-2 sm:px-3 py-2 sm:py-3 border-t font-semibold text-base sm:text-lg">
+                <span>Total:</span>
+                <span>{fmt(order.pricing.total)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Signature */}
+          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4">
+            <p className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">
+              Thank you for shopping with Avish Jewels!
+            </p>
+            <div className="text-center">
+              <img
+                src={sign}
+                alt="Signature"
+                className="h-12 sm:h-16 mx-auto"
+              />
+              <p className="font-medium text-xs sm:text-sm">
+                Authorized Signatory
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-4 flex gap-2 justify-end">
+          <button
+            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            onClick={() => window.print()}
+          >
+            Print
+          </button>
+          <button
+            className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition"
+            onClick={handleDownloadPDF}
+          >
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Account() {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
   const [orders, setOrders] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [returns, setReturns] = useState([]);
   const [error, setError] = useState("");
   const [popupImg, setPopupImg] = useState(null);
@@ -27,7 +234,6 @@ export default function Account() {
     })();
   }, []);
 
-  // Helper function to calculate product amount excl tax
   const getAmounts = (order) => {
     const total = order.pricing?.total || 0;
     const tax = order.pricing?.tax || 0;
@@ -36,7 +242,7 @@ export default function Account() {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-6">
+    <div className="p-1 max-w-6xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">My Account</h1>
       {error && <div className="text-red-600 text-sm">{error}</div>}
 
@@ -69,7 +275,6 @@ export default function Account() {
         <h2 className="font-semibold mb-4">Recent Orders</h2>
         <div className="space-y-6">
           {orders.length === 0 && <div>No recent orders.</div>}
-
           {orders.map((order) => {
             const { total, tax, productAmountExclTax } = getAmounts(order);
 
@@ -95,11 +300,10 @@ export default function Account() {
                       <span className="font-medium">Payment:</span>{" "}
                       {order.paymentDetails?.paymentStatus || "N/A"}
                     </div>
-                    {/* 🔥 Transaction ID (UTR Number) Show */}
                     {order.paymentDetails?.transactionId && (
                       <div className="text-sm">
                         <span className="font-medium">Transaction UTR ID:</span>{" "}
-                        <b> {order.paymentDetails.transactionId}</b>
+                        <b>{order.paymentDetails.transactionId}</b>
                       </div>
                     )}
                   </div>
@@ -134,27 +338,46 @@ export default function Account() {
                 </div>
 
                 {/* Shipping & Billing Address */}
-                <div className="mt-4">
-                  <h3 className="font-medium">Shipping Address</h3>
-                  <div className="text-sm text-gray-700">
-                    {order.shippingAddress?.name},{" "}
-                    {order.shippingAddress?.address},{" "}
-                    {order.shippingAddress?.city},{" "}
-                    {order.shippingAddress?.state} -{" "}
-                    {order.shippingAddress?.pincode}
-                    <br />
-                    Phone: {order.shippingAddress?.phone}
+                <div className="mt-4 flex flex-col gap-4">
+                  {/* Shipping Address */}
+                  <div>
+                    <h3 className="font-medium">Shipping Address</h3>
+                    <div className="text-sm text-gray-700 text-left">
+                      {order.shippingAddress?.name},{" "}
+                      {order.shippingAddress?.address},{" "}
+                      {order.shippingAddress?.city},{" "}
+                      {order.shippingAddress?.state} -{" "}
+                      {order.shippingAddress?.pincode}
+                      <br />
+                      Phone: {order.shippingAddress?.phone}
+                    </div>
                   </div>
-                </div>
-                <div className="mt-2">
-                  <h3 className="font-medium">Billing Address</h3>
-                  <div className="text-sm text-gray-700">
-                    {order.billingAddress?.name},{" "}
-                    {order.billingAddress?.address},{" "}
-                    {order.billingAddress?.city}, {order.billingAddress?.state}{" "}
-                    - {order.billingAddress?.pincode}
-                    <br />
-                    Phone: {order.billingAddress?.phone}
+
+                  {/* Billing Address with Button */}
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-medium">Billing Address</h3>
+                      <div className="text-sm text-gray-700 text-left">
+                        {order.billingAddress?.name},{" "}
+                        {order.billingAddress?.address},{" "}
+                        {order.billingAddress?.city},{" "}
+                        {order.billingAddress?.state} -{" "}
+                        {order.billingAddress?.pincode}
+                        <br />
+                        Phone: {order.billingAddress?.phone}
+                      </div>
+                    </div>
+                    <div className="ml-4 flex-shrink-0">
+                      <button
+                        className="px-2 py-1 text-xs md:text-xl bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                        onClick={() => {
+                          setSelectedOrder(order);
+                          setShowModal(true);
+                        }}
+                      >
+                        View Invoice
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -176,6 +399,14 @@ export default function Account() {
           })}
         </div>
       </section>
+
+      {/* Invoice Modal */}
+      {showModal && selectedOrder && (
+        <InvoiceModal
+          order={selectedOrder}
+          onClose={() => setShowModal(false)}
+        />
+      )}
 
       {/* Returns Section */}
       <section className="bg-white rounded-xl shadow p-4">
