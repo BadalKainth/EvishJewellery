@@ -115,9 +115,55 @@ const AnkletGrid = () => {
           </button>
         </div>
 
-        <div className="p-10 text-justify">
+        <div className="text-justify">
           {/* Your long anklets paragraph content remains unchanged */}
-          {/* ... */}
+          <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
+            <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+              Anklets – Stylish Anklets Collection for Every Occasion
+            </h1>
+            <p>
+              Add charm to your steps with{" "}
+              <b className="text-amber-700">AvishJEWELS</b> Anklets. Discover a
+              wide variety of trendy anklets designed to enhance your style and
+              personality. Whether you are dressing up for a festive occasion, a
+              casual outing, or simply want to add a touch of elegance to your
+              everyday look, <b className="text-amber-700">AvishJEWELS</b>{" "}
+              anklets are the perfect choice.
+            </p>
+            <br />
+            <p>
+              At <b className="text-amber-700">AvishJEWELS</b>, every anklet is
+              crafted with care to bring out the beauty of simplicity and
+              sophistication. From minimalistic chain anklets to elegant charm
+              anklets, we have designs that match every personality. These
+              anklets are lightweight, comfortable to wear, and add a graceful
+              finishing touch to your look.
+            </p>
+            <br />
+            <h2 className="font-bold text-amber-700">Trendy Anklet Styles</h2>
+            <p>
+              Explore <b className="text-amber-700">AvishJEWELS</b> trendy
+              anklet styles that perfectly blend fashion with comfort. Whether
+              you prefer delicate single-chain anklets, multi-layer anklets, or
+              anklets with quirky charms,
+              <b className="text-amber-700"> AvishJEWELS</b> has something
+              special for you. Each anklet is designed to make your every step
+              more stylish and confident.
+            </p>
+            <br />
+            <h2 className="font-bold text-amber-700">
+              Why Choose AvishJEWELS Anklets?
+            </h2>
+            <p>
+              Choosing <b className="text-amber-700">AvishJEWELS</b> anklets
+              means choosing timeless style, comfort, and durability. Our
+              collection is made keeping today’s fashion trends in mind, while
+              still providing versatile pieces that never go out of style.
+              Perfect as a gift or for personal use,
+              <b className="text-amber-700"> AvishJEWELS</b> anklets let you
+              express your individuality with elegance.
+            </p>
+          </div>
         </div>
       </div>
     </div>

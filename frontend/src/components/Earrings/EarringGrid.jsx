@@ -121,15 +121,57 @@ const EarringsGrid = () => {
       </div>
 
       {/* Existing Paragraphs */}
-      <div className="p-10 px-5 md:px-20 text-xs md:text-xl text-justify poppins-regular">
+      <div className="p-10 px-5 md:px-20 text-xs md:text-base text-justify poppins-regular">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
           Earrings – Beautiful Earrings Collection to Elevate Your Style
         </h1>
-        Discover beautiful silver earrings online. Shop to your heart's content
-        from pearls, classic stud earrings, or contemporary Sui Dhaga earrings
-        or minimalistic studs and quirky designs. All available in 925 sterling
-        silver with free delivery and returns. <br />
-        {/* ... rest of your description content remains unchanged */}
+        <p>
+          At <b className="text-amber-700">AvishJEWELS</b>, we believe earrings
+          are more than just accessories—they are timeless pieces that define
+          your style and personality. From minimal everyday studs to elegant
+          designs perfect for parties and weddings, our earrings are crafted to
+          bring out your inner charm. Each piece from{" "}
+          <b className="text-amber-700">AvishJEWELS</b> adds confidence,
+          elegance, and sophistication to your overall look.
+        </p>
+        <br />
+        <p>
+          The <b className="text-amber-700">AvishJEWELS</b> earring collection
+          is designed for every mood and every occasion. If you love simple
+          elegance, our minimalistic styles are the perfect choice for daily
+          wear. For those who want to make a bold statement,{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          offers unique and trendy designs that stand out effortlessly. Each
+          pair is carefully created with attention to detail, ensuring unmatched
+          style and comfort.
+        </p>
+        <br />
+        <p>
+          Earrings from <b className="text-amber-700">AvishJEWELS</b> are
+          versatile enough to complement both casual outfits and special
+          occasion looks. Whether you are dressing up for a festive celebration,
+          a wedding, or simply want to add sparkle to your everyday attire, our
+          collection offers something for everyone. With{" "}
+          <b className="text-amber-700">AvishJEWELS</b>, you don’t just wear
+          earrings—you wear a story of beauty, grace, and individuality.
+        </p>
+        <br />
+        <p>
+          If you’re looking for the perfect gift,{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          earrings are a thoughtful choice that symbolizes love and
+          appreciation. Our wide variety of designs ensures that every woman can
+          find a pair that resonates with her personality and complements her
+          unique style.
+        </p>
+        <br />
+        <p>
+          Choose <b className="text-amber-700">AvishJEWELS</b> to discover
+          earrings that are modern, elegant, and designed to leave a lasting
+          impression. Shop our exclusive earring collection today and elevate
+          your look with the beauty and charm only{" "}
+          <b className="text-amber-700">AvishJEWELS</b> can bring.
+        </p>
       </div>
     </div>
   );

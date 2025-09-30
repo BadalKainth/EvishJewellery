@@ -121,106 +121,108 @@ const BraceletsGrid = () => {
 
       {/* Existing Paragraphs & FAQ Section remain unchanged */}
       <div className="p-10 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold">
+        <h1 className="font-bold text-base md:text-2xl text-amber-700">
           Bracelets – Elegant & Stylish Bracelet Designs for Every Occasion
         </h1>
-        Shop elegant and stylish bracelet designs for every occasion. Discover
-        gold, silver, and designer bracelets crafted to add charm, style, and
-        sophistication to your look. <br />
+        <p>
+          Explore elegant and stylish bracelet designs for every occasion at
+          <b className="text-amber-700"> AvishJEWELS</b>. Shop bracelets that
+          provide that extra touch of charm, sophistication, and timeless style
+          to any look, perfect for daily wear, special occasions, celebrations,
+          or gifting to someone special.
+        </p>
         <br />
-        A bracelet is more than just a fashion accessory—it’s a reflection of
-        personality, emotions, and style. Whether it symbolizes love,
-        friendship, or individuality, a bracelet tells a story about the one who
-        wears it. From subtle elegance to bold statements, bracelets have the
-        power to transform an outfit and add that extra touch of charm. <br />
+        <p>
+          A bracelet is more than an accessory; it reflects personality,
+          emotion, and style. Each bracelet at{" "}
+          <b className="text-amber-700"> AvishJEWELS</b>
+          tells a story—whether it represents love, friendship, or
+          individuality. Bracelets can range from subtle elegance to bold
+          statement pieces and can elevate any outfit from ordinary to
+          extraordinary.
+        </p>
         <br />
-        At <b>Jewellers</b>, we bring you a stunning collection of bracelets
-        designed to suit every mood and occasion. Crafted with precision and
-        creativity, our range includes everything from classic gold and silver
-        pieces to contemporary designer bracelets. If you love minimal elegance,
-        our delicate chains and bangles are perfect for daily wear. For those
-        who want to make a statement, bold gemstone or diamond-studded bracelets
-        add sparkle and sophistication. <br />
+        <p>
+          At <b className="text-amber-700">AvishJEWELS</b>, you will find a
+          beautiful collection of bracelets for every mood and occasion. Our
+          bracelets include delicate chains, minimalist bangles, and bold
+          statement designs that enhance any look with sophistication and charm.
+          Available in traditional and modern styles, our bracelets are
+          versatile enough to complement casual outfits, party looks, or festive
+          attire.
+        </p>
         <br />
-        Available in traditional and modern designs, our bracelets are versatile
-        enough to complement casual outfits, party looks, or even wedding
-        attire. Each piece blends durability, comfort, and unmatched
-        craftsmanship, ensuring that your bracelet doesn’t just look beautiful
-        but also feels perfect on your wrist. <br />
+        <h2 className="font-bold text-amber-700">
+          What Makes a Bracelet Special?
+        </h2>
+        <p>
+          A bracelet is not just a piece of jewelry; it tells a story about the
+          wearer.
+          <b>Bracelets can symbolize love, friendship, or personal style.</b>
+          Many people choose bracelets because they are versatile and can
+          complement any outfit. At{" "}
+          <b className="text-amber-700">AvishJEWELS</b>, we have bracelets that
+          suit casual wear, party outfits, or formal looks.
+        </p>
         <br />
-        Whether you’re shopping for yourself or searching for a meaningful gift,
-        our bracelets are crafted to celebrate life’s special moments with
-        elegance and style. <br />
+        <h2 className="font-bold text-amber-700">
+          Different Styles of Bracelets
+        </h2>
+        <p>
+          Our collection features charm bracelets, bangles, leather bracelets,
+          and delicate chains. Each style has its unique appeal—charm bracelets
+          reflect memories, bangles create an eye-catching effect, leather
+          bracelets give a rugged vibe, and delicate chains offer everyday
+          elegance. There’s a bracelet for every occasion at{" "}
+          <b className="text-amber-700">AvishJEWELS</b>.
+        </p>
         <br />
-        <h1>Elegant & Stylish Bracelet Designs for Every Occasion</h1>
-        <h1>What Makes a Bracelet Special?</h1>A bracelet is not just a piece of
-        jewelry; it tells a story about the person who wears it.
-        <b>Bracelets can symbolize love, friendship, or personal style.</b>
-        Many people choose bracelets because they are versatile and can
-        complement any outfit. Whether made of gold, silver, or colorful beads,
-        bracelets add a charming touch to your overall look. So, the next time
-        you pick a bracelet, think about the meaning it holds for you.
-        <h1>Different Styles of Bracelets</h1>
-        There are many styles of bracelets available, and each style has its
-        unique charm. For example, charm bracelets allow you to collect charms
-        that represent special moments or interests. On the other hand, bangles
-        are solid and often worn in groups to create an eye-catching effect.
-        Leather bracelets give a rugged look, while pearl bracelets are perfect
-        for elegant occasions. So, whether you prefer casual wear or something
-        more formal, there’s a bracelet out there just for you!
-        <h6>How to Choose the Right Bracelet</h6>
-        When choosing a bracelet, consider your personal style and the occasions
-        you will wear it for. Think about the materials that you’re comfortable
-        with and the colors that suit your wardrobe. For daily wear, you might
-        want something lightweight and durable, while for special events, you
-        might choose a more glamorous piece. It’s essential to find a bracelet
-        that not only looks good but also feels good on your wrist. Because a
-        perfect bracelet can boost your confidence and make you feel fabulous!{" "}
+        <h2 className="font-bold text-amber-700">
+          How to Choose the Right Bracelet
+        </h2>
+        <p>
+          Consider your personal style and the occasions you will wear it for.
+          Look for comfort, design, and versatility. Daily wear pieces are
+          lightweight and practical, while special event bracelets are bold and
+          eye-catching. At <b className="text-amber-700">AvishJEWELS</b>, each
+          bracelet is designed to look beautiful and feel perfect on your wrist.
+        </p>
         <br />
-        Discover our exclusive collection of{" "}
-        <b>bracelets that blend elegance with modern style.</b> Whether you’re
-        looking for a delicate daily wear piece, a bold statement design, or a
-        meaningful gift for someone special, our bracelets are crafted to suit
-        every mood and occasion. From traditional to contemporary styles, each
-        bracelet adds a touch of sophistication and charm, making it the perfect
-        accessory to complete your look.
-        <br />
+        <p>
+          Discover our exclusive collection of bracelets at{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          that blend elegance with modern style. From delicate daily wear to
+          bold statement designs, every bracelet is crafted to suit every mood
+          and occasion, making it the perfect accessory to complete your look.
+        </p>
         <br />
         <div>
-          <h1>FAQs</h1>
+          <h1 className="font-bold text-amber-700">FAQs</h1>
           <h2 className="font-bold">
             1. What makes a bracelet a perfect gift?
           </h2>
-          <b>Answer:</b> A bracelet is a timeless gift because it carries
-          emotional value and symbolizes love, friendship, or special memories.
-          Its versatility makes it suitable for birthdays, anniversaries,
-          weddings, or “just because” moments.
+          <b>Answer:</b> A bracelet from{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          is a timeless gift that carries emotional value and symbolizes love,
+          friendship, or special memories. Its versatility makes it suitable for
+          birthdays, anniversaries, or any thoughtful occasion.
           <h2 className="font-bold">
-            2. Which bracelet styles are best for daily wear ?
+            2. Which bracelet styles are best for daily wear?
           </h2>
-          <b>Answer:</b> For daily wear, lightweight and durable designs such as
-          delicate chains, bangles, or leather bracelets are ideal. These pieces
-          are comfortable, stylish, and easy to pair with any outfit.
-          <h3 className="font-bold">
+          <b>Answer:</b> Lightweight and durable designs like delicate chains,
+          bangles, or leather bracelets are ideal for everyday wear, offering
+          comfort and style.
+          <h2 className="font-bold">
             3. How do I choose the right bracelet for a special occasion?
-          </h3>
-          <b> Answer:</b> For parties, weddings, or formal events, opt for bold
-          designs like diamond-studded, gemstone, or pearl bracelets. They add
-          sparkle and sophistication, perfectly complementing elegant attire.
-          <h3 className="font-bold">
+          </h2>
+          <b>Answer:</b> For parties or formal events, choose bold statement
+          designs or unique charms to add sparkle and sophistication to your
+          outfit.
+          <h2 className="font-bold">
             4. Are bracelets suitable for both men and women?
-          </h3>
-          <b>Answer:</b> Yes, bracelets are unisex accessories. Men often prefer
-          leather, beaded, or metal cuff styles, while women enjoy delicate
-          chains, bangles, and designer gemstone bracelets. There’s a bracelet
-          to suit everyone’s personality and taste.
-          <h4 className="font-bold">
-            5. What materials are most popular in bracelets?
-          </h4>
-          <b> Answer:</b> Popular bracelet materials include gold, silver,
-          platinum, leather, pearls, beads, and gemstones. Each material offers
-          a unique style—whether you prefer classic elegance, modern chic, or
-          casual charm.
+          </h2>
+          <b>Answer:</b> Yes, <b className="text-amber-700">AvishJEWELS</b>{" "}
+          bracelets are unisex, with options for every style and personality.
         </div>
       </div>
     </div>

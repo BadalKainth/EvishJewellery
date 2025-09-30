@@ -129,35 +129,46 @@ const NecklacesGrid = () => {
 
       {/* Paragraph content (unchanged) */}
       <div className="p-10 text-xs md:text-base px-6 md:px-20 text-justify poppins-regular">
-        <b>Necklaces – Modern & Traditional Necklace Designs Online</b>
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+          Necklaces – Modern & Traditional Necklace Designs Online
+        </h1>
+        <p>
+          At <b className="text-amber-700">AvishJEWELS</b>, necklaces are not
+          just accessories—they are timeless pieces that represent elegance,
+          beauty, and individuality. Whether it is a simple modern necklace for
+          daily wear or a traditional necklace for weddings, festivals, and
+          cultural occasions, every design from{" "}
+          <b className="text-amber-700">AvishJEWELS</b> adds charm and
+          sophistication to your style.
+        </p>
         <br />
-        Find traditional and modern necklace designs online. Shop designer, best
-        necklaces for weddings, occasions, every day.
+        <p>
+          The <b className="text-amber-700">AvishJEWELS</b> necklace collection
+          brings together modern trends with classic traditions. From statement
+          chokers to layered designs, from minimal everyday wear to grand
+          occasion pieces, each necklace is crafted with precision and passion.
+          Every creation from
+          <b className="text-amber-700"> AvishJEWELS</b> is made to highlight
+          your personality and make every moment memorable.
+        </p>
         <br />
+        <p>
+          A necklace from <b className="text-amber-700">AvishJEWELS</b> is more
+          than just a piece of jewelry—it is an expression of your creativity
+          and individuality. Whether you are choosing a design for daily wear,
+          gifting a loved one, or selecting something unique for bridal and
+          festive occasions, our necklaces bring a perfect balance of beauty and
+          versatility.
+        </p>
         <br />
-        Necklaces are one of the most beloved pieces of jewelry, representing
-        elegance, beauty and individuality. Whether it is a simple modern
-        necklace for daily wear or a comprehensive traditional necklace for
-        weddings, cultural events or festival occasions, necklaces lend charm
-        and purpose to every outfit. In our online store, you will discover an
-        exquisite variety of designer necklaces for sale in an array of styles,
-        including necklaces, diamond necklaces, statement chokers or layered
-        necklaces that can be worn as trendy or contemporary necklaces. Each
-        necklace is designed with meticulous precision, bringing together
-        classic tradition with modern style. You will discover more than just
-        necklaces, you will find necklaces that embrace your style and make
-        moments more memorable! A necklace is more than just an accessory, it is
-        a timeless piece of jewelry to finish any look or reflect your
-        creativity. Whether you are gazing at intricate traditional necklaces,
-        wearing simple modern and diamond link necklaces, there are a world of
-        necklaces and styles that have the ability to unlock your outfit or
-        special occasion. Whether you are looking for elegance in daily wear, a
-        gift for a loved one, or bridal jewelry that makes a statement, you will
-        find an exclusive private collection of necklaces for every style and
-        occasion.
-        <br />
-        <br />
-        {/* … rest of paragraph content unchanged … */}
+        <p>
+          Explore exclusive collections only at{" "}
+          <b className="text-amber-700">AvishJEWELS</b>. Our wide range ensures
+          you can always find the perfect piece to match your outfit, occasion,
+          and personality. Choose <b className="text-amber-700">AvishJEWELS</b>
+          necklaces to elevate your look with timeless elegance and unmatched
+          charm.
+        </p>
       </div>
     </div>
   );

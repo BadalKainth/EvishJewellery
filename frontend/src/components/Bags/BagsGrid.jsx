@@ -115,8 +115,52 @@ const BagsGrid = () => {
           </button>
         </div>
 
-        <div className="p-10 text-justify poppins-regular">
-          {/* Add your Bags description or content here */}
+        {/* Add your Bags description or content here */}
+        <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
+          <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+            Bags – Stylish & Trendy Bags Collection Online
+          </h1>
+          <p>
+            Complete your look with{" "}
+            <b className="text-amber-700">AvishJEWELS</b> Bags – a perfect
+            combination of fashion, utility, and elegance. From chic handbags to
+            classy clutches and spacious totes,{" "}
+            <b className="text-amber-700">AvishJEWELS</b>
+            brings you a stylish range of bags designed to suit every mood and
+            occasion.
+          </p>
+          <br />
+          <p>
+            At <b className="text-amber-700">AvishJEWELS</b>, we believe bags
+            are more than just accessories – they are a reflection of your
+            lifestyle and personality. Whether you’re heading to work, attending
+            a party, or enjoying a casual outing, our carefully curated bag
+            collection ensures you always make a style statement.
+          </p>
+          <br />
+          <h2 className="font-bold text-amber-700">
+            Trendy Bags for Every Occasion
+          </h2>
+          <p>
+            Discover the latest designs in handbags, clutches, slings,
+            backpacks, and more. Each{" "}
+            <b className="text-amber-700">AvishJEWELS</b> bag is designed to
+            balance comfort with style, offering enough space while still being
+            trendy. Our collection fits perfectly with both traditional and
+            modern outfits, making them a versatile choice for every woman.
+          </p>
+          <br />
+          <h2 className="font-bold text-amber-700">
+            Why Choose AvishJEWELS Bags?
+          </h2>
+          <p>
+            Choosing <b className="text-amber-700">AvishJEWELS</b> bags means
+            adding a timeless accessory to your wardrobe. From high-quality
+            materials to stylish detailing, every bag is made to last while
+            keeping you on-trend. Perfect as daily essentials or as gifts,{" "}
+            <b className="text-amber-700">AvishJEWELS</b>
+            bags redefine fashion with practicality.
+          </p>
         </div>
       </div>
     </div>

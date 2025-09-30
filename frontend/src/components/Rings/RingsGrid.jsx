@@ -78,7 +78,7 @@ const RingsGrid = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 px-1 md:px-20 gap-2 md:gap-4 mt-6">
           {rings.map((product) => (
             <ProductCard
-              key={product._id } // ✅ Unique key for React
+              key={product._id} // ✅ Unique key for React
               product={product} // ✅ Product data
               addToCart={() => addItem(product._id)} // ✅ Add to cart function
               onClick={() => navigate(`/category/rings/${product._id}`)} // ✅ Navigate to product detail page
@@ -133,36 +133,33 @@ const RingsGrid = () => {
 
       {/* ========================== Paragraph Content (unchanged) ========================== */}
       <div className="p-10 md:p-20 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold">
-          Rings – Timeless & Trendy Rings for Men & Women
-        </h1>
-        Shop timeless and trendy rings for men, women, and kids. Explore gold,
-        silver, diamond, and designer rings in 18KT & 22KT crafted for weddings,
-        daily wear, and special occasions.
+        <h1 className="font-bold">Rings – Timeless & Trendy Rings</h1>
+        Rings are more than just ornaments—they are timeless symbols of love,
+        commitment, style, and individuality. From elegant engagement rings to
+        everyday wear bands, each ring tells a unique story and adds a touch of
+        sophistication to your personality. Designed with care and creativity,
+        our rings are perfect for making every moment special.
         <br />
         <br />
-        Shop timeless and trendy rings for men and women. Discover gold, silver,
-        diamond, and designer ring collections crafted to suit every style and
-        special occasion. Rings are more than just ornaments—they are timeless
-        symbols of love, commitment, style, and individuality. From elegant
-        engagement rings to everyday wear bands, each ring tells a unique story
-        and adds a touch of sophistication to your personality. Whether crafted
-        in gold, silver, diamonds, or gemstones, rings have the power to
-        transform an outfit and create lasting impressions. At Jewellers, we
-        bring you a diverse collection of rings for men, women, and even kids,
-        designed to suit every style and occasion. Our range includes
-        traditional gold bands, modern diamond-studded pieces, and trendy
-        fashion rings, all crafted with precision and passion. Available in 18KT
-        and 22KT gold, our rings offer both beauty and durability, making them
-        ideal for everything from daily wear to weddings and grand celebrations.
-        From classic solitaires to bold cocktail rings, from simple bands to
-        intricate gemstone designs, we have something for everyone. Each piece
-        reflects excellent craftsmanship, premium quality, and timeless
-        elegance. Whether you’re searching for the perfect engagement ring, a
-        thoughtful gift, or a stylish accessory for yourself, our collection
-        ensures you’ll find a ring that truly matches your personality and
-        special moments.
-        {/* ✅ बाकी paragraph content unchanged, कोई data remove नहीं किया */}
+        At <b className="text-amber-700">AvishJEWELS</b>, we bring you a
+        versatile collection of rings crafted to suit every style and occasion.
+        Our designs range from classic elegance to modern fashion statements,
+        ensuring there’s something for everyone. Whether you prefer subtle
+        minimal bands or bold statement pieces, each ring is made to reflect
+        your personality and enhance your style.
+        <br />
+        <br />
+        Available in a variety of designs, our rings are comfortable for daily
+        wear and equally perfect for parties, weddings, or special occasions.
+        Each piece is a blend of durability, comfort, and unmatched
+        craftsmanship, ensuring that your ring doesn’t just look beautiful but
+        also feels perfect on your finger.
+        <br />
+        <br />
+        Whether you’re looking for a thoughtful gift, a symbol of love, or a
+        stylish accessory for yourself,{" "}
+        <b className="text-amber-700">AvishJEWELS</b> rings are crafted to
+        celebrate life’s special moments with timeless elegance.
       </div>
     </div>
   );

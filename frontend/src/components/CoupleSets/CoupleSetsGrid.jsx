@@ -123,30 +123,42 @@ const CoupleSetsGrid = () => {
 
       {/* Existing Paragraphs */}
       <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
-        <b> Couple Sets – Matching Jewelry Sets for Couples in Love </b>
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+          Couple Sets – Matching Jewelry Sets for Couples in Love
+        </h1>
+        <p>
+          Celebrate love with <b className="text-amber-700">AvishJEWELS</b>{" "}
+          Couple Sets - Matching Jewelry for couples. Shop matching necklaces,
+          matching bracelets and personalized jewelry gifts online. Great for
+          weddings, anniversaries and more.
+        </p>
         <br />
-        Celebrate love with Couple Sets - Matching Jewelry for couples. Shop
-        matching necklaces, matching bracelets and personalized jewelry gifts
-        online. Great for weddings, anniversaries and more. <br /> <br />
-        Love should be celebrated in every way, large and small! What better way
-        to celebrate love than with Couple Sets - Matching Jewelry Sets for
-        Couples in Love? Jewelry is more than a practical piece of clothing,
-        jewelry holds emotion, memories and connection. Matching Couple Jewelry,
-        the newest trend for couples in love! Matching couple jewelry is one of
-        today's prettiest trends for couples in love that want to proudly wear
-        their connection in a stylish and personal way. Whether you purchase
-        matching necklaces, matching bracelets, or a complete set, couples can
-        carry a little of each other wherever they go with their matching piece.{" "}
-        <br /> <br />
-        <b>Matching Couple Jewelry Sets</b> <br />
-        Matching Couple Jewelry Sets are more than just accessories; they
-        represent togetherness and connection. Usually sold in pairs, they
-        feature designs that are the same or complementary to each other,
-        representing two people's love for one another. There are lots of styles
-        to choose from, including pendants, chains, charm bracelets, or rings.
-        Matching Couple Jewelry Sets offer the unique opportunity for both
-        partners to feel connected, even if they are miles apart. <br />
-        {/* ... rest of your paragraphs remain unchanged */}
+        <p>
+          Love should be celebrated in every way, large and small! What better
+          way to celebrate love than with{" "}
+          <b className="text-amber-700">AvishJEWELS</b> Couple Sets - Matching
+          Jewelry Sets for Couples in Love? Jewelry is more than just a style
+          statement, it holds emotions, memories and connection. Matching Couple
+          Jewelry is the newest trend for couples in love! With{" "}
+          <b className="text-amber-700">AvishJEWELS</b>, couples can proudly
+          wear their bond in a stylish and personal way. Whether you choose
+          matching necklaces, matching bracelets, or a complete set, couples can
+          carry a little of each other wherever they go.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">
+          Matching Couple Jewelry Sets
+        </h2>
+        <p>
+          <b className="text-amber-700">AvishJEWELS</b> Matching Couple Jewelry
+          Sets are more than just accessories; they represent togetherness and
+          connection. Usually sold in pairs, they feature designs that are the
+          same or complementary to each other, symbolizing two people's love for
+          one another. There are lots of styles to choose from, including
+          pendants, chains, charm bracelets, or rings. With
+          <b className="text-amber-700"> AvishJEWELS</b>, couples get the unique
+          opportunity to feel connected, even if they are miles apart.
+        </p>
       </div>
     </div>
   );

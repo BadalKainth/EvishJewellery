@@ -120,8 +120,51 @@ const WomenDressGrid = () => {
         </div>
       </div>
 
-      <div className="p-10 text-justify poppins-regular">
-        {/* Add Women Dress description here */}
+      {/* Add Women Dress description here */}
+      <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+          Women Dresses – Trendy & Elegant Dress Collection
+        </h1>
+        <p>
+          Explore the latest collection of women’s dresses at{" "}
+          <b className="text-amber-700">AvishJEWELS</b>. From casual wear to
+          party-ready outfits, our dresses are designed to enhance your style
+          and confidence. Choose from chic dresses, maxi dresses, ethnic wear,
+          and modern fusion styles to suit every occasion and mood.
+        </p>
+        <br />
+        <p>
+          At <b className="text-amber-700">AvishJEWELS</b>, every dress is
+          crafted with attention to detail and a focus on comfort, fit, and
+          style. Our collection blends contemporary fashion trends with timeless
+          elegance, ensuring that every outfit makes a statement while keeping
+          you comfortable all day.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">
+          Trendy Styles for Every Occasion
+        </h2>
+        <p>
+          Discover a variety of styles including casual dresses, party dresses,
+          maxi gowns, ethnic dresses, and modern fusion wear. Each{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          dress is designed to complement your personality, whether you are
+          heading to work, attending a special event, or enjoying a casual
+          outing. Our dresses are versatile, fashionable, and perfect for all
+          seasons.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">
+          Why Choose AvishJEWELS Women Dresses?
+        </h2>
+        <p>
+          Choosing <b className="text-amber-700">AvishJEWELS</b> dresses means
+          choosing style, comfort, and quality. Each piece is carefully designed
+          to enhance your look and make you feel confident. With a wide range of
+          options, from everyday wear to festive and party dresses,{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          ensures that every outfit becomes a part of your style statement.
+        </p>
       </div>
     </div>
   );

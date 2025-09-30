@@ -119,8 +119,51 @@ const WatchGrind = () => {
         </div>
       </div>
 
-      <div className="p-10 text-justify poppins-regular">
-        {/* Add your Watch description or content here */}
+      {/* Add your Watch description or content here */}
+      <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+          Watches – Stylish & Trendy Watches Collection Online
+        </h1>
+        <p>
+          Discover a wide range of stylish watches at{" "}
+          <b className="text-amber-700">AvishJEWELS</b>. From casual everyday
+          watches to elegant timepieces for special occasions, our collection
+          blends fashion with functionality. Choose from classic designs, modern
+          chronographs, sleek minimalistic watches, and statement pieces to suit
+          every personality and style.
+        </p>
+        <br />
+        <p>
+          At <b className="text-amber-700">AvishJEWELS</b>, watches are more
+          than just accessories—they are a reflection of your personality and
+          taste. Our carefully curated collection ensures that every watch adds
+          sophistication, precision, and elegance to your look, whether for
+          work, parties, or casual outings.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">
+          Trendy Watches for Every Occasion
+        </h2>
+        <p>
+          Explore a variety of styles including analog, digital, chronograph,
+          smartwatches, and designer-inspired watches. Each{" "}
+          <b className="text-amber-700">AvishJEWELS</b>
+          watch is crafted for comfort and durability, while keeping your look
+          stylish and on-trend. Perfect for both men and women, our watches
+          complement formal attire, casual wear, and even sporty outfits.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">
+          Why Choose AvishJEWELS Watches?
+        </h2>
+        <p>
+          Choosing <b className="text-amber-700">AvishJEWELS</b> watches means
+          opting for quality, style, and timeless elegance. Each timepiece is
+          designed to offer reliable performance and a chic aesthetic. Ideal as
+          a gift or a personal accessory,
+          <b className="text-amber-700">AvishJEWELS</b> watches make a statement
+          on every wrist and elevate your overall look.
+        </p>
       </div>
     </div>
   );
