@@ -9,29 +9,27 @@ import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
 
 const BraceletsDetails = ({ addToCart }) => {
-  const [bracelets, setbracelets] = useState([]);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const { id } = useParams();
     const { addItem } = useContext(CartContext);
 
 
   useEffect(() => {
-    const fetchbracelets = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", { category: "bracelets" });
-        setbracelets(response.data?.products || []);
-        console.log("Fetched bracelets:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load bracelets");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchbracelets();
-  }, []);
-  const { id } = useParams();
-  const product = bracelets.find((p) => p.id.toString() === id);
+    fetchProduct();
+  }, [id]);
+
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;

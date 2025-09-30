@@ -8,31 +8,26 @@ import "swiper/css/pagination";
 import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
-const ProductDetails = ({ addToCart }) => {
-  const [rings, setrings] = useState([]);
+const ProductDetails = () => {
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-    const { addItem } = useContext(CartContext);
-
-
+  const { addItem } = useContext(CartContext);
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchrings = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", { category: "rings" });
-        setrings(response.data?.products || []);
-        console.log("Fetched ringss:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load rings");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchrings();
-  }, []);
-
-  const product = rings.find((p) => p.id.toString() === id);
+    fetchProduct();
+  }, [id]);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
@@ -49,13 +44,11 @@ const ProductDetails = ({ addToCart }) => {
   }
 
   return (
-    <>
-      <CartDesignId
-        key={product._id}
-        product={product}
-        addToCart={() => addItem(product._id)} // 🔹 _id bhejo
-      />
-    </>
+    <CartDesignId
+      key={product._id}
+      product={product}
+      addToCart={() => addItem(product._id)}
+    />
   );
 };
 

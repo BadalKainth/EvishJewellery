@@ -9,29 +9,28 @@ import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
 const WomenDetails = () => {
-  const [womendress, setwomendress] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  const { id } = useParams();  
   const { addItem } = useContext(CartContext);
 
+
+    const { id } = useParams();
+
   useEffect(() => {
-    const fetchwomendress = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", { category: "women-dress" });
-        setwomendress(response.data?.products || []);
-        console.log("Fetched womendress:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load womendress");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchwomendress();
-  }, []);
+    fetchProduct();
+  }, [id]);
 
-  const product = womendress.find((p) => p.id.toString() === id);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;

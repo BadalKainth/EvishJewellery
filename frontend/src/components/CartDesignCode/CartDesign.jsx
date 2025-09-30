@@ -56,7 +56,11 @@ const CartDesign = ({ product, addToCart, onClick }) => {
           {/* ✅ Product Image */}
           <div className="relative overflow-hidden">
             <img
-              onClick={onClick}
+              onClick={() => {
+                console.log("Clicked Product ID:", product._id || product.id);
+                onClick();
+              }}
+              // onClick={onClick}
               src={getImageURL(product.images[0]?.url || product.images[0])}
               alt={product.images[0]?.alt || product.name}
               loading="lazy"

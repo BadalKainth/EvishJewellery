@@ -11,32 +11,27 @@ import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
 const BagsDetails = ({ addToCart }) => {
-  const [bags, setbags] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const { id } = useParams();
   const { addItem } = useContext(CartContext);
+  
+   const { id } = useParams();
 
-
-  useEffect(() => {
-    const fetchbags = async () => {
-      try {
-        const response = await apiGet("/products", {
-          category: "bags",
-        });
-        setbags(response.data?.products || []);
-        console.log("Fetched bags:", response.data?.products);
-      } catch (err) {
-        setError(err.message || "Failed to load bags");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchbags();
-  }, []);
-
-  const product = bags.find((p) => p.id.toString() === id);
+   useEffect(() => {
+     const fetchProduct = async () => {
+       try {
+         const response = await apiGet(`/products/${id}`);
+         setProduct(response.data?.product || null);
+       } catch (err) {
+         setError(err.message || "Failed to load product");
+       } finally {
+         setLoading(false);
+       }
+     };
+     fetchProduct();
+   }, [id]);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;

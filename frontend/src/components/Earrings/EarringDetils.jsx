@@ -9,7 +9,7 @@ import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
 const EarringDetails = () => {
-  const [earrings, setearrings] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
     const { addItem } = useContext(CartContext);
@@ -18,22 +18,18 @@ const EarringDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchearrings = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", { category: "earrings" });
-        setearrings(response.data?.products || []);
-        console.log("Fetched earrings:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load earrings");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchearrings();
-  }, []);
-
-  const product = earrings.find((p) => p.id.toString() === id);
-
+    fetchProduct();
+  }, [id]);
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
   }

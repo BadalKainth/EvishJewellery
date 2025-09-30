@@ -9,7 +9,7 @@ import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
 const AnkletDetails = () => {
-  const [anklet, setanklet] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -18,23 +18,18 @@ const AnkletDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchanklet = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", {
-          category: "anklets",
-        });
-        setanklet(response.data?.products || []);
-        console.log("Fetched anklet:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load anklet");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchanklet();
-  }, []);
-
-  const product = anklet.find((p) => p.id.toString() === id);
+    fetchProduct();
+  }, [id]);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;

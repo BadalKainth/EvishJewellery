@@ -9,30 +9,26 @@ import CartDesignId from "../CartDesignCode/CartDesignId";
 import { CartContext } from "../../context/CartContext";
 
 const WatchDetails = ({ addToCart }) => {
-  const [watch, setwatch] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
     const { addItem } = useContext(CartContext);
 
-
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchwatch = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await apiGet("/products", { category: "watch" });
-        setwatch(response.data?.products || []);
-        console.log("Fetched Watches:", response.data?.products);
+        const response = await apiGet(`/products/${id}`);
+        setProduct(response.data?.product || null);
       } catch (err) {
-        setError(err.message || "Failed to load watch");
+        setError(err.message || "Failed to load product");
       } finally {
         setLoading(false);
       }
     };
-    fetchwatch();
-  }, []);
-
-  const product = watch.find((p) => p.id.toString() === id);
+    fetchProduct();
+  }, [id]);
 
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
