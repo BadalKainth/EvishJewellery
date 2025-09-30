@@ -51,16 +51,12 @@ const CartDesign = ({ product, addToCart, onClick }) => {
           </div>
         )}
 
-        {/* ✅ Card */}
+        {/* Card */}
         <div className="bg-white p-2 rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
-          {/* ✅ Product Image */}
+          {/*  Product Image */}
           <div className="relative overflow-hidden">
             <img
-              onClick={() => {
-                console.log("Clicked Product ID:", product._id || product.id);
-                onClick();
-              }}
-              // onClick={onClick}
+              onClick={onClick}
               src={getImageURL(product.images[0]?.url || product.images[0])}
               alt={product.images[0]?.alt || product.name}
               loading="lazy"
@@ -77,7 +73,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
             )}
           </div>
 
-          {/* ✅ Product Details */}
+          {/* Product Details */}
           <div className="py-0 md:py-4 px-1  md:px-4 ">
             <h3 className="flex justify-between items-center">
               <span className="font-semibold uppercase text-xs md:text-lg text-gray-800 truncate block w-3/4 md:w-4/5 ">
@@ -95,9 +91,9 @@ const CartDesign = ({ product, addToCart, onClick }) => {
               Delivery: ₹ {product.deliveryCharge || 0}
             </p> */}
 
-            {/* ✅ Price, Stock & Cart Button */}
+            {/* Price, Stock & Cart Button */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-0 md:mt-4">
-              {/* ✅ Left Section (Price + Discount + Stock) */}
+              {/*  Left Section (Price + Discount + Stock) */}
               <div className="flex flex-col font-bold text-amber-600 text-sm md:text-lg flex-1 w-full">
                 <div className="flex flex-row md:flex-col gap-2">
                   <span className="line-through whitespace-nowrap decoration-2 decoration-amber-700 text-sm md:text-xl">
@@ -109,20 +105,20 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                   </span>
                 </div>
 
-                {/* ✅ Discount + Stock (Mobile: left, Desktop: normal) */}
+                {/* Discount + Stock (Mobile: left, Desktop: normal) */}
                 <div className="flex flex-row justify-between items-center sm:flex-col sm:items-start gap-2 mt-1 w-full">
                   <div className="flex flex-col">
-                    {/* Mobile पर सिर्फ % OFF */}
+                    {/* Mobile */}
                     <span className="text-xs text-gray-600 animate-pulse block sm:hidden">
                       ({discountPercent}% OFF)
                     </span>
 
-                    {/* Desktop पर पूरा text */}
+                    {/* Desktop */}
                     <span className="md:text-sm text-gray-600 animate-pulse hidden sm:block">
                       🎉 You saved ₹{discount} ({discountPercent}% OFF)
                     </span>
 
-                    {/* ✅ Stock Count */}
+                    {/*  Stock Count */}
                     <span
                       className={`text-xs md:text-sm font-medium ${
                         product.stock > 5
@@ -138,7 +134,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                     </span>
                   </div>
 
-                  {/* ✅ Mobile पर सामने, Desktop पर अलग right side */}
+                  {/*  Mobile */}
                   <button
                     onClick={handleAddToCart}
                     disabled={product.stock <= 0}
@@ -153,7 +149,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                 </div>
               </div>
 
-              {/* ✅ Desktop Button (right side अलग रहे) */}
+              {/*  Desktop Button*/}
               <button
                 onClick={handleAddToCart}
                 disabled={product.stock <= 0}

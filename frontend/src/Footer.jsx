@@ -99,14 +99,25 @@ const Footer = () => {
           </h3>
           <ul className="space-y-3 text-gray-100">
             <li className="flex items-center gap-2">
-              <MapPin size={56} /> 35, I Block B , First floor ,Arya samaj Road
-              , Uttam Nagar New Delhi-110059
+              <MapPin size={56} />{" "}
+              <a
+                href="https://maps.app.goo.gl/HUmqtcZjdoruMQD5A"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📍 35, I Block B , First floor ,Arya samaj Road , Uttam Nagar
+                New Delhi-110059
+              </a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={18} /> +91 8882825761
+              <Phone size={18} />{" "}
+              <a href="tel:+918882825761">+91 88828 25761</a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail size={18} /> info.avishjewels@gmail.com
+              <Mail size={18} />{" "}
+              <a href="mailto:info.avishjewels@gmail.com ">
+                info.avishjewels@gmail.com
+              </a>
             </li>
           </ul>
           <div className="flex gap-8 px-6 py-4">
