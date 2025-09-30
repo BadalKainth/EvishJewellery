@@ -9,13 +9,13 @@ export default function CartCoupons() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await client.get("/coupons/admin/all", { limit: 50 });
+        // ✅ Backend already filters to active, public, and currently valid coupons
+        const res = await client.get("/coupons", { limit: 50 });
+
         if (res?.success) {
-          // Only show active & public coupons
-          const activeCoupons = res.data.coupons.filter(
-            (c) => c.isActive && c.isPublic
-          );
-          setCoupons(activeCoupons);
+          setCoupons(res?.data?.coupons ?? []);
+        } else {
+          setCoupons([]);
         }
       } catch (e) {
         setError(e.message || "Failed to load coupons");
@@ -44,7 +44,6 @@ export default function CartCoupons() {
             <span className="text-green-500">{c.code}</span> —{" "}
             {c.type === "percentage" ? c.value + "%" : "₹" + c.value} Off
           </div>
-          {/* <div className="text-gray-600">{c.name}</div> */}
         </div>
       ))}
     </div>

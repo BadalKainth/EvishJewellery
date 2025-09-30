@@ -225,10 +225,10 @@ export default function Checkout() {
             <span>Subtotal</span>
             <span>₹{subtotal.toLocaleString("en-IN")}</span>
           </div>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <span>Discount</span>
             <span>- ₹{discount.toLocaleString("en-IN")}</span>
-          </div>
+          </div> */}
           {couponDiscount > 0 && (
             <div className="flex justify-between text-green-600">
               <span>Coupon Discount</span>

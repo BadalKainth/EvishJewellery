@@ -144,7 +144,12 @@ export const setAuthToken = (token) => {
 
 // ✅ New helper for placing order and getting QR code
 export const placeOrder = async (orderData) => {
-  return apiPost("/orders", orderData); // backend returns { order, payment: { upiString, qrCode } }
+  return apiPost("/orders", orderData);
+};
+
+// ✅ Fetch public coupons (for users)
+export const getPublicCoupons = async (options = {}) => {
+  return apiGet("/coupons", options);
 };
 
 export default {
@@ -155,5 +160,6 @@ export default {
   delete: apiDelete,
   setAuthToken,
   getImageURL,
-  placeOrder, // added
+  placeOrder,
+  getPublicCoupons, // added
 };
