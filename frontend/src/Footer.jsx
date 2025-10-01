@@ -9,6 +9,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "../src/img/Logo.png";
+
 
 const Footer = () => {
   // Collections with routes
@@ -33,19 +35,20 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black text-white w-full shadow-2xl relative">
+    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black w-full shadow-2xl relative">
       <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Info */}
         <div>
-          <h2 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
-            ✨{" "}
-            <span className="text-4xl font-sans font-bold text-[#ed9d58]">
-              Avish
-            </span>
-            <span className="text-2xl font-sans font-bold pl-1 pt-4">
-              JEWELS
-            </span>
-          </h2>
+          <Link to="/">
+            {/* <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
+                    <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span> */}
+            <img
+              src={Logo}
+              alt="Avish Jewels"
+              className="ml-2 h-24 w-52 mix-blend-normal"
+            />
+          </Link>
+
           <p className="text-gray-100">
             Premium jewellery crafted with love and elegance, designed to shine
             with timeless beauty. Perfect for your special moments,
@@ -110,8 +113,7 @@ const Footer = () => {
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone size={18} />{" "}
-              <a href="tel:+918882825761">+91 8882825761</a>
+              <Phone size={18} /> <a href="tel:+918882825761">+91 8882825761</a>
             </li>
             <li className="flex items-center gap-2">
               <Mail size={18} />{" "}
