@@ -36,7 +36,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-b from-[#0a0a0a] to-black w-full shadow-2xl relative">
-      <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-8 md:px-0 py-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Info */}
         <div>
           <Link to="/">
@@ -45,12 +45,13 @@ const Footer = () => {
             <img
               src={Logo}
               alt="Avish Jewels"
-              className="ml-2 h-24 w-52 mix-blend-normal"
+              // className="h-32 w-52 mix-blend-normal brightness-100 "
+              className="h-32 w-52 rounded-full mix-blend-normal brightness-100 "
             />
           </Link>
 
           <p className="text-gray-100">
-            Premium jewellery crafted with love and elegance, designed to shine
+            Avish jewels crafted with love and elegance, designed to shine
             with timeless beauty. Perfect for your special moments,
             anniversaries, weddings, and everyday elegance that reflects your
             true style.
@@ -108,7 +109,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                📍 35, I Block B , First floor ,Arya samaj Road , Uttam Nagar
+              📍 35, I Block B, First floor, Arya samaj Road, Uttam Nagar
                 New Delhi-110059
               </a>
             </li>

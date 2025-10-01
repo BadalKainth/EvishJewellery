@@ -176,7 +176,7 @@ const AboutUsPage = () => {
                 href="tel:+918882825761"
                 className="text-gray-600 md:text-blue-600 hover:underline"
               >
-                +91 88828 25761
+                +91 8882825761
               </a>
             </div>
 

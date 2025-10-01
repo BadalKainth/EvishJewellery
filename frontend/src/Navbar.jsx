@@ -39,14 +39,19 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[#faf9eb] shadow-md sticky px-2 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
+    <nav className="bg-[#faf9eb] shadow-md sticky px-6 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
       <div className="mx-auto">
         <div className="flex justify-between items-center py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             {/* <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
             <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span> */}
-            <img src={Logo} alt="Avish Jewels" className="ml-2 h-20 w-40 rounded-md" />
+            <img
+              src={Logo}
+              alt="Avish Jewels"
+              className=" h-20 w-40 rounded-md"
+              // className=" h-20 w-40 rounded-full"
+            />
           </Link>
 
           {/* Desktop Menu */}
