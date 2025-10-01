@@ -35,22 +35,23 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black  text-amber-700  w-full shadow-2xl relative">
-      <div className="max-w-7xl mx-auto px-8 md:px-0 py-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black text-white w-full shadow-2xl relative">
+      <div className="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Info */}
         <div>
-          <Link to="/">
-            <span className="text-4xl  font-bold text-[#ed9d58]">Avish</span>
-            <span className="text-2xl  font-bold pl-2 pt-10">JEWELS</span>
-            {/* <img
-              src={Logo}
-              alt="Avish Jewels"
-              // className="h-32 w-52 mix-blend-normal brightness-100 "
-              className="h-32 w-60 rounded-md mix-blend-normal brightness-100 "
-            /> */}
-          </Link>
+          <h2 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
+            ✨{" "}
+            <Link to="/">
+              <span className="text-4xl font-sans font-bold text-[#ed9d58]">
+                Avish
+              </span>
+              <span className="text-2xl font-sans font-bold pl-1 pt-4">
+                JEWELS
+              </span>
+            </Link>
+          </h2>
 
-          <p className="text-gray-100 pt-4">
+          <p className="text-gray-100">
             Avish jewels crafted with love and elegance, designed to shine with
             timeless beauty. Perfect for your special moments, anniversaries,
             weddings, and everyday elegance that reflects your true style.

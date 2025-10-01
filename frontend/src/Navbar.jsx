@@ -39,9 +39,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[#faf9eb] shadow-md sticky px-6 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
+    <nav className="bg-[#faf9eb] shadow-md sticky px-2 top-0 z-50 text-amber-700 poppins-semibold text-lg uppercase">
       <div className="mx-auto">
-        <div className="flex justify-between items-center py-2">
+        <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
