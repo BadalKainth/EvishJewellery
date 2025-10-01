@@ -44,14 +44,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            {/* <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
-            <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span> */}
-            <img
+            <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
+            <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span>
+            {/* <img
               src={Logo}
               alt="Avish Jewels"
               className=" h-20 w-40 rounded-md"
-              // className=" h-20 w-40 rounded-full"
-            />
+              
+            /> */}
           </Link>
 
           {/* Desktop Menu */}

@@ -9,7 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import Logo from "../src/img/Logo.png";
+import Logo from "../src/img/avishlogo.jpeg";
 
 
 const Footer = () => {
@@ -35,26 +35,25 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black w-full shadow-2xl relative">
+    <footer className="bg-gradient-to-b from-[#0a0a0a] to-black  text-amber-700  w-full shadow-2xl relative">
       <div className="max-w-7xl mx-auto px-8 md:px-0 py-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Info */}
         <div>
           <Link to="/">
-            {/* <span className="text-3xl font-bold text-[#ed9d58]">Avish</span>
-                    <span className="text-1xl font-bold pl-1 pt-4">JEWELS</span> */}
-            <img
+            <span className="text-4xl  font-bold text-[#ed9d58]">Avish</span>
+            <span className="text-2xl  font-bold pl-2 pt-10">JEWELS</span>
+            {/* <img
               src={Logo}
               alt="Avish Jewels"
               // className="h-32 w-52 mix-blend-normal brightness-100 "
-              className="h-32 w-52 rounded-full mix-blend-normal brightness-100 "
-            />
+              className="h-32 w-60 rounded-md mix-blend-normal brightness-100 "
+            /> */}
           </Link>
 
-          <p className="text-gray-100">
-            Avish jewels crafted with love and elegance, designed to shine
-            with timeless beauty. Perfect for your special moments,
-            anniversaries, weddings, and everyday elegance that reflects your
-            true style.
+          <p className="text-gray-100 pt-4">
+            Avish jewels crafted with love and elegance, designed to shine with
+            timeless beauty. Perfect for your special moments, anniversaries,
+            weddings, and everyday elegance that reflects your true style.
           </p>
         </div>
 
@@ -109,8 +108,8 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-              📍 35, I Block B, First floor, Arya samaj Road, Uttam Nagar
-                New Delhi-110059
+                📍 35, I Block B, First floor, Arya samaj Road, Uttam Nagar New
+                Delhi-110059
               </a>
             </li>
             <li className="flex items-center gap-2">
