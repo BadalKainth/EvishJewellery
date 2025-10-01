@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPinPlus, Phone, MailPlus } from "lucide-react";
-
+import logo from "../../img/avishlogo.jpeg";
 const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-white poppins-regular">
@@ -73,8 +73,9 @@ const AboutUsPage = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img
-                src="https://images.pexels.com/photos/6567673/pexels-photo-6567673.jpeg"
-                alt="Team collaboration in a modern office space with diverse professionals working together around a table"
+                // src="https://images.pexels.com/photos/6567673/pexels-photo-6567673.jpeg"
+                src={logo}
+                alt="Avish Jweles "
                 className="w-full h-[550px] object-cover"
               />
             </div>
