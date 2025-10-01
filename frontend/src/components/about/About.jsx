@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPinPlus, Phone, MailPlus } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "../../img/avishlogo.jpeg";
 const AboutUsPage = () => {
   return (
@@ -72,12 +73,14 @@ const AboutUsPage = () => {
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
-              <img
-                // src="https://images.pexels.com/photos/6567673/pexels-photo-6567673.jpeg"
-                src={logo}
-                alt="Avish Jweles "
-                className="w-full h-[550px] object-cover"
-              />
+              <Link to="/">
+                <img
+                  // src="https://images.pexels.com/photos/6567673/pexels-photo-6567673.jpeg"
+                  src={logo}
+                  alt="Avish Jweles "
+                  className="w-full h-[550px] object-cover"
+                />
+              </Link>
             </div>
           </div>
         </div>
