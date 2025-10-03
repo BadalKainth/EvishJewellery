@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import client, { getImageURL } from "../../api/client";
-import { useDropzone } from "react-dropzone"; // ✅ added
+import { useDropzone } from "react-dropzone";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ export default function AdminProducts() {
     stock: "",
     tags: "",
     size: "",
-    imagesCsv: "",
+    images: [],
     isFeatured: false,
   });
   const [errors, setErrors] = useState({});
@@ -28,22 +28,83 @@ export default function AdminProducts() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulk, setBulk] = useState({ action: "activate", value: 0 });
 
-  const load = async () => {
+  // Pagination state
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 12,
+    total: 0,
+    totalPages: 1,
+  });
+
+  // Updated load function to get ALL products (including inactive) - MODIFIED
+  const load = async (page = 1) => {
     setLoading(true);
     try {
-      const res = await client.get("/products", { limit: 100 });
-      if (res?.success) setProducts(res.data.products);
+      // Remove isActive filter to get ALL products
+      const res = await client.get(
+        `/products?page=${page}&limit=12&isActive=all`
+      );
+      if (res?.success) {
+        setProducts(res.data.products);
+        // Set pagination data from API response
+        if (res.data.pagination) {
+          setPagination({
+            page: res.data.pagination.currentPage,
+            limit: 12,
+            total: res.data.pagination.totalProducts,
+            totalPages: res.data.pagination.totalPages,
+          });
+        }
+      }
     } catch (e) {
-      setError(e.message || "Failed to load products");
+      // If the above fails, try without any filters
+      try {
+        const res = await client.get(`/products?page=${page}&limit=12`);
+        if (res?.success) {
+          setProducts(res.data.products);
+          if (res.data.pagination) {
+            setPagination({
+              page: res.data.pagination.currentPage,
+              limit: 12,
+              total: res.data.pagination.totalProducts,
+              totalPages: res.data.pagination.totalPages,
+            });
+          }
+        }
+      } catch (err) {
+        setError(err.message || "Failed to load products");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    load();
+    load(1);
   }, []);
 
+  // Pagination functions
+  const nextPage = () => {
+    if (pagination.page < pagination.totalPages) {
+      load(pagination.page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (pagination.page > 1) {
+      load(pagination.page - 1);
+    }
+  };
+
+  // Calculate display range
+  const startItem =
+    pagination.total > 0 ? (pagination.page - 1) * pagination.limit + 1 : 0;
+  const endItem = Math.min(
+    pagination.page * pagination.limit,
+    pagination.total
+  );
+
+  // ALL YOUR EXISTING FUNCTIONS REMAIN THE SAME
   const onDrop = (acceptedFiles) => {
     setCreateForm((prev) => ({
       ...prev,
@@ -56,7 +117,6 @@ export default function AdminProducts() {
     onDrop,
   });
 
-  // ✅ Remove image from preview
   const removeImage = (index) => {
     setCreateForm((prev) => {
       const updated = [...prev.images];
@@ -68,7 +128,7 @@ export default function AdminProducts() {
   const toggleActive = async (p) => {
     try {
       await client.put(`/products/${p._id}`, { ...p, isActive: !p.isActive });
-      await load();
+      await load(pagination.page);
     } catch (e) {
       alert(e.message || "Failed to update");
     }
@@ -81,7 +141,7 @@ export default function AdminProducts() {
         quantity: Number(value) || 0,
         stock: Number(value) || p.stock,
       });
-      await load();
+      await load(pagination.page);
     } catch (e) {
       alert(e.message || "Failed to update stock");
     }
@@ -94,7 +154,6 @@ export default function AdminProducts() {
       .filter(Boolean)
       .map((url, idx) => ({ url, isPrimary: idx === 0 }));
 
-  // ✅ Validation
   const validateForm = () => {
     const newErrors = {};
     if (!createForm.name.trim()) newErrors.name = "Name is required";
@@ -108,7 +167,6 @@ export default function AdminProducts() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ✅ Create product (send FormData with files)
   const createProduct = async () => {
     if (!validateForm()) return;
     setCreating(true);
@@ -132,7 +190,6 @@ export default function AdminProducts() {
           .forEach((tag) => formData.append("tags[]", tag));
       }
 
-      // append multiple images
       createForm.images.forEach((file) => {
         formData.append("images", file);
       });
@@ -146,17 +203,17 @@ export default function AdminProducts() {
         description: "",
         price: "",
         originalPrice: "",
-        category: "rings",
+        category: "bracelets",
         type: "gold",
         material: "",
         weight: "",
         stock: "",
         size: "",
         images: [],
-        imagesCsv: "",
+        tags: "",
         isFeatured: false,
       });
-      await load();
+      await load(pagination.page);
     } catch (e) {
       alert(e.message || "Failed to create product");
     } finally {
@@ -200,7 +257,7 @@ export default function AdminProducts() {
       };
       await client.put(`/products/${id}`, payload);
       setEditingId("");
-      await load();
+      await load(pagination.page);
     } catch (e) {
       alert(e.message || "Failed to save changes");
     }
@@ -220,7 +277,7 @@ export default function AdminProducts() {
         body.data = { stock: Number(bulk.value) || 0 };
       await client.post("/admin/products/bulk", body);
       setSelectedIds([]);
-      await load();
+      await load(pagination.page);
     } catch (e) {
       alert(e.message || "Bulk action failed");
     }
@@ -233,10 +290,14 @@ export default function AdminProducts() {
     <div className="p-6 space-y-3">
       <h1 className="text-2xl font-bold">Products</h1>
 
+    
+
+      {/* ALL YOUR EXISTING JSX REMAINS EXACTLY THE SAME */}
       {/* Create product */}
       <div className="bg-white rounded shadow p-3 space-y-2">
         <h2 className="font-semibold">Create Product</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          {/* ... your existing create form fields ... */}
           <input
             className="border rounded px-2 py-1"
             placeholder="Name"
@@ -250,9 +311,8 @@ export default function AdminProducts() {
             placeholder="Original Price"
             type="number"
             value={createForm.originalPrice}
-            onChange={
-              (e) =>
-                setCreateForm({ ...createForm, originalPrice: e.target.value }) // ✅ correct
+            onChange={(e) =>
+              setCreateForm({ ...createForm, originalPrice: e.target.value })
             }
           />
           <input
@@ -355,7 +415,7 @@ export default function AdminProducts() {
             }
           />
 
-          {/* ✅ Image uploader */}
+          {/* Image uploader */}
           <div
             {...getRootProps()}
             className={`border-2 border-dashed rounded p-4 text-center col-span-3 cursor-pointer ${
@@ -455,6 +515,7 @@ export default function AdminProducts() {
         </span>
       </div>
 
+      {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {products.map((p) => (
           <div key={p._id} className="border rounded p-3">
@@ -477,7 +538,6 @@ export default function AdminProducts() {
             <div className="text-xs capitalize">
               {p.category} /{p.type}
             </div>
-            {/* ✅ Stock Display with color coding */}
             <div
               className={`text-sm font-medium ${
                 p.stock < 10 ? "text-red-600" : "text-green-600"
@@ -548,12 +608,11 @@ export default function AdminProducts() {
                   placeholder="Original Price"
                   type="number"
                   value={editForm.originalPrice}
-                  onChange={
-                    (e) =>
-                      setEditForm({
-                        ...editForm,
-                        originalPrice: e.target.value,
-                      }) // ✅ correct
+                  onChange={(e) =>
+                    setEditForm({
+                      ...editForm,
+                      originalPrice: e.target.value,
+                    })
                   }
                 />
                 <input
@@ -657,6 +716,37 @@ export default function AdminProducts() {
           </div>
         ))}
       </div>
+
+      {/* Bottom Pagination */}
+      {products.length > 0 && (
+        <div className="bg-white rounded shadow p-3 flex justify-between items-center">
+          <div className="text-sm text-gray-600">
+            Showing {startItem} to {endItem} of {pagination.total} products
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={prevPage}
+              disabled={pagination.page === 1}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+
+            <span className="px-3 py-2 text-sm bg-gray-100 rounded">
+              Page {pagination.page} of {pagination.totalPages}
+            </span>
+
+            <button
+              onClick={nextPage}
+              disabled={pagination.page === pagination.totalPages}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
