@@ -465,7 +465,9 @@ export default function AdminProducts() {
               />
             </div>
             <img
-              src={getImageURL(p.primaryImage || p.images?.[0]?.url || p.images?.[0])}
+              src={getImageURL(
+                p.primaryImage || p.images?.[0]?.url || p.images?.[0]
+              )}
               alt={p.name}
               className="w-full h-36 object-cover rounded"
             />

@@ -31,8 +31,8 @@ const AllLinks = ({ slider, cartItems, setCartItems, addToCart }) => {
         <Rings slider={slider} addToCart={addToCart} />
         <Earrings slider={slider} addToCart={addToCart} />
         <Necklaces slider={slider} addToCart={addToCart} />
-        <CoupleSets slider={slider} addToCart={addToCart} />
-        <Anklets slider={slider} addToCart={addToCart} />
+        {/* <CoupleSets slider={slider} addToCart={addToCart} />
+        <Anklets slider={slider} addToCart={addToCart} /> */}
         <Bags slider={slider} addToCart={addToCart} />
         <WomenDress slider={slider} addToCart={addToCart} />
         <Watch slider={slider} addToCart={addToCart} />
