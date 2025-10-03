@@ -32,6 +32,7 @@ const Footer = () => {
     { name: "About Us", path: "/about" },
     { name: "Privacy Policy", path: "/privacy-policy" },
     { name: "Terms & Conditions", path: "/terms" },
+    { name: "Refund, Return Policy", path: "/refund" },
   ];
 
   return (

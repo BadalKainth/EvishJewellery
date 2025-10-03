@@ -43,6 +43,7 @@ import WomenDressGrid from "./components/WomenDress/WomenDressGrid";
 import WomenDetails from "./components/WomenDress/WomenDetails";
 import WatchGrind from "./components/Watch/WatchGrid";
 import WatchDetails from "./components/Watch/WatchDetails";
+import Refund from "./components/Policy/Refund";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -230,7 +231,10 @@ function App() {
         />
 
         <Route path="/authForm" element={<AuthForm />} />
+
+        <Route path="/refund" element={<Refund/>} />
       </Routes>
+
 
       <Footer />
     </>
