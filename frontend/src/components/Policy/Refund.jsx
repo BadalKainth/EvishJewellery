@@ -2,7 +2,7 @@ import React from "react";
 
 const RefundPolicy = () => {
   return (
-    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-pink-50 via-amber-50 to-white shadow-2xl rounded-2xl my-8 border border-pink-100">
+    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-pink-50 via-amber-50 to-white shadow-2xl rounded-2xl border border-pink-100">
       <h1 className="text-3xl font-bold mb-4 text-center">
         Refund, Return & Cancellation Policy
       </h1>
