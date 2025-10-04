@@ -152,7 +152,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-800 py-4 text-center text-gray-100">
-        © {new Date().getFullYear()} Avish Jewellery Store. All Rights Reserved.
+        &copy; 2025 Avish Jewellery Store. All Rights Reserved.
       </div>
 
       {/* Floating WhatsApp Button */}
