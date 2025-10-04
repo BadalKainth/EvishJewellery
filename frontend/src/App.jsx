@@ -44,6 +44,8 @@ import WomenDetails from "./components/WomenDress/WomenDetails";
 import WatchGrind from "./components/Watch/WatchGrid";
 import WatchDetails from "./components/Watch/WatchDetails";
 import Refund from "./components/Policy/Refund";
+import PrivacyPolicy from "./components/Policy/PrivacyPolicy";
+import Terms from "./components/Policy/Terms";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -232,9 +234,11 @@ function App() {
 
         <Route path="/authForm" element={<AuthForm />} />
 
-        <Route path="/refund" element={<Refund/>} />
-      </Routes>
+        <Route path="/refund" element={<Refund />} />
 
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<Terms />} />
+      </Routes>
 
       <Footer />
     </>
