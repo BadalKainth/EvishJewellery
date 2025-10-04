@@ -2,7 +2,7 @@ import React from "react";
 
 const Terms = () => {
   return (
-    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-yellow-50 via-pink-50 to-white shadow-2xl rounded-2xl my-8 border border-yellow-100">
+    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-yellow-50 via-pink-50 to-white shadow-2xl rounded-2xl border border-yellow-100">
       <header className="text-center mb-6">
         <h1 className="text-3xl md:text-4xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 via-amber-700 to-amber-500">
           Terms & Conditions
