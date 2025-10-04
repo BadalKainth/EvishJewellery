@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-pink-50 via-amber-50 to-white shadow-2xl rounded-2xl my-8 border border-pink-100">
+    <div className="max-w-7xl mx-auto px-8 py-8 bg-gradient-to-b from-pink-50 via-amber-50 to-white shadow-2xl rounded-2xl  border border-pink-100">
       <header className="text-center mb-6">
         <h1 className="text-3xl md:text-4xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-amber-500 to-yellow-400">
           Privacy Policy
