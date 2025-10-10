@@ -6,6 +6,9 @@ import client from "../../api/client";
 import { useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react"; // ✅ Named import
 
+import { FaGooglePay, FaWhatsapp } from "react-icons/fa";
+import { SiPaytm, SiPhonepe } from "react-icons/si";
+
 export default function Checkout() {
   const { cart, refreshCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
@@ -259,15 +262,69 @@ export default function Checkout() {
 
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-2/5 relative">
+            <div>
+              <h1 className="text-2xl font-bold ">Use UPI to pay</h1>
+              <p>1. Open tha app linked to your UPI</p>
+              <p>2. Scan tha QR code</p>
+              <p>3. Write down your UTR Id to Complete transaction</p>
+            </div>
             <h2 className="text-lg font-semibold mb-4">Complete Payment</h2>
 
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center">
               {upiString ? (
                 <QRCodeCanvas value={upiString} size={288} />
               ) : (
                 <p className="text-gray-500">Generating QR...</p>
               )}
+            </div>
+
+            {/* *************************************** */}
+            <div className="flex flex-wrap items-center justify-center gap-4 p-6">
+              {/* BHIM */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA9UlEQVR4AWNAB////2eHsZ/ka3WAGRqi/AzB2nYMpIAwLQEtoAH/wZxIvQqGRucfxOlE2N4GMgCIZwM1XwXi/wxuKjmkGPAaasBb1kannyADgPgmKQb8h+HaclOQZgjWENUjqLncSgzsfyQM0gzDHwkacCtL4xC6AXNLjRCGROtHE3L+H5AmPK64hVOziSQXPzbNRwv1kA1YiNOALmfJQnTNq0oMkDVnEXL+JWTNy0sMUTSTFH19ZSbImn0IanZX5pWGae4vM36ApNmD2MQzCWpAD1DTM6hmG1JTXzGIDdasLKRNUgaa6yNbBqKBGgWBSdaIGD0A213NGQgHQY4AAAAASUVORK5CYII="
+                  alt="BHIM"
+                  className="h-8 w-auto object-contain cursor-pointer hover:scale-105"
+                />
+              </div>
+
+              {/* GPay */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="https://lh6.ggpht.com/rGCJgNVPB-osrt52EGg4XM2njJLtrtfCEom7eqq0hKIf9e2gziiHWrXtLqBRGq-t95tJzFJgRA"
+                  alt="GPay"
+                  className="h-8 w-auto object-contain cursor-pointer hover:scale-105"
+                />
+              </div>
+
+              {/* Paytm */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="https://play-lh.googleusercontent.com/IWU8HM1uQuW8wVrp6XpyOOJXvb_1tDPUDAOfkrl83RZPG9Ww3dCY9X1AV6T1atSvgXc=s64-rw"
+                  alt="Paytm"
+                  className="h-8 w-auto object-contain cursor-pointer hover:scale-105"
+                />
+              </div>
+
+              {/* PhonePe */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="https://play-lh.googleusercontent.com/6iyA2zVz5PyyMjK5SIxdUhrb7oh9cYVXJ93q6DZkmx07Er1o90PXYeo6mzL4VC2Gj9s=s64-rw"
+                  alt="PhonePe"
+                  className="h-8 w-auto object-contain cursor-pointer hover:scale-105"
+                />
+              </div>
+
+              {/* WhatsApp Pay */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
+                  alt="WhatsApp Pay"
+                  className="h-8 w-auto object-contain cursor-pointer hover:scale-105"
+                />
+              </div>
             </div>
 
             <input
