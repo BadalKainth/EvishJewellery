@@ -6,6 +6,8 @@ import avishLogo from "../../img/avishlogo.jpeg";
 import sign from "../../img/sign.jpeg";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { getImageURL } from "../../api/client";
+
 
 function InvoiceModal({ order, onClose }) {
   const printRef = useRef();
@@ -241,6 +243,30 @@ export default function Account() {
     return { total, tax, productAmountExclTax };
   };
 
+
+  const statusColors = {
+      pending:   "bg-green-200",
+      confirmed: "bg-green-300",
+      processing:"bg-green-400",
+      shipped:   "bg-green-500",
+      delivered: "bg-green-600",
+      cancelled: "bg-green-700",
+      returned:  "bg-green-800",
+
+  };
+
+
+  const statuses = [
+    "pending",
+    "confirmed",
+    "processing",
+    "shipped",
+    "delivered",
+    "cancelled",
+    "returned",
+  ];
+const [imgStatus, setImgStatus] = useState({});
+
   return (
     <div className="p-1 max-w-6xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">My Account</h1>
@@ -278,6 +304,7 @@ export default function Account() {
           {orders.map((order) => {
             const { total, tax, productAmountExclTax } = getAmounts(order);
 
+            
             return (
               <div
                 key={order._id}
@@ -319,14 +346,42 @@ export default function Account() {
                       key={i}
                       className="flex items-center gap-4 border-b pb-2 last:border-none"
                     >
-                      <img
+                      {/* <img
                         src={item.image || item.product?.primaryImage}
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded cursor-pointer"
                         onClick={() =>
                           setPopupImg(item.image || item.product?.primaryImage)
                         }
+                      /> */}
+
+                      <img
+                        src={getImageURL(
+                          item.image || item.product?.primaryImage
+                        )}
+                        alt={item.product?.name}
+                        className="w-16 h-16 object-cover rounded cursor-pointer"
+                        onClick={() =>
+                          setPopupImg(
+                            getImageURL(
+                              item.image || item.product?.primaryImage
+                            )
+                          )
+                        }
+                        onLoad={() =>
+                          setImgStatus((prev) => ({
+                            ...prev,
+                            [item._id]: "Yes Image",
+                          }))
+                        }
+                        onError={() =>
+                          setImgStatus((prev) => ({
+                            ...prev,
+                            [item._id]: "No Image",
+                          }))
+                        }
                       />
+
                       <div className="flex-1">
                         <div className="font-medium">{item.product?.name}</div>
                         <div className="text-sm text-gray-600">
@@ -382,16 +437,60 @@ export default function Account() {
                 </div>
 
                 {/* Payment & Summary */}
-                <div className="mt-4 border-t pt-3 flex justify-between text-sm">
-                  <div>
+                {/* Payment & Summary Responsive */}
+                <div className="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                  {/* Left: Status + Progress */}
+                  <div className="flex flex-col gap-2 sm:flex-1">
+                    {/* Status Text */}
+                    <div className="flex justify-between items-center text-base text-green-700 font-bold">
+                      <span>Status:</span>
+                      <span className="capitalize">{order.status}</span>
+                    </div>
+
+                    {/* Progress Line */}
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center w-full h-2 rounded-full overflow-hidden bg-gray-200">
+                        {statuses.map((status, index) => {
+                          const currentIndex = statuses.indexOf(order.status);
+                          const isActive = index <= currentIndex;
+
+                          return (
+                            <div
+                              key={status}
+                              className={`h-2 flex-1 transition-all duration-500 ${
+                                isActive ? statusColors[status] : "bg-gray-200"
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+
+                      {/* Status Labels */}
+                      <div className="flex flex-col sm:flex-row justify-between w-full text-sm mt-1 gap-1">
+                        {statuses.map((status) => (
+                          <span
+                            key={status}
+                            className={`capitalize font-semibold ${
+                              order.status === status
+                                ? "font-bold text-green-800"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {status}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Product Amount & Total Paid */}
+                  <div className="flex flex-col gap-4 sm:items-end text-sm font-bold">
                     <div>
                       Product Amount (Excl. Tax): ₹
                       {productAmountExclTax.toLocaleString("en-IN")}
                     </div>
                     <div>Tax: ₹{tax.toLocaleString("en-IN")}</div>
-                  </div>
-                  <div className="text-right font-bold text-lg">
-                    Total Paid: ₹{total.toLocaleString("en-IN")}
+                    <div className="text-green-700 text-xl font-bold">Total Paid: ₹{total.toLocaleString("en-IN")}</div>
                   </div>
                 </div>
               </div>

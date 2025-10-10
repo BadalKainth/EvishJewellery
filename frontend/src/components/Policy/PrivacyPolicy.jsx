@@ -154,7 +154,7 @@ const PrivacyPolicy = () => {
             rel="noopener noreferrer"
             className="text-green-600 underline"
           >
-            +91 8882825761
+          +91 8882825761
           </a>
         </p>
       </section>
@@ -163,6 +163,8 @@ const PrivacyPolicy = () => {
         <p>© {new Date().getFullYear()} Avish Jewels. All rights reserved.</p>
       </footer>
     </div>
+
+    
   );
 };
 
