@@ -5,6 +5,8 @@ import necklaces1 from "../Necklaces/img/necklaces1.jpg";
 import { Link } from "react-router-dom";
 import coupleset from "../Home/coupleset.png"
 import anklet from "../Home/anklet.png";
+import tinytreasure from "../../img/tiny tressure.jpeg";
+import hydroluxe from "../../img/hydro luxe.jpeg";
 
 const OurCollections = () => {
   return (
@@ -33,8 +35,8 @@ const OurCollections = () => {
                 {/* Link सिर्फ image को घेरता है */}
                 <Link to="/category/bracelets" className="block">
                   <img
-                    src="https://images.unsplash.com/photo-1644341129030-95ee42ff8d30?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Sparkling diamond necklace on a woman's neck with elegant evening dress"
+                    src={tinytreasure}
+                    alt="Tiny Treasures"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
                 </Link>
@@ -43,8 +45,8 @@ const OurCollections = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
 
                 <div className="absolute bottom-0 left-0 p-4 text-white pointer-events-auto">
-                  <h3 className="font-sans text-xl font-semibold">Bracelets</h3>
-                  <p className="text-accent">Bold and beautiful</p>
+                  <h3 className="text-xl poppins-semibold">Tiny Treasures</h3>
+                  <p className="text-accent poppins-medium">Kids &amp; Toys Collection</p>
                 </div>
               </div>
 
@@ -62,15 +64,15 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/rings" className="block">
                   <img
-                    src="https://plus.unsplash.com/premium_photo-1678749105286-9970ba61a724?q=80&w=812&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Golden engagement ring with diamond setting on a romantic wedding photo background"
+                    src={hydroluxe}
+                    alt="Hydro Luxe"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className=" font-sans text-xl font-semibold">Rings</h3>
-                  <p className="text-accent">Promise of forever</p>
+                  <h3 className="text-xl poppins-semibold">Hydro Luxe</h3>
+                  <p className="text-accent poppins-medium">Water Bottles &amp; Drinkware</p>
                 </div>
               </div>
               <div className="p-4">
@@ -94,8 +96,8 @@ const OurCollections = () => {
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className=" font-sans text-xl font-semibold">Earrings</h3>
-                  <p className="text-accent">Subtle sophistication</p>
+                  <h3 className="text-xl poppins-semibold">Smart Living</h3>
+                  <p className="text-accent poppins-medium">Home &amp; Kitchen Essentials</p>
                 </div>
               </div>
               <div className="p-4">
@@ -119,10 +121,10 @@ const OurCollections = () => {
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className=" font-sans text-xl font-semibold">
-                    Necklaces
+                  <h3 className="text-xl poppins-semibold">
+                    Aura Decor
                   </h3>
-                  <p className="text-accent">Grace That Speaks</p>
+                  <p className="text-accent poppins-medium">Home Decor Collection</p>
                 </div>
               </div>
               <div className="p-4">
@@ -146,10 +148,10 @@ const OurCollections = () => {
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className=" font-sans text-xl font-semibold">
-                    Couple Sets
+                  <h3 className="text-xl poppins-semibold">
+                    New Launches
                   </h3>
-                  <p className="text-accent">Crafted for Eternal Love</p>
+                  <p className="text-accent poppins-medium">Fresh arrivals just in</p>
                 </div>
               </div>
               <div className="p-4">
@@ -173,8 +175,8 @@ const OurCollections = () => {
                 </Link>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className=" font-sans text-xl font-semibold">Anklet</h3>
-                  <p className="text-accent">Elegance in Every Step</p>
+                  <h3 className="text-xl poppins-semibold">SheVerse</h3>
+                  <p className="text-accent poppins-medium">All women-related products.</p>
                 </div>
               </div>
               <div className="p-4">

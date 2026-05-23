@@ -40,9 +40,8 @@ function InvoiceModal({ order, onClose }) {
                 Avish Jewels
               </h1>
               <p className="text-xs sm:text-sm">
-                35 I-Block first floor Arya Samaj Road, Uttam Nagar
+                510 5thFloor Vishwa Sadan Building , Distt Centre Janak Puri New Delhi -110058
               </p>
-              <p className="text-xs sm:text-sm">New Delhi, Delhi - 110059</p>
               <p className="text-xs sm:text-sm">Phone: +91 8882825761</p>
               <p className="text-xs sm:text-sm">
                 Email: info.avishjewels@gmail.com

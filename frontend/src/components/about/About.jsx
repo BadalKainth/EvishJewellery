@@ -1,21 +1,31 @@
 import React from "react";
-import { MapPinPlus, Phone, MailPlus } from "lucide-react";
+import { 
+  MapPinPlus, 
+  Phone, 
+  MailPlus, 
+  Award, 
+  Sparkles, 
+  Heart, 
+  Gem,
+  CheckCircle2
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../../img/avishlogo.jpeg";
+
 const AboutUsPage = () => {
   return (
     <div className="min-h-screen bg-white poppins-regular">
       {/* Hero Section */}
-      <section className="p-8 md:px-8 bg-gradient-to-r from-blue-100 to-indigo-50">
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-r from-amber-50 to-orange-50">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-amber-800 p-2">
-            About Avish Jewellery
+          <div className="flex justify-center mb-4">
+            <Gem className="w-12 h-12 text-amber-600 animate-pulse" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-amber-800 p-2 font-serif">
+            Welcome to Avish Jewels
           </h1>
-          <p className="text-lg md:text-xl text-justify md:text-center text-gray-950 max-w-7xl mx-auto leading-relaxed">
-            Avish Jewellery brings you a world of exquisite craftsmanship and
-            timeless designs. Each piece is thoughtfully created to elevate
-            everyday style, celebrate special moments, and reflect your
-            personality with elegance and sophistication.
+          <p className="text-xl md:text-2xl text-amber-900 max-w-4xl mx-auto font-medium mt-4 leading-relaxed italic">
+            "At Avish Jewels, we believe every product should feel special —just like a precious jewel."
           </p>
         </div>
       </section>
@@ -25,60 +35,28 @@ const AboutUsPage = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-xl font-bold text-amber-700 mb-6 md:text-justify">
-                Avish Jewellery – Designs That Speak Elegance and Uniqueness
+              <h2 className="text-2xl md:text-3xl font-bold text-amber-700 mb-6 font-serif">
+                Our Mission & Story
               </h2>
-              <p className="md:text-base text-sm text-gray-900 mb-6 text-justify">
-                At Avish Jewellery, every creation is made with precision and
-                care. We focus on bringing you pieces that are stylish, durable,
-                and perfect for any occasion. Our collections are crafted to
-                inspire confidence and leave a lasting impression.
+              <p className="md:text-lg text-base text-gray-800 mb-6 text-justify leading-relaxed">
+                Our mission is to bring unique, stylish, useful, and premium-quality products that add happiness and value to everyday life.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="bg-blue-100 p-2 rounded-full mr-4">
-                    <div className="w-6 h-6 bg-blue-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Innovation</h3>
-                    <p className="text-gray-600">
-                      Constantly creating unique and stylish designs
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-full mr-4">
-                    <div className="w-6 h-6 bg-green-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Quality</h3>
-                    <p className="text-gray-600">
-                      Durable and reliable pieces you can trust
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="bg-purple-100 p-2 rounded-full mr-4">
-                    <div className="w-6 h-6 bg-purple-600 rounded-full"></div>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Customer Satisfaction
-                    </h3>
-                    <p className="text-gray-600">
-                      We prioritize your happiness with every purchase
-                    </p>
-                  </div>
-                </div>
+              <p className="md:text-base text-sm text-gray-600 mb-8 text-justify leading-relaxed">
+                From kids’ learning toys to modern water bottles, smart home essentials, and decorative items, every product at Avish Jewels is selected with care, quality, and creativity. We inspect each offering to ensure it meets our strict standards of craftsmanship and modern design.
+              </p>
+              
+              <div className="border-l-4 border-amber-500 pl-4 py-2 bg-amber-50 rounded-r-md">
+                <p className="text-amber-950 font-medium italic">
+                  Just like every jewel has its own shine, every product at Avish Jewels is designed to stand out with uniqueness, durability, and a premium feel.
+                </p>
               </div>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-xl">
+            <div className="rounded-lg overflow-hidden shadow-2xl transition-transform duration-300 hover:scale-105">
               <Link to="/">
                 <img
-                  // src="https://images.pexels.com/photos/6567673/pexels-photo-6567673.jpeg"
                   src={logo}
-                  alt="Avish Jweles "
-                  className="w-full h-[550px] object-cover"
+                  alt="Avish Jewels Storefront Logo"
+                  className="w-full h-[450px] object-cover"
                 />
               </Link>
             </div>
@@ -86,163 +64,166 @@ const AboutUsPage = () => {
         </div>
       </section>
 
-      {/* Product Section */}
-      <section className="p-6 md:px-8 bg-gray-50">
+      {/* Focus Points Section */}
+      <section className="py-16 px-4 md:px-8 bg-amber-50/50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 p-6">
-            Our Collections
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-800 mb-12 font-serif">
+            What We Focus On
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:h-72">
-            {/* product 1 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
-              <div className="h-full overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-amber-700">
+                <Award className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Premium Quality</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">Finest craftsmanship and top-tier materials.</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-600">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Trendy & Unique</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">Distinctive designs that stand out in style.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4 text-yellow-600">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Everyday Essentials</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">Highly useful products for modern daily lives.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-emerald-600">
+                <Gem className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Affordable Luxury</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">High-end luxury experiences within your reach.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-4 text-rose-600">
+                <Heart className="w-6 h-6" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">Trust & Satisfaction</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">Prioritizing customer happiness above all.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Section */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-800 mb-12 font-serif">
+            Our Curated Ranges
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+              <div className="h-64 overflow-hidden relative">
                 <img
-                  src="https://cdn.pixabay.com/photo/2017/03/17/02/40/rings-2150772_1280.jpg"
-                  alt="Elegant and stylish ring set designed for modern tastes"
-                  className="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=640"
+                  alt="Kids learning toys collection"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-black/25 flex items-end p-4">
+                  <span className="text-white font-bold text-lg font-serif">Tiny Treasures (Kids & Toys)</span>
+                </div>
               </div>
             </div>
 
-            {/* product 2 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
-              <div className="h-full overflow-hidden">
+            <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+              <div className="h-64 overflow-hidden relative">
                 <img
-                  src="https://cdn.pixabay.com/photo/2023/06/02/18/27/ai-generated-8036196_640.jpg"
-                  alt="Beautiful bracelet designed for everyday elegance"
-                  className="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=640"
+                  alt="Hydro Luxe insulated bottles"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-black/25 flex items-end p-4">
+                  <span className="text-white font-bold text-lg font-serif">Hydro Luxe (Drinkware)</span>
+                </div>
               </div>
             </div>
 
-            {/* product 3 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow hover:scale-105">
-              <div className="h-full overflow-hidden">
+            <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+              <div className="h-64 overflow-hidden relative">
                 <img
-                  src="https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Exquisite earrings designed for elegance and charm"
-                  className="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=640"
+                  alt="Aura Decor collection"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-black/25 flex items-end p-4">
+                  <span className="text-white font-bold text-lg font-serif">Aura Decor (Home Essentials)</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Brand Slogan Ribbon */}
+      <section className="py-12 bg-amber-800 text-white text-center px-4">
+        <h2 className="text-2xl md:text-3xl font-bold font-serif italic tracking-wide">
+          Avish Jewels — Where Every Product Shines Like a Jewel.
+        </h2>
+      </section>
+
       {/* Contact Section */}
-      <section className="py-4 md:py-12 px-4 md:px-8">
+      <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl font-bold text-amber-800 mb-6 font-serif">
             Get In Touch
           </h2>
-          <p className="text-lg text-gray-700 mb-8">
-            Interested in collaborating with us or exploring our latest
-            collections? We'd love to hear from you.
+          <p className="text-lg text-gray-700 mb-12">
+            Have questions about our collections, customized orders, or want to say hello? Reach out anytime!
           </p>
 
-          {/* Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12 justify-center items-center">
-            {/* Email */}
-            <div className="text-center">
-              <div className="w-12 h-12  bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <a
-                  href="mailto:info.avishjewels@gmail.com "
-                  className="text-gray-600 hover:underline"
-                >
-                  <div className="w-6 h-6 rounded-sm">
-                    <MailPlus />
-                  </div>
-                </a>
+          <div className="grid sm:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-amber-700">
+                <MailPlus className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
+              <h3 className="font-bold text-gray-900 mb-2">Email</h3>
               <a
-                href="mailto:info.avishjewels@gmail.com "
-                className="text-gray-600 hover:underline break-words block"
+                href="mailto:info.avishjewels@gmail.com"
+                className="text-amber-800 hover:underline break-all"
               >
                 info.avishjewels@gmail.com
               </a>
             </div>
 
-            {/* Phone */}
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <a
-                  href="tel:+918882825761"
-                  className="text-gray-600 md:text-blue-600 hover:underline"
-                >
-                  <div className="w-6 h-6 rounded-sm">
-                    <Phone />
-                  </div>
-                </a>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-amber-700">
+                <Phone className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
+              <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
               <a
                 href="tel:+918882825761"
-                className="text-gray-600 md:text-blue-600 hover:underline"
+                className="text-amber-800 hover:underline"
               >
                 +91 8882825761
               </a>
             </div>
 
-            {/* Location */}
-            <div className="text-center col-span-2 md:col-span-1">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <a
-                  href="https://maps.app.goo.gl/HUmqtcZjdoruMQD5A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="md:text-gray-600 text-blue-600 hover:underline"
-                >
-                  <div className="w-6 h-6 rounded-sm">
-                    <MapPinPlus />
-                  </div>
-                </a>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-amber-100 flex flex-col items-center">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4 text-amber-700">
+                <MapPinPlus className="w-6 h-6" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Location</h3>
+              <h3 className="font-bold text-gray-900 mb-2">Location</h3>
               <a
                 href="https://maps.app.goo.gl/HUmqtcZjdoruMQD5A"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="md:text-gray-600 text-blue-600 hover:underline"
+                className="text-amber-800 hover:underline text-sm leading-relaxed"
               >
-                📍 35, I Block B , First floor ,Arya samaj Road , Uttam Nagar
-                New Delhi-110059
+                📍 510 5thFloor Vishwa Sadan Building , Distt Centre Janak Puri New Delhi -110058
               </a>
             </div>
           </div>
         </div>
       </section>
-
-      {/* About Paragraphs */}
-      <div className="py-8 px-5 text-sm md:text-base md:px-20 space-y-4 text-justify text-gray-950">
-        <h1 className="font-bold text-lg md:text-xl text-amber-600 text-start md:text-center py-2">
-          Avish Jewellery – Where Elegance Meets Creativity
-        </h1>
-        <p>
-          Avish Jewellery is your ultimate destination for stylish,
-          trend-forward collections. Each piece is crafted to reflect modern
-          tastes while celebrating individuality and timeless beauty.
-        </p>
-        <p>
-          We design pieces that become a part of your life story, whether for
-          everyday elegance, special celebrations, or memorable gifts for loved
-          ones.
-        </p>
-        <p>
-          Our mission is to combine creativity, quality, and customer-centric
-          service. Every creation reflects attention to detail, passion, and a
-          commitment to exceed your expectations.
-        </p>
-        <p>
-          With Avish Jewellery, you are not just buying accessories – you are
-          choosing style, confidence, and moments that make a lasting impact.
-        </p>
-        <p>
-          We ensure hassle-free service, responsive support, and a shopping
-          experience that feels premium, enjoyable, and memorable. Your trust is
-          our top priority, and every interaction is designed to delight you.
-        </p>
-      </div>
     </div>
   );
 };

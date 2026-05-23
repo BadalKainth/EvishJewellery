@@ -175,7 +175,7 @@ router.post(
       }
 
       // ✅ Generate UPI QR for payment
-      const upiString = `upi://pay?pa=yourupi@upi&pn=YourStore&am=${total}&cu=INR`;
+      const upiString = `upi://pay?pa=avishenterpris@ptyes&pn=YourStore&am=${total}&cu=INR`;
       let qrCode = null;
       try {
         qrCode = await QRCode.toDataURL(upiString);

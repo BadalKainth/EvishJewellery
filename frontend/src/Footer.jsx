@@ -10,21 +10,14 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "../src/img/avishlogo.jpeg";
-
+import { primaryCategoryLinks } from "./constants/categories";
 
 const Footer = () => {
   // Collections with routes
-  const collections = [
-    { name: "Bracelets", path: "/category/bracelets" },
-    { name: "Rings", path: "/category/rings" },
-    { name: "Earrings", path: "/category/earrings" },
-    { name: "Necklaces", path: "/category/necklaces" },
-    { name: "Couple Sets", path: "/category/couple-sets" },
-    { name: "Anklet", path: "/category/anklets" },
-    { name: "Bags", path: "/category/bags" },
-    { name: "Women Dress", path: "/category/womendress" },
-    { name: "Watch", path: "/category/watch" },
-  ];
+  const collections = primaryCategoryLinks.map((category) => ({
+    name: category.label,
+    path: category.path,
+  }));
 
   // Quick Links with routes
   const quickLinks = [
@@ -52,10 +45,8 @@ const Footer = () => {
             </Link>
           </h2>
 
-          <p className="text-gray-100">
-            Avish jewels crafted with love and elegance, designed to shine with
-            timeless beauty. Perfect for your special moments, anniversaries,
-            weddings, and everyday elegance that reflects your true style.
+          <p className="text-gray-100 text-sm leading-relaxed">
+            Welcome to Avish Jewels —your destination for premium-quality toys, stylish bottles, home essentials, and unique decor products. Every item is carefully selected to deliver quality, style, and uniqueness —just like a precious jewel.
           </p>
         </div>
 
@@ -64,7 +55,7 @@ const Footer = () => {
           <h3 className="text-[#d4af37] font-serif font-semibold text-xl mb-6 border-b border-[#765900] pb-2">
             Collections
           </h3>
-          <ul className="space-y-2 text-gray-100 grid grid-cols-2 ">
+          <ul className="space-y-2 text-gray-100">
             {collections.map((item, index) => (
               <li key={index}>
                 <Link
@@ -110,8 +101,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                📍 35, I Block B, First floor, Arya samaj Road, Uttam Nagar New
-                Delhi-110059
+              📍 510 5thFloor Vishwa Sadan Building , Distt Centre Janak Puri New Delhi -110058
               </a>
             </li>
             <li className="flex items-center gap-2">
@@ -134,14 +124,14 @@ const Footer = () => {
             </a>
             <a
               target="_blank"
-              href="https://www.instagram.com/avish_jewels/"
+              href="https://www.instagram.com/avishenterprises_/"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Instagram />
             </a>
             <a
               target="_blank"
-              href="#"
+              href="https://www.amazon.in/s?i=merchant-items&me=A3PX8ICH3WTR1O&s=popularity-rank&fs=true&ref=lp_27943762031_sar"
               className="hover:text-gold-400 transition-transform transform hover:scale-110"
             >
               <Twitter />
