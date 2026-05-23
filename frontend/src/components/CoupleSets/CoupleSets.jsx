@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { CartContext } from "../../context/CartContext";
 import { apiGet } from "../../api/client";
 import CartDesign from "../CartDesignCode/CartDesign";
+import { getCategoryLabel, getCategorySubtitle } from "../../constants/categories";
 
 const CoupleSets = () => {
   const navigate = useNavigate();
@@ -91,10 +92,10 @@ const CoupleSets = () => {
               to="/category/couple-sets"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
-              Couple Sets
+              {getCategoryLabel("couple-sets")}
             </Link>
             <p className="text-lg poppins-medium text-amber-800">
-              Perfectly paired elegance for you and your partner
+              {getCategorySubtitle("couple-sets")}
             </p>
           </div>
         </div>

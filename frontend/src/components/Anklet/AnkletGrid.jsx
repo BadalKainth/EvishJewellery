@@ -56,10 +56,10 @@ const AnkletGrid = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Anklets
+              SheVerse
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegant anklets to adorn your feet
+              All Women-Related Products
             </p>
           </div>
         </div>
@@ -116,53 +116,34 @@ const AnkletGrid = () => {
         </div>
 
         <div className="text-justify">
-          {/* Your long anklets paragraph content remains unchanged */}
+          {/* Paragraphs for SheVerse */}
           <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
             <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-              Anklets – Stylish Anklets Collection for Every Occasion
+              SheVerse – All Women-Related Products Collection
             </h1>
             <p>
-              Add charm to your steps with{" "}
-              <b className="text-amber-700">AvishJEWELS</b> Anklets. Discover a
-              wide variety of trendy anklets designed to enhance your style and
-              personality. Whether you are dressing up for a festive occasion, a
-              casual outing, or simply want to add a touch of elegance to your
-              everyday look, <b className="text-amber-700">AvishJEWELS</b>{" "}
-              anklets are the perfect choice.
+              Welcome to <b className="text-amber-700">SheVerse</b> at <b className="text-amber-700">Avish</b>. Celebrate womanhood with our exclusive, carefully curated catalog of apparel, lifestyle accessories, personal care items, and unique products made specifically for today's dynamic woman. Discover pieces that perfectly enhance your everyday routines, confidence, and comfort.
             </p>
             <br />
             <p>
-              At <b className="text-amber-700">AvishJEWELS</b>, every anklet is
-              crafted with care to bring out the beauty of simplicity and
-              sophistication. From minimalistic chain anklets to elegant charm
-              anklets, we have designs that match every personality. These
-              anklets are lightweight, comfortable to wear, and add a graceful
-              finishing touch to your look.
+              Every woman deserves products that are designed with her unique needs and style in mind. From elegant daily essentials to luxury self-care treats, our collection offers a diverse array of handpicked items that merge high durability with exquisite feminine aesthetics.
             </p>
             <br />
-            <h2 className="font-bold text-amber-700">Trendy Anklet Styles</h2>
             <p>
-              Explore <b className="text-amber-700">AvishJEWELS</b> trendy
-              anklet styles that perfectly blend fashion with comfort. Whether
-              you prefer delicate single-chain anklets, multi-layer anklets, or
-              anklets with quirky charms,
-              <b className="text-amber-700"> AvishJEWELS</b> has something
-              special for you. Each anklet is designed to make your every step
-              more stylish and confident.
+              Whether you are pampering yourself, updating your routine, or searching for the perfect thoughtful gift for an important woman in your life, <b className="text-amber-700">SheVerse</b> provides high-quality solutions designed to delight.
             </p>
             <br />
-            <h2 className="font-bold text-amber-700">
-              Why Choose AvishJEWELS Anklets?
-            </h2>
-            <p>
-              Choosing <b className="text-amber-700">AvishJEWELS</b> anklets
-              means choosing timeless style, comfort, and durability. Our
-              collection is made keeping today’s fashion trends in mind, while
-              still providing versatile pieces that never go out of style.
-              Perfect as a gift or for personal use,
-              <b className="text-amber-700"> AvishJEWELS</b> anklets let you
-              express your individuality with elegance.
-            </p>
+            <div>
+              <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
+              <h2 className="font-bold">1. What kind of products can I find in the SheVerse collection?</h2>
+              <b>Answer:</b> The SheVerse collection features a diverse catalog of women's lifestyle essentials, fashion accessories, self-care items, apparel, and premium personal accessories.
+              <h2 className="font-bold">2. Are these products suitable for all age groups?</h2>
+              <b>Answer:</b> Yes, our selection includes versatile products designed to suit teenagers, young adults, professionals, and mothers alike.
+              <h2 className="font-bold">3. How often do you introduce new items to SheVerse?</h2>
+              <b>Answer:</b> We update our inventory with seasonal style refreshes and trendy daily additions so you can stay in tune with the latest contemporary trends.
+              <h2 className="font-bold">4. Can I buy these items as gifts?</h2>
+              <b>Answer:</b> Absolutely! Our premium packaging and curated products make SheVerse the ultimate destination for gifting mothers, sisters, partners, or friends on birthdays, anniversaries, and holidays.
+            </div>
           </div>
         </div>
       </div>

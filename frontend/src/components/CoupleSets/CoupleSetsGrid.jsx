@@ -59,10 +59,10 @@ const CoupleSetsGrid = () => {
         <div className="items-center text-center mb-6">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Couple Sets
+              New Launches
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Perfectly paired elegance for you and your partner
+              Fresh Arrivals Just In
             </p>
           </div>
         </div>
@@ -121,44 +121,34 @@ const CoupleSetsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs */}
+      {/* Existing Paragraphs for New Launches */}
       <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          Couple Sets – Matching Jewelry Sets for Couples in Love
+          New Launches – Discover the Fresh Arrivals Just In
         </h1>
         <p>
-          Celebrate love with <b className="text-amber-700">AvishJEWELS</b>{" "}
-          Couple Sets - Matching Jewelry for couples. Shop matching necklaces,
-          matching bracelets and personalized jewelry gifts online. Great for
-          weddings, anniversaries and more.
+          Be the first to explore the latest trends and hot additions at <b className="text-amber-700">Avish</b>. Our <b className="text-amber-700">New Launches</b> section showcases our newest high-quality products across all collections, featuring innovative designs, curated aesthetics, and smart solutions freshly added to our store.
         </p>
         <br />
         <p>
-          Love should be celebrated in every way, large and small! What better
-          way to celebrate love than with{" "}
-          <b className="text-amber-700">AvishJEWELS</b> Couple Sets - Matching
-          Jewelry Sets for Couples in Love? Jewelry is more than just a style
-          statement, it holds emotions, memories and connection. Matching Couple
-          Jewelry is the newest trend for couples in love! With{" "}
-          <b className="text-amber-700">AvishJEWELS</b>, couples can proudly
-          wear their bond in a stylish and personal way. Whether you choose
-          matching necklaces, matching bracelets, or a complete set, couples can
-          carry a little of each other wherever they go.
+          We constantly update our inventory to bring you state-of-the-art products that make daily life easier, more beautiful, and incredibly stylish. From unique kids' items and premium drinkware to sophisticated kitchenware and gorgeous home decor accessories, our new releases represent the absolute pinnacle of our craftsmanship and quality.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">
-          Matching Couple Jewelry Sets
-        </h2>
         <p>
-          <b className="text-amber-700">AvishJEWELS</b> Matching Couple Jewelry
-          Sets are more than just accessories; they represent togetherness and
-          connection. Usually sold in pairs, they feature designs that are the
-          same or complementary to each other, symbolizing two people's love for
-          one another. There are lots of styles to choose from, including
-          pendants, chains, charm bracelets, or rings. With
-          <b className="text-amber-700"> AvishJEWELS</b>, couples get the unique
-          opportunity to feel connected, even if they are miles apart.
+          Stay ahead of the curve and treat yourself or your loved ones to our latest releases. Whether you are redecorating your lifestyle or finding advanced tools for parenting or cooking, our newly launched items are designed to exceed your expectations.
         </p>
+        <br />
+        <div>
+          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
+          <h2 className="font-bold">1. How often are new products launched?</h2>
+          <b>Answer:</b> We introduce new items and fresh collections weekly to ensure you always have access to the latest global trends and innovative lifestyle solutions.
+          <h2 className="font-bold">2. Are New Launches available in limited quantities?</h2>
+          <b>Answer:</b> Yes, some of our fresh arrivals are introduced in limited boutique batches. We recommend purchasing your favorites early to avoid missing out when they sell out!
+          <h2 className="font-bold">3. Can I find discounts on newly launched items?</h2>
+          <b>Answer:</b> We occasionally run special introductory launch offers and early-bird discounts. Make sure to check our coupons section and product pages for active deals.
+          <h2 className="font-bold">4. Can I request or suggest products for future launches?</h2>
+          <b>Answer:</b> Absolutely! We love hearing from our community. You can share your feedback and suggestions with us via our contact email, and we will do our best to bring them in future updates.
+        </div>
       </div>
     </div>
   );

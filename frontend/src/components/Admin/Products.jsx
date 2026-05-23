@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import client, { getImageURL } from "../../api/client";
 import { useDropzone } from "react-dropzone";
+import {
+  getCategoryLabel,
+  primaryCategoryLinks,
+} from "../../constants/categories";
 
 export default function AdminProducts() {
+  const categoryOptions = primaryCategoryLinks.map((category) => category.slug);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -332,19 +337,9 @@ export default function AdminProducts() {
               setCreateForm({ ...createForm, category: e.target.value })
             }
           >
-            {[
-              "bracelets",
-              "rings",
-              "earrings",
-              "necklaces",
-              "couple-sets",
-              "anklets",
-              "bags",
-              "women-dress",
-              "watch",
-            ].map((c) => (
+            {categoryOptions.map((c) => (
               <option key={c} value={c}>
-                {c}
+                {getCategoryLabel(c)}
               </option>
             ))}
           </select>
@@ -536,7 +531,7 @@ export default function AdminProducts() {
             <div className="text-sm text-gray-600">₹{p.originalPrice}</div>
             <div className="text-sm text-gray-600">₹{p.price}</div>
             <div className="text-xs capitalize">
-              {p.category} /{p.type}
+              {getCategoryLabel(p.category)} /{p.type}
             </div>
             <div
               className={`text-sm font-medium ${

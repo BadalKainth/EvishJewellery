@@ -4,6 +4,7 @@ import { AuthContext } from "./context/AuthContext";
 import { CartContext } from "./context/CartContext";
 import { FaUserCircle } from "react-icons/fa";
 import Logo from "../src/img/avishlogo.jpeg";
+import { primaryCategoryLinks } from "./constants/categories";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -15,15 +16,10 @@ const Navbar = () => {
 
   const menuLinks = [
     { name: "Home", path: "/" },
-    { name: "Bracelets", path: "/category/bracelets" },
-    { name: "Rings", path: "/category/rings" },
-    { name: "Earrings", path: "/category/earrings" },
-    { name: "Necklaces", path: "/category/necklaces" },
-    // { name: "Couple-Sets", path: "/category/couple-sets" },
-    // { name: "Anklets", path: "/category/anklets" },
-    { name: "Bags", path: "/category/bags" },
-    { name: "Women-Dress", path: "/category/womendress" },
-    { name: "Watch", path: "/category/watch" },
+    ...primaryCategoryLinks.map((category) => ({
+      name: category.label,
+      path: category.path,
+    })),
     { name: "About", path: "/about" },
   ];
 

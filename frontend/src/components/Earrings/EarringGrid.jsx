@@ -58,10 +58,10 @@ const EarringsGrid = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Earrings
+              Smart Living
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that completes your style
+              Home &amp; Kitchen Essentials
             </p>
           </div>
         </div>
@@ -120,58 +120,42 @@ const EarringsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs */}
+      {/* Existing Paragraphs for Smart Living */}
       <div className="p-10 px-5 md:px-20 text-xs md:text-base text-justify poppins-regular">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          Earrings – Beautiful Earrings Collection to Elevate Your Style
+          Smart Living – Innovative Home & Kitchen Essentials
         </h1>
         <p>
-          At <b className="text-amber-700">AvishJEWELS</b>, we believe earrings
-          are more than just accessories—they are timeless pieces that define
-          your style and personality. From minimal everyday studs to elegant
-          designs perfect for parties and weddings, our earrings are crafted to
-          bring out your inner charm. Each piece from{" "}
-          <b className="text-amber-700">AvishJEWELS</b> adds confidence,
-          elegance, and sophistication to your overall look.
+          Welcome to <b className="text-amber-700">Smart Living</b> at <b className="text-amber-700">Avish</b>, where functionality meets modern elegance. Discover our exclusive range of smart home and kitchen essentials designed to simplify your everyday chores, organize your living spaces, and elevate your cooking experience. We bring you products that combine durability, cutting-edge convenience, and elegant aesthetics.
         </p>
         <br />
         <p>
-          The <b className="text-amber-700">AvishJEWELS</b> earring collection
-          is designed for every mood and every occasion. If you love simple
-          elegance, our minimalistic styles are the perfect choice for daily
-          wear. For those who want to make a bold statement,{" "}
-          <b className="text-amber-700">AvishJEWELS</b>
-          offers unique and trendy designs that stand out effortlessly. Each
-          pair is carefully created with attention to detail, ensuring unmatched
-          style and comfort.
+          The modern kitchen and home require modern solutions. Our curated collection focuses on high-quality kitchenware, innovative storage containers, culinary gadgets, and home organization accessories that make your daily routines smoother and highly efficient.
         </p>
         <br />
         <p>
-          Earrings from <b className="text-amber-700">AvishJEWELS</b> are
-          versatile enough to complement both casual outfits and special
-          occasion looks. Whether you are dressing up for a festive celebration,
-          a wedding, or simply want to add sparkle to your everyday attire, our
-          collection offers something for everyone. With{" "}
-          <b className="text-amber-700">AvishJEWELS</b>, you don’t just wear
-          earrings—you wear a story of beauty, grace, and individuality.
+          At <b className="text-amber-700">Avish</b>, we understand that a well-equipped home is a happy home. Whether you are upgrading your culinary tools, finding space-saving storage solutions, or searching for practical household items, our <b className="text-amber-700">Smart Living</b> products are built to perform and last, ensuring a perfect balance of utility and visual charm.
         </p>
         <br />
         <p>
-          If you’re looking for the perfect gift,{" "}
-          <b className="text-amber-700">AvishJEWELS</b>
-          earrings are a thoughtful choice that symbolizes love and
-          appreciation. Our wide variety of designs ensures that every woman can
-          find a pair that resonates with her personality and complements her
-          unique style.
+          If you are looking for smart housewarming gifts or looking to elevate your own kitchen setup, our selection provides a wide variety of sleek options. From beginner cooks to seasoned homemakers, everyone will find tools that resonate with their needs.
         </p>
         <br />
         <p>
-          Choose <b className="text-amber-700">AvishJEWELS</b> to discover
-          earrings that are modern, elegant, and designed to leave a lasting
-          impression. Shop our exclusive earring collection today and elevate
-          your look with the beauty and charm only{" "}
-          <b className="text-amber-700">AvishJEWELS</b> can bring.
+          Choose <b className="text-amber-700">Smart Living</b> to embrace a seamless, organized, and elegant lifestyle. Shop our premium collection today and transform your living and dining spaces into hubs of style and modern efficiency.
         </p>
+        <br />
+        <div>
+          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
+          <h2 className="font-bold">1. Are the Smart Living kitchen utensils safe for cooking?</h2>
+          <b>Answer:</b> Yes, absolutely. All of our kitchen utensils and food storage accessories are made from premium, food-grade, heat-resistant, and BPA-free materials that are highly safe for hot and cold food preparation.
+          <h2 className="font-bold">2. Do your products come with instructions?</h2>
+          <b>Answer:</b> Yes, where applicable, our appliances and innovative kitchen gadgets come with clear, detailed user manuals to guide you through setup, usage, and maintenance.
+          <h2 className="font-bold">3. How do I maintain and clean these kitchen tools?</h2>
+          <b>Answer:</b> Most of our products are dishwasher-safe. For items with premium non-stick coatings or wooden elements, we recommend gentle hand-washing with a soft sponge to extend their life.
+          <h2 className="font-bold">4. Can these items be gifted for housewarming ceremonies?</h2>
+          <b>Answer:</b> Definitely! Our Smart Living collection features exceptionally practical, beautifully boxed items that make incredibly thoughtful and appreciated housewarming, wedding, or festival gifts.
+        </div>
       </div>
     </div>
   );

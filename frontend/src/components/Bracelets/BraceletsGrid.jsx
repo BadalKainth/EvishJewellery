@@ -41,7 +41,7 @@ const BraceletsGrid = () => {
     }
   }, [page]);
 
-  if (loading) return <p className="text-center py-6">Loading bracelet...</p>;
+  if (loading) return <p className="text-center py-6">Loading products...</p>;
   if (error) return <p className="text-center text-red-600 py-6">{error}</p>;
 
   const handlePrev = () => page > 1 && setPage(page - 1);
@@ -57,10 +57,10 @@ const BraceletsGrid = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Bracelets
+              Tiny Treasures
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that shines on your wrist
+              Joyful &amp; Safe Kids &amp; Toys Collection
             </p>
           </div>
         </div>
@@ -119,110 +119,64 @@ const BraceletsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs & FAQ Section remain unchanged */}
+      {/* Existing Paragraphs & FAQ Section for Tiny Treasures */}
       <div className="p-10 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold text-base md:text-2xl text-amber-700">
-          Bracelets – Elegant & Stylish Bracelet Designs for Every Occasion
+          Tiny Treasures – Joyful & Safe Kids & Toys Collection
         </h1>
         <p>
-          Explore elegant and stylish bracelet designs for every occasion at
-          <b className="text-amber-700"> AvishJEWELS</b>. Shop bracelets that
-          provide that extra touch of charm, sophistication, and timeless style
-          to any look, perfect for daily wear, special occasions, celebrations,
-          or gifting to someone special.
+          Welcome to a world of wonder and imagination with our <b className="text-amber-700">Tiny Treasures</b> collection at <b className="text-amber-700">Avish</b>. Explore our curated selection of delightful, safe, and engaging toys and kids' essentials designed to inspire creativity, laughter, and endless hours of joyful play. From educational learning tools to soft, cuddly companions, we provide only the best quality for your little ones.
         </p>
         <br />
         <p>
-          A bracelet is more than an accessory; it reflects personality,
-          emotion, and style. Each bracelet at{" "}
-          <b className="text-amber-700"> AvishJEWELS</b>
-          tells a story—whether it represents love, friendship, or
-          individuality. Bracelets can range from subtle elegance to bold
-          statement pieces and can elevate any outfit from ordinary to
-          extraordinary.
+          Toys are more than just playthings; they are the stepping stones of growth, curiosity, and learning. Every piece in our <b className="text-amber-700">Tiny Treasures</b> collection is carefully chosen to nurture developmental skills, cognitive abilities, and motor coordination, ensuring that playtime is both enriching and fun.
         </p>
         <br />
         <p>
-          At <b className="text-amber-700">AvishJEWELS</b>, you will find a
-          beautiful collection of bracelets for every mood and occasion. Our
-          bracelets include delicate chains, minimalist bangles, and bold
-          statement designs that enhance any look with sophistication and charm.
-          Available in traditional and modern styles, our bracelets are
-          versatile enough to complement casual outfits, party looks, or festive
-          attire.
+          At <b className="text-amber-700">Avish</b>, we prioritize the health and happiness of your children above all else. Our toys are crafted from non-toxic, child-safe materials, meeting the highest standards of safety and durability. Whether you are searching for the perfect birthday gift, interactive puzzles, or cute room decor for kids, you will find options that make parenting a breeze and childhood truly magical.
         </p>
         <br />
         <h2 className="font-bold text-amber-700">
-          What Makes a Bracelet Special?
+          What Makes Our Kids & Toys Collection Special?
         </h2>
         <p>
-          A bracelet is not just a piece of jewelry; it tells a story about the
-          wearer.
-          <b>Bracelets can symbolize love, friendship, or personal style.</b>
-          Many people choose bracelets because they are versatile and can
-          complement any outfit. At{" "}
-          <b className="text-amber-700">AvishJEWELS</b>, we have bracelets that
-          suit casual wear, party outfits, or formal looks.
+          Our toys are not just designed to entertain—they are built to educate and spark curiosity.
+          <b> Each toy encourages active participation, cognitive growth, and social-emotional development.</b>
+          With vibrant colors, sleek designs, and interactive elements, we bring a modern touch to classic childhood favorites.
         </p>
         <br />
         <h2 className="font-bold text-amber-700">
-          Different Styles of Bracelets
+          Different Playstyles and Categories
         </h2>
         <p>
-          Our collection features charm bracelets, bangles, leather bracelets,
-          and delicate chains. Each style has its unique appeal—charm bracelets
-          reflect memories, bangles create an eye-catching effect, leather
-          bracelets give a rugged vibe, and delicate chains offer everyday
-          elegance. There’s a bracelet for every occasion at{" "}
-          <b className="text-amber-700">AvishJEWELS</b>.
+          Our collection spans across developmental toys, educational puzzles, creative building blocks, and plush cuddly companions. Whether your child is an aspiring builder, an artist, or a quiet daydreamer, our toys cater to every unique personality and age group, providing the ideal balance of entertainment and learning.
         </p>
         <br />
         <h2 className="font-bold text-amber-700">
-          How to Choose the Right Bracelet
+          How to Choose the Right Toy
         </h2>
         <p>
-          Consider your personal style and the occasions you will wear it for.
-          Look for comfort, design, and versatility. Daily wear pieces are
-          lightweight and practical, while special event bracelets are bold and
-          eye-catching. At <b className="text-amber-700">AvishJEWELS</b>, each
-          bracelet is designed to look beautiful and feel perfect on your wrist.
-        </p>
-        <br />
-        <p>
-          Discover our exclusive collection of bracelets at{" "}
-          <b className="text-amber-700">AvishJEWELS</b>
-          that blend elegance with modern style. From delicate daily wear to
-          bold statement designs, every bracelet is crafted to suit every mood
-          and occasion, making it the perfect accessory to complete your look.
+          Consider your child's age group, interests, and developmental milestone needs. Choose interactive and open-ended toys that encourage creativity, or go for simple, comforting plush toys for cozy bedtime routines. At <b className="text-amber-700">Avish</b>, every toy is crafted with love to bring a smile to your child's face.
         </p>
         <br />
         <div>
           <h1 className="font-bold text-amber-700">FAQs</h1>
           <h2 className="font-bold">
-            1. What makes a bracelet a perfect gift?
+            1. Are the toys in the Tiny Treasures collection safe for toddlers?
           </h2>
-          <b>Answer:</b> A bracelet from{" "}
-          <b className="text-amber-700">AvishJEWELS</b>
-          is a timeless gift that carries emotional value and symbolizes love,
-          friendship, or special memories. Its versatility makes it suitable for
-          birthdays, anniversaries, or any thoughtful occasion.
+          <b>Answer:</b> Yes, absolutely! Every product in our <b className="text-amber-700">Tiny Treasures</b> collection undergoes strict safety evaluations and is made from high-quality, non-toxic, BPA-free materials that are completely safe for young children.
           <h2 className="font-bold">
-            2. Which bracelet styles are best for daily wear?
+            2. What types of educational toys do you offer?
           </h2>
-          <b>Answer:</b> Lightweight and durable designs like delicate chains,
-          bangles, or leather bracelets are ideal for everyday wear, offering
-          comfort and style.
+          <b>Answer:</b> We offer a wide range of learning tools, including building block sets, puzzle sets, memory games, and sensory stimulation toys that help kids develop cognitive, critical-thinking, and fine-motor skills.
           <h2 className="font-bold">
-            3. How do I choose the right bracelet for a special occasion?
+            3. Do you have options suitable for baby shower or birthday gifts?
           </h2>
-          <b>Answer:</b> For parties or formal events, choose bold statement
-          designs or unique charms to add sparkle and sophistication to your
-          outfit.
+          <b>Answer:</b> Yes! Our beautifully designed collection makes the perfect gifting destination for birthdays, baby showers, and milestones, with items suitable for infants, toddlers, and young kids.
           <h2 className="font-bold">
-            4. Are bracelets suitable for both men and women?
+            4. How can I clean and maintain these toys?
           </h2>
-          <b>Answer:</b> Yes, <b className="text-amber-700">AvishJEWELS</b>{" "}
-          bracelets are unisex, with options for every style and personality.
+          <b>Answer:</b> Most of our plastic and wooden toys can be easily wiped down with a damp cloth and mild soap. Plush toys can be spot-cleaned or gently hand-washed as per their care labels.
         </div>
       </div>
     </div>

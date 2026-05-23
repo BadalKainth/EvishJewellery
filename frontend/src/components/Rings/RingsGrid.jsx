@@ -66,10 +66,10 @@ const RingsGrid = () => {
         <div className="items-center text-center">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Rings
+              Hydro Luxe
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that sparkles on your fingers
+              Premium Water Bottles &amp; Drinkware
             </p>
           </div>
         </div>
@@ -131,35 +131,32 @@ const RingsGrid = () => {
         </div>
       </div>
 
-      {/* ========================== Paragraph Content (unchanged) ========================== */}
+      {/* ========================== Paragraph Content for Hydro Luxe ========================== */}
       <div className="p-10 md:p-20 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold">Rings – Timeless & Trendy Rings</h1>
-        Rings are more than just ornaments—they are timeless symbols of love,
-        commitment, style, and individuality. From elegant engagement rings to
-        everyday wear bands, each ring tells a unique story and adds a touch of
-        sophistication to your personality. Designed with care and creativity,
-        our rings are perfect for making every moment special.
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 mb-4">Hydro Luxe – Premium Water Bottles & Drinkware</h1>
+        Elevate your hydration game with our <b className="text-amber-700">Hydro Luxe</b> premium drinkware collection. More than just containers, our bottles are statements of style, durability, and health. Designed to keep your favorite beverages at the perfect temperature all day long, they are the ideal companion for the gym, office, outdoor adventures, or daily commutes.
         <br />
         <br />
-        At <b className="text-amber-700">AvishJEWELS</b>, we bring you a
-        versatile collection of rings crafted to suit every style and occasion.
-        Our designs range from classic elegance to modern fashion statements,
-        ensuring there’s something for everyone. Whether you prefer subtle
-        minimal bands or bold statement pieces, each ring is made to reflect
-        your personality and enhance your style.
+        At <b className="text-amber-700">Avish</b>, we combine aesthetic elegance with high-performance insulation technology. Crafted from food-grade stainless steel and completely free of BPA, toxins, and odors, our bottles ensure your water stays ice-cold for up to 24 hours or your morning coffee stays piping hot for up to 12 hours.
         <br />
         <br />
-        Available in a variety of designs, our rings are comfortable for daily
-        wear and equally perfect for parties, weddings, or special occasions.
-        Each piece is a blend of durability, comfort, and unmatched
-        craftsmanship, ensuring that your ring doesn’t just look beautiful but
-        also feels perfect on your finger.
+        Available in a gorgeous range of curated colors, sleek shapes, and robust matte finishes, the <b className="text-amber-700">Hydro Luxe</b> collection is engineered to prevent condensation and leakage. Each bottle is a blend of environmental sustainability, daily reliability, and premium craftsmanship, helping you reduce single-use plastic waste while looking exceptionally sophisticated.
         <br />
         <br />
-        Whether you’re looking for a thoughtful gift, a symbol of love, or a
-        stylish accessory for yourself,{" "}
-        <b className="text-amber-700">AvishJEWELS</b> rings are crafted to
-        celebrate life’s special moments with timeless elegance.
+        Whether you are looking for a reliable thermal flask, a sleek gym bottle, or a stylish lifestyle tumbler, our <b className="text-amber-700">Hydro Luxe</b> collection offers unparalleled functionality and modern design to refresh your lifestyle.
+        <br />
+        <br />
+        <div>
+          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
+          <h2 className="font-bold">1. How long do Hydro Luxe bottles keep drinks cold or hot?</h2>
+          <b>Answer:</b> Our premium double-wall vacuum-insulated bottles keep cold beverages chilled for up to 24 hours and hot beverages warm for up to 12 hours.
+          <h2 className="font-bold">2. Are Hydro Luxe bottles BPA-free?</h2>
+          <b>Answer:</b> Yes, absolutely! All of our drinkware items are made from premium 18/8 food-grade stainless steel and are 100% BPA-free, non-toxic, and safe for all types of drinks.
+          <h2 className="font-bold">3. Are these bottles leak-proof and sweat-proof?</h2>
+          <b>Answer:</b> Yes. The leak-proof lid design prevents any accidental spills, and the advanced vacuum insulation ensures the outer surface remains dry and condensation-free.
+          <h2 className="font-bold">4. Can I wash these bottles in a dishwasher?</h2>
+          <b>Answer:</b> We recommend hand-washing with a soft bottle brush and warm, soapy water to preserve the premium exterior powder coat and thermal efficiency of the vacuum seal.
+        </div>
       </div>
     </div>
   );

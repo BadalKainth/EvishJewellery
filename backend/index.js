@@ -5,6 +5,7 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 import swaggerUi from "swagger-ui-express";
 import dotenv from "dotenv";
+import dns from "node:dns";
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -27,6 +28,18 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const mongoUri =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/evishjewellery";
+const requiredAuthEnvVars = ["JWT_SECRET", "JWT_REFRESH_SECRET"];
+const missingAuthEnvVars = requiredAuthEnvVars.filter(
+  (envVar) => !process.env[envVar]
+);
+
+if (missingAuthEnvVars.length > 0) {
+  throw new Error(
+    `Missing required auth environment variables: ${missingAuthEnvVars.join(", ")}`
+  );
+}
 
 // Get directory name for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -87,10 +100,25 @@ app.use(
 );
 
 // Database connection
-mongoose
-  .connect(
-    process.env.MONGODB_URI || "mongodb://localhost:27017/evishjewellery"
+if (mongoUri.startsWith("mongodb+srv://")) {
+  const configuredDnsServers = (
+    process.env.MONGODB_DNS_SERVERS || "8.8.8.8,1.1.1.1"
   )
+    .split(",")
+    .map((server) => server.trim())
+    .filter(Boolean);
+
+  if (configuredDnsServers.length > 0) {
+    dns.setServers(configuredDnsServers);
+    console.log(
+      "Using custom DNS servers for MongoDB SRV lookup:",
+      configuredDnsServers.join(", ")
+    );
+  }
+}
+
+mongoose
+  .connect(mongoUri)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 

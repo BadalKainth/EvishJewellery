@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { apiGet } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 import CartDesign from "../CartDesignCode/CartDesign";
+import { getCategoryLabel, getCategorySubtitle } from "../../constants/categories";
 
 const Earrings = () => {
   const navigate = useNavigate();
@@ -90,10 +91,10 @@ const Earrings = () => {
               to="/category/earrings"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
-              Earrings
+              {getCategoryLabel("earrings")}
             </Link>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that sparkles on your ears
+              {getCategorySubtitle("earrings")}
             </p>
           </div>
         </div>

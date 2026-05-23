@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 import CartDesign from "../CartDesignCode/CartDesign";
+import { getCategoryLabel, getCategorySubtitle } from "../../constants/categories";
 
 const Necklaces = () => {
   const navigate = useNavigate();
@@ -89,10 +90,10 @@ const Necklaces = () => {
               to="/category/necklaces"
               className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
             >
-              Necklaces
+              {getCategoryLabel("necklaces")}
             </Link>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that sparkles around your neck
+              {getCategorySubtitle("necklaces")}
             </p>
           </div>
         </div>

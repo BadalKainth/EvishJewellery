@@ -65,10 +65,10 @@ const NecklacesGrid = () => {
         <div className="items-center text-center mb-6">
           <div className="bg-[#eceacb] py-4 rounded-md">
             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
-              Necklaces
+              Aura Decor
             </h2>
             <p className="text-lg poppins-medium text-amber-800">
-              Elegance that sparkles around your neck
+              Premium Home Decor Collection
             </p>
           </div>
         </div>
@@ -127,48 +127,38 @@ const NecklacesGrid = () => {
         </div>
       </div>
 
-      {/* Paragraph content (unchanged) */}
+      {/* Paragraph content for Aura Decor */}
       <div className="p-10 text-xs md:text-base px-6 md:px-20 text-justify poppins-regular">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          Necklaces – Modern & Traditional Necklace Designs Online
+          Aura Decor – Premium Home Decor Collection
         </h1>
         <p>
-          At <b className="text-amber-700">AvishJEWELS</b>, necklaces are not
-          just accessories—they are timeless pieces that represent elegance,
-          beauty, and individuality. Whether it is a simple modern necklace for
-          daily wear or a traditional necklace for weddings, festivals, and
-          cultural occasions, every design from{" "}
-          <b className="text-amber-700">AvishJEWELS</b> adds charm and
-          sophistication to your style.
+          Transform your living spaces into sanctuaries of elegance and warmth with our <b className="text-amber-700">Aura Decor</b> premium home decor collection at <b className="text-amber-700">Avish</b>. Explore sophisticated designs that reflect your personality, elevate your mood, and add a signature touch of aesthetic premium luxury to every corner of your home.
         </p>
         <br />
         <p>
-          The <b className="text-amber-700">AvishJEWELS</b> necklace collection
-          brings together modern trends with classic traditions. From statement
-          chokers to layered designs, from minimal everyday wear to grand
-          occasion pieces, each necklace is crafted with precision and passion.
-          Every creation from
-          <b className="text-amber-700"> AvishJEWELS</b> is made to highlight
-          your personality and make every moment memorable.
+          Every home tells a story through the details. Our collection curated by design experts spans from minimalist table accents and statement wall art to artistic vases, premium cushions, and ambient lighting solutions that effortlessly breathe life and style into modern apartments and houses alike.
         </p>
         <br />
         <p>
-          A necklace from <b className="text-amber-700">AvishJEWELS</b> is more
-          than just a piece of jewelry—it is an expression of your creativity
-          and individuality. Whether you are choosing a design for daily wear,
-          gifting a loved one, or selecting something unique for bridal and
-          festive occasions, our necklaces bring a perfect balance of beauty and
-          versatility.
+          At <b className="text-amber-700">Avish</b>, we blend excellent craftsmanship with high-quality materials to ensure that each piece is not only visually stunning but also built to endure. Whether you are redecorating your cozy living room, upgrading your office desk styling, or searching for the ultimate artistic gift, our home decor pieces offer a perfect balance of contemporary beauty and enduring charm.
         </p>
         <br />
         <p>
-          Explore exclusive collections only at{" "}
-          <b className="text-amber-700">AvishJEWELS</b>. Our wide range ensures
-          you can always find the perfect piece to match your outfit, occasion,
-          and personality. Choose <b className="text-amber-700">AvishJEWELS</b>
-          necklaces to elevate your look with timeless elegance and unmatched
-          charm.
+          Explore exclusive styles that are modern, elegant, and designed to leave a lasting impression on your guests. Shop the <b className="text-amber-700">Aura Decor</b> collection today and elevate your surrounding environment with the timeless elegance and beauty only <b className="text-amber-700">Avish</b> can bring.
         </p>
+        <br />
+        <div>
+          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
+          <h2 className="font-bold">1. What materials are used in the Aura Decor collection?</h2>
+          <b>Answer:</b> We source premium materials, including handcrafted ceramics, polished metals, mouth-blown glassware, and sustainable natural textiles to construct high-quality, durable home accents.
+          <h2 className="font-bold">2. How can I style these items for a minimalist look?</h2>
+          <b>Answer:</b> Focus on a few standout pieces, such as our geometric vases or elegant metal accents, and pair them with neutral-toned background colors to let their exquisite craftsmanship shine.
+          <h2 className="font-bold">3. Do you offer seasonal home decor collections?</h2>
+          <b>Answer:</b> Yes, we frequently update our collection with seasonal launches and limited-edition items designed to match holiday aesthetics, festive vibes, and changing styling trends.
+          <h2 className="font-bold">4. What is the best way to clean these delicate decor pieces?</h2>
+          <b>Answer:</b> We recommend dusting gently with a clean micro-fiber cloth or using a slightly damp soft cloth for ceramics. Avoid using harsh chemical cleaners to preserve their premium finishes.
+        </div>
       </div>
     </div>
   );
