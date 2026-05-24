@@ -51,17 +51,17 @@ const CoupleSetsGrid = () => {
   return (
     <div
       id="couple_sets"
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full poppins"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full poppins"
       ref={gridRef}
     >
       <div className="w-full">
         {/* Heading */}
         <div className="items-center text-center mb-6">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               New Launches
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               Fresh Arrivals Just In
             </p>
           </div>
@@ -87,7 +87,7 @@ const CoupleSetsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -99,7 +99,7 @@ const CoupleSetsGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -113,7 +113,7 @@ const CoupleSetsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -122,18 +122,18 @@ const CoupleSetsGrid = () => {
       </div>
 
       <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent text-center p-4">
           New Launches: The Next Chapter of Brilliance
         </h1>
         <p>
-          Innovation, elegance, and exclusivity come together in our latest reveal. The <b className="text-amber-700">New Launches</b> section at Avish Jewels is where tomorrow's trends meet today's craftsmanship. We are constantly pushing the boundaries of luxury to bring you fresh, unique, and breathtaking designs before anyone else.
+          Innovation, elegance, and exclusivity come together in our latest reveal. The <b className="theme-copy-accent">New Launches</b> section at Avish Jewels is where tomorrow's trends meet today's craftsmanship. We are constantly pushing the boundaries of luxury to bring you fresh, unique, and breathtaking designs before anyone else.
         </p>
         <br />
         <p>
           Be the trendsetter and explore our newest arrivals, ranging from cutting-edge lifestyle products to premium statements. Don't just follow the trend; wear the future of luxury first.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <h2 className="font-bold theme-copy-accent">Why It's Unique</h2>
         <p>
           <b>Trendsetter Collection:</b> Sabse pehle market mein aane wale latest global designs jo aapko hamesha bheed se alag rakhte hain.
         </p>

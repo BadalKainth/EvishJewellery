@@ -53,16 +53,16 @@ const RoyalCrunchGrid = () => {
 
   return (
     <div
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 md:px-10"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10 md:px-10"
       ref={gridRef}
     >
       <div className="w-full">
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               {getCategoryLabel("royal-crunch")}
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               {getCategorySubtitle("royal-crunch")}
             </p>
           </div>
@@ -88,7 +88,7 @@ const RoyalCrunchGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -100,7 +100,7 @@ const RoyalCrunchGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -114,7 +114,7 @@ const RoyalCrunchGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -123,12 +123,12 @@ const RoyalCrunchGrid = () => {
       </div>
 
       <div className="p-10 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700">
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent">
           Royal Crunch: Nature's Finest Jewels for Wealth &amp; Wellness
         </h1>
         <p>
           True luxury is built on the foundation of good health. At
-          <b className="text-amber-700"> AVISH PREMIUM</b>, we present Royal
+          <b className="theme-copy-accent"> AVISH PREMIUM</b>, we present Royal
           Crunch, a handpicked selection of premium dry fruits and nuts that
           are as rich in nutrients as they are in taste. Sourced from the
           finest orchards globally, each nut is selected for its supreme size,
@@ -142,7 +142,7 @@ const RoyalCrunchGrid = () => {
           nourishment with the golden standard of wellness.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">Why It&apos;s Unique</h2>
+        <h2 className="font-bold theme-copy-accent">Why It&apos;s Unique</h2>
         <p>
           <b>Gourmet Standard &amp; Hand-Sorted:</b> Har ek badam, kaju, aur
           pista ko manually select kiya jata hai taaki aapko sirf uniform size

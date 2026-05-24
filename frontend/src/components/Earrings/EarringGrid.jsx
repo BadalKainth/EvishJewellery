@@ -50,17 +50,17 @@ const EarringsGrid = () => {
   return (
     <div
       id="earrings"
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10"
       ref={gridRef}
     >
       <div className="w-full">
         {/* Heading */}
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               Smart Living
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               Home &amp; Kitchen Essentials
             </p>
           </div>
@@ -86,7 +86,7 @@ const EarringsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -98,7 +98,7 @@ const EarringsGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -112,7 +112,7 @@ const EarringsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -121,18 +121,18 @@ const EarringsGrid = () => {
       </div>
 
       <div className="p-10 px-5 md:px-20 text-xs md:text-base text-justify poppins-regular">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent text-center p-4">
           Smart Living: Where Functionality Meets Finery
         </h1>
         <p>
-          True luxury is an everyday experience. With the <b className="text-amber-700">Smart Living</b> collection, Avish Jewels brings its signature touch of premium craftsmanship into the heart of your home. We believe that your kitchen and daily essentials should gleam with the same sophistication as a diamond necklace.
+          True luxury is an everyday experience. With the <b className="theme-copy-accent">Smart Living</b> collection, Avish Jewels brings its signature touch of premium craftsmanship into the heart of your home. We believe that your kitchen and daily essentials should gleam with the same sophistication as a diamond necklace.
         </p>
         <br />
         <p>
           This curated range of premium home and kitchen essentials blends cutting-edge utility with exquisite design. Elevate your daily rituals, host with unmatched grace, and transform your living space into a sanctuary of modern luxury.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <h2 className="font-bold theme-copy-accent">Why It's Unique</h2>
         <p>
           <b>Effortless Elegance:</b> Minimalist aur modern designs jo aapke kitchen aur dining area ko instant luxury look dete hain.
         </p>

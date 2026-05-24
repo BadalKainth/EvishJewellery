@@ -49,16 +49,16 @@ const AnkletGrid = () => {
 
   return (
     <div
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 p-0 md:px-10"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10 p-0 md:px-10"
       ref={gridRef}
     >
       <div className="w-full">
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               SheVerse
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               All Women-Related Products
             </p>
           </div>
@@ -82,7 +82,7 @@ const AnkletGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -94,7 +94,7 @@ const AnkletGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -108,7 +108,7 @@ const AnkletGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -117,18 +117,18 @@ const AnkletGrid = () => {
 
         <div className="text-justify">
           <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
-            <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+            <h1 className="font-bold text-base md:text-2xl theme-copy-accent text-center p-4">
               SheVerse: A Tribute to the Queen of Our Universe
             </h1>
             <p>
-              Every woman is a masterpiece, strong, brilliant, and uniquely beautiful. Welcome to <b className="text-amber-700">SheVerse</b> by Avish Jewels, an exclusive realm dedicated entirely to the multifaceted modern woman. This collection is a premium curation of lifestyle products, accessories, and essentials that celebrate her grace and power.
+              Every woman is a masterpiece, strong, brilliant, and uniquely beautiful. Welcome to <b className="theme-copy-accent">SheVerse</b> by Avish Jewels, an exclusive realm dedicated entirely to the multifaceted modern woman. This collection is a premium curation of lifestyle products, accessories, and essentials that celebrate her grace and power.
             </p>
             <br />
             <p>
               Much like our finest solitaire diamonds, SheVerse products are crafted to stand out, empower, and add an aura of ultimate luxury to her daily life. From self-care indulgence to power-dressing essentials, celebrate yourself or the queen in your life with absolute premium perfection.
             </p>
             <br />
-            <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+            <h2 className="font-bold theme-copy-accent">Why It's Unique</h2>
             <p>
               <b>Curated for the Modern Woman:</b> Working professional se lekar home-maker tak, har mahila ki multitasking lifestyle ko dhyan mein rakh kar banaya gaya hai.
             </p>

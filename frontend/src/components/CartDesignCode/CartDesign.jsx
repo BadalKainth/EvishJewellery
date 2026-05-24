@@ -52,7 +52,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
         )}
 
         {/* Card */}
-        <div className="bg-white p-2 rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
+        <div className="theme-card p-2 rounded-xl overflow-hidden hover:shadow-[0_24px_42px_rgba(33,38,41,0.14)] transition-all duration-300">
           {/*  Product Image */}
           <div className="relative overflow-hidden">
             <img
@@ -65,7 +65,7 @@ const CartDesign = ({ product, addToCart, onClick }) => {
             {product.tags && (
               <span
                 className={`absolute top-3 right-3 text-white text-[8px] md:text-xs font-semibold px-1 md:px-2 py-0  md:py-1 rounded-lg shadow ${
-                  product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
+                  product.tags === "SALE" ? "bg-red-500" : "theme-tag"
                 }`}
               >
                 {product.tags}
@@ -94,9 +94,9 @@ const CartDesign = ({ product, addToCart, onClick }) => {
             {/* Price, Stock & Cart Button */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-0 md:mt-4">
               {/*  Left Section (Price + Discount + Stock) */}
-              <div className="flex flex-col font-bold text-amber-600 text-sm md:text-lg flex-1 w-full">
+              <div className="flex flex-col font-bold theme-copy-accent text-sm md:text-lg flex-1 w-full">
                 <div className="flex flex-row md:flex-col gap-2">
-                  <span className="line-through whitespace-nowrap decoration-2 decoration-amber-700 text-sm md:text-xl">
+                  <span className="line-through whitespace-nowrap decoration-2 decoration-[#8c6137] text-sm md:text-xl">
                     Price: ₹ {product.originalPrice}
                   </span>
 
@@ -140,8 +140,8 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                     disabled={product.stock <= 0}
                     className={`${
                       product.stock <= 0
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-amber-500 hover:bg-amber-600"
+                        ? "theme-btn-muted cursor-not-allowed"
+                        : "theme-btn"
                     } text-white px-1 py-1 md:px-4 md:py-2 text-xs rounded-lg md:text-sm shadow-md transition-all duration-300 hover:scale-105 block sm:hidden`}
                   >
                     {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
@@ -155,8 +155,8 @@ const CartDesign = ({ product, addToCart, onClick }) => {
                 disabled={product.stock <= 0}
                 className={`${
                   product.stock <= 0
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-amber-500 hover:bg-amber-600"
+                    ? "theme-btn-muted cursor-not-allowed"
+                    : "theme-btn"
                 } text-white px-2 py-1 md:px-4 md:py-2 text-xs rounded-lg md:text-sm shadow-md transition-all duration-300 hover:scale-105 hidden sm:block`}
               >
                 {product.stock > 0 ? "Add to Cart" : "Out of Stock"}

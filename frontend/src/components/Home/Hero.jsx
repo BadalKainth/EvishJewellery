@@ -15,7 +15,7 @@ const Hero = () => {
 
       {/* Mobile Hero Image */}
       <img
-        src={phone}
+        src={HeroImg}
         alt="Luxury jewelry collection mobile"
         className="block md:hidden w-full h-auto object-cover"
       />

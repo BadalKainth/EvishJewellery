@@ -58,17 +58,17 @@ const RingsGrid = () => {
   return (
     <div
       id="rings"
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full"
       ref={gridRef} // ✅ Scroll reference attach किया
     >
       <div className="w-full">
         {/* ========================== Heading ========================== */}
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               Hydro Luxe
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               Premium Water Bottles &amp; Drinkware
             </p>
           </div>
@@ -95,7 +95,7 @@ const RingsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed" // ✅ Disabled styling
-                : "bg-amber-500 hover:bg-amber-600 text-white" // ✅ Active styling
+                : "theme-btn" // ✅ Active styling
             }`}
           >
             Prev
@@ -108,7 +108,7 @@ const RingsGrid = () => {
               onClick={() => setPage(idx + 1)} // ✅ Click पर page change
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white" // ✅ Active page styling
+                  ? "theme-btn-active" // ✅ Active page styling
                   : "bg-gray-200 hover:bg-gray-300" // ✅ Inactive styling
               }`}
             >
@@ -123,7 +123,7 @@ const RingsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed" // ✅ Disabled styling
-                : "bg-amber-500 hover:bg-amber-600 text-white" // ✅ Active styling
+                : "theme-btn" // ✅ Active styling
             }`}
           >
             Next
@@ -132,14 +132,14 @@ const RingsGrid = () => {
       </div>
 
       <div className="p-10 md:p-20 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700 mb-4">Hydro Luxe: Hydration Meets High Fashion</h1>
-        Why should elegance be limited to your jewelry box? Introducing <b className="text-amber-700">Hydro Luxe</b> by Avish Jewels, a statement drinkware collection that redefines everyday hydration. Crafted for those who appreciate the finer things in life, these premium bottles combine sleek, modern aesthetics with top-tier functionality.
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent mb-4">Hydro Luxe: Hydration Meets High Fashion</h1>
+        Why should elegance be limited to your jewelry box? Introducing <b className="theme-copy-accent">Hydro Luxe</b> by Avish Jewels, a statement drinkware collection that redefines everyday hydration. Crafted for those who appreciate the finer things in life, these premium bottles combine sleek, modern aesthetics with top-tier functionality.
         <br />
         <br />
         Whether you are at a boardroom meeting or a high-end lounge, let your drinkware reflect your sophisticated taste. Designed to mirror the brilliant polish and durability of our finest jewels, Hydro Luxe is not just a bottle; it's an accessory for the modern connoisseur.
         <br />
         <br />
-        <b className="text-amber-700">Why It's Unique:</b>
+        <b className="theme-copy-accent">Why It's Unique:</b>
         <br />
         <br />
         <b>Jewel-Tone Finish &amp; Ergonomic Design:</b> Luxury metal finish aur sleek designs jo pakadne mein comfortable hain aur dikhne mein kisi mehnge accessory jaise lagte hain.

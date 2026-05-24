@@ -49,17 +49,17 @@ const BraceletsGrid = () => {
 
   return (
     <div
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 md:px-10"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10 md:px-10"
       ref={gridRef}
     >
       <div className="w-full">
         {/* Title Section */}
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               Tiny Treasures
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               Joyful &amp; Safe Kids &amp; Toys Collection
             </p>
           </div>
@@ -85,7 +85,7 @@ const BraceletsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -97,7 +97,7 @@ const BraceletsGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -111,7 +111,7 @@ const BraceletsGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -120,12 +120,12 @@ const BraceletsGrid = () => {
       </div>
 
       <div className="p-10 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700">
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent">
           Tiny Treasures: Pure Joy, Crafted to Perfection
         </h1>
         <p>
           Just like a rare gemstone, the laughter of a child is priceless. At
-          <b className="text-amber-700"> Avish Jewels</b>, we bring you Tiny
+          <b className="theme-copy-accent"> Avish Jewels</b>, we bring you Tiny
           Treasures, a luxury collection of kids' essentials and premium toys
           designed to add a touch of elegance to their magical years. Every
           piece in this collection is curated with the same precision, safety,
@@ -139,7 +139,7 @@ const BraceletsGrid = () => {
           rule our hearts.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <h2 className="font-bold theme-copy-accent">Why It's Unique</h2>
         <p>
           <b>Premium &amp; Certified Safe:</b> Har ek toy aur accessory
           non-toxic, child-safe aur premium-grade materials se bani hai, taaki
@@ -187,16 +187,16 @@ export default BraceletsGrid;
 
 //   return (
 
-//     <div className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 p-0 md:px-10">
+//     <div className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10 p-0 md:px-10">
 
 //       <div className="w-full">
 //         {/* Title Section */}
 //         <div className="items-center text-center">
-//           <div className="bg-[#eceacb] py-4 rounded-md">
-//             <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+//           <div className="theme-page-panel py-4 rounded-md">
+//             <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
 //               Bracelets
 //             </h2>
-//             <p className="text-lg poppins-medium text-amber-800">
+//             <p className="text-lg poppins-medium theme-page-subtitle">
 //               Elegance that shines on your wrist
 //             </p>
 //           </div>
@@ -330,7 +330,7 @@ export default BraceletsGrid;
 //             {/* ✅ Add to Cart Button */}
 //             <button
 //               onClick={handleAddToCart}
-//               className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm"
+//               className="theme-btn px-4 py-2 rounded-lg text-sm"
 //             >
 //               Add to Cart
 //             </button>

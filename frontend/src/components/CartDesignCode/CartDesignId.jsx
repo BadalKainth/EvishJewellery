@@ -67,7 +67,7 @@ const CartDesignId = ({ product, addToCart }) => {
       : 0;
 
   return (
-    <div className="min-h-screen bg-[#f9f9f9] pb-10 px-5 md:px-20 relative poppins">
+    <div className="min-h-screen theme-page-bg pb-10 px-5 md:px-20 relative poppins">
       {/* ✅ Popup */}
       {showPopup && (
         <div
@@ -83,12 +83,12 @@ const CartDesignId = ({ product, addToCart }) => {
 
       <button
         onClick={() => navigate(-1)}
-        className="mt-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg"
+        className="mt-4 rounded-xl border border-[rgba(102,109,113,0.18)] bg-[rgba(255,253,249,0.88)] px-4 py-2 text-[#2b3134] shadow-sm hover:bg-white"
       >
         ← Back
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-6 rounded-xl shadow-lg">
+      <div className="theme-card grid grid-cols-1 md:grid-cols-2 gap-10 p-6 rounded-[1.75rem]">
         {/* ✅ Left: Image + Video Slider */}
         <div className="relative">
           <Swiper
@@ -128,7 +128,7 @@ const CartDesignId = ({ product, addToCart }) => {
           {product.tags && (
             <span
               className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                product.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
+                product.tags === "SALE" ? "bg-red-500" : "theme-tag"
               }`}
             >
               {product.tags}
@@ -154,7 +154,7 @@ const CartDesignId = ({ product, addToCart }) => {
           </p> */}
 
           {/* ✅ Price Section */}
-          <div className="flex flex-col font-bold text-amber-600 space-y-1 text-lg mt-4">
+          <div className="theme-copy-accent flex flex-col space-y-1 text-lg font-bold mt-4">
             {product.price ? (
               <>
                 <span>
@@ -208,8 +208,8 @@ const CartDesignId = ({ product, addToCart }) => {
               disabled={product.stock <= 0}
               className={`${
                 product.stock <= 0
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-amber-500 hover:bg-amber-600"
+                  ? "theme-btn-muted cursor-not-allowed"
+                  : "theme-btn"
               } text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all duration-300 hover:scale-105`}
             >
               {product.stock > 0 ? "🛒 Add to Cart" : "Out of Stock"}
@@ -217,7 +217,7 @@ const CartDesignId = ({ product, addToCart }) => {
 
             <button
               onClick={handleShare}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all duration-300 hover:scale-105"
+              className="rounded-lg bg-[linear-gradient(135deg,#b48752_0%,#8c6137_100%)] px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:scale-105"
             >
               🔗 Share
             </button>

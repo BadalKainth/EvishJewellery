@@ -7,190 +7,103 @@ import auradecor from "../../img/auradecor.jpeg";
 import newlaunches from "../../img/new launches.jpeg";
 import sheverse from "../../img/sheverse.jpeg";
 
+const collections = [
+  {
+    title: "Tiny Treasures",
+    subtitle: "Kids & Toys Collection",
+    image: tinytreasure,
+    path: "/category/bracelets",
+    imageClassName: "object-cover",
+  },
+  {
+    title: "Hydro Luxe",
+    subtitle: "Water Bottles & Drinkware",
+    image: hydroluxe,
+    path: "/category/rings",
+    imageClassName: "object-cover",
+  },
+  {
+    title: "Smart Living",
+    subtitle: "Home & Kitchen Essentials",
+    image: smartliving,
+    path: "/category/earrings",
+    imageClassName: "object-fill",
+  },
+  {
+    title: "Aura Decor",
+    subtitle: "Home Decor Collection",
+    image: auradecor,
+    path: "/category/necklaces",
+    imageClassName: "object-cover",
+  },
+  {
+    title: "New Launches",
+    subtitle: "Fresh arrivals just in",
+    image: newlaunches,
+    path: "/category/couple-sets",
+    imageClassName: "object-cover",
+  },
+  {
+    title: "SheVerse",
+    subtitle: "All women-related products.",
+    image: sheverse,
+    path: "/category/anklets",
+    imageClassName: "object-cover",
+  },
+];
+
 const OurCollections = () => {
   return (
-    <>
-      {/* <!-- Collections Section --> */}
-      <section
-        id="collections"
-        className="py-6 bg-[#fcf8dd] poppins-regular overflow-hidden"
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center pb-5">
-            <h2 className="text-4xl text-gray-950 mb-2 uppercase cormorant-garamond-bold">
-              Our Collections
-            </h2>
-            <p className="text-dark max-w-2xl mx-auto">
-              Each piece is crafted with precision and passion to celebrate
-              life's special moments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* <!-- Collection 1 --> */}
-
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
-              <div className="relative overflow-hidden">
-                {/* Link सिर्फ image को घेरता है */}
-                <Link to="/category/bracelets" className="block">
-                  <img
-                    src={tinytreasure}
-                    alt="Tiny Treasures"
-                    className="w-full h-52 object-cover cursor-pointer"
-                  />
-                </Link>
-
-                {/* gradient overlay — क्लिक को इमेज तक जाने देना */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-
-                <div className="absolute bottom-0 left-0 p-4 text-white pointer-events-auto">
-                  <h3 className="text-xl poppins-semibold">Tiny Treasures</h3>
-                  <p className="text-accent poppins-medium">Kids &amp; Toys Collection</p>
-                </div>
-              </div>
-
-              <div className="p-4">
-                <a
-                  href="category/bracelets"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg"
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-            {/* <!-- Collection 2 --> */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
-              <div className="relative overflow-hidden">
-                <Link to="/category/rings" className="block">
-                  <img
-                    src={hydroluxe}
-                    alt="Hydro Luxe"
-                    className="w-full h-52 object-cover cursor-pointer"
-                  />
-                </Link>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className="text-xl poppins-semibold">Hydro Luxe</h3>
-                  <p className="text-accent poppins-medium">Water Bottles &amp; Drinkware</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <a
-                  href="#rings"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-            {/* <!-- Collection 3 --> */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
-              <div className="relative overflow-hidden">
-                <Link to="/category/earrings" className="block">
-                  <img
-                    src={smartliving}
-                    alt="Smart Living"
-                    className="w-full h-52 object-fill cursor-pointer"
-                  />
-                </Link>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className="text-xl poppins-semibold">Smart Living</h3>
-                  <p className="text-accent poppins-medium">Home &amp; Kitchen Essentials</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <a
-                  href="category/earrings"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-            {/* <!-- Collection 4 --> */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
-              <div className="relative overflow-hidden">
-                <Link to="/category/necklaces" className="block">
-                  <img
-                    src={auradecor}
-                    alt="Aura Decor"
-                    className="w-full h-52 object-cover cursor-pointer"
-                  />
-                </Link>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className="text-xl poppins-semibold">
-                    Aura Decor
-                  </h3>
-                  <p className="text-accent poppins-medium">Home Decor Collection</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <a
-                  href="category/necklaces"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-            {/* <!-- Collection 5 --> */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
-              <div className="relative overflow-hidden">
-                <Link to="/category/couple-sets" className="block">
-                  <img
-                    src={newlaunches}
-                    alt="New Launches"
-                    className="w-full h-52 object-cover cursor-pointer"
-                  />
-                </Link>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className="text-xl poppins-semibold">
-                    New Launches
-                  </h3>
-                  <p className="text-accent poppins-medium">Fresh arrivals just in</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <a
-                  href="category/couple-sets"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-            {/* <!-- Collection 6 --> */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:shadow-[#ed9d] transition">
-              <div className="relative overflow-hidden">
-                <Link to="/category/anklets" className="block">
-                  <img
-                    src={sheverse}
-                    alt="SheVerse"
-                    className="w-full h-52 object-cover cursor-pointer"
-                  />
-                </Link>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-4 text-white">
-                  <h3 className="text-xl poppins-semibold">SheVerse</h3>
-                  <p className="text-accent poppins-medium">All women-related products.</p>
-                </div>
-              </div>
-              <div className="p-4">
-                <a
-                  href="category/anklets"
-                  className="text-primary hover:underline text-amber-700 hover:text-amber-800 hover:shadow-lg hover:shadow-[#ed9d58] "
-                >
-                  View Collection →
-                </a>
-              </div>
-            </div>
-          </div>
+    <section
+      id="collections"
+      className="theme-page-bg overflow-hidden py-8 poppins-regular"
+    >
+      <div className="container mx-auto px-4">
+        <div className="pb-6 text-center">
+          <h2 className="cormorant-garamond-bold mb-2 text-4xl uppercase text-[#2b3134]">
+            Our Collections
+          </h2>
+          <p className="mx-auto max-w-2xl text-[#6b7277]">
+            Each piece is crafted with precision and passion to celebrate
+            life&apos;s special moments.
+          </p>
         </div>
-      </section>
-    </>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {collections.map((collection) => (
+            <div
+              key={collection.path}
+              className="theme-card overflow-hidden rounded-[1.75rem] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_rgba(30,47,56,0.14)]"
+            >
+              <div className="relative overflow-hidden">
+                <Link to={collection.path} className="block">
+                  <img
+                    src={collection.image}
+                    alt={collection.title}
+                    className={`h-52 w-full cursor-pointer ${collection.imageClassName}`}
+                  />
+                </Link>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1f2427] via-transparent to-transparent opacity-75"></div>
+                <div className="pointer-events-auto absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl poppins-semibold">
+                    {collection.title}
+                  </h3>
+                  <p className="poppins-medium text-[#ece6de]">
+                    {collection.subtitle}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4">
+                <Link to={collection.path} className="theme-link poppins-medium">
+                  View Collection &rarr;
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

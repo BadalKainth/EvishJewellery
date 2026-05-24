@@ -55,7 +55,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="theme-page-bg min-h-screen p-6">
       {showPopup && (
         <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md z-50">
           Added to Cart!
@@ -71,7 +71,7 @@ export default function SearchPage() {
           onKeyDown={(e) => e.key === "Enter" && doSearch()}
         />
         <button
-          className="px-4 py-2 bg-black text-white rounded"
+          className="theme-btn px-4 py-2 rounded"
           onClick={doSearch}
         >
           Search
@@ -85,7 +85,7 @@ export default function SearchPage() {
         {results.map((p) => (
           <div
             key={p._id}
-            className="border rounded p-3 cursor-pointer relative"
+            className="theme-card rounded-2xl p-3 cursor-pointer relative"
             onClick={() =>
               navigate(
                 `/category/${categoryRouteMap[p.category] || p.category}/${p._id}`
@@ -101,7 +101,7 @@ export default function SearchPage() {
             {p.tags && (
               <span
                 className={`absolute top-3 right-3 text-white text-xs font-semibold px-2 py-1 rounded-lg shadow ${
-                  p.tags === "SALE" ? "bg-red-500" : "bg-amber-500"
+                  p.tags === "SALE" ? "bg-red-500" : "theme-tag"
                 }`}
               >
                 {p.tags}
@@ -126,10 +126,10 @@ export default function SearchPage() {
               </p>
 
               <div className="flex justify-between items-center mt-4">
-                <div className="flex flex-col text-amber-600 text-xl font-bold">
+                <div className="flex flex-col theme-copy-accent text-xl font-bold">
                   <span>
                     Price:{" "}
-                    <span className="line-through decoration-2 decoration-amber-700 text-2xl">
+                    <span className="line-through decoration-2 decoration-[#8c6137] text-2xl">
                       ₹{p.originalPrice}
                     </span>
                   </span>
@@ -143,7 +143,7 @@ export default function SearchPage() {
 
                 <button
                   onClick={(e) => handleAddToCart(p._id, e)}
-                  className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm"
+                  className="theme-btn px-4 py-2 rounded-lg text-sm"
                 >
                   Add to Cart
                 </button>

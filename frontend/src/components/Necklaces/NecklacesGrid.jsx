@@ -57,17 +57,17 @@ const NecklacesGrid = () => {
   return (
     <div
       id="necklaces"
-      className="scroll-mt-24 flex flex-col bg-[#ECEEDF] w-full pb-10 poppins"
+      className="scroll-mt-24 flex flex-col theme-page-bg w-full pb-10 poppins"
       ref={gridRef} // ✅ attach ref here
     >
       <div className="w-full">
         {/* Heading */}
         <div className="items-center text-center mb-6">
-          <div className="bg-[#eceacb] py-4 rounded-md">
-            <h2 className="text-4xl poppins-semibold text-[#e28e45] uppercase">
+          <div className="theme-page-panel py-4 rounded-md">
+            <h2 className="text-4xl poppins-semibold theme-page-title uppercase">
               Aura Decor
             </h2>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               Premium Home Decor Collection
             </p>
           </div>
@@ -93,7 +93,7 @@ const NecklacesGrid = () => {
             className={`px-3 py-1 rounded ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Prev
@@ -105,7 +105,7 @@ const NecklacesGrid = () => {
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
                 page === idx + 1
-                  ? "bg-amber-600 text-white"
+                  ? "theme-btn-active"
                   : "bg-gray-200 hover:bg-gray-300"
               }`}
             >
@@ -119,7 +119,7 @@ const NecklacesGrid = () => {
             className={`px-3 py-1 rounded ${
               page === totalPages
                 ? "bg-gray-300 cursor-not-allowed"
-                : "bg-amber-500 hover:bg-amber-600 text-white"
+                : "theme-btn"
             }`}
           >
             Next
@@ -128,18 +128,18 @@ const NecklacesGrid = () => {
       </div>
 
       <div className="p-10 text-xs md:text-base px-6 md:px-20 text-justify poppins-regular">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
+        <h1 className="font-bold text-base md:text-2xl theme-copy-accent text-center p-4">
           Aura Decor: Radiate Elegance in Every Corner
         </h1>
         <p>
-          Every home has a story, let yours be told in the language of luxury. <b className="text-amber-700">Aura Decor</b> by Avish Jewels is an exquisite ensemble of premium home decor pieces designed to cast a spell of sophistication over your spaces. Mirroring the artistic brilliance, intricate detailing, and timeless charm of our heritage jewelry, each artifact in this collection is a masterpiece.
+          Every home has a story, let yours be told in the language of luxury. <b className="theme-copy-accent">Aura Decor</b> by Avish Jewels is an exquisite ensemble of premium home decor pieces designed to cast a spell of sophistication over your spaces. Mirroring the artistic brilliance, intricate detailing, and timeless charm of our heritage jewelry, each artifact in this collection is a masterpiece.
         </p>
         <br />
         <p>
           Whether it's a striking centerpiece or subtle accents, Aura Decor infuses your home with an opulent vibe that leaves an unforgettable impression.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <h2 className="font-bold theme-copy-accent">Why It's Unique</h2>
         <p>
           <b>Artisanal Craftsmanship:</b> Har ek piece ko expert artisans dwara design kiya gaya hai, jo aapke ghar ko ek museum-like premium feel deta hai.
         </p>

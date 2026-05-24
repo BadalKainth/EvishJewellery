@@ -80,19 +80,19 @@ const Necklaces = () => {
   return (
     <div
       id="necklaces"
-      className="scroll-mt-24 flex flex-col md:flex-row bg-[#ECEEDF] w-full pb-10"
+      className="scroll-mt-24 flex flex-col md:flex-row theme-page-bg w-full pb-10"
     >
       <div className="w-full">
         {/* Heading */}
         <div className="items-center text-center">
-          <div className="bg-[#eceacb] py-4 rounded-md">
+          <div className="theme-page-panel py-4 rounded-md">
             <Link
               to="/category/necklaces"
-              className="text-4xl poppins-semibold text-[#e28e45] uppercase hover:text-green-600 hover:underline"
+              className="text-4xl poppins-semibold theme-page-title uppercase theme-link underline-offset-4 hover:underline"
             >
               {getCategoryLabel("necklaces")}
             </Link>
-            <p className="text-lg poppins-medium text-amber-800">
+            <p className="text-lg poppins-medium theme-page-subtitle">
               {getCategorySubtitle("necklaces")}
             </p>
           </div>
