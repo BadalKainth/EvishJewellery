@@ -119,65 +119,44 @@ const BraceletsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs & FAQ Section for Tiny Treasures */}
       <div className="p-10 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold text-base md:text-2xl text-amber-700">
-          Tiny Treasures – Joyful & Safe Kids & Toys Collection
+          Tiny Treasures: Pure Joy, Crafted to Perfection
         </h1>
         <p>
-          Welcome to a world of wonder and imagination with our <b className="text-amber-700">Tiny Treasures</b> collection at <b className="text-amber-700">Avish</b>. Explore our curated selection of delightful, safe, and engaging toys and kids' essentials designed to inspire creativity, laughter, and endless hours of joyful play. From educational learning tools to soft, cuddly companions, we provide only the best quality for your little ones.
+          Just like a rare gemstone, the laughter of a child is priceless. At
+          <b className="text-amber-700"> Avish Jewels</b>, we bring you Tiny
+          Treasures, a luxury collection of kids' essentials and premium toys
+          designed to add a touch of elegance to their magical years. Every
+          piece in this collection is curated with the same precision, safety,
+          and love that goes into crafting fine jewelry.
         </p>
         <br />
         <p>
-          Toys are more than just playthings; they are the stepping stones of growth, curiosity, and learning. Every piece in our <b className="text-amber-700">Tiny Treasures</b> collection is carefully chosen to nurture developmental skills, cognitive abilities, and motor coordination, ensuring that playtime is both enriching and fun.
+          From timeless keepsakes to beautifully designed playful essentials,
+          give your little ones the premium comfort and joy they deserve.
+          Because our finest treasures aren't always worn, sometimes, they
+          rule our hearts.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <p>
+          <b>Premium &amp; Certified Safe:</b> Har ek toy aur accessory
+          non-toxic, child-safe aur premium-grade materials se bani hai, taaki
+          aapke bacche surakshit rahein.
         </p>
         <br />
         <p>
-          At <b className="text-amber-700">Avish</b>, we prioritize the health and happiness of your children above all else. Our toys are crafted from non-toxic, child-safe materials, meeting the highest standards of safety and durability. Whether you are searching for the perfect birthday gift, interactive puzzles, or cute room decor for kids, you will find options that make parenting a breeze and childhood truly magical.
+          <b>Heirloom Quality:</b> Hamare toys aur keepsakes itne durable aur
+          elegant hain ki inhe ek generation se doosri generation ko pass kiya
+          ja sakta hai.
         </p>
         <br />
-        <h2 className="font-bold text-amber-700">
-          What Makes Our Kids & Toys Collection Special?
-        </h2>
         <p>
-          Our toys are not just designed to entertain—they are built to educate and spark curiosity.
-          <b> Each toy encourages active participation, cognitive growth, and social-emotional development.</b>
-          With vibrant colors, sleek designs, and interactive elements, we bring a modern touch to classic childhood favorites.
+          <b>Encourages Creative Learning:</b> Sirf khelne ke liye nahi, balki
+          ye designs bacchon ki imagination aur cognitive skills ko boost karne
+          ke liye banaye gaye hain.
         </p>
-        <br />
-        <h2 className="font-bold text-amber-700">
-          Different Playstyles and Categories
-        </h2>
-        <p>
-          Our collection spans across developmental toys, educational puzzles, creative building blocks, and plush cuddly companions. Whether your child is an aspiring builder, an artist, or a quiet daydreamer, our toys cater to every unique personality and age group, providing the ideal balance of entertainment and learning.
-        </p>
-        <br />
-        <h2 className="font-bold text-amber-700">
-          How to Choose the Right Toy
-        </h2>
-        <p>
-          Consider your child's age group, interests, and developmental milestone needs. Choose interactive and open-ended toys that encourage creativity, or go for simple, comforting plush toys for cozy bedtime routines. At <b className="text-amber-700">Avish</b>, every toy is crafted with love to bring a smile to your child's face.
-        </p>
-        <br />
-        <div>
-          <h1 className="font-bold text-amber-700">FAQs</h1>
-          <h2 className="font-bold">
-            1. Are the toys in the Tiny Treasures collection safe for toddlers?
-          </h2>
-          <b>Answer:</b> Yes, absolutely! Every product in our <b className="text-amber-700">Tiny Treasures</b> collection undergoes strict safety evaluations and is made from high-quality, non-toxic, BPA-free materials that are completely safe for young children.
-          <h2 className="font-bold">
-            2. What types of educational toys do you offer?
-          </h2>
-          <b>Answer:</b> We offer a wide range of learning tools, including building block sets, puzzle sets, memory games, and sensory stimulation toys that help kids develop cognitive, critical-thinking, and fine-motor skills.
-          <h2 className="font-bold">
-            3. Do you have options suitable for baby shower or birthday gifts?
-          </h2>
-          <b>Answer:</b> Yes! Our beautifully designed collection makes the perfect gifting destination for birthdays, baby showers, and milestones, with items suitable for infants, toddlers, and young kids.
-          <h2 className="font-bold">
-            4. How can I clean and maintain these toys?
-          </h2>
-          <b>Answer:</b> Most of our plastic and wooden toys can be easily wiped down with a damp cloth and mild soap. Plush toys can be spot-cleaned or gently hand-washed as per their care labels.
-        </div>
       </div>
     </div>
   );

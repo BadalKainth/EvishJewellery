@@ -116,34 +116,30 @@ const AnkletGrid = () => {
         </div>
 
         <div className="text-justify">
-          {/* Paragraphs for SheVerse */}
           <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
             <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-              SheVerse – All Women-Related Products Collection
+              SheVerse: A Tribute to the Queen of Our Universe
             </h1>
             <p>
-              Welcome to <b className="text-amber-700">SheVerse</b> at <b className="text-amber-700">Avish</b>. Celebrate womanhood with our exclusive, carefully curated catalog of apparel, lifestyle accessories, personal care items, and unique products made specifically for today's dynamic woman. Discover pieces that perfectly enhance your everyday routines, confidence, and comfort.
+              Every woman is a masterpiece, strong, brilliant, and uniquely beautiful. Welcome to <b className="text-amber-700">SheVerse</b> by Avish Jewels, an exclusive realm dedicated entirely to the multifaceted modern woman. This collection is a premium curation of lifestyle products, accessories, and essentials that celebrate her grace and power.
             </p>
             <br />
             <p>
-              Every woman deserves products that are designed with her unique needs and style in mind. From elegant daily essentials to luxury self-care treats, our collection offers a diverse array of handpicked items that merge high durability with exquisite feminine aesthetics.
+              Much like our finest solitaire diamonds, SheVerse products are crafted to stand out, empower, and add an aura of ultimate luxury to her daily life. From self-care indulgence to power-dressing essentials, celebrate yourself or the queen in your life with absolute premium perfection.
+            </p>
+            <br />
+            <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+            <p>
+              <b>Curated for the Modern Woman:</b> Working professional se lekar home-maker tak, har mahila ki multitasking lifestyle ko dhyan mein rakh kar banaya gaya hai.
             </p>
             <br />
             <p>
-              Whether you are pampering yourself, updating your routine, or searching for the perfect thoughtful gift for an important woman in your life, <b className="text-amber-700">SheVerse</b> provides high-quality solutions designed to delight.
+              <b>Uncompromised Luxury &amp; Comfort:</b> Chahe lifestyle accessory ho ya self-care product, har ek cheez mein premium comfort aur high-quality feel milti hai.
             </p>
             <br />
-            <div>
-              <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
-              <h2 className="font-bold">1. What kind of products can I find in the SheVerse collection?</h2>
-              <b>Answer:</b> The SheVerse collection features a diverse catalog of women's lifestyle essentials, fashion accessories, self-care items, apparel, and premium personal accessories.
-              <h2 className="font-bold">2. Are these products suitable for all age groups?</h2>
-              <b>Answer:</b> Yes, our selection includes versatile products designed to suit teenagers, young adults, professionals, and mothers alike.
-              <h2 className="font-bold">3. How often do you introduce new items to SheVerse?</h2>
-              <b>Answer:</b> We update our inventory with seasonal style refreshes and trendy daily additions so you can stay in tune with the latest contemporary trends.
-              <h2 className="font-bold">4. Can I buy these items as gifts?</h2>
-              <b>Answer:</b> Absolutely! Our premium packaging and curated products make SheVerse the ultimate destination for gifting mothers, sisters, partners, or friends on birthdays, anniversaries, and holidays.
-            </div>
+            <p>
+              <b>The Ultimate Empowerment Collection:</b> Aise designs aur products jo aapke confidence ko boost karte hain aur aapki unique personality ko celebrate karte hain.
+            </p>
           </div>
         </div>
       </div>

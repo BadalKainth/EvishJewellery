@@ -120,42 +120,30 @@ const EarringsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs for Smart Living */}
       <div className="p-10 px-5 md:px-20 text-xs md:text-base text-justify poppins-regular">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          Smart Living – Innovative Home & Kitchen Essentials
+          Smart Living: Where Functionality Meets Finery
         </h1>
         <p>
-          Welcome to <b className="text-amber-700">Smart Living</b> at <b className="text-amber-700">Avish</b>, where functionality meets modern elegance. Discover our exclusive range of smart home and kitchen essentials designed to simplify your everyday chores, organize your living spaces, and elevate your cooking experience. We bring you products that combine durability, cutting-edge convenience, and elegant aesthetics.
+          True luxury is an everyday experience. With the <b className="text-amber-700">Smart Living</b> collection, Avish Jewels brings its signature touch of premium craftsmanship into the heart of your home. We believe that your kitchen and daily essentials should gleam with the same sophistication as a diamond necklace.
         </p>
         <br />
         <p>
-          The modern kitchen and home require modern solutions. Our curated collection focuses on high-quality kitchenware, innovative storage containers, culinary gadgets, and home organization accessories that make your daily routines smoother and highly efficient.
+          This curated range of premium home and kitchen essentials blends cutting-edge utility with exquisite design. Elevate your daily rituals, host with unmatched grace, and transform your living space into a sanctuary of modern luxury.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <p>
+          <b>Effortless Elegance:</b> Minimalist aur modern designs jo aapke kitchen aur dining area ko instant luxury look dete hain.
         </p>
         <br />
         <p>
-          At <b className="text-amber-700">Avish</b>, we understand that a well-equipped home is a happy home. Whether you are upgrading your culinary tools, finding space-saving storage solutions, or searching for practical household items, our <b className="text-amber-700">Smart Living</b> products are built to perform and last, ensuring a perfect balance of utility and visual charm.
+          <b>Smart &amp; Time-Saving Functionality:</b> Har ek tool aur essential ko ergonomically design kiya gaya hai taaki aapka kaam aasan aur jaldi ho.
         </p>
         <br />
         <p>
-          If you are looking for smart housewarming gifts or looking to elevate your own kitchen setup, our selection provides a wide variety of sleek options. From beginner cooks to seasoned homemakers, everyone will find tools that resonate with their needs.
+          <b>Built to Last:</b> Premium rust-free aur scratch-resistant materials se nirmit, jo daily use ke baad bhi naye jaise chamakte hain.
         </p>
-        <br />
-        <p>
-          Choose <b className="text-amber-700">Smart Living</b> to embrace a seamless, organized, and elegant lifestyle. Shop our premium collection today and transform your living and dining spaces into hubs of style and modern efficiency.
-        </p>
-        <br />
-        <div>
-          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
-          <h2 className="font-bold">1. Are the Smart Living kitchen utensils safe for cooking?</h2>
-          <b>Answer:</b> Yes, absolutely. All of our kitchen utensils and food storage accessories are made from premium, food-grade, heat-resistant, and BPA-free materials that are highly safe for hot and cold food preparation.
-          <h2 className="font-bold">2. Do your products come with instructions?</h2>
-          <b>Answer:</b> Yes, where applicable, our appliances and innovative kitchen gadgets come with clear, detailed user manuals to guide you through setup, usage, and maintenance.
-          <h2 className="font-bold">3. How do I maintain and clean these kitchen tools?</h2>
-          <b>Answer:</b> Most of our products are dishwasher-safe. For items with premium non-stick coatings or wooden elements, we recommend gentle hand-washing with a soft sponge to extend their life.
-          <h2 className="font-bold">4. Can these items be gifted for housewarming ceremonies?</h2>
-          <b>Answer:</b> Definitely! Our Smart Living collection features exceptionally practical, beautifully boxed items that make incredibly thoughtful and appreciated housewarming, wedding, or festival gifts.
-        </div>
       </div>
     </div>
   );

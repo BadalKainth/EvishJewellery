@@ -127,38 +127,30 @@ const NecklacesGrid = () => {
         </div>
       </div>
 
-      {/* Paragraph content for Aura Decor */}
       <div className="p-10 text-xs md:text-base px-6 md:px-20 text-justify poppins-regular">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          Aura Decor – Premium Home Decor Collection
+          Aura Decor: Radiate Elegance in Every Corner
         </h1>
         <p>
-          Transform your living spaces into sanctuaries of elegance and warmth with our <b className="text-amber-700">Aura Decor</b> premium home decor collection at <b className="text-amber-700">Avish</b>. Explore sophisticated designs that reflect your personality, elevate your mood, and add a signature touch of aesthetic premium luxury to every corner of your home.
+          Every home has a story, let yours be told in the language of luxury. <b className="text-amber-700">Aura Decor</b> by Avish Jewels is an exquisite ensemble of premium home decor pieces designed to cast a spell of sophistication over your spaces. Mirroring the artistic brilliance, intricate detailing, and timeless charm of our heritage jewelry, each artifact in this collection is a masterpiece.
         </p>
         <br />
         <p>
-          Every home tells a story through the details. Our collection curated by design experts spans from minimalist table accents and statement wall art to artistic vases, premium cushions, and ambient lighting solutions that effortlessly breathe life and style into modern apartments and houses alike.
+          Whether it's a striking centerpiece or subtle accents, Aura Decor infuses your home with an opulent vibe that leaves an unforgettable impression.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <p>
+          <b>Artisanal Craftsmanship:</b> Har ek piece ko expert artisans dwara design kiya gaya hai, jo aapke ghar ko ek museum-like premium feel deta hai.
         </p>
         <br />
         <p>
-          At <b className="text-amber-700">Avish</b>, we blend excellent craftsmanship with high-quality materials to ensure that each piece is not only visually stunning but also built to endure. Whether you are redecorating your cozy living room, upgrading your office desk styling, or searching for the ultimate artistic gift, our home decor pieces offer a perfect balance of contemporary beauty and enduring charm.
+          <b>Timeless Aesthetics:</b> Aise designs jo kabhi out of fashion nahi hote, vibrant colors aur premium textures ka ek perfect blend.
         </p>
         <br />
         <p>
-          Explore exclusive styles that are modern, elegant, and designed to leave a lasting impression on your guests. Shop the <b className="text-amber-700">Aura Decor</b> collection today and elevate your surrounding environment with the timeless elegance and beauty only <b className="text-amber-700">Avish</b> can bring.
+          <b>Perfect for Elite Gifting:</b> Ye artifacts premium packaging ke sath aate hain, jo inhe housewarming aur corporate gifting ke liye sabse luxury choice banate hain.
         </p>
-        <br />
-        <div>
-          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
-          <h2 className="font-bold">1. What materials are used in the Aura Decor collection?</h2>
-          <b>Answer:</b> We source premium materials, including handcrafted ceramics, polished metals, mouth-blown glassware, and sustainable natural textiles to construct high-quality, durable home accents.
-          <h2 className="font-bold">2. How can I style these items for a minimalist look?</h2>
-          <b>Answer:</b> Focus on a few standout pieces, such as our geometric vases or elegant metal accents, and pair them with neutral-toned background colors to let their exquisite craftsmanship shine.
-          <h2 className="font-bold">3. Do you offer seasonal home decor collections?</h2>
-          <b>Answer:</b> Yes, we frequently update our collection with seasonal launches and limited-edition items designed to match holiday aesthetics, festive vibes, and changing styling trends.
-          <h2 className="font-bold">4. What is the best way to clean these delicate decor pieces?</h2>
-          <b>Answer:</b> We recommend dusting gently with a clean micro-fiber cloth or using a slightly damp soft cloth for ceramics. Avoid using harsh chemical cleaners to preserve their premium finishes.
-        </div>
       </div>
     </div>
   );

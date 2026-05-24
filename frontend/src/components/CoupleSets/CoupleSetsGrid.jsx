@@ -121,34 +121,30 @@ const CoupleSetsGrid = () => {
         </div>
       </div>
 
-      {/* Existing Paragraphs for New Launches */}
       <div className="p-10 px-5 md:px-20 text-justify poppins-regular text-xs md:text-base">
         <h1 className="font-bold text-base md:text-2xl text-amber-700 text-center p-4">
-          New Launches – Discover the Fresh Arrivals Just In
+          New Launches: The Next Chapter of Brilliance
         </h1>
         <p>
-          Be the first to explore the latest trends and hot additions at <b className="text-amber-700">Avish</b>. Our <b className="text-amber-700">New Launches</b> section showcases our newest high-quality products across all collections, featuring innovative designs, curated aesthetics, and smart solutions freshly added to our store.
+          Innovation, elegance, and exclusivity come together in our latest reveal. The <b className="text-amber-700">New Launches</b> section at Avish Jewels is where tomorrow's trends meet today's craftsmanship. We are constantly pushing the boundaries of luxury to bring you fresh, unique, and breathtaking designs before anyone else.
         </p>
         <br />
         <p>
-          We constantly update our inventory to bring you state-of-the-art products that make daily life easier, more beautiful, and incredibly stylish. From unique kids' items and premium drinkware to sophisticated kitchenware and gorgeous home decor accessories, our new releases represent the absolute pinnacle of our craftsmanship and quality.
+          Be the trendsetter and explore our newest arrivals, ranging from cutting-edge lifestyle products to premium statements. Don't just follow the trend; wear the future of luxury first.
+        </p>
+        <br />
+        <h2 className="font-bold text-amber-700">Why It's Unique</h2>
+        <p>
+          <b>Trendsetter Collection:</b> Sabse pehle market mein aane wale latest global designs jo aapko hamesha bheed se alag rakhte hain.
         </p>
         <br />
         <p>
-          Stay ahead of the curve and treat yourself or your loved ones to our latest releases. Whether you are redecorating your lifestyle or finding advanced tools for parenting or cooking, our newly launched items are designed to exceed your expectations.
+          <b>Limited Edition Pieces:</b> Is category ke kayi products limited stock mein aate hain, jo aapko ek exclusive owner banate hain.
         </p>
         <br />
-        <div>
-          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
-          <h2 className="font-bold">1. How often are new products launched?</h2>
-          <b>Answer:</b> We introduce new items and fresh collections weekly to ensure you always have access to the latest global trends and innovative lifestyle solutions.
-          <h2 className="font-bold">2. Are New Launches available in limited quantities?</h2>
-          <b>Answer:</b> Yes, some of our fresh arrivals are introduced in limited boutique batches. We recommend purchasing your favorites early to avoid missing out when they sell out!
-          <h2 className="font-bold">3. Can I find discounts on newly launched items?</h2>
-          <b>Answer:</b> We occasionally run special introductory launch offers and early-bird discounts. Make sure to check our coupons section and product pages for active deals.
-          <h2 className="font-bold">4. Can I request or suggest products for future launches?</h2>
-          <b>Answer:</b> Absolutely! We love hearing from our community. You can share your feedback and suggestions with us via our contact email, and we will do our best to bring them in future updates.
-        </div>
+        <p>
+          <b>Upgraded Innovation:</b> Purane designs se behtar, zyada durable aur modern features ke sath har hafte naye additions.
+        </p>
       </div>
     </div>
   );

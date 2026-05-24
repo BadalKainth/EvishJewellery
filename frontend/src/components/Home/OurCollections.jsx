@@ -1,12 +1,11 @@
 import React from "react";
-
-import bracelet9 from "../Bracelets/img/bracelet9.jpg";
-import necklaces1 from "../Necklaces/img/necklaces1.jpg";
 import { Link } from "react-router-dom";
-import coupleset from "../Home/coupleset.png"
-import anklet from "../Home/anklet.png";
 import tinytreasure from "../../img/tiny tressure.jpeg";
 import hydroluxe from "../../img/hydro luxe.jpeg";
+import smartliving from "../../img/smartliving.jpeg";
+import auradecor from "../../img/auradecor.jpeg";
+import newlaunches from "../../img/new launches.jpeg";
+import sheverse from "../../img/sheverse.jpeg";
 
 const OurCollections = () => {
   return (
@@ -89,8 +88,8 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/earrings" className="block">
                   <img
-                    src="https://images.unsplash.com/photo-1716461534906-d31a17008801?q=80&w=655&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Delicate gold earrings with pearl drops on a pastel pink background"
+                    src={smartliving}
+                    alt="Smart Living"
                     className="w-full h-52 object-fill cursor-pointer"
                   />
                 </Link>
@@ -114,8 +113,8 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/necklaces" className="block">
                   <img
-                    src="https://images.unsplash.com/photo-1641290748359-1d944fc8359a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Delicate gold earrings with pearl drops on a pastel pink background"
+                    src={auradecor}
+                    alt="Aura Decor"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
                 </Link>
@@ -141,8 +140,8 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/couple-sets" className="block">
                   <img
-                    src={coupleset}
-                    alt="Delicate gold earrings with pearl drops on a pastel pink background"
+                    src={newlaunches}
+                    alt="New Launches"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
                 </Link>
@@ -168,8 +167,8 @@ const OurCollections = () => {
               <div className="relative overflow-hidden">
                 <Link to="/category/anklets" className="block">
                   <img
-                    src={anklet}
-                    alt="Delicate gold earrings with pearl drops on a pastel pink background"
+                    src={sheverse}
+                    alt="SheVerse"
                     className="w-full h-52 object-cover cursor-pointer"
                   />
                 </Link>

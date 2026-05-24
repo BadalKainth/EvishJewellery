@@ -131,32 +131,24 @@ const RingsGrid = () => {
         </div>
       </div>
 
-      {/* ========================== Paragraph Content for Hydro Luxe ========================== */}
       <div className="p-10 md:p-20 text-justify poppins-regular text-xs md:text-base">
-        <h1 className="font-bold text-base md:text-2xl text-amber-700 mb-4">Hydro Luxe – Premium Water Bottles & Drinkware</h1>
-        Elevate your hydration game with our <b className="text-amber-700">Hydro Luxe</b> premium drinkware collection. More than just containers, our bottles are statements of style, durability, and health. Designed to keep your favorite beverages at the perfect temperature all day long, they are the ideal companion for the gym, office, outdoor adventures, or daily commutes.
+        <h1 className="font-bold text-base md:text-2xl text-amber-700 mb-4">Hydro Luxe: Hydration Meets High Fashion</h1>
+        Why should elegance be limited to your jewelry box? Introducing <b className="text-amber-700">Hydro Luxe</b> by Avish Jewels, a statement drinkware collection that redefines everyday hydration. Crafted for those who appreciate the finer things in life, these premium bottles combine sleek, modern aesthetics with top-tier functionality.
         <br />
         <br />
-        At <b className="text-amber-700">Avish</b>, we combine aesthetic elegance with high-performance insulation technology. Crafted from food-grade stainless steel and completely free of BPA, toxins, and odors, our bottles ensure your water stays ice-cold for up to 24 hours or your morning coffee stays piping hot for up to 12 hours.
+        Whether you are at a boardroom meeting or a high-end lounge, let your drinkware reflect your sophisticated taste. Designed to mirror the brilliant polish and durability of our finest jewels, Hydro Luxe is not just a bottle; it's an accessory for the modern connoisseur.
         <br />
         <br />
-        Available in a gorgeous range of curated colors, sleek shapes, and robust matte finishes, the <b className="text-amber-700">Hydro Luxe</b> collection is engineered to prevent condensation and leakage. Each bottle is a blend of environmental sustainability, daily reliability, and premium craftsmanship, helping you reduce single-use plastic waste while looking exceptionally sophisticated.
+        <b className="text-amber-700">Why It's Unique:</b>
         <br />
         <br />
-        Whether you are looking for a reliable thermal flask, a sleek gym bottle, or a stylish lifestyle tumbler, our <b className="text-amber-700">Hydro Luxe</b> collection offers unparalleled functionality and modern design to refresh your lifestyle.
+        <b>Jewel-Tone Finish &amp; Ergonomic Design:</b> Luxury metal finish aur sleek designs jo pakadne mein comfortable hain aur dikhne mein kisi mehnge accessory jaise lagte hain.
         <br />
         <br />
-        <div>
-          <h1 className="font-bold text-amber-700 text-xl mt-4 mb-2">FAQs</h1>
-          <h2 className="font-bold">1. How long do Hydro Luxe bottles keep drinks cold or hot?</h2>
-          <b>Answer:</b> Our premium double-wall vacuum-insulated bottles keep cold beverages chilled for up to 24 hours and hot beverages warm for up to 12 hours.
-          <h2 className="font-bold">2. Are Hydro Luxe bottles BPA-free?</h2>
-          <b>Answer:</b> Yes, absolutely! All of our drinkware items are made from premium 18/8 food-grade stainless steel and are 100% BPA-free, non-toxic, and safe for all types of drinks.
-          <h2 className="font-bold">3. Are these bottles leak-proof and sweat-proof?</h2>
-          <b>Answer:</b> Yes. The leak-proof lid design prevents any accidental spills, and the advanced vacuum insulation ensures the outer surface remains dry and condensation-free.
-          <h2 className="font-bold">4. Can I wash these bottles in a dishwasher?</h2>
-          <b>Answer:</b> We recommend hand-washing with a soft bottle brush and warm, soapy water to preserve the premium exterior powder coat and thermal efficiency of the vacuum seal.
-        </div>
+        <b>Advanced Thermal Insulation:</b> 24 ghante tak thanda aur 12 ghante tak garam rakhne wali advanced double-wall vacuum technology.
+        <br />
+        <br />
+        <b>Eco-Friendly Luxury:</b> 100% BPA-free, leak-proof, aur sustainable stainless steel jo environment aur aapki health dono ka khayal rakhta hai.
       </div>
     </div>
   );
@@ -174,3 +166,4 @@ const ProductCard = ({ product, addToCart, onClick }) => {
 };
 
 export default RingsGrid;
+
