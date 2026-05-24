@@ -35,6 +35,12 @@ export const primaryCategoryLinks = [
     subtitle: "All women-related products.",
     path: "/category/anklets",
   },
+  {
+    slug: "royal-crunch",
+    label: "Royal Crunch",
+    subtitle: "Premium Dry Fruits & Nuts Collection",
+    path: "/category/royal-crunch",
+  },
 ];
 
 export const categoryMeta = primaryCategoryLinks.reduce((acc, category) => {

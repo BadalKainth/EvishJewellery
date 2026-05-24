@@ -43,6 +43,8 @@ import WomenDressGrid from "./components/WomenDress/WomenDressGrid";
 import WomenDetails from "./components/WomenDress/WomenDetails";
 import WatchGrind from "./components/Watch/WatchGrid";
 import WatchDetails from "./components/Watch/WatchDetails";
+import RoyalCrunchGrid from "./components/RoyalCrunch/RoyalCrunchGrid";
+import RoyalCrunchDetails from "./components/RoyalCrunch/RoyalCrunchDetails";
 import Refund from "./components/Policy/Refund";
 import PrivacyPolicy from "./components/Policy/PrivacyPolicy";
 import Terms from "./components/Policy/Terms";
@@ -192,6 +194,14 @@ function App() {
         <Route
           path="category/anklets/:id"
           element={<AnkletDetails addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/royal-crunch"
+          element={<RoyalCrunchGrid addToCart={addToCart} slider={false} />}
+        />
+        <Route
+          path="category/royal-crunch/:id"
+          element={<RoyalCrunchDetails addToCart={addToCart} slider={false} />}
         />
         <Route
           path="category/bags"

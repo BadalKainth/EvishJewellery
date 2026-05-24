@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import client, { getImageURL } from "../../api/client";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { getCategoryLabel } from "../../constants/categories";
 
 export default function SearchPage() {
   const [q, setQ] = useState("");
@@ -11,6 +12,9 @@ export default function SearchPage() {
   const [showPopup, setShowPopup] = useState(false);
   const { addItem } = useContext(CartContext);
   const navigate = useNavigate();
+  const categoryRouteMap = {
+    "women-dress": "womendress",
+  };
 
   const doSearch = async () => {
     if (!q || q.trim().length < 2) return;
@@ -82,7 +86,11 @@ export default function SearchPage() {
           <div
             key={p._id}
             className="border rounded p-3 cursor-pointer relative"
-            onClick={() => navigate(`/category/watch/${p._id}`)}
+            onClick={() =>
+              navigate(
+                `/category/${categoryRouteMap[p.category] || p.category}/${p._id}`
+              )
+            }
           >
             <img
               src={getImageURL(p.primaryImage || p.images?.[0]?.url)}
@@ -141,7 +149,9 @@ export default function SearchPage() {
                 </button>
               </div>
             </div>
-            <div className="text-sm text-gray-600 capitalize">{p.category}</div>
+            <div className="text-sm text-gray-600">
+              {getCategoryLabel(p.category)}
+            </div>
           </div>
         ))}
       </div>

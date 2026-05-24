@@ -394,6 +394,7 @@ router.get(
         "rings",
         "anklets",
         "couple-sets",
+        "royal-crunch",
         "bags",
         "women-dress",
         "watch",

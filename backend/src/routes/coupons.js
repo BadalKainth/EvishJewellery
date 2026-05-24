@@ -23,6 +23,7 @@ router.get(
         "rings",
         "anklets",
         "couple-sets",
+        "royal-crunch",
         "all",
       ])
       .withMessage("Invalid category filter"),
@@ -82,6 +83,7 @@ router.post(
         "rings",
         "anklets",
         "couple-sets",
+        "royal-crunch",
       ])
       .withMessage("Invalid category"),
     body("productIds")

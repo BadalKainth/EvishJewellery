@@ -75,6 +75,7 @@ const couponSchema = new mongoose.Schema(
           "rings",
           "anklets",
           "couple-sets",
+          "royal-crunch",
           "all",
         ],
       },

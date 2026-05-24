@@ -7,6 +7,7 @@ import Earrings from "./Earrings/Earrings";
 import Necklaces from "./Necklaces/Necklaces";
 import CoupleSets from "./CoupleSets/CoupleSets";
 import Anklets from "./Anklet/Anklets";
+import RoyalCrunch from "./RoyalCrunch/RoyalCrunch";
 
 const AllLinks = ({ slider, cartItems, setCartItems, addToCart }) => {
   return (
@@ -30,6 +31,7 @@ const AllLinks = ({ slider, cartItems, setCartItems, addToCart }) => {
         <Necklaces slider={slider} addToCart={addToCart} />
         <CoupleSets slider={slider} addToCart={addToCart} />
         <Anklets slider={slider} addToCart={addToCart} />
+        <RoyalCrunch slider={slider} addToCart={addToCart} />
       </div>
       {/* </div> */}
     </>

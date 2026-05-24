@@ -33,6 +33,7 @@ const productSchema = new mongoose.Schema(
         "rings",
         "anklets",
         "couple-sets",
+        "royal-crunch",
         "bags",
         "women-dress",
         "watch",
